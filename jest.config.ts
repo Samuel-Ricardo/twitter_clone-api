@@ -176,7 +176,7 @@ const config: Config = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.(t|j)s?$': 'ts-jest',
+    '^.+\\.(t|j)s?$': '@swc/jest',
   },
 
   moduleNameMapper: {
