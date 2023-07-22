@@ -4,8 +4,10 @@
   "description": "A NodeJS APi that serves the site clone",
   "main": "index.ts",
   "scripts": {
-    "start": "node build/server.ts",
-    "start:dev": "nodemon --watch ./src --exec ts-node ./src/server.ts -e ts",
+    "build": "tsc --build",
+    "build:clean": "tsc --build --clean",
+    "start": "node ./build/src/server.js",
+    "start:dev": "nodemon --watch ./src --exec ts-node ./src/server.ts -e --swc",
     "lint:fix": "eslint ./src/**/*.{ts,js} --fix",
     "format:check": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
     "format:fix": "prettier --check --write --ignore-path .gitignore ./src/**/*.{ts,js}",
