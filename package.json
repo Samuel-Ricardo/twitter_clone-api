@@ -10,7 +10,10 @@
     "format:check": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
     "format:fix": "prettier --check --write --ignore-path .gitignore ./src/**/*.{ts,js}",
     "husky:prepare": "husky install",
-    "test:staged": ""
+    "test": "jest --passWithNoTests --color",
+    "test:staged": "jest --passWithNoTests --color --findRelatedTests",
+    "test:coverage": "jest --coverage --passWithNoTests --color",
+    "test:dev": "jest --watchAll --coverage --passWithNoTests --color"
   },
   "repository": {
     "type": "git",
