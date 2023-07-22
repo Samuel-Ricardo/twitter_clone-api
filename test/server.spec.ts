@@ -1,5 +1,11 @@
+import { app } from '@/app';
+import supertest from 'supertest';
+
 describe('[API] | health check', () => {
-  it('should be healthy', () => {
-    expect(200).toBe(200);
+  it('should be healthy', async () => {
+    const response = await supertest(app).get('/');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ result: 'Hello World!' });
   });
 });
