@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "moduleResolution": "Node",
+    "rootDir": "./",
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
