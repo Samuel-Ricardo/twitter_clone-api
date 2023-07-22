@@ -1,0 +1,21 @@
+name: CI & Docker
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs: 
+
+  tests:
+    name: Tests With Docker
+    runs-on: ubuntu-latest
+    
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: run tests with docker-compose
+        run: docker-compose -f docker-compose.ci.yaml up 
