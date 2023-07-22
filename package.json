@@ -17,7 +17,8 @@
     "test:coverage": "jest --coverage --passWithNoTests --color",
     "test:dev": "jest --watchAll --coverage --passWithNoTests --color",
     "test:docker": "npm run test:coverage && npm run test:dev",
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky install",
+    "code:ci": "npm run format:fix && npm run lint:fix && npm run test:coverage"
   },
   "repository": {
     "type": "git",

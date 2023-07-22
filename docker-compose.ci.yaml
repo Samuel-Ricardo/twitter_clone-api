@@ -1,11 +1,12 @@
 version: '3'
 
 services:
-  test:
+  
+  code_health:
     build: 
       context: .
       dockerfile: Dockerfile.prod
-    entrypoint: ["npm", "run", "test"]
+    entrypoint: ["npm", "run", "code:ci"]
     volumes:
       - .:/home/node/app
     
