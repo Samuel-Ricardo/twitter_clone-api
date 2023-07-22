@@ -1,0 +1,22 @@
+{
+  "name": "twitter_clone-api",
+  "version": "1.0.0",
+  "description": "A NodeJS APi that serves the site clone",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Samuel-Ricardo/twitter_clone-api.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "author": "@Samuel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samuel-Ricardo/twitter_clone-api/issues"
+  },
+  "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme"
+}
