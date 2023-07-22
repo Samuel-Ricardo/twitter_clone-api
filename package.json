@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
