@@ -4,7 +4,7 @@ services:
   test:
     build: 
       context: .
-      dockerfile: Dockerfile.ci
+      dockerfile: Dockerfile.prod
     entrypoint: ["npm", "run", "test"]
     volumes:
       - .:/home/node/app
