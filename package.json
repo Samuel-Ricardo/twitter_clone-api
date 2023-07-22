@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Samuel-Ricardo/twitter_clone-api/issues"
   },
-  "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme"
+  "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme",
+  "dependencies": {
+    "typescript": "^5.1.6"
+  }
 }
