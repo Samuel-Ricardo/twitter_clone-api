@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node build/server.ts",
     "start:dev": "nodemon --watch ./src --exec ts-node ./src/server.ts -e ts",
-    "format": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
+    "format:check": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
+    "format:fix": "prettier --check --write --ignore-path .gitignore ./src/**/*.{ts,js}"
     "test": ""
   },
   "repository": {
