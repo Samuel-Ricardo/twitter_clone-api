@@ -9,3 +9,10 @@ services:
       - "3000:3000"
     volumes:
       - .:/home/node/app
+
+  test:
+    build: .
+    restart: on-failure
+    entrypoint: ["npm", "run", "test:docker"]
+    volumes:
+      - .:/home/node/app

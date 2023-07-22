@@ -8,14 +8,16 @@
     "build:clean": "tsc --build --clean",
     "start": "node ./build/src/server.js",
     "start:dev": "nodemon --watch ./src --exec ts-node ./src/server.ts -e --swc",
+    "start:docker": "npm run start:dev",
     "lint:fix": "eslint ./src/**/*.{ts,js} --fix",
-    "format:check": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
     "format:fix": "prettier --check --write --ignore-path .gitignore ./src/**/*.{ts,js}",
-    "husky:prepare": "husky install",
+    "format:check": "prettier --check --ignore-path .gitignore ./src/**/*.{ts,js}",
     "test": "jest --passWithNoTests --color",
     "test:staged": "jest --passWithNoTests --color --findRelatedTests",
     "test:coverage": "jest --coverage --passWithNoTests --color",
-    "test:dev": "jest --watchAll --coverage --passWithNoTests --color"
+    "test:dev": "jest --watchAll --coverage --passWithNoTests --color",
+    "test:docker": "npm run test:coverage && npm run test:dev",
+    "husky:prepare": "husky install"
   },
   "repository": {
     "type": "git",
