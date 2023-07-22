@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "node build/server.ts",
+    "start:dev": "nodemon --watch ./src --exec ts-node ./src/server.ts -e ts",
     "test": ""
   },
   "repository": {
