@@ -5,8 +5,8 @@ services:
   code_health:
     build: 
       context: .
-      dockerfile: Dockerfile.prod
-    entrypoint: ["npm", "ci", "&&", "npm", "run", "code:ci"]
+      dockerfile: Dockerfile.ci
+    entrypoint: ["ls", "-a", "&&","npm", "run", "code:ci"]
     volumes:
       - .:/home/node/app
     
