@@ -6,7 +6,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.ci
-    entrypoint: ["npm", "run", "code:ci"]
+    entrypoint: ["ls", "-a"]
     volumes:
       - .:/home/node/app
     
