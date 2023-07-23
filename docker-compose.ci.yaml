@@ -7,6 +7,4 @@ services:
       context: .
       dockerfile: Dockerfile.ci
     entrypoint: ["ls", "-a"]
-    volumes:
-      - .:/home/node/app
     
