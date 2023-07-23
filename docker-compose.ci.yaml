@@ -6,7 +6,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.prod
-    entrypoint: ["npm", "run", "code:ci"]
+    entrypoint: ["npm", "ci", "&&", "npm", "run", "code:ci"]
     volumes:
       - .:/home/node/app
     
