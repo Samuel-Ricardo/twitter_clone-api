@@ -6,5 +6,5 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.ci
-    entrypoint: ["ls", "-a"]
+    entrypoint: ["npm", "run", "start"]
     
