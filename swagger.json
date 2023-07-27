@@ -1,5 +1,6 @@
 {
   "openapi": "3.0.0",
+  "swagger": "3.0",
   "info": {
     "title": "Twitter Clone API",
     "version": "1.0.0",
@@ -12,6 +13,19 @@
       "name": "Samuel",
       "email": "samuelricardoofficial@gmail.com",
       "url": "https://www.linkedin.com/in/samuel-ricardo/"
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["health_check"],
+        "description": "API health check",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
