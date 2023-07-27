@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Twitter Clone API",
+    "version": "1.0.0",
+    "description": "Twitter Clone API",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/Samuel-Ricardo/twitter_clone-api/blob/main/LICENSE"
+    },
+    "contact": {
+      "name": "Samuel",
+      "email": "samuelricardoofficial@gmail.com",
+      "url": "https://www.linkedin.com/in/samuel-ricardo/"
+    }
+  }
+}
