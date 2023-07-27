@@ -1,4 +1,5 @@
 import expresss from 'express';
+import { SwaggerModule } from './modules/documentation';
 
 class Application {
   private static instance?: expresss.Express;
@@ -19,6 +20,8 @@ class Application {
 }
 
 const app = Application.Instance();
+
+SwaggerModule.setup({ app });
 
 app.get('/', (req, res) => {
   res.send({ result: 'Hello World!' });

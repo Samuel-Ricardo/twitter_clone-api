@@ -1,10 +1,8 @@
 import { app } from './app';
+import { ENV } from './modules/config/env';
 import { SwaggerModule } from './modules/documentation';
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-  SwaggerModule.setup({ app, port });
-
-  console.log(`[API] | listening on: http://localhost:${port}`);
+app.listen(ENV.PORT, () => {
+  SwaggerModule.logs();
+  console.log(`[API] | listening on: http://localhost:${ENV.PORT}`);
 });
