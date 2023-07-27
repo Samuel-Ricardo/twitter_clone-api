@@ -6,5 +6,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   SwaggerModule.setup({ app, port });
 
-  console.log('[API] | listening on: http://localhost:3000');
+  console.log(`[API] | listening on: http://localhost:${port}`);
 });
