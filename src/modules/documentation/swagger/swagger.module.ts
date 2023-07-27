@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import Swagger from 'swagger-ui-express';
 import SwaggerConfig from '../../../../swagger.json';
-import { ENV } from '@/modules/config/env';
+import { ENV } from '../../config/env';
 
 export class SwaggerModule {
   private static docs_on_prod: boolean = false;
@@ -43,7 +43,7 @@ export class SwaggerModule {
   }
 
   static logs() {
-    if (!this.shouldRun() && !this.doc_route) return;
+    if (!this.shouldRun() || !this.doc_route || !this.port) return;
 
     console.log(
       `[DOCS] | Swagger UI is available at http://localhost:${this.port}${this.doc_route}`,
