@@ -94,6 +94,11 @@ Navigate to project folder and run it using `docker-compose`
 
   $ API: http://localhost:3000
 
+  $ SWAGGER: http://localhost:300/docs [DOCUMENTATION] [DEV]
+  $ SWAGGER_SCHEMA: http://localhost:3000/docs-json [DOCUMENTATION] [DEV]
+
+  $ [DEV] = dev environment only
+
   See more: ./docker-compose.yaml
 
 ```
