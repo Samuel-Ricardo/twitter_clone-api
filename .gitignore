@@ -1,3 +1,5 @@
+.docker/mongo-data
+
 build
 build/
 build/*
