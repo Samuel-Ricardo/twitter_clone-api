@@ -9,13 +9,16 @@ services:
       - "3000:3000"
     volumes:
       - .:/home/node/app
+    depends_on:
+      - mongo
 
   test:
     build: .
-    restart: on-failure
     entrypoint: ["npm", "run", "test:docker"]
     volumes:
       - .:/home/node/app
+    depends_on:
+      - app
 
   mongo:
     image: mongo
@@ -26,3 +29,11 @@ services:
     volumes:
       - ./.docker/mongo-data:/data/db
 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:  
+      - 8081:8081
+    env_file: .env
+    depends_on:
+      - mongo
