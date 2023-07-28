@@ -29,6 +29,7 @@ model User {
   posts Post[]
   comments Comment[]
   likes Like[]
+  notifications Notification[]
 }
 
 model Post {
@@ -77,18 +78,30 @@ model Like {
   comment Comment @relation(fields: [likedId], references: [id], onDelete: Cascade)
 }
   
-model follow {
+model Follow {
   id String @id @default(uuid()) @map("_id") @db.ObjectId
     
-  followerId String  
-  followedId String   
+  followerId String @db.ObjectId 
+  followedId String @db.ObjectId
 
   createdAt DateTime @default(now()) 
 }
 
-// model Notification {}
+ model Notification {
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
 
- enum NotificationType {
+  type NotificationType
+  body String
+  eventId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ }
+
+enum NotificationType {
   FOLLOW
   UNFOLLOW
   LIKE
