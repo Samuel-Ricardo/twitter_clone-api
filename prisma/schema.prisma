@@ -35,15 +35,15 @@ model User {
 
 // model Notification {}
   
-  model follow {
-    id String @id @default(uuid()) @map("_id") @db.ObjectId
+model follow {
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
     
-    followerId String  
-    followedId String   
+  followerId String  
+  followedId String   
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt 
-  }
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+}
 
 // enum NotificationType {
 //   LIKE
