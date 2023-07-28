@@ -26,7 +26,8 @@ model User {
   updatedAt DateTime @updatedAt
   hasNotifications Boolean @default(false)
 
-  Posts Post[]
+  posts Post[]
+  comments Comment[]
 }
 
 model Post {
@@ -40,9 +41,24 @@ model Post {
   updatedAt DateTime @updatedAt
 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  comments Comment[]
 }
 
-// model Comment {}
+model Comment {
+
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  body String
+  
+  authorId String @db.ObjectId
+  postId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
 
 // model Like {}
   
