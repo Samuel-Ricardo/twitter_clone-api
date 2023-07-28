@@ -16,3 +16,13 @@ services:
     entrypoint: ["npm", "run", "test:docker"]
     volumes:
       - .:/home/node/app
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    env_file: .env
+    volumes:
+      - ./.docker/mongo-data:/data/db
+
