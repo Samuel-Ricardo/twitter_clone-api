@@ -13,6 +13,10 @@
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
+      "@logger": ["./src/modules/logger/index.ts"],
+      "@env":["./src/modules/config/env/index.ts"],
+      "@module":["./src/modules/index.ts"],
+      "@module/*": ["./src/modules/*"],
       "@/*": ["./*"]
     }
   }
