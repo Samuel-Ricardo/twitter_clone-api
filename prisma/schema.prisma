@@ -10,3 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  username String @unique
+  bio String
+  email String
+  emailVerified DateTime?
+  image String?
+  coverImage String?
+  profileImage String?
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  hasNotifications Boolean @default(false)
+
+}
+
+// model Post {}
+
+// model Like {}
+
+// model Comment {}
+
+// model Notification {}
+
+// follow{}
+
+// enum NotificationType {
+//   LIKE
+//   COMMENT
+//   POST
+// }
