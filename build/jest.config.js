@@ -132,6 +132,8 @@ const config = {
     },
     moduleNameMapper: {
         '@/(.*)': '<rootDir>/src/$1',
+        '@modules': '<rootDir>/src/modules/index.ts',
+        '@modules/(.*)': '<rootDir>/src/modules/$1',
     },
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
     // transformIgnorePatterns: [
