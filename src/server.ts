@@ -1,7 +1,7 @@
 import { app } from './app';
-import { log } from './modules';
-import { ENV } from './modules/config/env';
-import { SwaggerModule } from './modules/documentation';
+import { log } from '@modules';
+import { ENV } from '@env';
+import { SwaggerModule } from '@modules/documentation';
 
 app.listen(ENV.PORT, () => {
   SwaggerModule.logs();
