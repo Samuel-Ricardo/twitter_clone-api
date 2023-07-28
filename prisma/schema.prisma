@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
   name String
   username String @unique
   bio String
@@ -25,7 +25,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   hasNotifications Boolean @default(false)
-
 }
 
 // model Post {}
@@ -35,8 +34,16 @@ model User {
 // model Comment {}
 
 // model Notification {}
+  
+  model follow {
+    id String @id @default(uuid()) @map("_id") @db.ObjectId
+    
+    followerId String  
+    followedId String   
 
-// follow{}
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt 
+  }
 
 // enum NotificationType {
 //   LIKE
