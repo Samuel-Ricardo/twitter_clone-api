@@ -9,5 +9,7 @@ RUN npm i
 
 COPY --chown=node:node . .
 
+RUN chown -R node:node /home/node/app
+
 #CMD ["npm", "run", "start:dev"]
 #CMD [ "tails", "-f", "/dev/null" ]
