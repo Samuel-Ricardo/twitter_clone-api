@@ -1,8 +1,12 @@
 import { app } from './app';
+import { log } from './modules';
 import { ENV } from './modules/config/env';
 import { SwaggerModule } from './modules/documentation';
 
 app.listen(ENV.PORT, () => {
   SwaggerModule.logs();
-  console.log(`[API] | listening on: http://localhost:${ENV.PORT}`);
+  log({
+    context: 'API',
+    message: `listening on: http://localhost:${ENV.PORT}`,
+  });
 });
