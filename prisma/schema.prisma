@@ -83,15 +83,16 @@ model follow {
   followerId String  
   followedId String   
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt 
+  createdAt DateTime @default(now()) 
 }
 
 // model Notification {}
 
-// enum NotificationType {
-//   LIKE
-//   COMMENT
-//   POST
-//   FOLLOW
-// }
+ enum NotificationType {
+  FOLLOW
+  UNFOLLOW
+  LIKE
+  UNLIKE
+  COMMENT
+  POST
+}
