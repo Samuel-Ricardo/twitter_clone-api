@@ -1,4 +1,3 @@
-import expresss from 'express';
 import { SwaggerModule } from './modules/documentation';
 import { Application } from '@modules';
 
