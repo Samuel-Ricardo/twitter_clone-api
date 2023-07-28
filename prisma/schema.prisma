@@ -28,6 +28,7 @@ model User {
 
   posts Post[]
   comments Comment[]
+  likes Like[]
 }
 
 model Post {
@@ -43,6 +44,7 @@ model Post {
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   comments Comment[]
+  likes Like[]
 }
 
 model Comment {
@@ -58,9 +60,22 @@ model Comment {
 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  likes Like[]
 }
 
-// model Like {}
+model Like {
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
+ 
+  likedId String @db.ObjectId
+  userId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [likedId], references: [id], onDelete: Cascade)
+  comment Comment @relation(fields: [likedId], references: [id], onDelete: Cascade)
+}
   
 model follow {
   id String @id @default(uuid()) @map("_id") @db.ObjectId
