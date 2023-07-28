@@ -25,15 +25,26 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   hasNotifications Boolean @default(false)
+
+  Posts Post[]
 }
 
-// model Post {}
+model Post {
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  body String
 
-// model Like {}
+  authorId String @db.ObjectId
+  image String? 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
 
 // model Comment {}
 
-// model Notification {}
+// model Like {}
   
 model follow {
   id String @id @default(uuid()) @map("_id") @db.ObjectId
@@ -45,8 +56,11 @@ model follow {
   updatedAt DateTime @updatedAt 
 }
 
+// model Notification {}
+
 // enum NotificationType {
 //   LIKE
 //   COMMENT
 //   POST
+//   FOLLOW
 // }
