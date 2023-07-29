@@ -12,6 +12,8 @@
     "skipDefaultLibCheck": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "rootDir": "./",
     "outDir": "./build",
     "baseUrl": "./src",
