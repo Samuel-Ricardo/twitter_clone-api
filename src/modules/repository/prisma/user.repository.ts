@@ -24,6 +24,10 @@ export class UserRepository implements IUserRepository {
     return User.fromPrisma(createdUser);
   }
 
+  async selectAll(): Promise<User[]> {
+    return User.fromPrismaArray(await this.prisma.user.findMany());
+  }
+
   async selectById(props: SelectUserByIdDTO): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { id: props.id },
