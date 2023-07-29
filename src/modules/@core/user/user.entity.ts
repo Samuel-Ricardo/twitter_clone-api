@@ -7,16 +7,12 @@ export class User {
     public id: string,
     public name: string,
     public username: string,
-    public bio: string,
     public email: string,
     public password: string,
     public createdAt: Date,
     public updatedAt: Date,
     public hasNotifications: boolean,
-    public posts: any[],
-    public comments: any[],
-    public likes: any[],
-    public notifications: any[],
+    public bio?: string | null,
     public emailVerified?: Date | null,
     public image?: string | null,
     public coverImage?: string | null,
@@ -36,20 +32,20 @@ export class User {
       user.id,
       user.name,
       user.username,
-      user.bio,
       user.email,
       user.password,
       user.createdAt,
       user.updatedAt,
       user.hasNotifications,
-      [],
-      [],
-      [],
-      [],
+      user.bio,
       user.emailVerified,
       user.image,
       user.coverImage,
       user.profileImage,
     );
+  }
+
+  static fromPrismaArray(users: PrismaUser[]) {
+    return users.map((user) => User.fromPrisma(user));
   }
 }
