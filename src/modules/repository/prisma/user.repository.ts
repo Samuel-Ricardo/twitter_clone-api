@@ -1,4 +1,4 @@
-import { CreateUserDTO, IUserRepository, User } from '@User';
+import { CreateUserDTO, IUserRepository, UpdateUserDTO, User } from '@User';
 import { MODULE } from '@modules/app.module';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
@@ -16,5 +16,16 @@ export class UserRepository implements IUserRepository {
     });
 
     return User.fromPrisma(createdUser);
+  }
+
+  async update(props: UpdateUserDTO): Promise<User> {
+    const data = { ...props, id: undefined };
+
+    const updated = await this.prisma.user.update({
+      where: { id: props.id },
+      data: data,
+    });
+
+    return User.fromPrisma(updated);
   }
 }
