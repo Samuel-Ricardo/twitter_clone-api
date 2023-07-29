@@ -12,9 +12,19 @@ export class User {
     public createdAt: Date,
     public updatedAt: Date,
     public hasNotification: boolean,
+    public posts: any[],
+    public comments: any[],
+    public likes: any[],
+    public notifications: any[],
     public emailVerified?: Date,
     public image?: string,
     public coverImage?: string,
     public profileImage?: string,
   ) {}
+
+  validateName() {
+    if (this.name.length < 3) {
+      throw new Error('Name must be at least 3 characters long');
+    }
+  }
 }
