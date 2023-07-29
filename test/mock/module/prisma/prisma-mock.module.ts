@@ -29,4 +29,6 @@ PrismaMockModule.bind(PrismaMockResgistry.PRISMA_DEV).toConstantValue(
 export const PrismaMockFactory = {
   PRISMA: () =>
     PrismaMockModule.get<jest.Mocked<PrismaClient>>(PrismaMockResgistry.PRISMA),
+  PRISMA_DEV: () =>
+    PrismaMockModule.get<PrismaClient>(PrismaMockResgistry.PRISMA_DEV),
 };
