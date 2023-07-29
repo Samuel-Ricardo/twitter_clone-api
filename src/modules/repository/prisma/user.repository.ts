@@ -10,7 +10,7 @@ import { PrismaClient, User as PrismaUser } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 
 @injectable()
-export class UserRepository implements IUserRepository {
+export class PrismaUserRepository implements IUserRepository {
   constructor(
     @inject(MODULE.PRISMA)
     private prisma: PrismaClient,
@@ -45,5 +45,9 @@ export class UserRepository implements IUserRepository {
     });
 
     return User.fromPrisma(updated);
+  }
+
+  delete(props: IDeleteUserDTO): Promise<void> {
+    this.prisma.user.delete({ where: { id: props.id } });
   }
 }
