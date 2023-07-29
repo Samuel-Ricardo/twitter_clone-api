@@ -18,6 +18,10 @@
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
+      "@User": ["./modules/@core/user/index.ts"],
+      "@User/*": ["./modules/@core/user/*"],
+      "@Core": ["./modules/@core/index.ts"],
+      "@Core/*": ["./modules/@core/*"],
       "@logger": ["./modules/logger/index.ts"],
       "@env":["./modules/config/env/index.ts"],
       "@modules":["./modules/index.ts"],
