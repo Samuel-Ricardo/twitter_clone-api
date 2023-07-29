@@ -18,6 +18,8 @@
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
+      "@Type": ["./@types/index.ts"],
+      "@Type/*": ["./@types/*"],
       "@User": ["./modules/@core/user/index.ts"],
       "@User/*": ["./modules/@core/user/*"],
       "@Core": ["./modules/@core/index.ts"],
