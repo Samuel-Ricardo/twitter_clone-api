@@ -1,4 +1,4 @@
 export interface IRepository<T> {
-  create(data): Promise<T>;
-  selectAll(data): Promise<T[]>;
+  create(data: any): Promise<T>;
+  selectAll(data: any): Promise<T[]>;
 }
