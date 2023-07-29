@@ -18,6 +18,8 @@
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
+      "@test/env": ["../test/config/env/env.ts"],
+      "@test/*": ["../test/*"],
       "@Type": ["./@types/index.ts"],
       "@Type/*": ["./@types/*"],
       "@User": ["./modules/@core/user/index.ts"],
