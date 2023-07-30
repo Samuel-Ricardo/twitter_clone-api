@@ -1,5 +1,8 @@
+import 'reflect-metadata';
+
 import { injectable } from 'inversify';
 import { User as PrismaUser } from '@prisma/client';
+import { UpdateUserDTO } from './DTO';
 
 @injectable()
 export class User {
@@ -25,6 +28,24 @@ export class User {
     if (this.name.length < 3) {
       throw new Error('Name must be at least 3 characters long');
     }
+  }
+
+  static create(user: UpdateUserDTO) {
+    return new User(
+      user.id,
+      user.name!,
+      user.username!,
+      user.email!,
+      user.password!,
+      user.createdAt!,
+      user.updatedAt!,
+      user.hasNotifications!,
+      user.bio,
+      user.emailVerified,
+      user.image,
+      user.coverImage,
+      user.profileImage,
+    );
   }
 
   static fromPrisma(user: PrismaUser) {
