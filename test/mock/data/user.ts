@@ -15,3 +15,5 @@ export const VALID_USER_DATA: UpdateUserDTO = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
+
+export const VALID_USER = User.create(VALID_USER_DATA);
