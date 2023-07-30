@@ -1,8 +1,3 @@
-import { Container } from 'inversify';
-import { PrismaRepositoryRegistry, PrismaRepositoryModule } from './prisma';
-
-export const RepositoryRegistry = {
-  PRISMA: { ...PrismaRepositoryRegistry },
-};
+import { PrismaRepositoryModule } from './prisma';
 
 export { PrismaRepositoryModule as RepositoryModule };
