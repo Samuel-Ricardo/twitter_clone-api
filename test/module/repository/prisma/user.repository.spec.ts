@@ -6,7 +6,7 @@ import {
   VALID_USER_DATA,
 } from '@test/mock/data/user';
 import { MockFactory } from '@test/mock/module/app.module';
-import { UpdateUserDTO, User } from '@User';
+import { User } from '@User';
 
 describe('[REPOSITORY] | User', () => {
   let repository: PrismaUserRepository;
