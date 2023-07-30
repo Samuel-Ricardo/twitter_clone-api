@@ -1,8 +1,12 @@
 import { User as PrismaUser } from '@prisma/client';
 import { PrismaUserRepository } from '@modules';
-import { CREATE_USER_DATA, VALID_USER } from '@test/mock/data/user';
+import {
+  CREATE_USER_DATA,
+  VALID_USER,
+  VALID_USER_DATA,
+} from '@test/mock/data/user';
 import { MockFactory } from '@test/mock/module/app.module';
-import { User } from '@User';
+import { UpdateUserDTO, User } from '@User';
 
 describe('[REPOSITORY] | User', () => {
   let repository: PrismaUserRepository;
@@ -56,5 +60,37 @@ describe('[REPOSITORY] | User', () => {
     expect(user).toHaveProperty('name');
 
     expect(prismaMock.user.findUnique).toHaveBeenCalledTimes(1);
+  });
+
+  it('[UNIT] | should update a user', async () => {
+    const UPDATED_USER = {
+      ...VALID_USER,
+      name: 'updated name',
+    };
+
+    const UPDATED_USER_DATA = {
+      ...VALID_USER_DATA,
+      name: 'updated name',
+    };
+
+    prismaMock.user.update.mockResolvedValue(UPDATED_USER as PrismaUser);
+
+    const user = await repository.update(UPDATED_USER_DATA);
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+    expect(user).toEqual(UPDATED_USER);
+
+    expect(prismaMock.user.update).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.update).toHaveBeenCalledWith({
+      where: {
+        id: VALID_USER.id,
+      },
+      data: {
+        ...UPDATED_USER,
+        id: undefined,
+      },
+    });
   });
 });
