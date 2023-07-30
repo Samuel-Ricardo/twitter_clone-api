@@ -1,23 +1,17 @@
 import { injectable } from 'inversify';
 
-@injectable()
-export class UpdateUserDto {
-  constructor(
-    public name?: string,
-    public username?: string,
-    public bio?: string,
-    public email?: string,
-    public password?: string,
-    public createdAt?: Date,
-    public updatedAt?: Date,
-    public hasNotification?: boolean,
-    public posts?: any[],
-    public comments?: any[],
-    public likes?: any[],
-    public notifications?: any[],
-    public emailVerified?: Date,
-    public image?: string,
-    public coverImage?: string,
-    public profileImage?: string,
-  ) {}
+export interface UpdateUserDTO {
+  id: string;
+  name?: string;
+  username?: string;
+  bio?: string;
+  email?: string;
+  password?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  hasNotifications?: boolean;
+  emailVerified?: Date;
+  image?: string;
+  coverImage?: string;
+  profileImage?: string;
 }
