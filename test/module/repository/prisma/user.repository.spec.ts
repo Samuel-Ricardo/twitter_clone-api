@@ -93,4 +93,19 @@ describe('[REPOSITORY] | User', () => {
       },
     });
   });
+
+  it('[UNIT] | should delete a user', async () => {
+    prismaMock.user.delete.mockResolvedValue(VALID_USER as PrismaUser);
+
+    const result = await repository.delete({ id: VALID_USER.id });
+
+    expect(result).toBeTruthy();
+
+    expect(prismaMock.user.delete).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.delete).toHaveBeenCalledWith({
+      where: {
+        id: VALID_USER.id,
+      },
+    });
+  });
 });
