@@ -19,3 +19,13 @@ services:
     entrypoint: ["npm", "run", "code:ci"]
     depends_on:
       - app
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    env_file: .env
+    volumes:
+      - ./.docker/mongo-data:/data/db
+
