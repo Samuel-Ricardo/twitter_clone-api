@@ -27,5 +27,21 @@ describe('[REPOSITORY] | User', () => {
     expect(user).toBeDefined();
     expect(user).toHaveProperty('id');
     expect(user).toBeInstanceOf(User);
+
+    expect(prismaMock.user.create).toHaveBeenCalledTimes(1);
+  });
+
+  it('[UNIT] | should select all users', async () => {
+    prismaMock.user.findMany.mockResolvedValue([VALID_USER as PrismaUser]);
+
+    const users = await repository.selectAll();
+
+    expect(users).toBeDefined();
+    expect(users).toBeInstanceOf(Array);
+    expect(users).toHaveLength(1);
+    expect(users[0]).toBeInstanceOf(User);
+    expect(users[0]).toHaveProperty('id');
+
+    expect(prismaMock.user.findMany).toHaveBeenCalledTimes(1);
   });
 });
