@@ -19,5 +19,13 @@ describe('[REPOSITORY] | User', () => {
     expect(prismaMock).toBeDefined();
   });
 
-  it('[UNIT] | should create a user', async () => {});
+  it('[UNIT] | should create a user', async () => {
+    prismaMock.user.create.mockResolvedValue(VALID_USER as PrismaUser);
+
+    const user = await repository.create(CREATE_USER_DATA);
+
+    expect(user).toBeDefined();
+    expect(user).toHaveProperty('id');
+    expect(user).toBeInstanceOf(User);
+  });
 });
