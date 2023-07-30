@@ -1,6 +1,3 @@
-import { injectable } from 'inversify';
-
-@injectable()
-export class SelectUserByIdDTO {
-  constructor(public id: number) {}
+export interface SelectUserByIdDTO {
+  id: string;
 }
