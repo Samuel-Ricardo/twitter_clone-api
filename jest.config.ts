@@ -183,6 +183,16 @@ const config: Config = {
     '@/(.*)': '<rootDir>/src/$1',
     '@modules': '<rootDir>/src/modules/index.ts',
     '@modules/(.*)': '<rootDir>/src/modules/$1',
+    '@test/env': '<rootDir>/test/config/env/env.ts',
+    '@test/(.*)': '<rootDir>/test/$1',
+    '@Type': '<rootDir>/src/@types/index.ts',
+    '@Type/(.*)': '<rootDir>/src/@types/$1',
+    '@User': '<rootDir>/src/modules/@core/user/index.ts',
+    '@User/(.*)': '<rootDir>/src/modules/@core/user/$1',
+    '@Core': '<rootDir>/src/modules/@core/index.ts',
+    '@Core/(.*)': '<rootDir>/src/modules/@core/$1',
+    '@logger': '<rootDir>/src/modules/logger/index.ts',
+    '@env': '<rootDir>/src/modules/config/env/index.ts',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
