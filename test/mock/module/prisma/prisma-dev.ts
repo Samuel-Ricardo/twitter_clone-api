@@ -11,4 +11,6 @@ export const prisma_dev = new PrismaClient({
   datasources: { db: { url } },
 });
 
-export const PrismaDevFactory = {};
+export const PrismaDevFactory = {
+  PRISMA_DEV: () => prisma_dev,
+};
