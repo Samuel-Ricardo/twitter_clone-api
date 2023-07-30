@@ -5,6 +5,7 @@ import {
   UpdateUserDTO,
   User,
 } from '@User';
+import { IDeleteuserDTO } from '@User/DTO/delete.dto';
 import { MODULE } from '@modules/app.module';
 import { PrismaClient, User as PrismaUser } from '@prisma/client';
 import { inject, injectable } from 'inversify';
@@ -47,7 +48,7 @@ export class PrismaUserRepository implements IUserRepository {
     return User.fromPrisma(updated);
   }
 
-  delete(props: IDeleteUserDTO): Promise<void> {
+  async delete(props: IDeleteuserDTO) {
     this.prisma.user.delete({ where: { id: props.id } });
   }
 }
