@@ -33,6 +33,9 @@ describe('[REPOSITORY] | User', () => {
     expect(user).toBeInstanceOf(User);
 
     expect(prismaMock.user.create).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.create).toHaveBeenCalledWith({
+      data: CREATE_USER_DATA,
+    });
   });
 
   it('[UNIT] | should select all users', async () => {
