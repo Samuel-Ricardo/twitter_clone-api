@@ -60,6 +60,11 @@ describe('[REPOSITORY] | User', () => {
     expect(user).toHaveProperty('name');
 
     expect(prismaMock.user.findUnique).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
+      where: {
+        id: VALID_USER.id,
+      },
+    });
   });
 
   it('[UNIT] | should update a user', async () => {
