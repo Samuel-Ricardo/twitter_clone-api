@@ -1,12 +1,10 @@
-import {
-  PrismaRepositoryModule,
-  PrismaRepositoryRegistry,
-} from './prisma-repository.module';
+import { PrismaRepositoryModule } from './prisma-repository.module';
+import { PrismaRepositoryRegistry } from './prisma-repository.registry';
 import { PrismaUserRepository } from './user.repository';
 
 export const PrismaRepositoryFactory = {
-  USER_REPOSITORY: () =>
+  USER: () =>
     PrismaRepositoryModule.get<PrismaUserRepository>(
-      PrismaRepositoryRegistry.USER_REPOSITORY,
+      PrismaRepositoryRegistry.USER,
     ),
 };
