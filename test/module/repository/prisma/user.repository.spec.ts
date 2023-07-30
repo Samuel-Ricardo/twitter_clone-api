@@ -44,4 +44,17 @@ describe('[REPOSITORY] | User', () => {
 
     expect(prismaMock.user.findMany).toHaveBeenCalledTimes(1);
   });
+
+  it('[UNIT] | should select a user by id', async () => {
+    prismaMock.user.findUnique.mockResolvedValue(VALID_USER as PrismaUser);
+
+    const user = await repository.selectById({ id: VALID_USER.id });
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+    expect(user).toHaveProperty('name');
+
+    expect(prismaMock.user.findUnique).toHaveBeenCalledTimes(1);
+  });
 });
