@@ -1,16 +1,11 @@
-import { randomUUID } from 'crypto';
-import { PrismaMockModule, PrismaMockResgistry } from './prisma-mock.module';
 import { PrismaClient } from '@prisma/client';
-import { ENV } from '@test/env';
+import { PrismaMockModule, PrismaMockResgistry } from './prisma-mock.module';
 
-const url = ENV.DB.URL.replace('[hash]', 'test_' + randomUUID());
+const prisma = new PrismaClient();
 
-console.log({ url });
-
-export const prisma_dev = new PrismaClient({
-  datasources: { db: { url } },
-});
+PrismaMockModule.bind(PrismaMockResgistry.PRISMA_DEV).toConstantValue(prisma);
 
 export const PrismaDevFactory = {
-  PRISMA_DEV: () => prisma_dev,
+  PRISMA_DEV: () =>
+    PrismaMockModule.get<PrismaClient>(PrismaMockResgistry.PRISMA_DEV),
 };
