@@ -1,8 +1,11 @@
 FROM node:18-slim
 
-USER node
+RUN apt-get update -y && apt-get install -y openssl
 
+USER node
 WORKDIR /home/node/app
+
+
 
 COPY --chown=node:node package*.json ./
 RUN npm i
