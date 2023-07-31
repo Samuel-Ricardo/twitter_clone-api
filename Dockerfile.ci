@@ -1,5 +1,7 @@
 FROM node:18-slim
 
+RUN apt-get update -y && apt-get install -y openssl
+
 WORKDIR /home/node/app
 
 COPY package*.json ./
@@ -7,8 +9,6 @@ RUN npm ci
 
 COPY . .
 
-RUN npx prisma generate && npm run build
-
-RUN ls -a
+RUN npm run build && npx prisma generate
 
 #CMD ["npm", "run", "start"]
