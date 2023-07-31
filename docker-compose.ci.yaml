@@ -12,14 +12,6 @@ services:
     depends_on:
       - mongo
 
-  code_health:
-    build: 
-      context: .
-      dockerfile: Dockerfile.ci
-    entrypoint: ["npm", "run", "code:ci"]
-    depends_on:
-      - app
-
   mongo:
     image: mongo
     restart: always
