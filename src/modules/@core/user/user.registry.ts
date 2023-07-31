@@ -1,8 +1,8 @@
 export const UserRegistry = {
   SERVICE: {
-    USER: Symbol.for('UserService'),
+    DEFAULT: Symbol.for('UserService'),
   },
   CONTROLLER: {
-    USER: Symbol.for('UserController'),
+    DEFAULT: Symbol.for('UserController'),
   },
 };
