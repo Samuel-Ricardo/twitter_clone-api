@@ -5,5 +5,5 @@ import { UserController } from './controller';
 
 export const UserModule = new Container({ autoBindInjectable: true });
 
-UserModule.bind(UserRegistry.SERVICE.USER).to(UserService);
-UserModule.bind(UserRegistry.CONTROLLER.USER).to(UserController);
+UserModule.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
+UserModule.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);

@@ -4,11 +4,13 @@ import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
 
 export const USER_MODULE = {
-  GET: () => UserModule.get<UserController>(UserRegistry.CONTROLLER.USER),
+  DEFAULT: () =>
+    UserModule.get<UserController>(UserRegistry.CONTROLLER.DEFAULT),
   SERVICE: {
-    USER: () => UserModule.get<UserService>(UserRegistry.SERVICE.USER),
+    DEFAULT: () => UserModule.get<UserService>(UserRegistry.SERVICE.DEFAULT),
   },
   CONTROLLER: {
-    USER: () => UserModule.get<UserController>(UserRegistry.CONTROLLER.USER),
+    DEFAULT: () =>
+      UserModule.get<UserController>(UserRegistry.CONTROLLER.DEFAULT),
   },
 };
