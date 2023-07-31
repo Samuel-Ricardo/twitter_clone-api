@@ -20,6 +20,9 @@ jobs:
       
       - name: Checkout
         uses: actions/checkout@v3     
-
+      
+      - name: Up docker containers
+        run: docker compose -f docker-compose.ci.yaml up -d 
+      
       - name: run tests with docker-compose
-        run: sudo docker compose -f docker-compose.ci.yaml up -d 
+        run: docker compose -f docker-compose.ci.yaml exec -T app sh -c "npm run code:ci"
