@@ -25,7 +25,11 @@ services:
     restart: always
     ports:
       - 27017:27017
-    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+
+ 
     volumes:
       - ./.docker/mongo-data:/data/db
 
