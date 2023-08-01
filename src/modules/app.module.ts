@@ -7,12 +7,16 @@ import { RepositoryModule } from './repository/repository.module';
 
 import { Express } from 'express';
 import { MODULE } from './app.registry';
+import { UserModule } from '@User';
+import { RoutesModule } from './routes/routes.module';
 
-const container = new Container();
-container.bind<Express>(MODULE.APP).toConstantValue(Application.Instance());
+const Module = new Container();
+Module.bind<Express>(MODULE.APP).toConstantValue(Application.Instance());
 
 export const AppModule = Container.merge(
-  container,
+  Module,
   PrismaModule,
   RepositoryModule,
+  UserModule,
+  RoutesModule,
 );
