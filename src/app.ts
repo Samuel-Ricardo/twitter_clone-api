@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { SwaggerModule } from './modules/documentation';
+import { SwaggerModule } from '@modules/documentation';
 import { MODULES } from '@modules';
 
 const app = MODULES.APP();
