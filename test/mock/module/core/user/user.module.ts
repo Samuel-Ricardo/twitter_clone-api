@@ -2,6 +2,7 @@ import { Container } from 'inversify';
 import {
   mockCreateUserUseCase,
   mockDeleteUserUseCase,
+  mockSelectAllUsersUseCase,
   mockUpdateUserUseCase,
 } from './use-case';
 import { UserMockRegistry } from './user.resgistry';
@@ -16,6 +17,10 @@ UserMockModule.bind(UserMockRegistry.USE_CASE.UPDATE).toDynamicValue(
   mockUpdateUserUseCase,
 );
 
-UserMockModule.bind(UserMockRegistry.USE_CASE.DELETE).toConstantValue(
+UserMockModule.bind(UserMockRegistry.USE_CASE.DELETE).toDynamicValue(
   mockDeleteUserUseCase,
+);
+
+UserMockModule.bind(UserMockRegistry.USE_CASE.SELECT.ALL).toDynamicValue(
+  mockSelectAllUsersUseCase,
 );
