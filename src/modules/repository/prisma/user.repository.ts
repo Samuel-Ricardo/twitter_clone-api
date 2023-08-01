@@ -6,7 +6,7 @@ import {
   User,
 } from '@User';
 import { IDeleteuserDTO } from '@User/DTO';
-import { MODULE } from '@modules';
+import { MODULE, MODULES } from '@modules';
 import { PrismaClient, User as PrismaUser } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 
@@ -26,7 +26,16 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   async selectAll(): Promise<User[]> {
-    return await this.prisma.user.findMany();
+    // return await this.prisma.user.findMany();
+
+    const _users = await this.prisma.user.findMany();
+    const factory = MODULES.USER.FOR_PRISMA();
+
+    const users = _users.map((user) => {
+      return factory(user);
+    });
+
+    return users as User[];
   }
 
   async selectById(props: SelectUserByIdDTO): Promise<User> {
