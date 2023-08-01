@@ -1,10 +1,12 @@
 import { Container } from 'inversify';
 import { PrismaUserRepository } from './user.repository';
 import { PrismaRepositoryRegistry } from './prisma-repository.registry';
+import { PrismaModule } from '../../prisma/prisma.module';
 
-export const PrismaRepositoryModule = new Container({
+const Module = new Container({
   autoBindInjectable: true,
 });
-PrismaRepositoryModule.bind(PrismaRepositoryRegistry.USER).to(
-  PrismaUserRepository,
-);
+
+Module.bind(PrismaRepositoryRegistry.USER).to(PrismaUserRepository);
+
+export const PrismaRepositoryModule = Container.merge(Module, PrismaModule);
