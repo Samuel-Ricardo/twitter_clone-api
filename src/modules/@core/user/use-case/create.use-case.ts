@@ -1,6 +1,6 @@
 import { CreateUserDTO } from '@User/DTO';
 import { IUserRepository } from '@User/user.repository';
-import { MODULE } from '@modules/app.registry';
+import { MODULE } from '@modules';
 import { inject, injectable } from 'inversify';
 
 @injectable()
