@@ -4,6 +4,7 @@ export const UserMockRegistry = {
     UPDATE: Symbol.for('UpdateUserMockUseCase'),
     SELECT: {
       BY_ID: Symbol.for('SelectUserByIdMockUseCase'),
+      ALL: Symbol.for('SelectAllUserMockUseCase'),
     },
   },
 };
