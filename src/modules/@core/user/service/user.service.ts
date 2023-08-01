@@ -1,4 +1,9 @@
-import { CreateUserDTO, IDeleteuserDTO, UpdateUserDTO } from '@User/DTO';
+import {
+  CreateUserDTO,
+  IDeleteuserDTO,
+  SelectUserByIdDTO,
+  UpdateUserDTO,
+} from '@User/DTO';
 import { CreateUserUseCase } from '@User/use-case';
 import { USER_MODULE } from '../user.factory';
 import { inject, injectable } from 'inversify';
@@ -40,5 +45,9 @@ export class UserService {
 
   async selectAll() {
     return await this.selectAllUser.execute();
+  }
+
+  async selectById(data: SelectUserByIdDTO) {
+    return await this.selectUserById.execute(data);
   }
 }
