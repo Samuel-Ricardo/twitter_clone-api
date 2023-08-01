@@ -11,9 +11,10 @@ describe('[MODULE] | AppModule', () => {
   });
 
   it('Should be able to bind module [PRISMA]', () => {
-    const prisma = AppModule.get<PrismaClient>(MODULE.PRISMA);
+    const prisma = AppModule.getAll<PrismaClient>(MODULE.PRISMA)[0];
 
     expect(prisma).toBeDefined();
+    expect(prisma).toBeInstanceOf(PrismaClient);
     expect(prisma).toHaveProperty('user');
   });
 });
