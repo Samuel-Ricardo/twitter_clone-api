@@ -4,6 +4,7 @@ import { UserMockRegistry } from './user.resgistry';
 import {
   CreateUserUseCase,
   DeleteUserUseCase,
+  SelectAllUsersUseCase,
   SelectUserByIdUseCase,
   UpdateUserUseCase,
 } from '@User';
@@ -26,6 +27,10 @@ export const UserMockFactory = {
       BY_ID: () =>
         UserMockModule.get<DeepMockProxy<SelectUserByIdUseCase>>(
           UserMockRegistry.USE_CASE.SELECT.BY_ID,
+        ),
+      ALL: () =>
+        UserMockModule.get<DeepMockProxy<SelectAllUsersUseCase>>(
+          UserMockRegistry.USE_CASE.SELECT.ALL,
         ),
     },
   },
