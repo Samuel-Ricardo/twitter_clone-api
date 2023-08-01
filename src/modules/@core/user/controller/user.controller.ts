@@ -13,4 +13,10 @@ export class UserController {
   async create(data: CreateUserDTO) {
     return await this.service.create(data);
   }
+
+  async seletcAll() {
+    const users = await this.service.selectAll();
+
+    return { users };
+  }
 }
