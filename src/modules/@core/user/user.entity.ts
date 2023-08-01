@@ -3,31 +3,69 @@ import 'reflect-metadata';
 import { injectable } from 'inversify';
 import { User as PrismaUser } from '@prisma/client';
 import { UpdateUserDTO } from './DTO';
+import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @injectable()
 export class User {
-  constructor(
-    public id: string,
-    public name: string,
-    public username: string,
-    public email: string,
-    public password: string,
-    public createdAt: Date,
-    public updatedAt: Date,
-    public hasNotifications: boolean,
-    public bio?: string | null,
-    public emailVerified?: Date | null,
-    public image?: string | null,
-    public coverImage?: string | null,
-    public profileImage?: string | null,
-  ) {
-    this.validateName();
-  }
+  @IsNotEmpty()
+  public id: string;
 
-  private validateName() {
-    if (this.name.length < 3) {
-      throw new Error('Name must be at least 3 characters long');
-    }
+  @MaxLength(255)
+  @MinLength(3)
+  @IsNotEmpty()
+  public name: string;
+
+  @MaxLength(255)
+  @MinLength(3)
+  @IsNotEmpty()
+  public username: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  public email: string;
+
+  @MinLength(6)
+  @IsNotEmpty()
+  public password: string;
+  public createdAt: Date;
+  public updatedAt: Date;
+  public hasNotifications: boolean;
+  public bio?: string | null;
+  public emailVerified?: Date | null;
+  public image?: string | null;
+  public coverImage?: string | null;
+  public profileImage?: string | null;
+
+  constructor(
+    id: string,
+    name: string,
+    username: string,
+    email: string,
+    password: string,
+    createdAt: Date,
+    updatedAt: Date,
+    hasNotifications: boolean,
+    bio?: string | null,
+    emailVerified?: Date | null,
+    image?: string | null,
+    coverImage?: string | null,
+    profileImage?: string | null,
+  ) {
+    Object.assign(this, {
+      id,
+      name,
+      username,
+      email,
+      password,
+      createdAt,
+      updatedAt,
+      hasNotifications,
+      bio,
+      emailVerified,
+      image,
+      coverImage,
+      profileImage,
+    });
   }
 
   static create(user: UpdateUserDTO) {
