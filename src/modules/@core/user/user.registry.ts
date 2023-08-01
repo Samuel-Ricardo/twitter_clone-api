@@ -11,6 +11,7 @@ export const UserRegistry = {
     UPDATE: Symbol.for('UpdateUserUseCase'),
     SELECT: {
       BY_ID: Symbol.for('SelectUserByIdUseCase'),
+      ALL: Symbol.for('SelectAllUsersUseCase'),
     },
   },
 };
