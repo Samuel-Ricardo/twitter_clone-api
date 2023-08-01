@@ -1,4 +1,4 @@
-import { CreateUserDTO, UpdateUserDTO } from '@User/DTO';
+import { CreateUserDTO, IDeleteuserDTO, UpdateUserDTO } from '@User/DTO';
 import { CreateUserUseCase } from '@User/use-case';
 import { USER_MODULE } from '../user.factory';
 import { inject, injectable } from 'inversify';
@@ -32,5 +32,9 @@ export class UserService {
 
   async update(data: UpdateUserDTO) {
     return await this.updateUser.execute(data);
+  }
+
+  async delete(data: IDeleteuserDTO) {
+    return await this.deleteUser.execute(data);
   }
 }
