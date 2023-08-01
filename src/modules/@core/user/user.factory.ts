@@ -4,7 +4,8 @@ import { UserService } from './service';
 import { CreateUserUseCase } from './use-case';
 import { UserModule } from './user.module';
 import { UserRegistry } from './user.registry';
-import { User } from '@prisma/client';
+import { User } from './user.entity';
+import { User as PrismaUser } from '@prisma/client';
 import { UpdateUserDTO } from './DTO';
 import { UpdateUserUseCase } from './use-case/update.use-case';
 import { DeleteUserUseCase } from './use-case/delete.use-case';
@@ -40,5 +41,10 @@ export const USER_MODULE = {
   ENTITY: () =>
     UserModule.get<interfaces.Factory<User, [UpdateUserDTO]>>(
       UserRegistry.ENTITY,
+    ),
+
+  FOR_PRISMA: () =>
+    UserModule.get<interfaces.Factory<User, [PrismaUser]>>(
+      UserRegistry.FOR_PRISMA,
     ),
 };
