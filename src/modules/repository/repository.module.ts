@@ -1,3 +1,3 @@
-import { PrismaRepositoryModule } from './prisma';
+import { PrismaRepositoryModule } from './prisma/prisma-repository.module';
 
 export { PrismaRepositoryModule as RepositoryModule };
