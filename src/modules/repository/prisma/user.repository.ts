@@ -24,7 +24,7 @@ export class PrismaUserRepository implements IUserRepository {
       data: { ...user },
     });
 
-    return createdUser;
+    return this.userFactory(createdUser) as User;
   }
 
   async selectAll(): Promise<User[]> {
