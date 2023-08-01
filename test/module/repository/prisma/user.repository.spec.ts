@@ -1,5 +1,5 @@
 import { User as PrismaUser } from '@prisma/client';
-import { PrismaUserRepository } from '@modules';
+import { MODULES, PrismaUserRepository } from '@modules';
 import {
   CREATE_USER_DATA,
   VALID_USER,
@@ -15,7 +15,10 @@ describe('[REPOSITORY] | User', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     prismaMock = MockFactory.PRISMA();
-    repository = new PrismaUserRepository(prismaMock);
+    repository = new PrismaUserRepository(
+      prismaMock,
+      MODULES.USER.FOR_PRISMA(),
+    );
 
     expect(repository).toBeDefined();
     expect(repository).toBeInstanceOf(PrismaUserRepository);
