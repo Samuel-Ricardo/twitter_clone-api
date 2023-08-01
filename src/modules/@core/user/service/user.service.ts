@@ -37,4 +37,8 @@ export class UserService {
   async delete(data: IDeleteuserDTO) {
     return await this.deleteUser.execute(data);
   }
+
+  async selectAll() {
+    return await this.selectAllUser.execute();
+  }
 }
