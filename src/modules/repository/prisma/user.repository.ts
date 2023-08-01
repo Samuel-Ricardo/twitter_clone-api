@@ -42,7 +42,7 @@ export class PrismaUserRepository implements IUserRepository {
       where: { id: props.id },
     });
 
-    return user as PrismaUser;
+    return this.userFactory(user as PrismaUser) as User;
   }
 
   async update(props: UpdateUserDTO): Promise<User> {
