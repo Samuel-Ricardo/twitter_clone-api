@@ -28,10 +28,14 @@ export const USER_MODULE = {
       UserModule.get<UpdateUserUseCase>(UserRegistry.USE_CASE.UPDATE),
     DELETE: () =>
       UserModule.get<DeleteUserUseCase>(UserRegistry.USE_CASE.DELETE),
-    SELECT_ALL: () =>
-      UserModule.get<SelectAllUsersUseCase>(UserRegistry.USE_CASE.SELECT.ALL),
-    SELECT_BY_ID: () =>
-      UserModule.get<SelectUserByIdUseCase>(UserRegistry.USE_CASE.SELECT.BY_ID),
+    SELECT: {
+      ALL: () =>
+        UserModule.get<SelectAllUsersUseCase>(UserRegistry.USE_CASE.SELECT.ALL),
+      BY_ID: () =>
+        UserModule.get<SelectUserByIdUseCase>(
+          UserRegistry.USE_CASE.SELECT.BY_ID,
+        ),
+    },
   },
   ENTITY: () =>
     UserModule.get<interfaces.Factory<User, [UpdateUserDTO]>>(
