@@ -13,5 +13,6 @@ export const UserRegistry = {
       BY_ID: Symbol.for('SelectUserByIdUseCase'),
       ALL: Symbol.for('SelectAllUsersUseCase'),
     },
+    DELETE: Symbol.for('DeleteUserUseCase'),
   },
 };
