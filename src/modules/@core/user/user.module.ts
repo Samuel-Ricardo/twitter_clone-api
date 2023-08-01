@@ -3,6 +3,7 @@ import { UserRegistry } from './user.registry';
 import { UserService } from './service/user.service';
 import { UserController } from './controller/user.controller';
 import { User } from './user.entity';
+import { User as PrismaUser } from '@prisma/client';
 import { UpdateUserDTO } from './DTO/update.dto';
 import { CreateUserUseCase } from './use-case/create.use-case';
 import { UpdateUserUseCase } from './use-case/update.use-case';
@@ -24,6 +25,25 @@ Module.bind(UserRegistry.ENTITY).toFactory<User, [UpdateUserDTO]>(
       user.createdAt!,
       user.updatedAt!,
       user.hasNotifications!,
+      user.bio,
+      user.emailVerified,
+      user.image,
+      user.coverImage,
+      user.profileImage,
+    ),
+);
+
+Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
+  (context: interfaces.Context) => (user: PrismaUser) =>
+    new User(
+      user.id,
+      user.name,
+      user.username,
+      user.email,
+      user.password,
+      user.createdAt,
+      user.updatedAt,
+      user.hasNotifications,
       user.bio,
       user.emailVerified,
       user.image,
