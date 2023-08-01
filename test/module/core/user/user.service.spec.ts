@@ -52,13 +52,15 @@ describe('[SERVICE] | USER', () => {
   });
 
   it('should: select - all [USER]', async () => {
-    // selectAll.execute.mockResolvedValue([VALID_USER])
+    selectAll.execute.mockResolvedValue([VALID_USER]);
 
-    // const users = await service.selectAll();
+    const users = await service.selectAll();
 
-    // expect(users).toBeDefined();
-    // expect(users).toEqual([VALID_USER])
-    // expect(users[0]).toStrictEqual(VALID_USER)
-    expect(true).toBeTruthy();
+    expect(users).toBeDefined();
+    expect(users).toEqual([VALID_USER]);
+    expect(users[0]).toStrictEqual(VALID_USER);
+
+    expect(selectAll.execute).toHaveBeenCalledTimes(1);
+    expect(selectAll.execute).toHaveBeenCalledWith();
   });
 });
