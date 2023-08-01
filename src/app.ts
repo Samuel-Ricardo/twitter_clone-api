@@ -1,12 +1,10 @@
+import 'reflect-metadata';
 import { SwaggerModule } from './modules/documentation';
-import { Application } from '@modules';
+import { MODULES } from '@modules';
 
-const app = Application.Instance();
+const app = MODULES.APP();
 
 SwaggerModule.setup({ app });
-
-app.get('/', (req, res) => {
-  res.send({ result: 'Hello World!' });
-});
+app.use(MODULES.ROUTES());
 
 export { app };
