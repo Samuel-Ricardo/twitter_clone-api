@@ -14,7 +14,7 @@ import { inject, injectable } from 'inversify';
 export class PrismaUserRepository implements IUserRepository {
   constructor(
     @inject(MODULE.PRISMA)
-    private prisma: PrismaClient,
+    private readonly prisma: PrismaClient,
   ) {}
 
   async create(user: CreateUserDTO): Promise<User> {
@@ -22,11 +22,11 @@ export class PrismaUserRepository implements IUserRepository {
       data: { ...user },
     });
 
-    return User.fromPrisma(createdUser);
+    return createdUser;
   }
 
   async selectAll(): Promise<User[]> {
-    return User.fromPrismaArray(await this.prisma.user.findMany());
+    return await this.prisma.user.findMany();
   }
 
   async selectById(props: SelectUserByIdDTO): Promise<User> {
@@ -34,7 +34,7 @@ export class PrismaUserRepository implements IUserRepository {
       where: { id: props.id },
     });
 
-    return User.fromPrisma(user as PrismaUser);
+    return user as PrismaUser;
   }
 
   async update(props: UpdateUserDTO): Promise<User> {
@@ -45,7 +45,7 @@ export class PrismaUserRepository implements IUserRepository {
       data: data,
     });
 
-    return User.fromPrisma(updated);
+    return updated;
   }
 
   async delete(props: IDeleteuserDTO) {

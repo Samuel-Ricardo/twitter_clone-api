@@ -5,7 +5,7 @@ import {
   UpdateUserDTO,
 } from '@User/DTO';
 import { CreateUserUseCase } from '@User/use-case';
-import { USER_MODULE } from '../user.factory';
+import { UserRegistry as USER_MODULE } from '../user.registry';
 import { inject, injectable } from 'inversify';
 import { UpdateUserUseCase } from '@User/use-case/update.use-case';
 import { DeleteUserUseCase } from '@User/use-case/delete.use-case';
