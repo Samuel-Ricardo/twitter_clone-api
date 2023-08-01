@@ -6,5 +6,6 @@ export const UserMockRegistry = {
       BY_ID: Symbol.for('SelectUserByIdMockUseCase'),
       ALL: Symbol.for('SelectAllUserMockUseCase'),
     },
+    DELETE: Symbol.for('DeleteUserMockUseCase'),
   },
 };
