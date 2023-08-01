@@ -74,4 +74,15 @@ describe('[SERVICE] | USER', () => {
     expect(selectById.execute).toHaveBeenCalledTimes(1);
     expect(selectById.execute).toHaveBeenCalledWith({ id: VALID_USER.id });
   });
+
+  it('should: create [USER]', async () => {
+    create.execute.mockResolvedValue(VALID_USER);
+
+    const user = await service.create(VALID_USER);
+
+    expect(user).toBeDefined();
+    expect(user).toStrictEqual(VALID_USER);
+    expect(create.execute).toHaveBeenCalledTimes(1);
+    expect(create.execute).toHaveBeenCalledWith(VALID_USER);
+  });
 });
