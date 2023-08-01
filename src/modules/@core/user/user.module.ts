@@ -5,6 +5,7 @@ import { UserController } from './controller';
 import { CreateUserUseCase } from './use-case';
 import { User } from './user.entity';
 import { UpdateUserDTO } from './DTO';
+import { UpdateUserUseCase } from './use-case/update.use-case';
 
 export const UserModule = new Container({ autoBindInjectable: true });
 
@@ -31,3 +32,4 @@ UserModule.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
 UserModule.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
 
 UserModule.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
+UserModule.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
