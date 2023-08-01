@@ -10,7 +10,7 @@ import {
   UpdateUserUseCase,
 } from '@User/use-case';
 import { UserService } from '@User/service';
-import { MockFactory, VALID_USER } from '@test/mock';
+import { MockFactory, VALID_USER, VALID_USER_DATA } from '@test/mock';
 import { DeepMockProxy } from 'jest-mock-extended';
 
 describe('[SERVICE] | USER', () => {
@@ -84,5 +84,26 @@ describe('[SERVICE] | USER', () => {
     expect(user).toStrictEqual(VALID_USER);
     expect(create.execute).toHaveBeenCalledTimes(1);
     expect(create.execute).toHaveBeenCalledWith(VALID_USER);
+  });
+
+  it('should: update [USER]', async () => {
+    const UPDATED_USER = {
+      ...VALID_USER,
+      name: 'updated name',
+    };
+
+    const UPDATED_USER_DATA = {
+      ...VALID_USER_DATA,
+      name: 'updated name',
+    };
+
+    update.execute.mockResolvedValue(UPDATED_USER);
+
+    const user = await service.update(UPDATED_USER_DATA);
+
+    expect(user).toBeDefined();
+    expect(user).toStrictEqual(UPDATED_USER);
+    expect(update.execute).toHaveBeenCalledTimes(1);
+    expect(update.execute).toHaveBeenCalledWith(UPDATED_USER_DATA);
   });
 });
