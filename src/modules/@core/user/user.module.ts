@@ -1,18 +1,19 @@
 import { Container, interfaces } from 'inversify';
 import { UserRegistry } from './user.registry';
-import { UserService } from './service';
-import { UserController } from './controller';
-import { CreateUserUseCase } from './use-case';
+import { UserService } from './service/user.service';
+import { UserController } from './controller/user.controller';
 import { User } from './user.entity';
-import { UpdateUserDTO } from './DTO';
+import { UpdateUserDTO } from './DTO/update.dto';
+import { CreateUserUseCase } from './use-case/create.use-case';
 import { UpdateUserUseCase } from './use-case/update.use-case';
 import { DeleteUserUseCase } from './use-case/delete.use-case';
 import { SelectAllUsersUseCase } from './use-case/select_all.use-case';
 import { SelectUserByIdUseCase } from './use-case/select_by_id.use-case';
+import { RepositoryModule } from '../../repository/repository.module';
 
-export const UserModule = new Container({ autoBindInjectable: true });
+const Module = new Container({ autoBindInjectable: true });
 
-UserModule.bind(UserRegistry.ENTITY).toFactory<User, [UpdateUserDTO]>(
+Module.bind(UserRegistry.ENTITY).toFactory<User, [UpdateUserDTO]>(
   (context: interfaces.Context) => (user: UpdateUserDTO) =>
     new User(
       user.id,
@@ -31,11 +32,15 @@ UserModule.bind(UserRegistry.ENTITY).toFactory<User, [UpdateUserDTO]>(
     ),
 );
 
-UserModule.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
-UserModule.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
+Module.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
+Module.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
 
-UserModule.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
-UserModule.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
-UserModule.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
-UserModule.bind(UserRegistry.USE_CASE.SELECT.ALL).to(SelectAllUsersUseCase);
-UserModule.bind(UserRegistry.USE_CASE.SELECT.BY_ID).to(SelectUserByIdUseCase);
+Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
+Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
+Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
+Module.bind(UserRegistry.USE_CASE.SELECT.ALL).to(SelectAllUsersUseCase);
+Module.bind(UserRegistry.USE_CASE.SELECT.BY_ID).to(SelectUserByIdUseCase);
+
+const UserModule = Container.merge(Module, RepositoryModule);
+
+export { UserModule };
