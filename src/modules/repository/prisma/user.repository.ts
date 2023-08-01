@@ -53,7 +53,7 @@ export class PrismaUserRepository implements IUserRepository {
       data: data,
     });
 
-    return updated;
+    return this.userFactory(updated) as User;
   }
 
   async delete(props: IDeleteuserDTO) {
