@@ -9,5 +9,8 @@ export const UserRegistry = {
   USE_CASE: {
     CREATE: Symbol.for('CreateUserUseCase'),
     UPDATE: Symbol.for('UpdateUserUseCase'),
+    SELECT: {
+      BY_ID: Symbol.for('SelectUserByIdUseCase'),
+    },
   },
 };
