@@ -3,6 +3,7 @@ import {
   mockCreateUserUseCase,
   mockDeleteUserUseCase,
   mockSelectAllUsersUseCase,
+  mockSelectUserByIdUseCase,
   mockUpdateUserUseCase,
 } from './use-case';
 import { UserMockRegistry } from './user.resgistry';
@@ -23,4 +24,8 @@ UserMockModule.bind(UserMockRegistry.USE_CASE.DELETE).toDynamicValue(
 
 UserMockModule.bind(UserMockRegistry.USE_CASE.SELECT.ALL).toDynamicValue(
   mockSelectAllUsersUseCase,
+);
+
+UserMockModule.bind(UserMockRegistry.USE_CASE.SELECT.BY_ID).toDynamicValue(
+  mockSelectUserByIdUseCase,
 );
