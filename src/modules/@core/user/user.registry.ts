@@ -1,5 +1,6 @@
 export const UserRegistry = {
   ENTITY: Symbol.for('UserENtity'),
+  FOR_PRISMA: Symbol.for('UserForPrisma'),
   SERVICE: {
     DEFAULT: Symbol.for('UserService'),
   },
