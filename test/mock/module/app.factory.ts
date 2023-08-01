@@ -1,7 +1,11 @@
-import { PrismaMockResgistry } from './prisma';
-import { PrismaRepositoryMockRegistry as PRISMA } from './repository';
+import { PrismaMockFactory } from './prisma';
+import { PrismaDevFactory } from './prisma/prisma-dev';
+import { RepositoryMockFactory as REPOSITORY } from './repository';
+import { UserMockFactory as USER } from './core/user';
 
-export const MOCK_MODULE = {
-  ...PrismaMockResgistry,
-  PRISMA,
+export const MockFactory = {
+  ...PrismaMockFactory,
+  ...PrismaDevFactory,
+  REPOSITORY,
+  USER,
 };
