@@ -1,7 +1,7 @@
 import { UserService } from '@User/service/user.service';
 import { inject, injectable } from 'inversify';
 import { UserRegistry as USER_MODULE } from '../user.registry';
-import { CreateUserDTO } from '@User/DTO';
+import { CreateUserDTO, SelectUserByIdDTO } from '@User/DTO';
 
 @injectable()
 export class UserController {
@@ -18,5 +18,9 @@ export class UserController {
     const users = await this.service.selectAll();
 
     return { users };
+  }
+
+  async selectById(props: SelectUserByIdDTO) {
+    return await this.service.selectById(props);
   }
 }
