@@ -8,7 +8,7 @@ import { RepositoryModule } from './repository/repository.module';
 import { Express } from 'express';
 import { MODULE } from './app.registry';
 import { UserModule } from '@User';
-import { RoutesModule } from './routes/routes.module';
+import { RoutesModule } from './router/router.module';
 
 const Module = new Container();
 Module.bind<Express>(MODULE.APP).toConstantValue(Application.Instance());
