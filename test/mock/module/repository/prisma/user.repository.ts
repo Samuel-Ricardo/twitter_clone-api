@@ -1,6 +1,6 @@
-import { PrismaUserRepository } from '@modules';
+import { MODULES, PrismaUserRepository } from '@modules';
 import { Container } from 'inversify';
-import { MockFactory } from '../../app.module';
+import { MockFactory } from '../../app.factory';
 
 jest.mock('../../../../../src/modules/repository/prisma/user.repository.ts');
 
@@ -27,7 +27,13 @@ PrismaRepositoryMockModule.bind<jest.Mocked<PrismaUserRepository>>(
 
 PrismaRepositoryMockModule.bind<PrismaUserRepository>(
   PrismaRepositoryMockRegistry.USER_DEV,
-).toDynamicValue(() => new PrismaUserRepository(MockFactory.PRISMA_DEV()));
+).toDynamicValue(
+  () =>
+    new PrismaUserRepository(
+      MockFactory.PRISMA_DEV(),
+      MODULES.USER.FOR_PRISMA(),
+    ),
+);
 
 export const PrismaRepositoryFactoryMock = {
   USER: () =>
