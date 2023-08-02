@@ -15,4 +15,5 @@ export const MODULES = {
   USER,
   REPOSITORY,
   APP: () => AppModule.get<Express>(MODULE.APP),
+  BODY_PARSER: () => AppModule.get(MODULE.BODY_PARSER),
 };
