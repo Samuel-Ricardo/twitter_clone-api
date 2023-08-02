@@ -11,5 +11,6 @@ export const MODULE = {
   USER,
   REPOSITORY,
   APP: Symbol.for('app'),
+  BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
 };
