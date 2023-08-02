@@ -5,7 +5,7 @@ import {
   VALID_USER,
   VALID_USER_DATA,
 } from '@test/mock/data/user';
-import { MockFactory } from '@test/mock/module/app.module';
+import { MockFactory } from '@test/mock/module';
 import { User } from '@User';
 
 describe('[REPOSITORY] | User', () => {
