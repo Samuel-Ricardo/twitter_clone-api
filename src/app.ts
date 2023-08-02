@@ -5,6 +5,6 @@ import { MODULES } from '@modules';
 const app = MODULES.APP();
 
 SwaggerModule.setup({ app });
-app.use(MODULES.ROUTES());
+app.use(MODULES.ROUTER());
 
 export { app };
