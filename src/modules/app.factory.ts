@@ -7,7 +7,7 @@ import { PrismaFactory } from './prisma';
 import { USER_MODULE as USER } from './@core/user/user.factory';
 
 import { Express } from 'express';
-import { RoutesFactory } from './routes/routes.factory';
+import { RoutesFactory } from './router/router.factory';
 
 export const MODULES = {
   ...PrismaFactory,
