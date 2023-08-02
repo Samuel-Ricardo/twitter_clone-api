@@ -1,7 +1,7 @@
 import { UserService } from '@User/service/user.service';
 import { inject, injectable } from 'inversify';
 import { UserRegistry as USER_MODULE } from '../user.registry';
-import { CreateUserDTO, SelectUserByIdDTO } from '@User/DTO';
+import { CreateUserDTO, SelectUserByIdDTO, UpdateUserDTO } from '@User/DTO';
 
 @injectable()
 export class UserController {
@@ -11,7 +11,8 @@ export class UserController {
   ) {}
 
   async create(data: CreateUserDTO) {
-    return await this.service.create(data);
+    const user = await this.service.create(data);
+    return { user };
   }
 
   async seletcAll() {
@@ -20,7 +21,15 @@ export class UserController {
     return { users };
   }
 
-  async selectById(props: SelectUserByIdDTO) {
-    return await this.service.selectById(props);
+  async selectById(data: SelectUserByIdDTO) {
+    const user = await this.service.selectById(data);
+
+    return { user };
+  }
+
+  async update(data: UpdateUserDTO) {
+    const user = await this.service.update(data);
+
+    return { user };
   }
 }
