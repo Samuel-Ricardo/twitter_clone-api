@@ -7,9 +7,16 @@ import {
   SelectAllUsersUseCase,
   SelectUserByIdUseCase,
   UpdateUserUseCase,
+  UserService,
 } from '@User';
 
 export const UserMockFactory = {
+  SERVICE: {
+    SIMULATE_DEFAULT: () =>
+      UserMockModule.get<UserService>(
+        UserMockRegistry.SERVICE.SIMULATE_DEFAULT,
+      ),
+  },
   USE_CASE: {
     CREATE: () =>
       UserMockModule.get<DeepMockProxy<CreateUserUseCase>>(
