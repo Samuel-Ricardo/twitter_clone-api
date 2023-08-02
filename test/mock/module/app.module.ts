@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import { Container } from 'inversify';
 import { PrismaMockModule } from './prisma';
 import { PrismaRepositoryMockModule } from './repository/prisma/user.repository';
