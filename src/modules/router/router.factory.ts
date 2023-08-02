@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { RoutesModule } from './routes.module';
-import { RoutesRegistry } from './routes.registry';
+import { RoutesModule } from './router.module';
+import { RoutesRegistry } from './router.registry';
 
 export const RoutesFactory = {
   ROUTES: () => RoutesModule.get<Router>(RoutesRegistry.ROUTES),
