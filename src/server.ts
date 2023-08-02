@@ -1,4 +1,4 @@
-import { app } from './app';
+import { app } from '@/app';
 import { log } from '@modules';
 import { ENV } from '@env';
 import { SwaggerModule } from '@modules/documentation';
