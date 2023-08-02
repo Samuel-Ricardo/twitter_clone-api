@@ -1,7 +1,12 @@
 import { UserService } from '@User/service/user.service';
 import { inject, injectable } from 'inversify';
 import { UserRegistry as USER_MODULE } from '../user.registry';
-import { CreateUserDTO, SelectUserByIdDTO, UpdateUserDTO } from '@User/DTO';
+import {
+  CreateUserDTO,
+  IDeleteuserDTO,
+  SelectUserByIdDTO,
+  UpdateUserDTO,
+} from '@User/DTO';
 
 @injectable()
 export class UserController {
@@ -31,5 +36,9 @@ export class UserController {
     const user = await this.service.update(data);
 
     return { user };
+  }
+
+  async delete(data: IDeleteuserDTO) {
+    return await this.service.delete(data);
   }
 }
