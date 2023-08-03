@@ -9,6 +9,7 @@ import { Express, json } from 'express';
 import { MODULE } from './app.registry';
 import { UserModule } from '@User';
 import { RoutesModule } from './router/router.module';
+import { MiddlewareModule } from './middleware/middleware.module';
 
 const Module = new Container();
 
@@ -21,4 +22,5 @@ export const AppModule = Container.merge(
   RepositoryModule,
   UserModule,
   RoutesModule,
+  MiddlewareModule,
 );
