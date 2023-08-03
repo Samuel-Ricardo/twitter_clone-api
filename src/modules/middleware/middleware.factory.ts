@@ -27,6 +27,14 @@ export const MiddlewareFactory = {
         MiddlewareModule.get<RequestHandler>(
           MiddlewareRegistry.VALIDATOR.USER.DELETE,
         ),
+      SELECT: {
+        BY: {
+          ID: () =>
+            MiddlewareModule.get<RequestHandler>(
+              MiddlewareRegistry.VALIDATOR.USER.SELECT.BY.ID,
+            ),
+        },
+      },
     },
   },
 };
