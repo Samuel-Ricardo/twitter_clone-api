@@ -18,4 +18,13 @@ export class AppError extends Error implements IError {
       error: this.error,
     };
   }
+
+  fromStruct(struct: IError): AppError {
+    return new AppError(
+      struct.message,
+      struct.status,
+      struct.data,
+      struct.error,
+    );
+  }
 }
