@@ -16,4 +16,5 @@ export const UserRegistry = {
     },
     DELETE: Symbol.for('DeleteUserUseCase'),
   },
+  VALIDATOR: Symbol.for('User.Validator'),
 };
