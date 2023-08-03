@@ -4,4 +4,9 @@ export const MiddlewareRegistry = {
     APP: Symbol('Middleware.LOGGER.APP'),
     ERROR: Symbol('Middleware.LOGGER.ERROR'),
   },
+  VALIDATOR: {
+    USER: {
+      CREATE: Symbol('Middleware.VALIDATOR.USER.CREATE'),
+    },
+  },
 };
