@@ -17,4 +17,8 @@ user_routes.patch(prefix, (req, res) => {
   res.json(USER.update(req.body));
 });
 
+user_routes.delete(prefix, (req, res) => {
+  res.json(USER.delete(req.body));
+});
+
 export { user_routes };
