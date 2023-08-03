@@ -10,9 +10,10 @@ export class AppError extends Error implements IError {
     super(message);
   }
 
-  toStruct(): IError {
+  toStruct() {
     return {
       message: this.message,
+      cause: this.cause,
       status: this.status,
       data: this.data,
       error: this.error,
