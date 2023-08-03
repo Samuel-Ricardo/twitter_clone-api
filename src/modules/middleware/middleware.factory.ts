@@ -19,6 +19,10 @@ export const MiddlewareFactory = {
         MiddlewareModule.get<RequestHandler>(
           MiddlewareRegistry.VALIDATOR.USER.CREATE,
         ),
+      UPDATE: () =>
+        MiddlewareModule.get<RequestHandler>(
+          MiddlewareRegistry.VALIDATOR.USER.UPDATE,
+        ),
     },
   },
 };
