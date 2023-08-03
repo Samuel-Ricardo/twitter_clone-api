@@ -52,7 +52,9 @@ user_routes.delete(
 
 user_routes.get(
   `${prefix}/:id`,
+
   MODULES.MIDDLEWARE.VALIDATOR.USER.SELECT.BY.ID(),
+
   async (req, res, next) => {
     try {
       res.json(await USER.selectById({ id: req.params.id }));
@@ -62,4 +64,4 @@ user_routes.get(
   },
 );
 
-export { user_routes };
+export { user_routes, prefix };
