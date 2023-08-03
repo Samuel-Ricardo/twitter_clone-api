@@ -6,6 +6,7 @@ import { errorLoggerMiddleware } from './logger/error/logger.middleware';
 import { UserModule } from '@User';
 import { validateCreateUserData } from './validator';
 import { validateUpdateUserDTO } from './validator/user/update-validator.middleware';
+import { validateDeleteUserDTO } from './validator/user/delete-validator.middleware';
 
 const Module = new Container();
 
@@ -22,6 +23,10 @@ Module.bind(MiddlewareRegistry.VALIDATOR.USER.CREATE).toConstantValue(
 
 Module.bind(MiddlewareRegistry.VALIDATOR.USER.UPDATE).toConstantValue(
   validateUpdateUserDTO,
+);
+
+Module.bind(MiddlewareRegistry.VALIDATOR.USER.DELETE).toConstantValue(
+  validateDeleteUserDTO,
 );
 
 export const MiddlewareModule = Container.merge(Module, UserModule);
