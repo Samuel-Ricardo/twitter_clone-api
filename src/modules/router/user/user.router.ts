@@ -1,3 +1,4 @@
+import { IDeleteuserDTO } from '@User';
 import { MODULES } from '../../app.factory';
 import { Router } from 'express';
 
@@ -21,16 +22,44 @@ user_routes.post(
   },
 );
 
-user_routes.patch(prefix, async (req, res) => {
-  res.json(await USER.update(req.body));
-});
+user_routes.patch(
+  prefix,
 
-user_routes.delete(prefix, async (req, res) => {
-  res.json(await USER.delete(req.body));
-});
+  MODULES.MIDDLEWARE.VALIDATOR.USER.UPDATE(),
 
-user_routes.get(`${prefix}/:id`, async (req, res) => {
-  res.json(await USER.selectById(req.params));
-});
+  async (req, res, next) => {
+    try {
+      res.json(await USER.update(req.body));
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+
+user_routes.delete(
+  `${prefix}/:id`,
+
+  MODULES.MIDDLEWARE.VALIDATOR.USER.DELETE(),
+
+  async (req, res, next) => {
+    try {
+      res.json(await USER.delete({ id: req.params.id }));
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+
+user_routes.get(
+  `${prefix}/:id`,
+  MODULES.MIDDLEWARE.VALIDATOR.USER.SELECT.BY.ID(),
+  async (req, res, next) => {
+    try {
+      res.json(await USER.selectById({ id: req.params.id }));
+    } catch (e) {
+      next(e);
+    }
+  },
+);
 
 export { user_routes };
