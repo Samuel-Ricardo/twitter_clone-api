@@ -11,6 +11,7 @@ import { UpdateUserUseCase } from './use-case/update.use-case';
 import { DeleteUserUseCase } from './use-case/delete.use-case';
 import { SelectAllUsersUseCase } from './use-case/select_all.use-case';
 import { SelectUserByIdUseCase } from './use-case/select_by_id.use-case';
+import { UserValidator } from './validator/user.validator';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -47,4 +48,5 @@ export const USER_MODULE = {
     UserModule.get<interfaces.Factory<User, [PrismaUser]>>(
       UserRegistry.FOR_PRISMA,
     ),
+  VALIDATOR: () => UserModule.get<UserValidator>(UserRegistry.VALIDATOR),
 };
