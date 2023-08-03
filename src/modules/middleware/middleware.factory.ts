@@ -23,6 +23,10 @@ export const MiddlewareFactory = {
         MiddlewareModule.get<RequestHandler>(
           MiddlewareRegistry.VALIDATOR.USER.UPDATE,
         ),
+      DELETE: () =>
+        MiddlewareModule.get<RequestHandler>(
+          MiddlewareRegistry.VALIDATOR.USER.DELETE,
+        ),
     },
   },
 };
