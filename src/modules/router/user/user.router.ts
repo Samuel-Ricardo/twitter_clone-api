@@ -9,9 +9,17 @@ user_routes.get(prefix, async (req, res) => {
   res.send(await USER.seletcAll());
 });
 
-user_routes.post(prefix, async (req, res) => {
-  res.json(await USER.create(req.body));
-});
+user_routes.post(
+  prefix,
+  MODULES.MIDDLEWARE.VALIDATOR.USER.CREATE(),
+  async (req, res, next) => {
+    try {
+      res.json(await USER.create(req.body));
+    } catch (e) {
+      next(e);
+    }
+  },
+);
 
 user_routes.patch(prefix, async (req, res) => {
   res.json(await USER.update(req.body));
