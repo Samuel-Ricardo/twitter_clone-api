@@ -6,6 +6,6 @@ describe('[API] | health check', () => {
     const response = await supertest(app).get('/');
 
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({ message: 'Hello World! :D' });
+    expect(response.body).toEqual({ data: 'Hello World! :D' });
   });
 });
