@@ -12,7 +12,7 @@ export class UserValidator {
   constructor() {}
 
   validateCreateDTO(data: CreateUserDTO) {
-    if (!data) throw new NoDataProvidedError();
+    this.shouldBeDefined(data);
 
     if (!data.name) throw new InvalidDataError('name is missing');
     if (!data.username) throw new InvalidDataError('username is missing');
@@ -21,20 +21,24 @@ export class UserValidator {
   }
 
   validateUpdateDTO(data: UpdateUserDTO) {
-    if (!data) throw new NoDataProvidedError();
+    this.shouldBeDefined(data);
 
     if (!data.id) throw new InvalidDataError('id is missing');
   }
 
   validateDeleteDTO(data: IDeleteuserDTO) {
-    if (!data) throw new NoDataProvidedError();
+    this.shouldBeDefined(data);
 
     if (!data.id) throw new InvalidDataError('id is missing');
   }
 
   validateSelectByIdDTO(data: SelectUserByIdDTO) {
-    if (!data) throw new NoDataProvidedError();
+    this.shouldBeDefined(data);
 
     if (!data.id) throw new InvalidDataError('id is missing');
+  }
+
+  shouldBeDefined(data: any) {
+    if (!data) throw new NoDataProvidedError();
   }
 }
