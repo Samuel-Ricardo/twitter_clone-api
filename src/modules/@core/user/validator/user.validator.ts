@@ -1,4 +1,9 @@
-import { CreateUserDTO, IDeleteuserDTO, UpdateUserDTO } from '@User/DTO';
+import {
+  CreateUserDTO,
+  IDeleteuserDTO,
+  SelectUserByIdDTO,
+  UpdateUserDTO,
+} from '@User/DTO';
 import { InvalidDataError, NoDataProvidedError } from '@modules/error/data';
 import { injectable } from 'inversify';
 
@@ -22,6 +27,12 @@ export class UserValidator {
   }
 
   validateDeleteDTO(data: IDeleteuserDTO) {
+    if (!data) throw new NoDataProvidedError();
+
+    if (!data.id) throw new InvalidDataError('id is missing');
+  }
+
+  validateSelectByIdDTO(data: SelectUserByIdDTO) {
     if (!data) throw new NoDataProvidedError();
 
     if (!data.id) throw new InvalidDataError('id is missing');
