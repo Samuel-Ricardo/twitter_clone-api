@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   username String @unique
   bio String?
@@ -33,7 +33,7 @@ model User {
 }
 
 model Post {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   body String
 
   authorId String @db.ObjectId
@@ -50,7 +50,7 @@ model Post {
 
 model Comment {
 
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   body String
   
   authorId String @db.ObjectId
@@ -66,7 +66,7 @@ model Comment {
 }
 
 model Like {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
  
   likedId String @db.ObjectId
   userId String @db.ObjectId
@@ -79,7 +79,7 @@ model Like {
 }
   
 model Follow {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
     
   followerId String @db.ObjectId 
   followedId String @db.ObjectId
@@ -88,7 +88,7 @@ model Follow {
 }
 
  model Notification {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId
 
   type NotificationType
