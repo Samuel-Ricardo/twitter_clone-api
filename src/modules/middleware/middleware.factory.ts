@@ -13,4 +13,12 @@ export const MiddlewareFactory = {
         MiddlewareRegistry.LOGGER.ERROR,
       ),
   },
+  VALIDATOR: {
+    USER: {
+      CREATE: () =>
+        MiddlewareModule.get<RequestHandler>(
+          MiddlewareRegistry.VALIDATOR.USER.CREATE,
+        ),
+    },
+  },
 };
