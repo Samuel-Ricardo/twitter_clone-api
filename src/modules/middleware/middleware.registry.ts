@@ -7,6 +7,14 @@ export const MiddlewareRegistry = {
   VALIDATOR: {
     USER: {
       CREATE: Symbol('Middleware.VALIDATOR.USER.CREATE'),
+      UPDATE: Symbol('Middleware.VALIDATOR.USER.UPDATE'),
+      DELETE: Symbol('Middleware.VALIDATOR.USER.DELETE'),
+      SELECT: {
+        BY: {
+          ID: Symbol('Middleware.VALIDATOR.USER.SELECT.BY.ID'),
+        },
+        ALL: Symbol('Middleware.VALIDATOR.USER.SELECT.ALL'),
+      },
     },
   },
 };
