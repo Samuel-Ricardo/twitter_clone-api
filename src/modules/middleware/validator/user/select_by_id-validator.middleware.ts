@@ -4,6 +4,7 @@ import { RequestHandler } from 'express';
 export const validateSelectUserByIdDTO: RequestHandler = (req, res, next) => {
   try {
     USER_MODULE.VALIDATOR().validateSelectByIdDTO({ id: req.params.id });
+    next();
   } catch (error) {
     next(error);
   }
