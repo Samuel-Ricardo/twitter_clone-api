@@ -13,4 +13,8 @@ user_routes.post(prefix, (req, res) => {
   res.json(USER.create(req.body));
 });
 
+user_routes.patch(prefix, (req, res) => {
+  res.json(USER.update(req.body));
+});
+
 export { user_routes };
