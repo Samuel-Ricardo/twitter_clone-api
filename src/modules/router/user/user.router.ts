@@ -9,4 +9,8 @@ user_routes.get(prefix, (req, res) => {
   res.send(USER.seletcAll());
 });
 
+user_routes.post(prefix, (req, res) => {
+  res.json(USER.create(req.body));
+});
+
 export { user_routes };
