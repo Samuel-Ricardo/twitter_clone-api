@@ -2,26 +2,21 @@ version: '3'
 
 services:
 
-  app:
-    build: .
-    entrypoint: ["npm", "run", "start:docker"]
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/home/node/app
+  code_health:
+    build: 
+      context: .
+      dockerfile: Dockerfile.ci
+    entrypoint: ["npm", "run", "code:ci"]
     depends_on:
       - mongo
 
   mongo:
     image: mongo
-    restart: always
     ports:
       - 27017:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
-
- 
+      - MONGO_INITDB_ROOT_PASSWORD=root 
     volumes:
       - ./.docker/mongo-data:/data/db
 
