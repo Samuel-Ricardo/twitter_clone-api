@@ -30,6 +30,8 @@ export class User {
   public createdAt: Date;
   public updatedAt: Date;
   public hasNotifications: boolean;
+
+  public sessionToken?: string | null;
   public bio?: string | null;
   public emailVerified?: Date | null;
   public image?: string | null;
@@ -45,6 +47,7 @@ export class User {
     createdAt: Date,
     updatedAt: Date,
     hasNotifications: boolean,
+    sessionToken?: string | null,
     bio?: string | null,
     emailVerified?: Date | null,
     image?: string | null,
@@ -60,6 +63,7 @@ export class User {
       createdAt,
       updatedAt,
       hasNotifications,
+      sessionToken,
       bio,
       emailVerified,
       image,
@@ -78,6 +82,7 @@ export class User {
       user.createdAt!,
       user.updatedAt!,
       user.hasNotifications!,
+      user.sessionToken,
       user.bio,
       user.emailVerified,
       user.image,
@@ -96,6 +101,7 @@ export class User {
       user.createdAt,
       user.updatedAt,
       user.hasNotifications,
+      user.sessionToken,
       user.bio,
       user.emailVerified,
       user.image,
