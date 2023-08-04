@@ -9,6 +9,7 @@ export interface UpdateUserDTO {
   password?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  sessionToken?: string;
   hasNotifications?: boolean;
   emailVerified?: Date;
   image?: string;
