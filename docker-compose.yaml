@@ -11,6 +11,8 @@ services:
       - .:/home/node/app
     depends_on:
       - mongo
+    external_links:
+      - "host.docker.internal"
 
   test:
     build: .
@@ -19,6 +21,8 @@ services:
       - .:/home/node/app
     depends_on:
       - app
+    external_links:
+      - "host.docker.internal"
 
   mongo:
     image: mongo:latest
@@ -28,6 +32,9 @@ services:
     env_file: .env
     volumes:
       - ./.docker/mongo-data:/data/db
+    external_links:
+      - "host.docker.internal"
+
 
   mongo-express:
     image: mongo-express
@@ -37,3 +44,6 @@ services:
     env_file: .env
     depends_on:
       - mongo
+    external_links:
+      - "host.docker.internal"
+
