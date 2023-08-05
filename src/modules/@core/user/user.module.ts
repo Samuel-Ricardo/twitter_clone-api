@@ -55,9 +55,6 @@ Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
     ),
 );
 
-Module.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
-Module.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
-
 Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
@@ -65,6 +62,9 @@ Module.bind(UserRegistry.USE_CASE.SELECT.ALL).to(SelectAllUsersUseCase);
 Module.bind(UserRegistry.USE_CASE.SELECT.BY_ID).to(SelectUserByIdUseCase);
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
+
+Module.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
+Module.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
 
 const UserModule = Container.merge(Module, RepositoryModule);
 

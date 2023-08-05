@@ -1,3 +1,8 @@
+/*
+ * @jest-environment ./test/environment.js
+ */
+
+import 'reflect-metadata';
 import { User as PrismaUser } from '@prisma/client';
 import { MODULES, PrismaUserRepository } from '@modules';
 import {
@@ -8,7 +13,7 @@ import {
 import { MockFactory } from '@test/mock/module';
 import { User } from '@User';
 
-describe('[REPOSITORY] | User', () => {
+describe('[REPOSITORY] | User - [UNIT]', () => {
   let repository: PrismaUserRepository;
   let prismaMock = MockFactory.PRISMA();
 
@@ -118,5 +123,24 @@ describe('[REPOSITORY] | User', () => {
         id: VALID_USER.id,
       },
     });
+  });
+});
+
+describe('[REPOSITORY] | User - [INTEGRATION]', () => {
+  let repository: PrismaUserRepository;
+
+  beforeEach(() => {
+    repository = new PrismaUserRepository(
+      MODULES.PRISMA(),
+      MODULES.USER.FOR_PRISMA(),
+    );
+  });
+
+  it('[INTEGRATION] - Should: Create => User', async () => {
+    const user = await repository.create(CREATE_USER_DATA);
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
   });
 });
