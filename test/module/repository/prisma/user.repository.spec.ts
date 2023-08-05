@@ -143,4 +143,14 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
     expect(user).toBeInstanceOf(User);
     expect(user).toHaveProperty('id');
   });
+
+  it('[INTEGRATION] - Should: Select All => Users', async () => {
+    const users = await repository.selectAll();
+
+    expect(users).toBeDefined();
+    expect(users).toBeInstanceOf(Array);
+    expect(users.length).toBeGreaterThanOrEqual(1);
+    expect(users[0]).toBeInstanceOf(User);
+    expect(users[0]).toHaveProperty('id');
+  });
 });
