@@ -54,7 +54,6 @@ Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
       user.profileImage,
     ),
 );
-
 Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
