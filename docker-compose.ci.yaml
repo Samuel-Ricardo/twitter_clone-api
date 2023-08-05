@@ -9,9 +9,12 @@ services:
     entrypoint: ["npm", "run", "code:ci"]
     depends_on:
       - mongo
+    external_links:
+      - "host.docker.internal"
 
   mongo:
     image: mongo
+    command: ['--replSet', 'rs0']
     ports:
       - 27017:27017
     environment:
@@ -19,4 +22,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root 
     volumes:
       - ./.docker/mongo-data:/data/db
+    external_links:
+      - "host.docker.internal"
 
