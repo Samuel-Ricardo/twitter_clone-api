@@ -5,6 +5,11 @@ export const UserMockRegistry = {
       DEFAULT: Symbol.for('DEFAULT_USER_SERVICE'),
     },
   },
+  CONTROLLER: {
+    SIMULATE: {
+      DEFAULT: Symbol.for('SIMULATE_DEFAULT_USER_CONTROLLER'),
+    },
+  },
   USE_CASE: {
     CREATE: Symbol.for('CreateUserMockUseCase'),
     UPDATE: Symbol.for('UpdateUserMockUseCase'),
