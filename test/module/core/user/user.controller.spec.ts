@@ -3,7 +3,7 @@ import { MODULES } from '@modules';
 
 import { UserController, UserService } from '@User';
 import { DeepMockProxy } from 'jest-mock-extended';
-import { MockFactory } from '@test/mock';
+import { MockFactory, VALID_USER } from '@test/mock';
 
 describe('[CONTROLLER] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -19,19 +19,19 @@ describe('[CONTROLLER] | USER', () => {
     expect(service).toBeDefined();
     expect(service.create).toHaveProperty('mockReturnValue');
 
-    controller = new UserController(MockFactory.USER.SERVICE.MOCK.DEFAULT());
+    controller = new UserController(service);
 
     expect(controller).toBeDefined();
     expect(controller).toBeInstanceOf(UserController);
   });
 
   it('select all', async () => {
-    expect(true).toBeTruthy();
-    // const result = controller.seletcAll();
+    service.selectAll.mockResolvedValue([VALID_USER]);
 
-    // const users: User[] = [];
+    const result = await controller.seletcAll();
+    const expected = { users: [VALID_USER] };
 
-    // expect(result).toBeDefined();
-    // expect(result).toEqual({users});
+    expect(result).toBeDefined();
+    expect(result).toEqual(expected);
   });
 });
