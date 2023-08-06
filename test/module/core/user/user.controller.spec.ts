@@ -25,7 +25,7 @@ describe('[CONTROLLER] | USER', () => {
     expect(controller).toBeInstanceOf(UserController);
   });
 
-  it('[UNIT] | Should: Select all => [USER]', async () => {
+  it('[UNIT] | Should: Select - [all] => [USER]', async () => {
     service.selectAll.mockResolvedValue([VALID_USER]);
 
     const result = await controller.seletcAll();
@@ -33,5 +33,14 @@ describe('[CONTROLLER] | USER', () => {
 
     expect(result).toBeDefined();
     expect(result).toEqual(expected);
+  });
+
+  it('[UNIT] | Should: Select by - [id] => [USER]', async () => {
+    service.selectById.mockResolvedValue(VALID_USER);
+
+    const result = await controller.selectById({ id: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual({ user: VALID_USER });
   });
 });
