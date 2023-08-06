@@ -1,4 +1,4 @@
-import { UserService } from '@User/service/user.service';
+import { UserService } from '../service/user.service';
 import { inject, injectable } from 'inversify';
 import { UserRegistry as USER_MODULE } from '../user.registry';
 import {
