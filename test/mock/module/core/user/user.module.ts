@@ -8,6 +8,7 @@ import {
 } from './use-case';
 import { UserMockRegistry } from './user.resgistry';
 import { mockUserService, simulateUserService } from './service/user.service';
+import { simulateUserController } from './controller/user.controller';
 
 export const UserMockModule = new Container({ autoBindInjectable: true });
 
@@ -38,3 +39,7 @@ UserMockModule.bind(UserMockRegistry.SERVICE.SIMULATE_DEFAULT).toDynamicValue(
 UserMockModule.bind(UserMockRegistry.SERVICE.MOCK.DEFAULT).toDynamicValue(
   mockUserService,
 );
+
+UserMockModule.bind(
+  UserMockRegistry.CONTROLLER.SIMULATE.DEFAULT,
+).toDynamicValue((context) => simulateUserController(context));
