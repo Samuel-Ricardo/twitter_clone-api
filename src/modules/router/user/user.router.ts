@@ -6,8 +6,12 @@ const prefix = '/users';
 const USER = MODULES.USER.DEFAULT();
 const user_routes = Router();
 
-user_routes.get(prefix, async (req, res) => {
-  res.send(await USER.seletcAll());
+user_routes.get(prefix, async (req, res, next) => {
+  try {
+    res.status(302).send(await USER.seletcAll());
+  } catch (e) {
+    next(e);
+  }
 });
 
 user_routes.post(
@@ -15,7 +19,7 @@ user_routes.post(
   MODULES.MIDDLEWARE.VALIDATOR.USER.CREATE(),
   async (req, res, next) => {
     try {
-      res.json(await USER.create(req.body));
+      res.status(201).json(await USER.create(req.body));
     } catch (e) {
       next(e);
     }
@@ -29,7 +33,7 @@ user_routes.patch(
 
   async (req, res, next) => {
     try {
-      res.json(await USER.update(req.body));
+      res.status(201).json(await USER.update(req.body));
     } catch (e) {
       next(e);
     }
@@ -43,7 +47,7 @@ user_routes.delete(
 
   async (req, res, next) => {
     try {
-      res.json(await USER.delete({ id: req.params.id }));
+      res.status(200).json(await USER.delete({ id: req.params.id }));
     } catch (e) {
       next(e);
     }
@@ -57,7 +61,7 @@ user_routes.get(
 
   async (req, res, next) => {
     try {
-      res.json(await USER.selectById({ id: req.params.id }));
+      res.status(302).json(await USER.selectById({ id: req.params.id }));
     } catch (e) {
       next(e);
     }
