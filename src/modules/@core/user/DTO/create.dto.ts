@@ -1,4 +1,5 @@
 import { InvalidDataError } from '@modules/error/data';
+import { catchZod } from '@modules/util/validator';
 import { z } from 'zod';
 
 export interface CreateUserDTO {
@@ -9,24 +10,8 @@ export interface CreateUserDTO {
 }
 
 export const CreateUserSchema = z.object({
-  name: z
-    .string()
-    .min(3)
-    .nonempty()
-    .catch((zod) => {
-      throw new InvalidDataError(JSON.parse(zod.error.message));
-    }),
+  name: z.string().min(3).nonempty().catch(catchZod),
   username: z.string().min(1),
-  email: z
-    .string()
-    .email()
-    .catch((zod) => {
-      throw new InvalidDataError(JSON.parse(zod.error.message));
-    }),
-  password: z
-    .string()
-    .nonempty()
-    .catch((zod) => {
-      throw new InvalidDataError(JSON.parse(zod.error.message));
-    }),
+  email: z.string().email().catch(catchZod),
+  password: z.string().nonempty().catch(catchZod),
 });
