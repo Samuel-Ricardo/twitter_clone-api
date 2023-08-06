@@ -47,6 +47,9 @@ describe('[CONTROLLER] | USER', () => {
 
     expect(result).toBeDefined();
     expect(result).toEqual({ user: VALID_USER });
+
+    expect(service.selectById).toHaveBeenCalledTimes(1);
+    expect(service.selectById).toHaveBeenCalledWith({ id: VALID_USER.id });
   });
 
   it('[UNIT] | Should: Create => [USER]', async () => {
