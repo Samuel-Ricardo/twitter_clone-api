@@ -39,6 +39,12 @@ describe('[MODULE] | User', () => {
     expect(response.status).toBe(200);
     expect(body.user).toHaveProperty('id');
     expect(body.user.id).toEqual(user.id);
-    expect(body.user.username).toBe(user.username);
+    expect(body.user).toStrictEqual(user);
+  });
+
+  it('[E2E] | Should not: Delete - wrong [id] => [USER]', async () => {
+    const response = await supertest(app).delete(`/users/rapaaaz`);
+
+    expect(response.status).not.toBe(200);
   });
 });
