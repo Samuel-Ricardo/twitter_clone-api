@@ -22,8 +22,8 @@ export class PrismaPostRepository implements IPostRepository {
     const result = await this.prisma.post.create({ data });
     return Post.fromPrisma(result);
   }
-  findAll(): Promise<Post[]> {
-    throw new Error('Method not implemented.');
+  async findAll() {
+    return Post.fromPrismaArray(await this.prisma.post.findMany());
   }
   findById(data: IFindPostByIdDTO): Promise<Post> {
     throw new Error('Method not implemented.');
