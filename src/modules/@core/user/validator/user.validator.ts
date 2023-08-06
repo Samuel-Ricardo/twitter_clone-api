@@ -3,6 +3,7 @@ import {
   CreateUserSchema,
   IDeleteuserDTO,
   SelectUserByIdDTO,
+  SelectUserByIdSchema,
   UpdateUserDTO,
   UpdateUserSchema,
 } from '@User/DTO';
@@ -32,7 +33,7 @@ export class UserValidator {
   validateSelectByIdDTO(data: SelectUserByIdDTO) {
     this.shouldBeDefined(data);
 
-    if (!data.id) throw new InvalidDataError('id is missing');
+    return SelectUserByIdSchema.parse(data);
   }
 
   shouldBeDefined(data: any) {
