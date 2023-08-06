@@ -7,6 +7,7 @@ import {
   IUpdatePostDTO,
   Post,
 } from '@Post';
+import { Post as PrismaPost } from '@prisma/client';
 import { MODULE } from '@modules/app.registry';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
@@ -25,8 +26,11 @@ export class PrismaPostRepository implements IPostRepository {
   async findAll() {
     return Post.fromPrismaArray(await this.prisma.post.findMany());
   }
-  findById(data: IFindPostByIdDTO): Promise<Post> {
-    throw new Error('Method not implemented.');
+  async findById(data: IFindPostByIdDTO) {
+    const result = await this.prisma.post.findUnique({
+      where: { id: data.id },
+    });
+    return Post.fromPrisma(result as PrismaPost);
   }
   findByAuhorId(data: IFindPostByAuthorIdDTO): Promise<Post> {
     throw new Error('Method not implemented.');
