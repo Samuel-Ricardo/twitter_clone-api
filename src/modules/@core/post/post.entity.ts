@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { IPostDTO, IPostSchema } from './DTO/post.dto';
+import { Post as PrismaPost } from '@prisma/client';
 
 @injectable()
 export class Post {
@@ -9,7 +10,7 @@ export class Post {
     private authorId: string,
     private createdAt: Date,
     private updatedAt: Date,
-    private image?: string,
+    private image?: string | null,
   ) {
     Post.validate({
       id,
@@ -30,6 +31,17 @@ export class Post {
       data.updatedAt,
       data.image,
     );
+  }
+
+  static fromPrisma(data: PrismaPost) {
+    return Post.create({
+      id: data.id,
+      body: data.body,
+      authorId: data.authorId,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+      image: data.image,
+    });
   }
 
   public static validate(data: IPostDTO) {
