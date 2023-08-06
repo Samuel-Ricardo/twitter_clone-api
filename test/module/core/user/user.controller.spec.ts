@@ -38,6 +38,9 @@ describe('[CONTROLLER] | USER', () => {
 
     expect(result).toBeDefined();
     expect(result).toEqual(expected);
+
+    expect(service.selectAll).toHaveBeenCalledTimes(1);
+    expect(service.selectAll).toHaveBeenCalledWith();
   });
 
   it('[UNIT] | Should: Select by - [id] => [USER]', async () => {
