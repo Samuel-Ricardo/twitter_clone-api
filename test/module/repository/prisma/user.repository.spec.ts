@@ -11,7 +11,7 @@ import {
   VALID_USER_DATA,
 } from '@test/mock/data/user';
 import { MockFactory } from '@test/mock/module';
-import { User } from '@User';
+import { UpdateUserDTO, User } from '@User';
 
 describe('[REPOSITORY] | User - [UNIT]', () => {
   let repository: PrismaUserRepository;
@@ -164,5 +164,23 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
     expect(user).toBeInstanceOf(User);
     expect(user).toHaveProperty('id');
     expect(user).toStrictEqual(createdUser);
+  });
+
+  it('[INTEGRATION] - Should: Update => User', async () => {
+    const UPDATED_USER = {
+      id: createdUser.id,
+      name: 'updated name',
+    };
+
+    const user = await repository.update(UPDATED_USER);
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+
+    expect(user.id).toEqual(createdUser.id);
+    expect(user.name).not.toEqual(createdUser.name);
+    expect(user.name).toBe('updated name');
+    expect(user.email).toEqual(createdUser.email);
   });
 });
