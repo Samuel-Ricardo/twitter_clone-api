@@ -183,4 +183,14 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
     expect(user.name).toBe('updated name');
     expect(user.email).toEqual(createdUser.email);
   });
+
+  it('[INTEGRATION] - Should: Delete => User', async () => {
+    try {
+      await repository.delete({ id: createdUser.id });
+    } catch (error) {
+      expect(error).toBeUndefined();
+    }
+
+    expect(repository.selectById({ id: createdUser.id })).rejects.toThrow();
+  });
 });
