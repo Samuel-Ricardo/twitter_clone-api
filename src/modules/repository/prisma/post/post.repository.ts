@@ -42,8 +42,12 @@ export class PrismaPostRepository implements IPostRepository {
     return Post.fromPrisma(result as PrismaPost);
   }
 
-  update(data: IUpdatePostDTO): Promise<Post> {
-    throw new Error('Method not implemented.');
+  async update(data: IUpdatePostDTO) {
+    const oldPost = await this.prisma.post.update({
+      where: { id: data.id },
+      data,
+    });
+    return Post.fromPrisma(oldPost);
   }
   delete(post: IDeletePostDTO): Promise<Post> {
     throw new Error('Method not implemented.');
