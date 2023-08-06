@@ -3,7 +3,12 @@ import { MODULES } from '@modules';
 
 import { UserController, UserService } from '@User';
 import { DeepMockProxy } from 'jest-mock-extended';
-import { MockFactory, VALID_USER } from '@test/mock';
+import {
+  CREATE_USER_DATA,
+  MockFactory,
+  VALID_USER,
+  VALID_USER_DATA,
+} from '@test/mock';
 
 describe('[CONTROLLER] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -42,5 +47,15 @@ describe('[CONTROLLER] | USER', () => {
 
     expect(result).toBeDefined();
     expect(result).toEqual({ user: VALID_USER });
+  });
+
+  it('[UNIT] | Should: Create => [USER]', async () => {
+    service.create.mockResolvedValue(VALID_USER);
+
+    const result = await controller.create(CREATE_USER_DATA);
+    const expectedResult = { user: VALID_USER };
+
+    expect(result).toBeDefined();
+    expect(result).toEqual(expectedResult);
   });
 });
