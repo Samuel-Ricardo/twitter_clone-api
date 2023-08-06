@@ -25,7 +25,7 @@ describe('[CONTROLLER] | USER', () => {
     expect(controller).toBeInstanceOf(UserController);
   });
 
-  it('select all', async () => {
+  it('[UNIT] | Should: Select all => [USER]', async () => {
     service.selectAll.mockResolvedValue([VALID_USER]);
 
     const result = await controller.seletcAll();
