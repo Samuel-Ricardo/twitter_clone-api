@@ -51,4 +51,9 @@ describe('[MODULE] | User', () => {
     const response = await supertest(app).delete(`/users/rapaaaz`);
     expect(response.status).not.toBe(200);
   });
+
+  it('[E2E] | Should: return error when select - wrong [id] => [USER]', async () => {
+    const response = await supertest(app).get(`/users/${user.id}`);
+    expect(response.status).not.toBe(200);
+  });
 });
