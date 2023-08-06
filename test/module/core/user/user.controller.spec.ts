@@ -57,6 +57,9 @@ describe('[CONTROLLER] | USER', () => {
 
     expect(result).toBeDefined();
     expect(result).toEqual(expectedResult);
+
+    expect(service.create).toHaveBeenCalledTimes(1);
+    expect(service.create).toHaveBeenCalledWith(CREATE_USER_DATA);
   });
 
   it('[UNIT] | Should: Update => [USER]', async () => {
