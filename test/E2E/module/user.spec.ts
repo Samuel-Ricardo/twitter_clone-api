@@ -23,10 +23,17 @@ describe('[MODULE] | User', () => {
     user = body.user;
   });
 
+  it('[E2E] | Should not: Create same => [USER]', async () => {
+    const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
+    const body: { user: User } = response.body;
+
+    expect(response.status).not.toBe(201);
+  });
+
   it('[E2E] | Should: Select - [all] => [USER]', async () => {
     const response = await supertest(app).get('/users');
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(302);
     expect(response.body.users).toBeInstanceOf(Array);
     expect(response.body.users.length).toBeGreaterThanOrEqual(0);
     expect(response.body.users).toContainEqual(user);
@@ -36,7 +43,7 @@ describe('[MODULE] | User', () => {
     const response = await supertest(app).get(`/users/${user.id}`);
     const body: { user: User } = response.body;
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(302);
     expect(body.user).toHaveProperty('id');
     expect(body.user.id).toEqual(user.id);
     expect(body.user).toStrictEqual(user);
@@ -54,6 +61,6 @@ describe('[MODULE] | User', () => {
 
   it('[E2E] | Should: return error when select - wrong [id] => [USER]', async () => {
     const response = await supertest(app).get(`/users/${user.id}`);
-    expect(response.status).not.toBe(200);
+    expect(response.status).not.toBe(302);
   });
 });
