@@ -16,6 +16,12 @@ export const UserMockFactory = {
       UserMockModule.get<UserService>(
         UserMockRegistry.SERVICE.SIMULATE_DEFAULT,
       ),
+    MOCK: {
+      DEFAULT: () =>
+        UserMockModule.get<DeepMockProxy<UserService>>(
+          UserMockRegistry.SERVICE.MOCK.DEFAULT,
+        ),
+    },
   },
   USE_CASE: {
     CREATE: () =>
