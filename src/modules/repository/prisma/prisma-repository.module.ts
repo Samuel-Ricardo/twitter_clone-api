@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { PrismaUserRepository } from './user.repository';
+import { PrismaUserRepository } from './user/user.repository';
 import { PrismaRepositoryRegistry } from './prisma-repository.registry';
 import { PrismaModule } from '../../prisma/prisma.module';
 

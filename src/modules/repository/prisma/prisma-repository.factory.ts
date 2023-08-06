@@ -1,6 +1,6 @@
 import { PrismaRepositoryModule } from './prisma-repository.module';
 import { PrismaRepositoryRegistry } from './prisma-repository.registry';
-import { PrismaUserRepository } from './user.repository';
+import { PrismaUserRepository } from './user/user.repository';
 
 export const PrismaRepositoryFactory = {
   USER: () =>
