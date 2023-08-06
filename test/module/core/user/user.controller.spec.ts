@@ -58,4 +58,30 @@ describe('[CONTROLLER] | USER', () => {
     expect(result).toBeDefined();
     expect(result).toEqual(expectedResult);
   });
+
+  it('[UNIT] | Should: Update => [USER]', async () => {
+    const UPDATED_USER = {
+      ...VALID_USER,
+      name: 'Tomi!',
+    };
+
+    service.update.mockResolvedValue(UPDATED_USER);
+
+    const result = await controller.update({
+      id: VALID_USER.id,
+      name: UPDATED_USER.name,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual({ user: UPDATED_USER });
+
+    expect(VALID_USER.id).toEqual(result.user.id);
+    expect(VALID_USER.name).not.toEqual(result.user.name);
+
+    expect(service.update).toHaveBeenCalledTimes(1);
+    expect(service.update).toHaveBeenCalledWith({
+      id: VALID_USER.id,
+      name: UPDATED_USER.name,
+    });
+  });
 });
