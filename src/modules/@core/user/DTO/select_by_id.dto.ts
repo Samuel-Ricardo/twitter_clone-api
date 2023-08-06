@@ -5,6 +5,8 @@ export interface SelectUserByIdDTO {
   id: string;
 }
 
-export const SelectUserByIdSchema = z.object({
-  id: z.string().nonempty().catch(catchZod),
-});
+export const SelectUserByIdSchema = z
+  .object({
+    id: z.string().nonempty().catch(catchZod),
+  })
+  .catch(catchZod);
