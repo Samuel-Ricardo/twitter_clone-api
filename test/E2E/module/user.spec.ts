@@ -10,6 +10,10 @@ import supertest from 'supertest';
 describe('[MODULE] | User', () => {
   let user: User;
 
+  beforeEach(async () => {
+    if (user) user = (await supertest(app).get(`/users/${user.id}`)).body.user;
+  });
+
   it('[E2E] | Should: Create => [USER]', async () => {
     const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
     const body: { user: User } = response.body;
@@ -21,6 +25,23 @@ describe('[MODULE] | User', () => {
     expect(body.user.bio).toBeNull();
 
     user = body.user;
+  });
+
+  it('[E2E] | Should: Update => [USER]', async () => {
+    const UPDATE_USER_DATA = {
+      id: user.id,
+      name: 'Tomi!',
+    };
+
+    const response = await supertest(app)
+      .patch(`/users`)
+      .send(UPDATE_USER_DATA);
+    const body: { user: User } = response.body;
+
+    expect(response.status).toBe(201);
+
+    expect(body.user).toHaveProperty('id');
+    expect(body.user.id).toBe(user.id);
   });
 
   it('[E2E] | Should not: Create same => [USER]', async () => {
@@ -60,7 +81,7 @@ describe('[MODULE] | User', () => {
   });
 
   it('[E2E] | Should: return error when select - wrong [id] => [USER]', async () => {
-    const response = await supertest(app).get(`/users/${user.id}`);
+    const response = await supertest(app).get(`/users/pedro`);
     expect(response.status).not.toBe(302);
   });
 });
