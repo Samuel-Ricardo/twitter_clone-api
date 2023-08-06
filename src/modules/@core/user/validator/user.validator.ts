@@ -1,6 +1,7 @@
 import {
   CreateUserDTO,
   CreateUserSchema,
+  DeleteUserScheme,
   IDeleteuserDTO,
   SelectUserByIdDTO,
   SelectUserByIdSchema,
@@ -9,6 +10,7 @@ import {
 } from '@User/DTO';
 import { InvalidDataError, NoDataProvidedError } from '@modules/error/data';
 import { injectable } from 'inversify';
+import { z } from 'zod';
 
 @injectable()
 export class UserValidator {
@@ -26,14 +28,17 @@ export class UserValidator {
 
   validateDeleteDTO(data: IDeleteuserDTO) {
     this.shouldBeDefined(data);
-
-    if (!data.id) throw new InvalidDataError('id is missing');
+    return DeleteUserScheme.parse(data);
   }
 
   validateSelectByIdDTO(data: SelectUserByIdDTO) {
     this.shouldBeDefined(data);
 
     return SelectUserByIdSchema.parse(data);
+  }
+
+  validate(scheme: z.ZodAny, data: any) {
+    return scheme.parse(data);
   }
 
   shouldBeDefined(data: any) {
