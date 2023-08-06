@@ -50,12 +50,12 @@ export class PrismaUserRepository implements IUserRepository {
   async update(props: UpdateUserDTO): Promise<User> {
     const data = { ...props, id: undefined };
 
-    const updated = await this.prisma.user.update({
+    const oldUser = await this.prisma.user.update({
       where: { id: props.id },
       data: data,
     });
 
-    return this.userFactory(updated) as User;
+    return this.userFactory(oldUser) as User;
   }
 
   async delete(props: IDeleteuserDTO) {
