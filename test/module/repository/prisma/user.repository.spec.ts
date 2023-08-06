@@ -128,6 +128,7 @@ describe('[REPOSITORY] | User - [UNIT]', () => {
 
 describe('[REPOSITORY] | User - [INTEGRATION]', () => {
   let repository: PrismaUserRepository;
+  let createdUser: User;
 
   beforeEach(() => {
     repository = new PrismaUserRepository(
@@ -142,6 +143,8 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
     expect(user).toBeDefined();
     expect(user).toBeInstanceOf(User);
     expect(user).toHaveProperty('id');
+
+    createdUser = user;
   });
 
   it('[INTEGRATION] - Should: Select All => Users', async () => {
@@ -152,5 +155,14 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
     expect(users.length).toBeGreaterThanOrEqual(1);
     expect(users[0]).toBeInstanceOf(User);
     expect(users[0]).toHaveProperty('id');
+  });
+
+  it('[INTEGRATION] - Should: Select By Id => User', async () => {
+    const user = await repository.selectById({ id: createdUser.id });
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+    expect(user).toStrictEqual(createdUser);
   });
 });
