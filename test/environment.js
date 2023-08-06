@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { resolve } from 'path';
-import TestEnvironment from 'jest-environment-jsdom';
+import TestEnvironment from 'jest-environment-node';
 import { randomUUID } from 'crypto';
 import { execSync } from 'child_process';
 import { MongoClient } from 'mongodb';
