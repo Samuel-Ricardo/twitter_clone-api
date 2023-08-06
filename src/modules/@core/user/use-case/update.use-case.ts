@@ -6,7 +6,7 @@ import { inject, injectable } from 'inversify';
 @injectable()
 export class UpdateUserUseCase {
   constructor(
-    @inject(MODULE.PRISMA)
+    @inject(MODULE.REPOSITORY.PRISMA.USER)
     private userRepository: IUserRepository,
   ) {}
 
