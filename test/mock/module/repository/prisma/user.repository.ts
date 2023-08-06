@@ -2,7 +2,9 @@ import { MODULES, PrismaUserRepository } from '@modules';
 import { Container } from 'inversify';
 import { MockFactory } from '../../app.factory';
 
-jest.mock('../../../../../src/modules/repository/prisma/user.repository.ts');
+jest.mock(
+  '../../../../../src/modules/repository/prisma/user/user.repository.ts',
+);
 
 const PrismaUserRepositoryMock =
   PrismaUserRepository as jest.Mock<PrismaUserRepository>;
