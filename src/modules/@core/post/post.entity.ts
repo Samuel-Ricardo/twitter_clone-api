@@ -44,6 +44,10 @@ export class Post {
     });
   }
 
+  static fromPrismaArray(data: PrismaPost[]) {
+    return data.map((item) => Post.fromPrisma(item));
+  }
+
   public static validate(data: IPostDTO) {
     return IPostSchema.parse(data);
   }
