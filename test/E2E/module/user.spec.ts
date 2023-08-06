@@ -42,9 +42,13 @@ describe('[MODULE] | User', () => {
     expect(body.user).toStrictEqual(user);
   });
 
+  it('[E2E] | Should: Delete - by [id] => [USER]', async () => {
+    const response = await supertest(app).delete(`/users/${user.id}`);
+    expect(response.status).toBe(200);
+  });
+
   it('[E2E] | Should not: Delete - wrong [id] => [USER]', async () => {
     const response = await supertest(app).delete(`/users/rapaaaz`);
-
     expect(response.status).not.toBe(200);
   });
 });
