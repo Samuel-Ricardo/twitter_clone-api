@@ -4,6 +4,7 @@ import {
   IDeleteuserDTO,
   SelectUserByIdDTO,
   UpdateUserDTO,
+  UpdateUserSchema,
 } from '@User/DTO';
 import { InvalidDataError, NoDataProvidedError } from '@modules/error/data';
 import { injectable } from 'inversify';
@@ -13,13 +14,13 @@ export class UserValidator {
   constructor() {}
 
   validateCreateDTO(data: CreateUserDTO) {
+    this.shouldBeDefined(data);
     return CreateUserSchema.parse(data);
   }
 
   validateUpdateDTO(data: UpdateUserDTO) {
     this.shouldBeDefined(data);
-
-    if (!data.id) throw new InvalidDataError('id is missing');
+    return UpdateUserSchema.parse(data);
   }
 
   validateDeleteDTO(data: IDeleteuserDTO) {
