@@ -98,4 +98,17 @@ describe('[REPOSITORY] | Post', () => {
       where: { id: VALID_POST_DATA.id },
     });
   });
+
+  it('[UNIT] | Should: FindByAuthorId => [POST]', async () => {
+    prisma.post.findUnique.mockResolvedValue(VALID_POST_DATA as PrismaPost);
+
+    const result = await repository.findByAuhorId({ id: VALID_POST.authorId });
+
+    expect(result).toEqual(VALID_POST);
+
+    expect(prisma.post.findUnique).toHaveBeenCalledTimes(1);
+    expect(prisma.post.findUnique).toHaveBeenCalledWith({
+      where: { authorId: VALID_POST.authorId },
+    });
+  });
 });
