@@ -26,6 +26,13 @@ describe('[REPOSITORY] | Post', () => {
   });
 
   it('[UNIT] | Should: Create => [POST]', async () => {
-    expect(true).toBe(true);
+    prisma.post.create.mockResolvedValue(VALID_POST_DATA as PrismaPost);
+
+    const result = await repository.create(CREATE_POST_DATA);
+
+    expect(result).toEqual(VALID_POST);
+
+    expect(prisma.post.create).toHaveBeenCalledTimes(1);
+    expect(prisma.post.create).toHaveBeenCalledWith({ data: CREATE_POST_DATA });
   });
 });
