@@ -87,4 +87,15 @@ describe('[REPOSITORY] | Post', () => {
       data: { body: UPDATE_DATA.body },
     });
   });
+
+  it('[UNIT] | Should: Delete => [POST]', async () => {
+    prisma.post.delete.mockResolvedValue(VALID_POST_DATA as PrismaPost);
+
+    await repository.delete({ id: VALID_POST_DATA.id });
+
+    expect(prisma.post.delete).toHaveBeenCalledTimes(1);
+    expect(prisma.post.delete).toHaveBeenCalledWith({
+      where: { id: VALID_POST_DATA.id },
+    });
+  });
 });
