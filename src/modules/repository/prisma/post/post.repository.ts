@@ -45,7 +45,10 @@ export class PrismaPostRepository implements IPostRepository {
   async update(data: IUpdatePostDTO) {
     const oldPost = await this.prisma.post.update({
       where: { id: data.id },
-      data,
+      data: {
+        body: data.body,
+        image: data.image,
+      },
     });
     return Post.fromPrisma(oldPost);
   }
