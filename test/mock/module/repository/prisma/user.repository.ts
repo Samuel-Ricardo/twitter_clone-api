@@ -1,49 +1,25 @@
 import { MODULES, PrismaUserRepository } from '@modules';
-import { Container } from 'inversify';
-import { MockFactory } from '../../app.factory';
+import { interfaces } from 'inversify';
+import { MOCK_MODULE } from '../../app.registry';
+import { mockDeep } from 'jest-mock-extended';
 
-jest.mock(
-  '../../../../../src/modules/repository/prisma/user/user.repository.ts',
-);
+// jest.mock(
+//   '../../../../../src/modules/repository/prisma/user/user.repository.ts',
+// );
 
-const PrismaUserRepositoryMock =
-  PrismaUserRepository as jest.Mock<PrismaUserRepository>;
+// const PrismaUserRepositoryMock =
+//   PrismaUserRepository as jest.Mock<PrismaUserRepository>;
 
-const mockPrismaUserRepository = () =>
-  new PrismaUserRepositoryMock(
-    MockFactory.PRISMA(),
-  ) as jest.Mocked<PrismaUserRepository>;
+// export const mockPrismaUserRepository = ({container}: interfaces.Context) =>
+//   new PrismaUserRepositoryMock(
+//     container.get(MOCK_MODULE.PRISMA),
+//     MODULES.USER.FOR_PRISMA(),
+//   ) as jest.Mocked<PrismaUserRepository>;
 
-export const PrismaRepositoryMockRegistry = {
-  USER: Symbol.for('UserPrismaRepositoryMock'),
-  USER_DEV: Symbol.for('UserPrismaDevRepositoryMock'),
-};
+export const mockPrismaUserRepository = () => mockDeep<PrismaUserRepository>();
 
-export const PrismaRepositoryMockModule = new Container({
-  autoBindInjectable: true,
-});
-
-PrismaRepositoryMockModule.bind<jest.Mocked<PrismaUserRepository>>(
-  PrismaRepositoryMockRegistry.USER,
-).toDynamicValue(mockPrismaUserRepository);
-
-PrismaRepositoryMockModule.bind<PrismaUserRepository>(
-  PrismaRepositoryMockRegistry.USER_DEV,
-).toDynamicValue(
-  () =>
-    new PrismaUserRepository(
-      MockFactory.PRISMA_DEV(),
-      MODULES.USER.FOR_PRISMA(),
-    ),
-);
-
-export const PrismaRepositoryFactoryMock = {
-  USER: () =>
-    PrismaRepositoryMockModule.get<jest.Mocked<PrismaUserRepository>>(
-      PrismaRepositoryMockRegistry.USER,
-    ),
-  USER_DEV: () =>
-    PrismaRepositoryMockModule.get<PrismaUserRepository>(
-      PrismaRepositoryMockRegistry.USER_DEV,
-    ),
-};
+export const simulatePrismaUserRepository = (context: interfaces.Context) =>
+  new PrismaUserRepository(
+    context.container.get(MOCK_MODULE.PRISMA),
+    MODULES.USER.FOR_PRISMA(),
+  );
