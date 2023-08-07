@@ -35,4 +35,15 @@ describe('[REPOSITORY] | Post', () => {
     expect(prisma.post.create).toHaveBeenCalledTimes(1);
     expect(prisma.post.create).toHaveBeenCalledWith({ data: CREATE_POST_DATA });
   });
+
+  it('[UNIT] | Should: FindAll => [POST]', async () => {
+    prisma.post.findMany.mockResolvedValue([VALID_POST_DATA as PrismaPost]);
+
+    const result = await repository.findAll();
+
+    expect(result).toEqual([VALID_POST]);
+
+    expect(prisma.post.findMany).toHaveBeenCalledTimes(1);
+    expect(prisma.post.findMany).toHaveBeenCalledWith();
+  });
 });
