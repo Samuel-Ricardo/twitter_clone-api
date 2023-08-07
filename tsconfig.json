@@ -26,6 +26,8 @@
       "@Type/*": ["./@types/*"],
       "@User": ["./modules/@core/user/index.ts"],
       "@User/*": ["./modules/@core/user/*"],
+      "@Post": ["./modules/@core/post/index.ts"],
+      "@Post/*": ["./modules/@core/post/*"],
       "@Core": ["./modules/@core/index.ts"],
       "@Core/*": ["./modules/@core/*"],
       "@logger": ["./modules/logger/index.ts"],
