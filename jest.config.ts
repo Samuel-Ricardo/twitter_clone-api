@@ -189,6 +189,8 @@ const config: Config = {
     '@Type/(.*)': '<rootDir>/src/@types/$1',
     '@User': '<rootDir>/src/modules/@core/user/index.ts',
     '@User/(.*)': '<rootDir>/src/modules/@core/user/$1',
+    '@Post': '<rootDir>/src/modules/@core/post/index.ts',
+    '@Post/(.*)': '<rootDir>/src/modules/@core/post/$1',
     '@Core': '<rootDir>/src/modules/@core/index.ts',
     '@Core/(.*)': '<rootDir>/src/modules/@core/$1',
     '@logger': '<rootDir>/src/modules/logger/index.ts',
