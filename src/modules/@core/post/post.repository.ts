@@ -1,4 +1,4 @@
-import { Post } from '@prisma/client';
+import { Post } from './post.entity';
 import {
   ICreatePostDTO,
   IFindPostByIdDTO,
@@ -13,5 +13,5 @@ export interface IPostRepository {
   findById(data: IFindPostByIdDTO): Promise<Post>;
   findByAuhorId(data: IFindPostByAuthorIdDTO): Promise<Post>;
   update(data: IUpdatePostDTO): Promise<Post>;
-  delete(post: IDeletePostDTO): Promise<Post>;
+  delete(post: IDeletePostDTO): Promise<void>;
 }
