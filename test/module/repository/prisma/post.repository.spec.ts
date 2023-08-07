@@ -46,4 +46,17 @@ describe('[REPOSITORY] | Post', () => {
     expect(prisma.post.findMany).toHaveBeenCalledTimes(1);
     expect(prisma.post.findMany).toHaveBeenCalledWith();
   });
+
+  it('[UNIT] | Should: FindById => [POST]', async () => {
+    prisma.post.findUnique.mockResolvedValue(VALID_POST_DATA as PrismaPost);
+
+    const result = await repository.findById({ id: VALID_POST_DATA.id });
+
+    expect(result).toEqual(VALID_POST);
+
+    expect(prisma.post.findUnique).toHaveBeenCalledTimes(1);
+    expect(prisma.post.findUnique).toHaveBeenCalledWith({
+      where: { id: VALID_POST_DATA.id },
+    });
+  });
 });
