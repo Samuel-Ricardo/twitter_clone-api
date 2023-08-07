@@ -49,6 +49,7 @@ export class PrismaPostRepository implements IPostRepository {
     });
     return Post.fromPrisma(oldPost);
   }
+
   async delete(post: IDeletePostDTO) {
     await this.prisma.post.delete({
       where: { id: post.id },
