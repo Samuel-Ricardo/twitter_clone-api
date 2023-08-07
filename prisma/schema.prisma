@@ -37,7 +37,7 @@ model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   body String
 
-  authorId String @db.ObjectId
+  authorId String @db.ObjectId @unique
   image String? 
 
   createdAt DateTime @default(now())
