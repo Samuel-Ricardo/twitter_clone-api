@@ -8,6 +8,7 @@ import {
 } from '@test/mock/data/post';
 import { Post as PrismaPost } from '@prisma/client';
 import { DeepMockProxy } from 'jest-mock-extended';
+import { IUpdatePostDTO } from '@Post';
 
 describe('[REPOSITORY] | Post', () => {
   let prisma: DeepMockProxy<PrismaClient>;
@@ -57,6 +58,33 @@ describe('[REPOSITORY] | Post', () => {
     expect(prisma.post.findUnique).toHaveBeenCalledTimes(1);
     expect(prisma.post.findUnique).toHaveBeenCalledWith({
       where: { id: VALID_POST_DATA.id },
+    });
+  });
+
+  it('[UNIT] | Should: Update => [POST]', async () => {
+    const UPDATED_POST = {
+      ...VALID_POST_DATA,
+      body: 'Rapaaaaaz!',
+    };
+
+    prisma.post.update.mockResolvedValue(UPDATED_POST as PrismaPost);
+
+    const UPDATE_DATA: IUpdatePostDTO = {
+      id: VALID_POST.id,
+      body: 'Rapaaaaaz!',
+    };
+
+    const result = await repository.update(UPDATE_DATA);
+
+    expect(result.id).toEqual(VALID_POST.id);
+    expect(result.body).not.toEqual(VALID_POST.body);
+    expect(result.body).toEqual(UPDATE_DATA.body);
+    expect(result.image).toEqual(VALID_POST.image);
+
+    expect(prisma.post.update).toHaveBeenCalledTimes(1);
+    expect(prisma.post.update).toHaveBeenCalledWith({
+      where: { id: UPDATE_DATA.id },
+      data: { body: UPDATE_DATA.body },
     });
   });
 });
