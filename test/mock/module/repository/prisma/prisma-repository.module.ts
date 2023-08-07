@@ -1,7 +1,9 @@
-import { MODULES, PrismaUserRepository } from '@modules';
+import { PrismaUserRepository } from '@modules';
 import { Container } from 'inversify';
-import { mockPrismaUserRepository } from './user.repository';
-import { MockFactory } from '../../app.factory';
+import {
+  mockPrismaUserRepository,
+  simulatePrismaUserRepository,
+} from './user.repository';
 import { DeepMockProxy } from 'jest-mock-extended';
 import {
   mockPrismaPostRepository,
@@ -9,58 +11,33 @@ import {
 } from './post.repository';
 import { PrismaPostRepository } from '@modules/repository/prisma/post';
 import { PrismaClient } from '@prisma/client';
+import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
+import { PrismaMockModule } from '../../prisma';
 
 type simulatePostType = {
   repository: PrismaPostRepository;
   prisma: DeepMockProxy<PrismaClient>;
 };
 
-export const PrismaRepositoryMockRegistry = {
-  USER: Symbol.for('UserPrismaRepositoryMock'),
-  USER_DEV: Symbol.for('UserPrismaDevRepositoryMock'),
-  POST: Symbol.for('PostPrismaRepositoryMock'),
-  POST_DEV: Symbol.for('PostPrismaDevRepositoryMock'),
-};
+const _module = new Container({ autoBindInjectable: true });
 
-export const PrismaRepositoryMockModule = new Container({
-  autoBindInjectable: true,
-});
+export const PrismaRepositoryMockModule = Container.merge(
+  _module,
+  PrismaMockModule,
+);
 
-PrismaRepositoryMockModule.bind<jest.Mocked<PrismaUserRepository>>(
+PrismaRepositoryMockModule.bind<DeepMockProxy<PrismaUserRepository>>(
   PrismaRepositoryMockRegistry.USER,
 ).toDynamicValue(mockPrismaUserRepository);
 
 PrismaRepositoryMockModule.bind<PrismaUserRepository>(
   PrismaRepositoryMockRegistry.USER_DEV,
-).toDynamicValue(
-  () =>
-    new PrismaUserRepository(
-      MockFactory.PRISMA_DEV(),
-      MODULES.USER.FOR_PRISMA(),
-    ),
-);
+).toDynamicValue(simulatePrismaUserRepository);
 
 PrismaRepositoryMockModule.bind<DeepMockProxy<PrismaPostRepository>>(
-  mockPrismaPostRepository,
-);
+  PrismaRepositoryMockRegistry.POST,
+).toDynamicValue(mockPrismaPostRepository);
 
-PrismaRepositoryMockModule.bind<simulatePostType>(simulatePrismaPostRepository);
-
-export const PrismaRepositoryFactoryMock = {
-  USER: () =>
-    PrismaRepositoryMockModule.get<jest.Mocked<PrismaUserRepository>>(
-      PrismaRepositoryMockRegistry.USER,
-    ),
-  USER_DEV: () =>
-    PrismaRepositoryMockModule.get<PrismaUserRepository>(
-      PrismaRepositoryMockRegistry.USER_DEV,
-    ),
-  POST: () =>
-    PrismaRepositoryMockModule.get<DeepMockProxy<PrismaPostRepository>>(
-      PrismaRepositoryMockRegistry.POST,
-    ),
-  POST_DEV: () =>
-    PrismaRepositoryMockModule.get<simulatePostType>(
-      PrismaRepositoryMockRegistry.POST_DEV,
-    ),
-};
+PrismaRepositoryMockModule.bind<simulatePostType>(
+  PrismaRepositoryMockRegistry.POST_DEV,
+).toDynamicValue(simulatePrismaPostRepository);
