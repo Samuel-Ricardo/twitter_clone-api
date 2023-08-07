@@ -1,11 +1,18 @@
-import { PrismaPostRepository } from '@modules/repository/prisma/post';
-import { mockDeep } from 'jest-mock-extended';
-import { MockFactory } from '../../app.factory';
+import { PrismaPostRepository } from '../../../../../src/modules/repository/prisma/post/post.repository';
+import { interfaces } from 'inversify';
+import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
+import { PrismaMockResgistry } from '../../prisma';
+import { PrismaClient } from '@prisma/client';
 
 export const mockPrismaPostRepository = () => mockDeep<PrismaPostRepository>();
 
-export const simulatePrismaPostRepository = () => {
-  const prisma = MockFactory.PRISMA();
+export const simulatePrismaPostRepository = ({
+  container,
+}: interfaces.Context) => {
+  const prisma = container.get<DeepMockProxy<PrismaClient>>(
+    PrismaMockResgistry.PRISMA,
+  );
+
   const repository = new PrismaPostRepository(prisma);
 
   return { repository, prisma };
