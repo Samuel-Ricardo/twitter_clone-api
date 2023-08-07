@@ -2,10 +2,24 @@ import { MODULES, PrismaUserRepository } from '@modules';
 import { Container } from 'inversify';
 import { mockPrismaUserRepository } from './user.repository';
 import { MockFactory } from '../../app.factory';
+import { DeepMockProxy } from 'jest-mock-extended';
+import {
+  mockPrismaPostRepository,
+  simulatePrismaPostRepository,
+} from './post.repository';
+import { PrismaPostRepository } from '@modules/repository/prisma/post';
+import { PrismaClient } from '@prisma/client';
+
+type simulatePostType = {
+  repository: PrismaPostRepository;
+  prisma: DeepMockProxy<PrismaClient>;
+};
 
 export const PrismaRepositoryMockRegistry = {
   USER: Symbol.for('UserPrismaRepositoryMock'),
   USER_DEV: Symbol.for('UserPrismaDevRepositoryMock'),
+  POST: Symbol.for('PostPrismaRepositoryMock'),
+  POST_DEV: Symbol.for('PostPrismaDevRepositoryMock'),
 };
 
 export const PrismaRepositoryMockModule = new Container({
@@ -26,6 +40,12 @@ PrismaRepositoryMockModule.bind<PrismaUserRepository>(
     ),
 );
 
+PrismaRepositoryMockModule.bind<DeepMockProxy<PrismaPostRepository>>(
+  mockPrismaPostRepository,
+);
+
+PrismaRepositoryMockModule.bind<simulatePostType>(simulatePrismaPostRepository);
+
 export const PrismaRepositoryFactoryMock = {
   USER: () =>
     PrismaRepositoryMockModule.get<jest.Mocked<PrismaUserRepository>>(
@@ -34,5 +54,13 @@ export const PrismaRepositoryFactoryMock = {
   USER_DEV: () =>
     PrismaRepositoryMockModule.get<PrismaUserRepository>(
       PrismaRepositoryMockRegistry.USER_DEV,
+    ),
+  POST: () =>
+    PrismaRepositoryMockModule.get<DeepMockProxy<PrismaPostRepository>>(
+      PrismaRepositoryMockRegistry.POST,
+    ),
+  POST_DEV: () =>
+    PrismaRepositoryMockModule.get<simulatePostType>(
+      PrismaRepositoryMockRegistry.POST_DEV,
     ),
 };
