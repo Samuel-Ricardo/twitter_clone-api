@@ -1,6 +1,6 @@
 import { PrismaMockFactory } from './prisma';
 import { PrismaDevFactory } from './prisma/prisma-dev';
-import { RepositoryMockFactory as REPOSITORY } from './repository';
+import { RepositoryMockFactory as REPOSITORY } from './repository/repository.module';
 import { UserMockFactory as USER } from './core/user';
 
 export const MockFactory = {
