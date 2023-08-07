@@ -7,7 +7,7 @@ export interface IPostDTO {
   authorId: string;
   createdAt: Date;
   updatedAt: Date;
-  image?: string;
+  image?: string | null;
 }
 
 export const IPostSchema = z
