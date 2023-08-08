@@ -70,4 +70,19 @@ describe('[REPOSITORY] | Post', () => {
     expect(result).toHaveProperty('id');
     expect(result.id).toEqual(byAuthor.id);
   });
+
+  it('[INTEGRATION] | Should: Delete => [POST]', async () => {
+    try {
+      const byAuthor = await repository.findByAuhorId({
+        id: CREATE_POST_DATA.authorId,
+      });
+      expect(
+        repository.delete({
+          id: byAuthor.id,
+        }),
+      ).resolves.not.toThrow();
+    } catch (e) {
+      expect(e).toBeUndefined();
+    }
+  });
 });
