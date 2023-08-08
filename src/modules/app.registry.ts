@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import { UserRegistry as USER } from './@core/user/user.registry';
+import { PostRegistry as POST } from './@core/post/post.registry';
 import { PrismaRegistry } from './prisma';
 import { RepositoryRegistry as REPOSITORY } from './repository/repository.registry';
 import { RoutesRegistry } from './router/router.registry';
@@ -10,6 +11,7 @@ export const MODULE = {
   ...PrismaRegistry,
   ...RoutesRegistry,
   USER,
+  POST,
   REPOSITORY,
   MIDDLEWARE,
   APP: Symbol.for('app'),
