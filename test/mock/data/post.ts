@@ -1,6 +1,6 @@
 import { ICreatePostDTO, IPostDTO, Post } from '@Post';
 import { VALID_USER } from './user';
-import { randomUUID } from 'crypto';
+import { randomID } from '../../../src/modules/util/mongo';
 
 export const CREATE_POST_DATA: ICreatePostDTO = {
   body: 'Hello World!',
@@ -10,7 +10,7 @@ export const CREATE_POST_DATA: ICreatePostDTO = {
 
 export const VALID_POST_DATA: IPostDTO = {
   ...CREATE_POST_DATA,
-  id: randomUUID(),
+  id: randomID(),
   createdAt: new Date(),
   updatedAt: new Date(),
 };
