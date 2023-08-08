@@ -3,12 +3,7 @@ import { MODULES } from '@modules';
 
 import { UserController, UserService } from '@User';
 import { DeepMockProxy } from 'jest-mock-extended';
-import {
-  CREATE_USER_DATA,
-  MockFactory,
-  VALID_USER,
-  VALID_USER_DATA,
-} from '@test/mock';
+import { CREATE_USER_DATA, MockFactory, VALID_USER } from '@test/mock';
 
 describe('[CONTROLLER] | USER', () => {
   MODULES.USER.USE_CASE;
