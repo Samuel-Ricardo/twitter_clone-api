@@ -1,3 +1,4 @@
+export * from './post/post.repository';
 export * from './user/user.repository';
 export * from './prisma-repository.module';
 export * from './prisma-repository.factory';
