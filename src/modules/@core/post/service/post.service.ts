@@ -44,4 +44,8 @@ export class PostService {
   async delete(data: IDeletePostDTO) {
     await this.deletePost.execute(data);
   }
+
+  async listAll() {
+    return await this.listPosts.execute();
+  }
 }
