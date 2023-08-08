@@ -10,7 +10,7 @@ export class CreatePostUseCase {
     private readonly repository: IPostRepository,
   ) {}
 
-  async execute(data: ICreatePostDTO) {
-    return await this.repository.create(data);
+  async execute(post: ICreatePostDTO) {
+    return await this.repository.create(post);
   }
 }
