@@ -1,4 +1,10 @@
-import { ICreatePostDTO } from '@Post/DTO';
+import {
+  ICreatePostDTO,
+  IUpdatePostDTO,
+  IDeletePostDTO,
+  IFindPostByIdDTO,
+  IFindPostByAuthorIdDTO,
+} from '@Post/DTO';
 import {
   CreatePostUseCase,
   DeletePostUseCase,
@@ -29,5 +35,9 @@ export class PostService {
 
   async create(data: ICreatePostDTO) {
     return await this.createPost.execute(data);
+  }
+
+  async update(data: IUpdatePostDTO) {
+    return await this.updatePost.execute(data);
   }
 }
