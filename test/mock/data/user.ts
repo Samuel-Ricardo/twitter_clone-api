@@ -1,5 +1,5 @@
 import { CreateUserDTO, UpdateUserDTO, User } from '@User';
-import { randomUUID } from 'crypto';
+import { randomID } from '../../../src/modules/util/mongo';
 
 export const CREATE_USER_DATA: CreateUserDTO = {
   name: 'pedro',
@@ -10,7 +10,7 @@ export const CREATE_USER_DATA: CreateUserDTO = {
 
 export const VALID_USER_DATA: UpdateUserDTO = {
   ...CREATE_USER_DATA,
-  id: randomUUID(),
+  id: randomID(),
   bio: 'Hello World! :D',
   createdAt: new Date(),
   updatedAt: new Date(),
