@@ -48,4 +48,8 @@ export class PostService {
   async listAll() {
     return await this.listPosts.execute();
   }
+
+  async detail(data: IFindPostByIdDTO) {
+    return await this.detailPosts.execute(data);
+  }
 }
