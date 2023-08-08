@@ -40,4 +40,8 @@ export class PostService {
   async update(data: IUpdatePostDTO) {
     return await this.updatePost.execute(data);
   }
+
+  async delete(data: IDeletePostDTO) {
+    await this.deletePost.execute(data);
+  }
 }
