@@ -5,6 +5,7 @@
 import { MODULES } from '@modules';
 import { PrismaPostRepository } from '../../../../../src/modules/repository/prisma/post/post.repository';
 import { CREATE_POST_DATA, VALID_POST } from '@test/mock/data/post';
+import { IUpdatePostDTO } from '@Post';
 
 describe('[REPOSITORY] | Post', () => {
   let repository: PrismaPostRepository;
@@ -46,5 +47,27 @@ describe('[REPOSITORY] | Post', () => {
     expect(result.id).toEqual(byAuthor.id);
     expect(result.authorId).toEqual(byAuthor.authorId);
     expect(result.body).toEqual(byAuthor.body);
+  });
+
+  it('[INTEGRATION] | Should: Update => [POST]', async () => {
+    const byAuthor = await repository.findByAuhorId({
+      id: CREATE_POST_DATA.authorId,
+    });
+
+    expect(byAuthor).toHaveProperty('id');
+    expect(byAuthor.authorId).toEqual(CREATE_POST_DATA.authorId);
+    expect(byAuthor.body).toEqual(CREATE_POST_DATA.body);
+
+    const data: IUpdatePostDTO = {
+      id: byAuthor.id,
+      body: 'Tomi!',
+    };
+
+    const result = await repository.update({
+      ...data,
+    });
+
+    expect(result).toHaveProperty('id');
+    expect(result.id).toEqual(byAuthor.id);
   });
 });
