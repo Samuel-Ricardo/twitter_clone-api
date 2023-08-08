@@ -1,8 +1,7 @@
-import { PrismaPostRepository } from '@modules/repository/prisma/post';
 import { PrismaClient } from '@prisma/client';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { PrismaRepositoryMockModule } from './prisma-repository.module';
-import { PrismaUserRepository } from '@modules';
+import { PrismaUserRepository, PrismaPostRepository } from '@modules';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 
 type simulatePostType = {
