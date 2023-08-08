@@ -6,6 +6,6 @@ import { inject, injectable } from 'inversify';
 export abstract class PostRepositoryAcess {
   constructor(
     @inject(MODULE.REPOSITORY.PRISMA.POST)
-    private readonly repository: IPostRepository,
+    protected readonly repository: IPostRepository,
   ) {}
 }
