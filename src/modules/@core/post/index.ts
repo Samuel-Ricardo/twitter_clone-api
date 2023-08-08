@@ -1,3 +1,3 @@
 export * from './DTO';
-export * from './post.entity';
-export * from './post.repository';
+export * from './entity';
+export * from './repository';
