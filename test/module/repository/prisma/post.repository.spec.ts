@@ -1,12 +1,11 @@
-import { PrismaPostRepository } from '../../../../src/modules/repository/prisma/post/post.repository';
-import { PrismaClient } from '@prisma/client';
+import { PrismaPostRepository } from '@modules';
 import { MockFactory } from '@test/mock';
 import {
   CREATE_POST_DATA,
   VALID_POST,
   VALID_POST_DATA,
 } from '@test/mock/data/post';
-import { Post as PrismaPost } from '@prisma/client';
+import { Post as PrismaPost, PrismaClient } from '@prisma/client';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { IUpdatePostDTO } from '@Post';
 
