@@ -7,9 +7,8 @@ import {
   IUpdatePostDTO,
   Post,
 } from '@Post';
-import { Post as PrismaPost } from '@prisma/client';
-import { MODULE } from '@modules/app.registry';
-import { PrismaClient } from '@prisma/client';
+import { Post as PrismaPost, PrismaClient } from '@prisma/client';
+import { MODULE } from '@modules';
 import { inject, injectable } from 'inversify';
 
 @injectable()
