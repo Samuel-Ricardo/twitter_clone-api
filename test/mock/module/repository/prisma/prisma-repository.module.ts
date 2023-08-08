@@ -9,7 +9,7 @@ import {
   mockPrismaPostRepository,
   simulatePrismaPostRepository,
 } from './post.repository';
-import { PrismaPostRepository } from '@modules/repository/prisma/post';
+import { PrismaPostRepository } from '../../../../../src/modules/repository/prisma/post/post.repository';
 import { PrismaClient } from '@prisma/client';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 import { PrismaMockModule } from '../../prisma';
