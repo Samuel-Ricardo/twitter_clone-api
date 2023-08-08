@@ -1,3 +1,4 @@
+import { ICreatePostDTO } from '@Post/DTO';
 import {
   CreatePostUseCase,
   DeletePostUseCase,
@@ -25,4 +26,8 @@ export class PostService {
     @inject(MODULE.POST.USE_CASE.FIND.BY.AUTHOR)
     private readonly listUserPosts: ListUserPostsUseCase,
   ) {}
+
+  async create(data: ICreatePostDTO) {
+    return await this.createPost.execute(data);
+  }
 }
