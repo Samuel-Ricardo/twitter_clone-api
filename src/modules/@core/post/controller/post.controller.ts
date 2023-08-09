@@ -1,4 +1,4 @@
-import { ICreatePostDTO, IUpdatePostDTO } from '@Post/DTO';
+import { ICreatePostDTO, IDeletePostDTO, IUpdatePostDTO } from '@Post/DTO';
 import { PostRegistry } from '@Post/post.registry';
 import { PostService } from '@Post/service/post.service';
 import { inject, injectable } from 'inversify';
@@ -16,5 +16,9 @@ export class PostController {
 
   async update(post: IUpdatePostDTO) {
     return this.service.update(post);
+  }
+
+  async delete(post: IDeletePostDTO) {
+    return this.service.delete(post);
   }
 }
