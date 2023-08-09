@@ -30,4 +30,12 @@ router.get(`${prefix}/:id`, async (req, res, next) => {
   }
 });
 
+router.patch(prefix, async (req, res, next) => {
+  try {
+    return res.status(201).json(await Post.update(req.body));
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export const post = { router, prefix };
