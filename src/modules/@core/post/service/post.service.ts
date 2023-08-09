@@ -52,4 +52,8 @@ export class PostService {
   async detail(data: IFindPostByIdDTO) {
     return await this.detailPosts.execute(data);
   }
+
+  async listPostsFromUser(data: IFindPostByAuthorIdDTO) {
+    return await this.listUserPosts.execute(data);
+  }
 }
