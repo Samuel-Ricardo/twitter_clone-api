@@ -14,4 +14,20 @@ router.get(prefix, async (req, res, next) => {
   }
 });
 
+router.post(prefix, async (req, res, next) => {
+  try {
+    return res.status(201).json(await Post.create(req.body));
+  } catch (e) {
+    return next(e);
+  }
+});
+
+router.get(`${prefix}/:id`, async (req, res, next) => {
+  try {
+    return res.status(200).json(await Post.details({ id: req.params.id }));
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export const post = { router, prefix };
