@@ -8,7 +8,6 @@ import {
   mockListAllPostsUseCase,
   mockListUserPostsUseCase,
 } from './use-case';
-import { PostModule } from '@Post';
 import { mockPostService, simulatePostService } from './service/post.service';
 import {
   mockPostController,
@@ -36,10 +35,10 @@ PostMockModule.bind(PostMockRegistry.USE_CASE.FIND.BY.AUTHOR).toDynamicValue(
   mockListUserPostsUseCase,
 );
 
-PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.MOCK).toDynamicValue(
+PostMockModule.bind(PostMockRegistry.SERVICE.DEFAULT.MOCK).toDynamicValue(
   mockPostService,
 );
-PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.SIMULATE).toDynamicValue(
+PostMockModule.bind(PostMockRegistry.SERVICE.DEFAULT.SIMULATE).toDynamicValue(
   simulatePostService,
 );
 

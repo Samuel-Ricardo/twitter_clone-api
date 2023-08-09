@@ -1,4 +1,4 @@
-import { PostService } from '@Post/service/post.service';
+import { PostService } from '../../../../../../src/modules/@core/post/service/post.service';
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { interfaces } from 'inversify';
 import { PostMockRegistry } from '../post.registry';

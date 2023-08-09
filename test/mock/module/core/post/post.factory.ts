@@ -7,12 +7,12 @@ import {
   DetailPostsUseCase,
 } from '@Post/use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
-import { PostMockRegistry } from './post.registry';
 import { PostService } from '@Post/service/post.service';
-import { PostMockModule } from './post.module';
-import { ISimulatePostService } from '@test/@types/simulate/post.service';
 import { PostController } from '@Post/controller/post.controller';
+import { ISimulatePostService } from '@test/@types/simulate/post.service';
 import { ISimulatePostController } from '@test/@types/simulate';
+import { PostMockRegistry } from './post.registry';
+import { PostMockModule } from './post.module';
 
 export const PostMockFactory = {
   SERVICE: {

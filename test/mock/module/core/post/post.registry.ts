@@ -1,8 +1,8 @@
 export const PostMockRegistry = {
   SERVICE: {
     DEFAULT: {
-      MOCK: Symbol('POST.SERVICE.MOCK'),
-      SIMULATE: Symbol('POST.SERVICE.SIMULATE'),
+      MOCK: Symbol('MOCK>POST.SERVICE.MOCK'),
+      SIMULATE: Symbol('MOCK>POST.SERVICE.SIMULATE'),
     },
   },
   CONTROLLER: {
