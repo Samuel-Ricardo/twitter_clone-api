@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { user_routes } from './user';
+import { post } from './post';
 
 const routes = Router();
 
@@ -12,5 +13,6 @@ routes.get('/', (req, res, next) => {
 });
 
 routes.use(user_routes);
+routes.use(post.router);
 
 export { routes };
