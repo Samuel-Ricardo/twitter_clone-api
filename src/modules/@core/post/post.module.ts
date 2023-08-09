@@ -23,6 +23,4 @@ Module.bind(PostRegistry.USE_CASE.FIND.BY.ID).to(DetailPostsUseCase);
 Module.bind(PostRegistry.SERVICE.DEFAULT).to(PostService);
 Module.bind(PostRegistry.CONTROLLER.DEFAULT).to(PostController);
 
-// export const PostModule = Container.merge(Module, RepositoryModule);
-
-export const PostModule = Module;
+export const PostModule = Container.merge(Module, RepositoryModule);
