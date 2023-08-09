@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get(prefix, async (req, res, next) => {
   try {
-    return await Post.listAll();
+    return res.status(200).json(await Post.listAll());
   } catch (e) {
     return next(e);
   }
