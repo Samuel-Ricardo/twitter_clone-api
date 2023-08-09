@@ -51,4 +51,15 @@ describe('[CONTROLLER] | POST', () => {
     expect(module.service.update).toHaveBeenCalledTimes(1);
     expect(module.service.update).toHaveBeenCalledWith(UPDATE_POST_DATA);
   });
+
+  it('[UNIT] | Should: delete => [POST]', async () => {
+    module.service.delete.mockResolvedValue();
+
+    expect(
+      module.controller.delete({ id: VALID_POST.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.service.delete).toHaveBeenCalledTimes(1);
+    expect(module.service.delete).toHaveBeenCalledWith({ id: VALID_POST.id });
+  });
 });
