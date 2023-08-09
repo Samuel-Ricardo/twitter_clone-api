@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { IPostDTO, IPostSchema } from './DTO/post.dto';
+import { IPostDTO, IPostSchema } from '../DTO/post.dto';
 import { Post as PrismaPost } from '@prisma/client';
 
 @injectable()
