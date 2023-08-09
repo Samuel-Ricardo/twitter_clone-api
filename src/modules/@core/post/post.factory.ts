@@ -1,3 +1,4 @@
+import { PostController } from './controller/post.controller';
 import { PostModule } from './post.module';
 import { PostRegistry } from './post.registry';
 import { PostService } from './service/post.service';
@@ -11,6 +12,10 @@ import {
 } from './use-case';
 
 export const PostFactory = {
+  CONTROLLER: {
+    DEFAULT: () =>
+      PostModule.get<PostController>(PostRegistry.CONTROLLER.DEFAULT),
+  },
   SERVICE: {
     DEFAULT: () => PostModule.get<PostService>(PostRegistry.SERVICE.DEFAULT),
   },
