@@ -1,14 +1,14 @@
-import { RepositoryModule } from '@modules/repository';
 import { Container } from 'inversify';
 import { PostRegistry } from './post.registry';
-import {
-  CreatePostUseCase,
-  DeletePostUseCase,
-  DetailPostsUseCase,
-  ListPostsUseCase,
-  ListUserPostsUseCase,
-  UpdatePostUseCase,
-} from './use-case';
+import { RepositoryModule } from '../../repository/repository.module';
+
+import { CreatePostUseCase } from './use-case/create.use-case';
+import { DeletePostUseCase } from './use-case/delete.use-case';
+import { ListPostsUseCase } from './use-case/list_posts.use-case';
+import { UpdatePostUseCase } from './use-case/update.use-case';
+import { DetailPostsUseCase } from './use-case/post_details.use-case';
+import { ListUserPostsUseCase } from './use-case/list_user_posts';
+import { PostService } from './service/post.service';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -19,4 +19,8 @@ Module.bind(PostRegistry.USE_CASE.FIND.ALL).to(ListPostsUseCase);
 Module.bind(PostRegistry.USE_CASE.FIND.BY.AUTHOR).to(ListUserPostsUseCase);
 Module.bind(PostRegistry.USE_CASE.FIND.BY.ID).to(DetailPostsUseCase);
 
-export const PostModule = Container.merge(Module, RepositoryModule);
+Module.bind(PostRegistry.SERVICE.DEFAULT).to(PostService);
+
+// export const PostModule = Container.merge(Module, RepositoryModule);
+
+export const PostModule = Module;
