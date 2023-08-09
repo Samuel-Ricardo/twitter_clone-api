@@ -1,5 +1,6 @@
 import { PostModule } from './post.module';
 import { PostRegistry } from './post.registry';
+import { PostService } from './service/post.service';
 import {
   CreatePostUseCase,
   UpdatePostUseCase,
@@ -10,6 +11,9 @@ import {
 } from './use-case';
 
 export const PostFactory = {
+  SERVICE: {
+    DEFAULT: () => PostModule.get<PostService>(PostRegistry.SERVICE.DEFAULT),
+  },
   USE_CASE: {
     CREATE: () =>
       PostModule.get<CreatePostUseCase>(PostRegistry.USE_CASE.CREATE),
