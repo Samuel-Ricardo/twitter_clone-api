@@ -1,4 +1,4 @@
-import { ICreatePostDTO, IPostDTO, Post } from '@Post';
+import { ICreatePostDTO, IPostDTO, IUpdatePostDTO, Post } from '@Post';
 import { VALID_USER } from './user';
 import { randomID } from '../../../src/modules/util/mongo';
 
@@ -16,3 +16,8 @@ export const VALID_POST_DATA: IPostDTO = {
 };
 
 export const VALID_POST = Post.create(VALID_POST_DATA);
+
+export const UPDATE_POST_DATA: IUpdatePostDTO = {
+  id: VALID_POST.id,
+  body: 'Pedro Modificações',
+};
