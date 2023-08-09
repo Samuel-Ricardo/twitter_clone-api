@@ -9,4 +9,8 @@ export class PostController {
     @inject(PostRegistry.SERVICE.DEFAULT)
     private readonly service: PostService,
   ) {}
+
+  async create(post: ICreatePostDTO) {
+    return this.service.create(post);
+  }
 }
