@@ -1,6 +1,7 @@
 import {
   ICreatePostDTO,
   IDeletePostDTO,
+  IFindPostByAuthorIdDTO,
   IFindPostByIdDTO,
   IUpdatePostDTO,
 } from '@Post/DTO';
@@ -29,6 +30,10 @@ export class PostController {
 
   async listAll() {
     return this.service.listAll();
+  }
+
+  async listUserPosts(author: IFindPostByAuthorIdDTO) {
+    return this.service.listPostsFromUser(author);
   }
 
   async details(post: IFindPostByIdDTO) {
