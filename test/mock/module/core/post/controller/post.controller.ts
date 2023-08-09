@@ -1,5 +1,5 @@
-import { PostController } from '@Post/controller/post.controller';
-import { PostService } from '@Post/service/post.service';
+import { PostController } from '../../../../../../src/modules/@core/post/controller/post.controller';
+import { PostService } from '../../../../../../src/modules/@core/post/service/post.service';
 import { ISimulatePostController } from '@test/@types/simulate';
 import { interfaces } from 'inversify';
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
