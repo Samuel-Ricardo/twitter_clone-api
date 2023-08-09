@@ -12,6 +12,7 @@ export const PrismaRepositoryModule = Container.merge(Module, PrismaModule);
 PrismaRepositoryModule.bind(PrismaRepositoryRegistry.USER).to(
   PrismaUserRepository,
 );
+
 PrismaRepositoryModule.bind(PrismaRepositoryRegistry.POST).to(
   PrismaPostRepository,
 );
