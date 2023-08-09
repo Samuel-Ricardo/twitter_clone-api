@@ -1,4 +1,7 @@
 export const PostRegistry = {
+  CONTROLLER: {
+    DEFAULT: Symbol('POST.CONTROLLER.DEFAULT'),
+  },
   SERVICE: {
     DEFAULT: Symbol('POST.SERVICE.DEFAULT'),
   },
