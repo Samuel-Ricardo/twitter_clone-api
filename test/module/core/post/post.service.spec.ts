@@ -1,6 +1,6 @@
 import { ISimulatePostService } from '@test/@types';
 import { MockFactory } from '@test/mock';
-import { VALID_POST } from '@test/mock/data/post';
+import { CREATE_POST_DATA, VALID_POST } from '@test/mock/data/post';
 
 describe('[SERVICE] | POST', () => {
   let module: ISimulatePostService;
@@ -19,5 +19,15 @@ describe('[SERVICE] | POST', () => {
     expect(result).toEqual([VALID_POST]);
     expect(module.list.execute).toBeCalledTimes(1);
     expect(module.list.execute).toHaveBeenCalledWith();
+  });
+
+  it('[UNIT] | Should: create => [POST]', async () => {
+    module.create.execute.mockResolvedValue(VALID_POST);
+
+    const result = await module.service.create(CREATE_POST_DATA);
+
+    expect(result).toEqual(VALID_POST);
+    expect(module.create.execute).toBeCalledTimes(1);
+    expect(module.create.execute).toHaveBeenCalledWith(CREATE_POST_DATA);
   });
 });
