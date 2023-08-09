@@ -1,11 +1,11 @@
-import { Post } from './post.entity';
+import { Post } from '../entity';
 import {
   ICreatePostDTO,
   IFindPostByIdDTO,
   IFindPostByAuthorIdDTO,
   IUpdatePostDTO,
   IDeletePostDTO,
-} from './DTO';
+} from '../DTO';
 
 export interface IPostRepository {
   create(data: ICreatePostDTO): Promise<Post>;
