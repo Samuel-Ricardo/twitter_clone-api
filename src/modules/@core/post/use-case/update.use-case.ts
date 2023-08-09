@@ -1,6 +1,6 @@
 import { IUpdatePostDTO } from '@Post/DTO';
 import { injectable } from 'inversify';
-import { PostRepositoryAcess } from '../repository_acess';
+import { PostRepositoryAcess } from '../repository';
 
 @injectable()
 export class UpdatePostUseCase extends PostRepositoryAcess {
