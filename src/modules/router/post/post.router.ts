@@ -46,4 +46,14 @@ router.delete(`${prefix}/:id`, async (req, res, next) => {
   }
 });
 
+router.get(`${prefix}/:authorID`, async (req, res, next) => {
+  try {
+    return res
+      .status(200)
+      .json(await Post.listUserPosts({ id: req.params.authorID }));
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export const post = { router, prefix };
