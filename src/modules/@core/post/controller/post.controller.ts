@@ -4,7 +4,7 @@ import { PostService } from '@Post/service/post.service';
 import { inject, injectable } from 'inversify';
 
 @injectable()
-export class Controller {
+export class PostController {
   constructor(
     @inject(PostRegistry.SERVICE.DEFAULT)
     private readonly service: PostService,
