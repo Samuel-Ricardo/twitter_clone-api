@@ -3,10 +3,10 @@ import {
   IDeletePostDTO,
   IFindPostByAuthorIdDTO,
   IFindPostByIdDTO,
-  IPostRepository,
   IUpdatePostDTO,
-  Post,
-} from '@Post';
+} from '../../../@core/post/DTO';
+import { Post } from '../../../@core/post/entity';
+import { IPostRepository } from '../../../@core/post/repository';
 import { Post as PrismaPost, PrismaClient } from '@prisma/client';
 import { MODULE } from '@modules';
 import { inject, injectable } from 'inversify';
