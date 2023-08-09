@@ -1,4 +1,7 @@
 export const PostMockRegistry = {
+  SERVICE: {
+    DEFAULT: Symbol('POST.SERVICE.POST'),
+  },
   USE_CASE: {
     CREATE: Symbol('POST.USE_CASE.CREATE'),
     UPDATE: Symbol('POST.USE_CASE.UPDATE'),
