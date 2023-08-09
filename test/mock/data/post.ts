@@ -21,3 +21,8 @@ export const UPDATE_POST_DATA: IUpdatePostDTO = {
   id: VALID_POST.id,
   body: 'Pedro Modificações',
 };
+
+export const VALID_UPDATED_POST = Post.create({
+  ...VALID_POST_DATA,
+  ...UPDATE_POST_DATA,
+});
