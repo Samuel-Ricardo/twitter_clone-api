@@ -62,4 +62,15 @@ describe('[CONTROLLER] | POST', () => {
     expect(module.service.delete).toHaveBeenCalledTimes(1);
     expect(module.service.delete).toHaveBeenCalledWith({ id: VALID_POST.id });
   });
+
+  it('[UNIT] | Should: detail => [POST]', async () => {
+    module.service.detail.mockResolvedValue(VALID_POST);
+
+    const result = await module.controller.details({ id: VALID_POST.id });
+
+    expect(result).toEqual({ post: VALID_POST });
+
+    expect(module.service.detail).toHaveBeenCalledTimes(1);
+    expect(module.service.detail).toHaveBeenCalledWith({ id: VALID_POST.id });
+  });
 });
