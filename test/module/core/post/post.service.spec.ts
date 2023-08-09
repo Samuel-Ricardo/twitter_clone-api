@@ -59,4 +59,14 @@ describe('[SERVICE] | POST', () => {
       id: VALID_POST.id,
     });
   });
+
+  it('[UNIT] | Should: detail => [POST]', async () => {
+    module.detail.execute.mockResolvedValue(VALID_POST);
+
+    const result = await module.service.detail({ id: VALID_POST.id });
+
+    expect(result).toEqual(VALID_POST);
+    expect(module.detail.execute).toBeCalledTimes(1);
+    expect(module.detail.execute).toHaveBeenCalledWith({ id: VALID_POST.id });
+  });
 });
