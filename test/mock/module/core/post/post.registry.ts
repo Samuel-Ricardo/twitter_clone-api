@@ -6,7 +6,10 @@ export const PostMockRegistry = {
     },
   },
   CONTROLLER: {
-    DEFAULT: Symbol('POST.CONTROLLER.POST'),
+    DEFAULT: {
+      MOCK: Symbol('POST.CONTROLLER.MOCK'),
+      SIMULATE: Symbol('POST.CONTROLLER.SIMULATE'),
+    },
   },
   USE_CASE: {
     CREATE: Symbol('POST.USE_CASE.CREATE'),
