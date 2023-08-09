@@ -11,6 +11,8 @@ import { PostMockRegistry } from './post.registry';
 import { PostService } from '@Post/service/post.service';
 import { PostMockModule } from './post.module';
 import { ISimulatePostService } from '@test/@types/simulate/post.service';
+import { PostController } from '@Post/controller/post.controller';
+import { ISimulatePostController } from '@test/@types/simulate';
 
 export const PostMockFactory = {
   SERVICE: {
@@ -22,6 +24,18 @@ export const PostMockFactory = {
       SIMULATE: () =>
         PostMockModule.get<ISimulatePostService>(
           PostMockRegistry.SERVICE.DEFAULT.SIMULATE,
+        ),
+    },
+  },
+  CONTROLLER: {
+    DEFAULT: {
+      MOCK: () =>
+        PostMockModule.get<DeepMockProxy<PostController>>(
+          PostMockRegistry.CONTROLLER.DEFAULT.MOCK,
+        ),
+      SIMULATE: () =>
+        PostMockModule.get<ISimulatePostController>(
+          PostMockRegistry.CONTROLLER.DEFAULT.SIMULATE,
         ),
     },
   },
