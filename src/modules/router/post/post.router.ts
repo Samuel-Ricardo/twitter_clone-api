@@ -1,9 +1,9 @@
-import { MODULES } from '@modules/app.factory';
+import { MODULES } from '../../app.factory';
 import express from 'express';
 
 const Post = MODULES.POST.CONTROLLER.DEFAULT();
 
-const prefix = '/post';
+const prefix = '/posts';
 const router = express.Router();
 
 router.get(prefix, async (req, res, next) => {
