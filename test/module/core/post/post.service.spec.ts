@@ -48,4 +48,15 @@ describe('[SERVICE] | POST', () => {
     expect(result.id).toEqual(VALID_POST.id);
     expect(result.body).not.toEqual(VALID_POST.body);
   });
+
+  it('[UNIT] | Should: delete => [POST]', async () => {
+    module.deletePost.execute.mockResolvedValue(undefined);
+
+    expect(module.service.delete({ id: VALID_POST.id })).resolves.not.toThrow();
+
+    expect(module.deletePost.execute).toBeCalledTimes(1);
+    expect(module.deletePost.execute).toHaveBeenCalledWith({
+      id: VALID_POST.id,
+    });
+  });
 });
