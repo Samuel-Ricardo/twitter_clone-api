@@ -7,7 +7,6 @@ import {
 } from '@Post/DTO';
 import { PostRegistry } from '@Post/post.registry';
 import { PostService } from '@Post/service/post.service';
-import { Console } from 'console';
 import { inject, injectable } from 'inversify';
 
 @injectable()
@@ -18,11 +17,11 @@ export class PostController {
   ) {}
 
   async create(post: ICreatePostDTO) {
-    return await this.service.create(post);
+    return { post: await this.service.create(post) };
   }
 
   async update(post: IUpdatePostDTO) {
-    return await this.service.update(post);
+    return { post: await this.service.update(post) };
   }
 
   async delete(post: IDeletePostDTO) {
@@ -35,10 +34,10 @@ export class PostController {
   }
 
   async listUserPosts(author: IFindPostByAuthorIdDTO) {
-    return await this.service.listPostsFromUser(author);
+    return { posts: await this.service.listPostsFromUser(author) };
   }
 
   async details(post: IFindPostByIdDTO) {
-    return await this.service.detail(post);
+    return { post: await this.service.detail(post) };
   }
 }
