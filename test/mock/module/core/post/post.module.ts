@@ -8,6 +8,8 @@ import {
   mockListAllPostsUseCase,
   mockListUserPostsUseCase,
 } from './use-case';
+import { PostModule } from '@Post';
+import { mockPostService, simulatePostService } from './service/post.service';
 
 export const PostMockModule = new Container({ autoBindInjectable: true });
 
@@ -28,4 +30,11 @@ PostMockModule.bind(PostMockRegistry.USE_CASE.FIND.BY.ID).toDynamicValue(
 );
 PostMockModule.bind(PostMockRegistry.USE_CASE.FIND.BY.AUTHOR).toDynamicValue(
   mockListUserPostsUseCase,
+);
+
+PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.MOCK).toDynamicValue(
+  mockPostService,
+);
+PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.SIMULATE).toDynamicValue(
+  simulatePostService,
 );
