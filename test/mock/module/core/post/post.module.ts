@@ -10,6 +10,10 @@ import {
 } from './use-case';
 import { PostModule } from '@Post';
 import { mockPostService, simulatePostService } from './service/post.service';
+import {
+  mockPostController,
+  simulatePostController,
+} from './controller/post.controller';
 
 export const PostMockModule = new Container({ autoBindInjectable: true });
 
@@ -38,3 +42,10 @@ PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.MOCK).toDynamicValue(
 PostModule.bind(PostMockRegistry.SERVICE.DEFAULT.SIMULATE).toDynamicValue(
   simulatePostService,
 );
+
+PostMockModule.bind(PostMockRegistry.CONTROLLER.DEFAULT.MOCK).toDynamicValue(
+  mockPostController,
+);
+PostMockModule.bind(
+  PostMockRegistry.CONTROLLER.DEFAULT.SIMULATE,
+).toDynamicValue(simulatePostController);
