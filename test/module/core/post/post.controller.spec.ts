@@ -1,5 +1,5 @@
 import { ISimulatePostController } from '@test/@types';
-import { MockFactory } from '@test/mock';
+import { MockFactory, VALID_USER } from '@test/mock';
 import {
   CREATE_POST_DATA,
   UPDATE_POST_DATA,
@@ -72,5 +72,22 @@ describe('[CONTROLLER] | POST', () => {
 
     expect(module.service.detail).toHaveBeenCalledTimes(1);
     expect(module.service.detail).toHaveBeenCalledWith({ id: VALID_POST.id });
+  });
+
+  it('[UNIT] | Should: list [user] posts => [POST]', async () => {
+    module.service.listPostsFromUser.mockResolvedValue([VALID_POST]);
+
+    const result = await module.controller.listUserPosts({
+      id: VALID_POST.authorId,
+    });
+
+    expect(result).toEqual({ posts: [VALID_POST] });
+
+    expect(module.service.listPostsFromUser).toHaveBeenCalledTimes(1);
+    expect(module.service.listPostsFromUser).toHaveBeenCalledWith({
+      id: VALID_POST.authorId,
+    });
+
+    expect(result.posts[0].authorId).toEqual(VALID_USER.id);
   });
 });
