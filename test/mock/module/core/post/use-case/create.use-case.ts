@@ -1,4 +1,4 @@
-import { CreateUserUseCase } from '@User';
+import { CreatePostUseCase } from '@Post/use-case';
 import { mockDeep } from 'jest-mock-extended';
 
-export const mockCreateUserUseCase = mockDeep<CreateUserUseCase>();
+export const mockCreatePostUseCase = mockDeep<CreatePostUseCase>();
