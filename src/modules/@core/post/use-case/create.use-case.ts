@@ -1,5 +1,5 @@
 import { ICreatePostDTO } from '@Post/DTO';
-import { PostRepositoryAcess } from '@Post/repository_acess';
+import { PostRepositoryAcess } from '@Post/repository';
 import { injectable } from 'inversify';
 
 @injectable()
