@@ -38,4 +38,12 @@ router.patch(prefix, async (req, res, next) => {
   }
 });
 
+router.delete(`${prefix}/:id`, async (req, res, next) => {
+  try {
+    return res.status(204).json(await Post.delete({ id: req.params.id }));
+  } catch (e) {
+    return next(e);
+  }
+});
+
 export const post = { router, prefix };
