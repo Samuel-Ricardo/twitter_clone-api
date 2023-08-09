@@ -21,4 +21,8 @@ export class PostController {
   async delete(post: IDeletePostDTO) {
     return this.service.delete(post);
   }
+
+  async listAll() {
+    return this.service.listAll();
+  }
 }
