@@ -46,11 +46,11 @@ router.delete(`${prefix}/:id`, async (req, res, next) => {
   }
 });
 
-router.get(`${prefix}/:authorID`, async (req, res, next) => {
+router.get(`${prefix}/author/:id`, async (req, res, next) => {
   try {
     return res
       .status(200)
-      .json(await Post.listUserPosts({ id: req.params.authorID }));
+      .json(await Post.listUserPosts({ id: req.params.id }));
   } catch (e) {
     return next(e);
   }
