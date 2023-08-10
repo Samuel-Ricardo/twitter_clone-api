@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.ci
     entrypoint: ["npm", "run", "code:ci"]
     depends_on:
-      - mongo
+      - mongo_setup
     external_links:
       - "host.docker.internal"
 
@@ -22,3 +22,13 @@ services:
     external_links:
       - "host.docker.internal"
 
+  mongo_setup:
+    image: mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./.docker/mongo-data:/data/db
+      - ./.docker/mongo/scripts:/scripts
+    entrypoint: [ "bash", "/scripts/mongo_setup.sh"]
+    external_links:
+      - "host.docker.internal"
