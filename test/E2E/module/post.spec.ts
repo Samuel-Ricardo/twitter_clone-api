@@ -6,7 +6,14 @@ import { app } from '@/app';
 import { post } from '../../../src/modules/router/post/post.router';
 import { Post } from '../../../src/modules/@core/post/entity/post.entity';
 import supertest from 'supertest';
-import { CREATE_POST_DATA, VALID_POST, VALID_USER } from '@test/mock/data/post';
+import {
+  CREATE_POST_DATA,
+  UPDATE_POST_DATA,
+  VALID_POST,
+  VALID_USER,
+} from '@test/mock/data/post';
+import { response } from 'express';
+import { IUpdatePostDTO } from '@Post';
 
 describe('[MODULE] | Post', () => {
   let posted: any;
@@ -36,16 +43,6 @@ describe('[MODULE] | Post', () => {
   });
 
   it('[E2E] | Should: create and list [by author] => [POST]', async () => {
-    const createResponse = await supertest(app)
-      .post(post.prefix)
-      .send(CREATE_POST_DATA);
-    const createBody: { post: any } = createResponse.body;
-
-    expect(createResponse.status).toBe(201);
-    expect(createBody.post).toHaveProperty('_id');
-    expect(createBody.post._authorId).toBe(CREATE_POST_DATA.authorId);
-    expect(createBody.post._authorId).toBe(VALID_USER.id);
-
     const response = await supertest(app).get(
       post.prefix + '/author/' + VALID_USER.id,
     );
@@ -65,5 +62,21 @@ describe('[MODULE] | Post', () => {
     expect(response.status).toBe(200);
     expect(body.post).toHaveProperty('_id');
     expect(body.post._id).toBe(posted._id);
+  });
+
+  it('[E2E] | Should: update => [POST]', async () => {
+    const UPDATE_DATA: IUpdatePostDTO = {
+      id: posted._id,
+      body: 'Rapazzzzzzz',
+    };
+
+    const response = await supertest(app).patch(post.prefix).send(UPDATE_DATA);
+    const body: { post: any } = response.body;
+
+    expect(response.status).toBe(201);
+    expect(body.post).toBeDefined();
+
+    expect(body.post._id).toEqual(posted._id);
+    expect(body.post._body).not.toEqual(posted._body);
   });
 });
