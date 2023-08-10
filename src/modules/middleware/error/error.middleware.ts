@@ -1,4 +1,4 @@
-import { AppError } from '@modules/error';
+import { AppError } from '../../error/app.error';
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 
 export const ERROR_MIDDLEWARE: ErrorRequestHandler = (

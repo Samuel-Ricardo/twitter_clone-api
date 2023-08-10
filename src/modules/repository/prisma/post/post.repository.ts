@@ -10,6 +10,7 @@ import { IPostRepository } from '../../../@core/post/repository';
 import { Post as PrismaPost, PrismaClient } from '@prisma/client';
 import { MODULE } from '@modules';
 import { inject, injectable } from 'inversify';
+import { NotFoundError } from '../../../error/query/not-found.error';
 
 @injectable()
 export class PrismaPostRepository implements IPostRepository {
@@ -31,14 +32,19 @@ export class PrismaPostRepository implements IPostRepository {
     const result = await this.prisma.post.findUnique({
       where: { id: data.id },
     });
+
+    console.log({ NotFoundError });
+
+    if (!result) throw new NotFoundError(`Post not found`);
+
     return Post.fromPrisma(result as PrismaPost);
   }
 
   async findByAuhorId(data: IFindPostByAuthorIdDTO) {
-    const result = await this.prisma.post.findUnique({
+    const result = await this.prisma.post.findMany({
       where: { authorId: data.id },
     });
-    return Post.fromPrisma(result as PrismaPost);
+    return result ? Post.fromPrismaArray(result as PrismaPost[]) : [];
   }
 
   async update(data: IUpdatePostDTO) {

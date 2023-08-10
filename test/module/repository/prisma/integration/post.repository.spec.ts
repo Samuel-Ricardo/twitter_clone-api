@@ -37,16 +37,17 @@ describe('[REPOSITORY] | Post', () => {
       id: CREATE_POST_DATA.authorId,
     });
 
-    expect(byAuthor).toHaveProperty('id');
-    expect(byAuthor.authorId).toEqual(CREATE_POST_DATA.authorId);
-    expect(byAuthor.body).toEqual(CREATE_POST_DATA.body);
+    expect(byAuthor).toBeInstanceOf(Array);
+    expect(byAuthor[0]).toHaveProperty('id');
+    expect(byAuthor[0].authorId).toEqual(CREATE_POST_DATA.authorId);
+    expect(byAuthor[0].body).toEqual(CREATE_POST_DATA.body);
 
-    const result = await repository.findById({ id: byAuthor.id });
+    const result = await repository.findById({ id: byAuthor[0].id });
 
     expect(result).toHaveProperty('id');
-    expect(result.id).toEqual(byAuthor.id);
-    expect(result.authorId).toEqual(byAuthor.authorId);
-    expect(result.body).toEqual(byAuthor.body);
+    expect(result.id).toEqual(byAuthor[0].id);
+    expect(result.authorId).toEqual(byAuthor[0].authorId);
+    expect(result.body).toEqual(byAuthor[0].body);
   });
 
   it('[INTEGRATION] | Should: Update => [POST]', async () => {
@@ -54,12 +55,12 @@ describe('[REPOSITORY] | Post', () => {
       id: CREATE_POST_DATA.authorId,
     });
 
-    expect(byAuthor).toHaveProperty('id');
-    expect(byAuthor.authorId).toEqual(CREATE_POST_DATA.authorId);
-    expect(byAuthor.body).toEqual(CREATE_POST_DATA.body);
+    expect(byAuthor[0]).toHaveProperty('id');
+    expect(byAuthor[0].authorId).toEqual(CREATE_POST_DATA.authorId);
+    expect(byAuthor[0].body).toEqual(CREATE_POST_DATA.body);
 
     const data: IUpdatePostDTO = {
-      id: byAuthor.id,
+      id: byAuthor[0].id,
       body: 'Tomi!',
     };
 
@@ -68,7 +69,7 @@ describe('[REPOSITORY] | Post', () => {
     });
 
     expect(result).toHaveProperty('id');
-    expect(result.id).toEqual(byAuthor.id);
+    expect(result.id).toEqual(byAuthor[0].id);
   });
 
   it('[INTEGRATION] | Should: Delete => [POST]', async () => {
@@ -78,7 +79,7 @@ describe('[REPOSITORY] | Post', () => {
       });
       expect(
         repository.delete({
-          id: byAuthor.id,
+          id: byAuthor[0].id,
         }),
       ).resolves.not.toThrow();
     } catch (e) {

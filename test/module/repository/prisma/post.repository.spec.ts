@@ -99,14 +99,14 @@ describe('[REPOSITORY] | Post', () => {
   });
 
   it('[UNIT] | Should: FindByAuthorId => [POST]', async () => {
-    prisma.post.findUnique.mockResolvedValue(VALID_POST_DATA as PrismaPost);
+    prisma.post.findMany.mockResolvedValue([VALID_POST_DATA] as [PrismaPost]);
 
     const result = await repository.findByAuhorId({ id: VALID_POST.authorId });
 
-    expect(result).toEqual(VALID_POST);
+    expect(result).toEqual([VALID_POST]);
 
-    expect(prisma.post.findUnique).toHaveBeenCalledTimes(1);
-    expect(prisma.post.findUnique).toHaveBeenCalledWith({
+    expect(prisma.post.findMany).toHaveBeenCalledTimes(1);
+    expect(prisma.post.findMany).toHaveBeenCalledWith({
       where: { authorId: VALID_POST.authorId },
     });
   });

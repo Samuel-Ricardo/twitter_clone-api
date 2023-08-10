@@ -79,4 +79,18 @@ describe('[MODULE] | Post', () => {
     expect(body.post._id).toEqual(posted._id);
     expect(body.post._body).not.toEqual(posted._body);
   });
+
+  it('[E2E] | Should: delete => [POST]', async () => {
+    const response = await supertest(app).delete(
+      post.prefix + '/' + posted._id,
+    );
+
+    expect(response.status).toBe(204);
+
+    const findResponse = await supertest(app).get(
+      post.prefix + '/' + posted._id,
+    );
+
+    expect(findResponse.status).toBe(404);
+  });
 });
