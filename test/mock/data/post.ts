@@ -1,6 +1,8 @@
 import { ICreatePostDTO, IPostDTO, IUpdatePostDTO, Post } from '@Post';
-import { VALID_USER } from './user';
+import { VALID_USER as USER } from './user';
 import { randomID } from '../../../src/modules/util/mongo';
+
+export const VALID_USER = USER;
 
 export const CREATE_POST_DATA: ICreatePostDTO = {
   body: 'Hello World!',
