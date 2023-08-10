@@ -38,4 +38,5 @@
     }
   },
   "include": ["**/*.ts", "./src/**/*.ts"],
+  "exclude": ["**/*.spec.*", "**/*.test.*", "./test"],
 }
