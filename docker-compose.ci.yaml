@@ -9,9 +9,7 @@ services:
     entrypoint: ["npm", "run", "code:ci"]
     depends_on:
       - mongo_setup
-    external_links:
-      - "host.docker.internal"
-
+    
   mongo:
     image: mongo
     command: ['--replSet', 'rs0']
@@ -19,9 +17,7 @@ services:
       - 27017:27017 
     volumes:
       - ./.docker/mongo-data:/data/db
-    external_links:
-      - "host.docker.internal"
-
+  
   mongo_setup:
     image: mongo
     depends_on:
@@ -30,5 +26,4 @@ services:
       - ./.docker/mongo-data:/data/db
       - ./.docker/mongo/scripts:/scripts
     entrypoint: [ "bash", "/scripts/mongo_setup.sh"]
-    external_links:
-      - "host.docker.internal"
+  

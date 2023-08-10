@@ -12,10 +12,6 @@ mongosh --host mongo:27017 <<EOF
       {
         "_id": 0,
         "host": "mongo:27017",
-      },
-      {
-        "_id": 1,
-        "host": "host.docker.internal:27017",
       }    
     ]
   };
