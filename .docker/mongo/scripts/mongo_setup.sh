@@ -16,6 +16,15 @@ mongosh --host mongo:27017 <<EOF
     ]
   };
   rs.initiate(cfg);
+
+  use admin
+
+  db.createUser({
+    user: "root",
+    pwd: "root",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  });
+
 EOF
 
 sleep 100000
