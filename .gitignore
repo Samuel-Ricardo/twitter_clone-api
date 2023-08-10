@@ -80,7 +80,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
-.env.test
+#.env.test
 .env.prod
 .env.development.local
 .env.test.local
