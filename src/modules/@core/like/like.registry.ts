@@ -2,7 +2,9 @@ export const LikeRegistry = {
   SERVICE: {
     DEFAULT: Symbol('LIKE.SERVICE.DEFAULT'),
   },
-
+  CONTROLLER: {
+    DEFAULT: Symbol('LIKE.CONTROLLER.DEFAULT'),
+  },
   USE_CASE: {
     CREATE: Symbol('LIKE.USE_CASE.CREATE'),
     DELETE: Symbol('LIKE.USE_CASE.DELETE'),
