@@ -6,6 +6,7 @@ import { GetPostLikesUseCase } from './use-case/get_post_likes.use-case';
 import { GetUserLikesUseCase } from './use-case/get_user_likes.use-case';
 import { GetCommentLikesUseCase } from './use-case/get_comment_likes.use-case';
 import { LikeService } from './service/like.service';
+import { LikeController } from './controller/like.controller';
 
 export const LikeModule = new Container({ autoBindInjectable: true });
 
@@ -18,3 +19,5 @@ LikeModule.bind(LikeRegistry.USE_CASE.GET.BY.COMMENT).to(
 );
 
 LikeModule.bind(LikeRegistry.SERVICE.DEFAULT).to(LikeService);
+
+LikeModule.bind(LikeRegistry.CONTROLLER.DEFAULT).to(LikeController);
