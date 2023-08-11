@@ -1,4 +1,4 @@
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { CreateLikeUseCase } from '../use-case/create.use-case';
 import { DeleteLikeUseCase } from '../use-case/delete.use-case';
 import { GetPostLikesUseCase } from '../use-case/get_post_likes.use-case';
@@ -9,14 +9,20 @@ import { IDeleteLikeDTO } from '../DTO/delete.dto';
 import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 import { IGetLikesOfCommentDTO } from '../DTO/get_by_comment.dto';
+import { MODULE } from '@modules/app.registry';
 
 @injectable()
 export class LikeService {
   constructor(
+    @inject(MODULE.LIKE.USE_CASE.CREATE)
     private readonly giveLike: CreateLikeUseCase,
+    @inject(MODULE.LIKE.USE_CASE.DELETE)
     private readonly giveDislike: DeleteLikeUseCase,
+    @inject(MODULE.LIKE.USE_CASE.GET.BY.POST)
     private readonly getPostLikes: GetPostLikesUseCase,
+    @inject(MODULE.LIKE.USE_CASE.GET.BY.USER)
     private readonly getUserLikes: GetUserLikesUseCase,
+    @inject(MODULE.LIKE.USE_CASE.GET.BY.COMMENT)
     private readonly getCommentLikes: GetCommentLikesUseCase,
   ) {}
 
