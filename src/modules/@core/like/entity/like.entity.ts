@@ -9,6 +9,15 @@ export class Like {
     private readonly _createdAt: Date,
   ) {}
 
+  toStruct() {
+    return {
+      id: this._id,
+      userId: this._userId,
+      likedId: this._likedId,
+      createdAt: this._createdAt,
+    };
+  }
+
   get id(): string {
     return this._id;
   }
