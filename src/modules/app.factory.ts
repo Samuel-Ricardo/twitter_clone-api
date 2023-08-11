@@ -6,6 +6,7 @@ import { RepositoryFactory as REPOSITORY } from './repository/repository.factory
 import { PrismaFactory } from './prisma';
 import { USER_MODULE as USER } from './@core/user/user.factory';
 import { PostFactory as POST } from './@core/post/post.factory';
+import { LikeFactory as LIKE } from './@core/like/like.factory';
 import { MiddlewareFactory as MIDDLEWARE } from './middleware/middleware.factory';
 
 import { Express } from 'express';
@@ -16,6 +17,7 @@ export const MODULES = {
   ...RoutesFactory,
   USER,
   POST,
+  LIKE,
   REPOSITORY,
   MIDDLEWARE,
   APP: () => AppModule.get<Express>(MODULE.APP),
