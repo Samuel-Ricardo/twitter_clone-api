@@ -15,4 +15,8 @@ export class LikeService {
     private readonly getUserLikes: GetUserLikesUseCase,
     private readonly getCommentLikes: GetCommentLikesUseCase,
   ) {}
+
+  async create(data: ICreateLikeDTO) {
+    await this.giveLike.execute(data);
+  }
 }
