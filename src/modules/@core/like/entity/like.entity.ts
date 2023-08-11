@@ -19,6 +19,10 @@ export class Like {
     return new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
 
+  public static fromPrismaArray(data: PrismaLike[]) {
+    return data.map((item) => Like.fromPrisma(item));
+  }
+
   toStruct(): ILikeDTO {
     return {
       id: this._id,
