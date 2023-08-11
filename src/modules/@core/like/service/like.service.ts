@@ -7,6 +7,7 @@ import { GetCommentLikesUseCase } from '../use-case/get_comment_likes.use-case';
 import { ICreateLikeDTO } from '../DTO/create.dto';
 import { IDeleteLikeDTO } from '../DTO/delete.dto';
 import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
+import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 
 @injectable()
 export class LikeService {
@@ -28,5 +29,9 @@ export class LikeService {
 
   async postLikes(data: IGetLikesOfPostDTO) {
     return await this.getPostLikes.execute(data);
+  }
+
+  async userLikes(data: IGetLikesOfUserDTO) {
+    return await this.getUserLikes.execute(data);
   }
 }
