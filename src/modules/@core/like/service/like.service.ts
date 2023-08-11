@@ -12,7 +12,7 @@ import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 export class LikeService {
   constructor(
     private readonly giveLike: CreateLikeUseCase,
-    private readonly giveUnlike: DeleteLikeUseCase,
+    private readonly giveDislike: DeleteLikeUseCase,
     private readonly getPostLikes: GetPostLikesUseCase,
     private readonly getUserLikes: GetUserLikesUseCase,
     private readonly getCommentLikes: GetCommentLikesUseCase,
@@ -22,7 +22,11 @@ export class LikeService {
     await this.giveLike.execute(data);
   }
 
-  async unlike(data: IDeleteLikeDTO) {
-    await this.giveUnlike.execute(data);
+  async dislike(data: IDeleteLikeDTO) {
+    await this.giveDislike.execute(data);
+  }
+
+  async postLikes(data: IGetLikesOfPostDTO) {
+    return await this.getPostLikes.execute(data);
   }
 }
