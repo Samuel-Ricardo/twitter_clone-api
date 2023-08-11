@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { ILikeDTO } from '../DTO/like.dto';
+import { ILikeDTO, LikeSchema } from '../DTO/like.dto';
 import { Like as PrismaLike } from '@prisma/client';
 
 @injectable()
@@ -9,17 +9,28 @@ export class Like {
     private readonly _userId: string,
     private readonly _likedId: string,
     private readonly _createdAt: Date,
-  ) {}
+  ) {
+    Like.validate({
+      id: this._id,
+      userId: this._userId,
+      likedId: this._likedId,
+      createdAt: this._createdAt,
+    });
+  }
 
-  public static Create(data: ILikeDTO) {
+  static validate(data: ILikeDTO) {
+    return LikeSchema.parse(data);
+  }
+
+  static Create(data: ILikeDTO) {
     new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
 
-  public static fromPrisma(data: PrismaLike) {
+  static fromPrisma(data: PrismaLike) {
     return new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
 
-  public static fromPrismaArray(data: PrismaLike[]) {
+  static fromPrismaArray(data: PrismaLike[]) {
     return data.map((item) => Like.fromPrisma(item));
   }
 
