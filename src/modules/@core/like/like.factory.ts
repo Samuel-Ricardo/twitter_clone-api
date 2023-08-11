@@ -1,3 +1,4 @@
+import { LikeController } from './controller/like.controller';
 import { LikeModule } from './like.module';
 import { LikeRegistry } from './like.registry';
 import { LikeService } from './service/like.service';
@@ -8,6 +9,10 @@ import { GetPostLikesUseCase } from './use-case/get_post_likes.use-case';
 import { GetUserLikesUseCase } from './use-case/get_user_likes.use-case';
 
 export const LikeFactory = {
+  CONTROLLER: {
+    DEFAULT: () =>
+      LikeModule.get<LikeController>(LikeRegistry.CONTROLLER.DEFAULT),
+  },
   SERVICE: {
     DEFAULT: () => LikeModule.get<LikeService>(LikeRegistry.SERVICE.DEFAULT),
   },
