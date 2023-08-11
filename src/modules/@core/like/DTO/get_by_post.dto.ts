@@ -1,7 +1,7 @@
 import { catchZod } from '@modules/util/validator';
 import { z } from 'zod';
 
-export interface IGetLikesOfPost {
+export interface IGetLikesOfPostDTO {
   id: string;
 }
 
