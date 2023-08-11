@@ -8,6 +8,7 @@ import { ICreateLikeDTO } from '../DTO/create.dto';
 import { IDeleteLikeDTO } from '../DTO/delete.dto';
 import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
+import { IGetLikesOfCommentDTO } from '../DTO/get_by_comment.dto';
 
 @injectable()
 export class LikeService {
@@ -33,5 +34,9 @@ export class LikeService {
 
   async userLikes(data: IGetLikesOfUserDTO) {
     return await this.getUserLikes.execute(data);
+  }
+
+  async commentLikes(data: IGetLikesOfCommentDTO) {
+    return await this.getCommentLikes.execute(data);
   }
 }
