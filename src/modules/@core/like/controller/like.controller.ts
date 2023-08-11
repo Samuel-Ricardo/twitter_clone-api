@@ -4,6 +4,7 @@ import { LikeRegistry } from '../like.registry';
 import { ICreateLikeDTO } from '../DTO/create.dto';
 import { IDeleteLikeDTO } from '../DTO/delete.dto';
 import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
+import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 
 @injectable()
 export class LikeController {
@@ -22,5 +23,9 @@ export class LikeController {
 
   async getPostLikes(data: IGetLikesOfPostDTO) {
     return { likes: await this.service.postLikes(data) };
+  }
+
+  async getUserLikes(data: IGetLikesOfUserDTO) {
+    return { likes: await this.service.userLikes(data) };
   }
 }
