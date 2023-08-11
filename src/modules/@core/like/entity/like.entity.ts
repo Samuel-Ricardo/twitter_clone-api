@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { ILikeDTO } from '../DTO/like.dto';
 
 @injectable()
 export class Like {
@@ -9,7 +10,11 @@ export class Like {
     private readonly _createdAt: Date,
   ) {}
 
-  toStruct() {
+  public static Create(data: ILikeDTO) {
+    new Like(data.id, data.userId, data.likedId, data.createdAt);
+  }
+
+  toStruct(): ILikeDTO {
     return {
       id: this._id,
       userId: this._userId,
