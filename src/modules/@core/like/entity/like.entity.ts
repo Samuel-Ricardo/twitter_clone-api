@@ -18,6 +18,10 @@ export class Like {
     };
   }
 
+  toString() {
+    return JSON.stringify(this.toStruct());
+  }
+
   get id(): string {
     return this._id;
   }
