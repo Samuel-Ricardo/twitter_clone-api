@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { ILikeDTO } from '../DTO/like.dto';
+import { Like as PrismaLike } from '@prisma/client';
 
 @injectable()
 export class Like {
@@ -12,6 +13,10 @@ export class Like {
 
   public static Create(data: ILikeDTO) {
     new Like(data.id, data.userId, data.likedId, data.createdAt);
+  }
+
+  public static fromPrisma(data: PrismaLike) {
+    return new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
 
   toStruct(): ILikeDTO {
