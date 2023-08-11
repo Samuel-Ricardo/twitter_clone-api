@@ -2,11 +2,11 @@ import { catchZod } from '@modules/util/validator';
 import { z } from 'zod';
 
 export interface IGetLikesOfUserDTO {
-  userID: string;
+  userId: string;
 }
 
 export const GetLikesOfUserSchema = z
   .object({
-    userID: z.string().catch(catchZod),
+    userId: z.string().catch(catchZod),
   })
   .catch(catchZod);
