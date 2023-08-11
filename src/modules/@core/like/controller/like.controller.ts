@@ -3,6 +3,7 @@ import { LikeService } from '../service/like.service';
 import { LikeRegistry } from '../like.registry';
 import { ICreateLikeDTO } from '../DTO/create.dto';
 import { IDeleteLikeDTO } from '../DTO/delete.dto';
+import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 
 @injectable()
 export class LikeController {
@@ -12,10 +13,14 @@ export class LikeController {
   ) {}
 
   async save(data: ICreateLikeDTO) {
-    return await this.service.like(data);
+    return { like: await this.service.like(data) };
   }
 
   async dislike(data: IDeleteLikeDTO) {
     return await this.service.dislike(data);
+  }
+
+  async getPostLikes(data: IGetLikesOfPostDTO) {
+    return { likes: await this.service.postLikes(data) };
   }
 }
