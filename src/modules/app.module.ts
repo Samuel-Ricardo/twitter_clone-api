@@ -10,6 +10,8 @@ import { MODULE } from './app.registry';
 import { UserModule } from '@User';
 import { RoutesModule } from './router/router.module';
 import { MiddlewareModule } from './middleware/middleware.module';
+import { PostModule } from './@core/post/post.module';
+import { LikeModule } from './@core/like/like.module';
 
 const Module = new Container();
 
@@ -21,6 +23,8 @@ export const AppModule = Container.merge(
   PrismaModule,
   RepositoryModule,
   UserModule,
+  PostModule,
+  LikeModule,
   RoutesModule,
   MiddlewareModule,
 );

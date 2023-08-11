@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import { UserRegistry as USER } from './@core/user/user.registry';
 import { PostRegistry as POST } from './@core/post/post.registry';
+import { LikeRegistry as LIKE } from './@core/like/like.registry';
 import { PrismaRegistry } from './prisma';
 import { RepositoryRegistry as REPOSITORY } from './repository/repository.registry';
 import { RoutesRegistry } from './router/router.registry';
@@ -12,6 +13,7 @@ export const MODULE = {
   ...RoutesRegistry,
   USER,
   POST,
+  LIKE,
   REPOSITORY,
   MIDDLEWARE,
   APP: Symbol.for('app'),
