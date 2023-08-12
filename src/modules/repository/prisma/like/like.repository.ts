@@ -29,9 +29,12 @@ export class PrismaLikeRepository implements ILikeRepository {
     return Like.fromPrismaArray(result);
   }
 
-  getLikesOfUser(data: IGetLikesOfUserDTO): Promise<Like[]> {
-    throw new Error('Method not implemented.');
+  async getLikesOfUser(data: IGetLikesOfUserDTO): Promise<Like[]> {
+    return Like.fromPrismaArray(
+      await this.prisma.like.findMany({ where: data }),
+    );
   }
+
   getLikesOfComment(data: IGetLikesOfCommentDTO): Promise<Like[]> {
     throw new Error('Method not implemented.');
   }
