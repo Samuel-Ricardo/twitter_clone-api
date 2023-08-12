@@ -56,4 +56,14 @@ router.get(
   },
 );
 
+router.get(`${prefix}/:likedId`, async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(await Like.getCommentLikes({ likedId: req.params.likedId }));
+  } catch (error) {
+    next(error);
+  }
+});
+
 export const like = { router, prefix };
