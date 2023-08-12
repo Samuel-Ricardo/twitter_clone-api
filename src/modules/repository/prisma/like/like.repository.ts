@@ -20,9 +20,10 @@ export class PrismaLikeRepository implements ILikeRepository {
     return Like.fromPrisma(await this.prisma.like.create({ data }));
   }
 
-  delete(data: IDeleteLikeDTO): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(data: IDeleteLikeDTO) {
+    await this.prisma.like.delete({ where: data });
   }
+
   getLikesOfPost(data: IGetLikesOfPostDTO): Promise<Like[]> {
     throw new Error('Method not implemented.');
   }
