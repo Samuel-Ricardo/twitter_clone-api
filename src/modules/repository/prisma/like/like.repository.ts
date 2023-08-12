@@ -29,13 +29,15 @@ export class PrismaLikeRepository implements ILikeRepository {
     return Like.fromPrismaArray(result);
   }
 
-  async getLikesOfUser(data: IGetLikesOfUserDTO): Promise<Like[]> {
+  async getLikesOfComment(data: IGetLikesOfCommentDTO) {
     return Like.fromPrismaArray(
       await this.prisma.like.findMany({ where: data }),
     );
   }
 
-  getLikesOfComment(data: IGetLikesOfCommentDTO): Promise<Like[]> {
-    throw new Error('Method not implemented.');
+  async getLikesOfUser(data: IGetLikesOfUserDTO) {
+    return Like.fromPrismaArray(
+      await this.prisma.like.findMany({ where: data }),
+    );
   }
 }
