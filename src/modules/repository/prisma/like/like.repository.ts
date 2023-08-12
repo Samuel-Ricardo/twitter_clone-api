@@ -1,10 +1,10 @@
-import { ICreateLikeDTO } from '@Core/like/DTO/create.dto';
-import { IDeleteLikeDTO } from '@Core/like/DTO/delete.dto';
-import { IGetLikesOfCommentDTO } from '@Core/like/DTO/get_by_comment.dto';
-import { IGetLikesOfPostDTO } from '@Core/like/DTO/get_by_post.dto';
-import { IGetLikesOfUserDTO } from '@Core/like/DTO/get_by_user.dto';
-import { Like } from '@Core/like/entity/like.entity';
-import { ILikeRepository } from '@Core/like/repository/like.repository';
+import { ICreateLikeDTO } from '../../../@core/like/DTO/create.dto';
+import { IDeleteLikeDTO } from '../../../@core/like/DTO/delete.dto';
+import { IGetLikesOfCommentDTO } from '../../../@core/like/DTO/get_by_comment.dto';
+import { IGetLikesOfPostDTO } from '../../../@core/like/DTO/get_by_post.dto';
+import { IGetLikesOfUserDTO } from '../../../@core/like/DTO/get_by_user.dto';
+import { Like } from '../../../@core/like/entity/like.entity';
+import { ILikeRepository } from '../../../@core/like/repository/like.repository';
 import { MODULE } from '@modules';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
