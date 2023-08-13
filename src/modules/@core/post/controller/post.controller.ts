@@ -35,7 +35,11 @@ export class PostController {
   }
 
   async listUserPosts(author: IFindPostByAuthorIdDTO) {
-    return { posts: await this.service.listPostsFromUser(author) };
+    return {
+      posts: (await this.service.listPostsFromUser(author)).map((post) =>
+        post.toStruct(),
+      ),
+    };
   }
 
   async details(post: IFindPostByIdDTO) {
