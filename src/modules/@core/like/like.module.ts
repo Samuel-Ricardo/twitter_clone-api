@@ -7,8 +7,11 @@ import { GetUserLikesUseCase } from './use-case/get_user_likes.use-case';
 import { GetCommentLikesUseCase } from './use-case/get_comment_likes.use-case';
 import { LikeService } from './service/like.service';
 import { LikeController } from './controller/like.controller';
+import { RepositoryModule } from '../../repository/repository.module';
 
-export const LikeModule = new Container({ autoBindInjectable: true });
+const Module = new Container({ autoBindInjectable: true });
+
+export const LikeModule = Container.merge(Module, RepositoryModule);
 
 LikeModule.bind(LikeRegistry.USE_CASE.CREATE).to(CreateLikeUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.DELETE).to(DeleteLikeUseCase);
