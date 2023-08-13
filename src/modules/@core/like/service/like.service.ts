@@ -27,7 +27,7 @@ export class LikeService {
   ) {}
 
   async like(data: ICreateLikeDTO) {
-    await this.giveLike.execute(data);
+    return await this.giveLike.execute(data);
   }
 
   async dislike(data: IDeleteLikeDTO) {
