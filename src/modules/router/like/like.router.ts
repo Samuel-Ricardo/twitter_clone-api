@@ -46,7 +46,6 @@ router.get(
   `${prefix}/user/:userId`,
   validate(GetLikesOfUserSchema),
   async (req, res, next) => {
-    console.log({ get_params: req.params });
     try {
       res
         .status(200)
