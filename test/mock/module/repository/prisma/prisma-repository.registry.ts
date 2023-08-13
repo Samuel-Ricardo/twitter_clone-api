@@ -4,4 +4,5 @@ export const PrismaRepositoryMockRegistry = {
   POST: Symbol.for('PostPrismaRepositoryMock'),
   POST_DEV: Symbol.for('PostPrismaDevRepositoryMock'),
   LIKE: Symbol.for('PRISMA>LIKE>REPOSITORY'),
+  LIKE_DEV: Symbol.for('PRISMA.LIKE.REPOSITORY.DEV'),
 };
