@@ -8,6 +8,7 @@ import { PrismaLikeRepository } from '../../../../../src/modules/repository/pris
 import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 import { Like } from '../../../../../src/modules/@core/like';
 import { VALID_POST } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock';
 
 describe('[REPOSITORY] LikeRepository', () => {
   let repository: ILikeRepository;
@@ -37,5 +38,16 @@ describe('[REPOSITORY] LikeRepository', () => {
     expect(result[0]).toBeInstanceOf(Like);
     expect(result[0]).toHaveProperty('id');
     expect(result[0].likedId).toBe(VALID_POST.id);
+  });
+
+  it('[INTEGRATION] | Should: Find by user => [LIKE]', async () => {
+    const result = await repository.getLikesOfUser({ userId: VALID_USER.id });
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toBeInstanceOf(Like);
+    expect(result[0]).toHaveProperty('id');
+    expect(result[0].userId).toBe(VALID_USER.id);
   });
 });
