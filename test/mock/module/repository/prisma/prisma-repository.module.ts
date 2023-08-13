@@ -13,6 +13,9 @@ import { PrismaPostRepository } from '../../../../../src/modules/repository/pris
 import { PrismaClient } from '@prisma/client';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 import { PrismaMockModule } from '../../prisma';
+import { PrismaLikeRepository } from '@modules/repository/prisma/like';
+import { mockPrismaLikeRepository, simulatePrismaLikeRepository } from './impl';
+import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
 
 type simulatePostType = {
   repository: PrismaPostRepository;
@@ -41,3 +44,11 @@ PrismaRepositoryMockModule.bind<DeepMockProxy<PrismaPostRepository>>(
 PrismaRepositoryMockModule.bind<simulatePostType>(
   PrismaRepositoryMockRegistry.POST_DEV,
 ).toDynamicValue(simulatePrismaPostRepository);
+
+PrismaRepositoryMockModule.bind<DeepMockProxy<PrismaLikeRepository>>(
+  PrismaRepositoryMockRegistry.LIKE,
+).toDynamicValue(mockPrismaLikeRepository);
+
+PrismaRepositoryMockModule.bind<ISimulatePrismaLikeRepository>(
+  PrismaRepositoryMockRegistry.LIKE_DEV,
+).toDynamicValue(simulatePrismaLikeRepository);
