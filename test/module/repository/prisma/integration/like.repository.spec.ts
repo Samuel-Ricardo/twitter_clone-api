@@ -12,6 +12,7 @@ import { VALID_USER } from '@test/mock';
 
 describe('[REPOSITORY] LikeRepository', () => {
   let repository: ILikeRepository;
+  let like: Like;
 
   beforeEach(async () => {
     repository = MODULES.REPOSITORY.PRISMA.LIKE();
@@ -27,6 +28,8 @@ describe('[REPOSITORY] LikeRepository', () => {
     expect(result).toBeInstanceOf(Like);
     expect(result.userId).toBe(CREATE_POST_LIKE_DATA.userId);
     expect(result.likedId).toBe(CREATE_POST_LIKE_DATA.likedId);
+
+    like = result;
   });
 
   it('[INTEGRATION] | Should: Find by post => [LIKE]', async () => {
@@ -49,5 +52,9 @@ describe('[REPOSITORY] LikeRepository', () => {
     expect(result[0]).toBeInstanceOf(Like);
     expect(result[0]).toHaveProperty('id');
     expect(result[0].userId).toBe(VALID_USER.id);
+  });
+
+  it('[INTEGRATION] | Should: Delete => [LIKE]', async () => {
+    expect(repository.delete({ id: like.id })).resolves.not.toThrow();
   });
 });
