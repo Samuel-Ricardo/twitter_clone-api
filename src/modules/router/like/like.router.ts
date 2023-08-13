@@ -2,12 +2,12 @@ import { CreateLikeSchema } from '@Core/like/DTO/create.dto';
 import { DeleteLikeSchema } from '@Core/like/DTO/delete.dto';
 import { GetLikesOfPostSchema } from '@Core/like/DTO/get_by_post.dto';
 import { GetLikesOfUserSchema } from '@Core/like/DTO/get_by_user.dto';
-import { MODULES } from '@modules/app.factory';
-import { validate } from '@modules/middleware/validator';
+import { MODULES } from '../../app.factory';
+import { validate } from '../../middleware/validator';
 import { Router } from 'express';
 
 const router = Router();
-const prefix = '/like';
+const prefix = '/likes';
 const Like = MODULES.LIKE.DEFAULT();
 
 router.post(prefix, validate(CreateLikeSchema), async (req, res, next) => {
@@ -31,7 +31,7 @@ router.delete(
 );
 
 router.get(
-  `${prefix}/:likedId`,
+  `${prefix}/post/:likedId`,
   validate(GetLikesOfPostSchema),
   async (req, res, next) => {
     try {
@@ -43,9 +43,10 @@ router.get(
 );
 
 router.get(
-  `${prefix}/:userId`,
+  `${prefix}/user/:userId`,
   validate(GetLikesOfUserSchema),
   async (req, res, next) => {
+    console.log({ get_params: req.params });
     try {
       res
         .status(200)
@@ -56,7 +57,7 @@ router.get(
   },
 );
 
-router.get(`${prefix}/:likedId`, async (req, res, next) => {
+router.get(`${prefix}/comment/:likedId`, async (req, res, next) => {
   try {
     res
       .status(200)
