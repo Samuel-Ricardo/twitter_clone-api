@@ -30,4 +30,18 @@ describe('[REPOSITORY] | LIKE', () => {
       data: CREATE_POST_LIKE_DATA,
     });
   });
+
+  it('[UNIT] | Should: delete => [LIKE]', async () => {
+    module.prisma.like.delete.mockResolvedValue(VALID_POST_LIKE);
+
+    const result = await module.repository.delete({ id: VALID_POST_LIKE.id });
+
+    expect(result).toBeUndefined();
+    expect(module.prisma.like.delete).toHaveBeenCalledTimes(1);
+    expect(module.prisma.like.delete).toHaveBeenCalledWith({
+      where: {
+        id: VALID_POST_LIKE.id,
+      },
+    });
+  });
 });
