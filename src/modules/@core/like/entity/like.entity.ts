@@ -23,7 +23,7 @@ export class Like {
   }
 
   static Create(data: ILikeDTO) {
-    new Like(data.id, data.userId, data.likedId, data.createdAt);
+    return new Like(data.id, data.userId, data.likedId, data.createdAt);
   }
 
   static fromPrisma(data: PrismaLike) {

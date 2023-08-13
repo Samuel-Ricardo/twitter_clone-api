@@ -1,4 +1,4 @@
-import { PrismaLikeRepository } from '@modules/repository/prisma/like';
+import { PrismaLikeRepository } from '../../../../../../src/modules/repository/prisma/like';
 import { PrismaClient } from '@prisma/client';
 import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
 import { MOCK_MODULE } from '@test/mock/module/app.registry';
