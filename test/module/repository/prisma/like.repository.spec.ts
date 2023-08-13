@@ -1,10 +1,11 @@
 import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
-import { MockFactory } from '@test/mock';
+import { MockFactory, VALID_USER } from '@test/mock';
 import {
   CREATE_POST_LIKE_DATA,
   VALID_POST_LIKE,
   VALID_POST_LIKE_DATA,
 } from '@test/mock/data/like';
+import { VALID_POST } from '@test/mock/data/post';
 
 describe('[REPOSITORY] | LIKE', () => {
   let module: ISimulatePrismaLikeRepository;
@@ -41,6 +42,38 @@ describe('[REPOSITORY] | LIKE', () => {
     expect(module.prisma.like.delete).toHaveBeenCalledWith({
       where: {
         id: VALID_POST_LIKE.id,
+      },
+    });
+  });
+
+  it('[UNIT] | Should: find by post => [LIKE]', async () => {
+    module.prisma.like.findMany.mockResolvedValue([VALID_POST_LIKE]);
+
+    const result = await module.repository.getLikesOfPost({
+      likedId: VALID_POST.id,
+    });
+
+    expect(result).toEqual([VALID_POST_LIKE]);
+    expect(module.prisma.like.findMany).toHaveBeenCalledTimes(1);
+    expect(module.prisma.like.findMany).toHaveBeenCalledWith({
+      where: {
+        likedId: VALID_POST.id,
+      },
+    });
+  });
+
+  it('[UNIT] | Should: find by user => [LIKE]', async () => {
+    module.prisma.like.findMany.mockResolvedValue([VALID_POST_LIKE]);
+
+    const result = await module.repository.getLikesOfUser({
+      userId: VALID_USER.id,
+    });
+
+    expect(result).toEqual([VALID_POST_LIKE]);
+    expect(module.prisma.like.findMany).toHaveBeenCalledTimes(1);
+    expect(module.prisma.like.findMany).toHaveBeenCalledWith({
+      where: {
+        userId: VALID_USER.id,
       },
     });
   });
