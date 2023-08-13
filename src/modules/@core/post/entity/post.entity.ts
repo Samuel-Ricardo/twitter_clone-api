@@ -48,6 +48,16 @@ export class Post {
     return data.map((item) => Post.fromPrisma(item));
   }
 
+  toStruct(): IPostDTO {
+    return {
+      id: this._id,
+      authorId: this._authorId,
+      body: this._body,
+      image: this._image,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+    };
+  }
   public static validate(data: IPostDTO) {
     return IPostSchema.parse(data);
   }

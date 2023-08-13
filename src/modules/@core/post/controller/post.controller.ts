@@ -17,11 +17,12 @@ export class PostController {
   ) {}
 
   async create(post: ICreatePostDTO) {
-    return { post: await this.service.create(post) };
+    return { post: (await this.service.create(post)).toStruct() };
   }
 
   async update(post: IUpdatePostDTO) {
-    return { post: await this.service.update(post) };
+    const result = await this.service.update(post);
+    return { post: result.toStruct() };
   }
 
   async delete(post: IDeletePostDTO) {
