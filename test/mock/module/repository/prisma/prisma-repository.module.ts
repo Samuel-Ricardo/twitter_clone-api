@@ -3,12 +3,12 @@ import { Container } from 'inversify';
 import {
   mockPrismaUserRepository,
   simulatePrismaUserRepository,
-} from './user.repository';
+} from './impl/user.repository';
 import { DeepMockProxy } from 'jest-mock-extended';
 import {
   mockPrismaPostRepository,
   simulatePrismaPostRepository,
-} from './post.repository';
+} from './impl/post.repository';
 import { PrismaPostRepository } from '../../../../../src/modules/repository/prisma/post/post.repository';
 import { PrismaClient } from '@prisma/client';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';

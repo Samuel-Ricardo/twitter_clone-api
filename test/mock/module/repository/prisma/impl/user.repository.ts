@@ -1,6 +1,6 @@
 import { MODULES, PrismaUserRepository } from '@modules';
 import { interfaces } from 'inversify';
-import { MOCK_MODULE } from '../../app.registry';
+import { MOCK_MODULE } from '../../../app.registry';
 import { mockDeep } from 'jest-mock-extended';
 
 // jest.mock(
