@@ -6,8 +6,10 @@ export const validate =
   (schema: z.ZodSchema) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
-      if (req.body) return schema.parse(req.body);
-      if (req.params) return schema.parse(req.params);
+      if (Object.keys({ ...req.body }).length > 0)
+        return schema.parse(req.body);
+      if (Object.keys({ ...req.params }).length > 0)
+        return schema.parse(req.params);
 
       throw new NoDataProvidedError('No data provided');
     } catch (e) {
