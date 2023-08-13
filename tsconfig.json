@@ -38,5 +38,5 @@
     }
   },
   "include": ["**/*.ts", "./src/**/*.ts"],
-  "exclude": ["**/*.spec.*", "**/*.test.*", "./test"],
+  // "exclude": ["**/*.spec.*", "**/*.test.*", "./test"],  -- exclude test files for build
 }

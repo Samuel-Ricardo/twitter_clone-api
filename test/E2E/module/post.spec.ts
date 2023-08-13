@@ -25,9 +25,9 @@ describe('[MODULE] | Post', () => {
     const body: { post: any } = response.body;
 
     expect(response.status).toBe(201);
-    expect(body.post).toHaveProperty('_id');
-    expect(body.post._authorId).toBe(CREATE_POST_DATA.authorId);
-    expect(body.post._body).toBe(CREATE_POST_DATA.body);
+    expect(body.post).toHaveProperty('id');
+    expect(body.post.authorId).toBe(CREATE_POST_DATA.authorId);
+    expect(body.post.body).toBe(CREATE_POST_DATA.body);
 
     posted = body.post;
   });
@@ -51,22 +51,22 @@ describe('[MODULE] | Post', () => {
     expect(response.status).toBe(200);
     expect(body.posts).toBeInstanceOf(Array);
     expect(body.posts.length).toBeGreaterThanOrEqual(1);
-    expect(body.posts[0]._authorId).toBe(VALID_POST.authorId);
-    expect(body.posts[0]._authorId).toBe(VALID_USER.id);
+    expect(body.posts[0].authorId).toBe(VALID_POST.authorId);
+    expect(body.posts[0].authorId).toBe(VALID_USER.id);
   });
 
   it('[E2E] | Should: detail => [POST]', async () => {
-    const response = await supertest(app).get(post.prefix + '/' + posted._id);
+    const response = await supertest(app).get(post.prefix + '/' + posted.id);
     const body: { post: any } = response.body;
 
     expect(response.status).toBe(200);
-    expect(body.post).toHaveProperty('_id');
-    expect(body.post._id).toBe(posted._id);
+    expect(body.post).toHaveProperty('id');
+    expect(body.post.id).toBe(posted.id);
   });
 
   it('[E2E] | Should: update => [POST]', async () => {
     const UPDATE_DATA: IUpdatePostDTO = {
-      id: posted._id,
+      id: posted.id,
       body: 'Rapazzzzzzz',
     };
 
@@ -76,19 +76,17 @@ describe('[MODULE] | Post', () => {
     expect(response.status).toBe(201);
     expect(body.post).toBeDefined();
 
-    expect(body.post._id).toEqual(posted._id);
-    expect(body.post._body).not.toEqual(posted._body);
+    expect(body.post.id).toEqual(posted.id);
+    expect(body.post.body).not.toEqual(posted.body);
   });
 
   it('[E2E] | Should: delete => [POST]', async () => {
-    const response = await supertest(app).delete(
-      post.prefix + '/' + posted._id,
-    );
+    const response = await supertest(app).delete(post.prefix + '/' + posted.id);
 
     expect(response.status).toBe(204);
 
     const findResponse = await supertest(app).get(
-      post.prefix + '/' + posted._id,
+      post.prefix + '/' + posted.id,
     );
 
     expect(findResponse.status).toBe(404);
