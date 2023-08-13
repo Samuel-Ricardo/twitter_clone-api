@@ -7,6 +7,7 @@ import { ILikeRepository } from '../../../../../src/modules/@core/like/repositor
 import { PrismaLikeRepository } from '../../../../../src/modules/repository/prisma/like';
 import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 import { Like } from '../../../../../src/modules/@core/like';
+import { VALID_POST } from '@test/mock/data/post';
 
 describe('[REPOSITORY] LikeRepository', () => {
   let repository: ILikeRepository;
@@ -18,12 +19,23 @@ describe('[REPOSITORY] LikeRepository', () => {
     expect(repository).toBeInstanceOf(PrismaLikeRepository);
   });
 
-  it('create', async () => {
+  it('[INTEGRATION] | Should: Create => [LIKE]', async () => {
     const result = await repository.create(CREATE_POST_LIKE_DATA);
 
     expect(result).toBeDefined();
     expect(result).toBeInstanceOf(Like);
     expect(result.userId).toBe(CREATE_POST_LIKE_DATA.userId);
     expect(result.likedId).toBe(CREATE_POST_LIKE_DATA.likedId);
+  });
+
+  it('[INTEGRATION] | Should: Find by post => [LIKE]', async () => {
+    const result = await repository.getLikesOfPost({ likedId: VALID_POST.id });
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toBeInstanceOf(Like);
+    expect(result[0]).toHaveProperty('id');
+    expect(result[0].likedId).toBe(VALID_POST.id);
   });
 });
