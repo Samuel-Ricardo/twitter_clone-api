@@ -34,6 +34,10 @@ export class LikeController {
   }
 
   async getCommentLikes(data: IGetLikesOfCommentDTO) {
-    return { likes: await this.service.commentLikes(data) };
+    return {
+      likes: (await this.service.commentLikes(data)).map((like) =>
+        like.toStruct(),
+      ),
+    };
   }
 }
