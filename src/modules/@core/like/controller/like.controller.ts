@@ -15,7 +15,8 @@ export class LikeController {
   ) {}
 
   async save(data: ICreateLikeDTO) {
-    return { like: await this.service.like(data) };
+    const result = await this.service.like(data);
+    return { like: result.toStruct() };
   }
 
   async dislike(data: IDeleteLikeDTO) {
@@ -23,7 +24,8 @@ export class LikeController {
   }
 
   async getPostLikes(data: IGetLikesOfPostDTO) {
-    return { likes: await this.service.postLikes(data) };
+    const result = await this.service.postLikes(data);
+    return { likes: result.map((like) => like.toStruct()) };
   }
 
   async getUserLikes(data: IGetLikesOfUserDTO) {
