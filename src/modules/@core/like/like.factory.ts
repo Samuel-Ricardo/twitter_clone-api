@@ -9,6 +9,8 @@ import { GetPostLikesUseCase } from './use-case/get_post_likes.use-case';
 import { GetUserLikesUseCase } from './use-case/get_user_likes.use-case';
 
 export const LikeFactory = {
+  DEFAULT: () =>
+    LikeModule.get<LikeController>(LikeRegistry.CONTROLLER.DEFAULT),
   CONTROLLER: {
     DEFAULT: () =>
       LikeModule.get<LikeController>(LikeRegistry.CONTROLLER.DEFAULT),
