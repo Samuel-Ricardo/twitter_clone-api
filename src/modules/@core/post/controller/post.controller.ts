@@ -43,6 +43,6 @@ export class PostController {
   }
 
   async details(post: IFindPostByIdDTO) {
-    return { post: await this.service.detail(post) };
+    return { post: (await this.service.detail(post)).toStruct() };
   }
 }
