@@ -6,7 +6,7 @@ import {
   VALID_POST,
   VALID_POST_DATA,
   VALID_UPDATED_POST,
-} from '@test/mock/data/post';
+} from '../../../mock/data/post';
 
 describe('[CONTROLLER] | POST', () => {
   let module: ISimulatePostController;
@@ -24,7 +24,7 @@ describe('[CONTROLLER] | POST', () => {
 
     const result = await module.controller.listAll();
 
-    expect(result).toEqual({ posts: [VALID_POST] });
+    expect(result).toEqual({ posts: [VALID_POST.toStruct()] });
 
     expect(module.service.listAll).toHaveBeenCalledTimes(1);
     expect(module.service.listAll).toHaveBeenCalledWith();
@@ -35,7 +35,7 @@ describe('[CONTROLLER] | POST', () => {
 
     const result = await module.controller.create(CREATE_POST_DATA);
 
-    expect(result).toEqual({ post: VALID_POST });
+    expect(result).toEqual({ post: VALID_POST.toStruct() });
 
     expect(module.service.create).toHaveBeenCalledTimes(1);
     expect(module.service.create).toHaveBeenCalledWith(CREATE_POST_DATA);
@@ -46,7 +46,7 @@ describe('[CONTROLLER] | POST', () => {
 
     const result = await module.controller.update(UPDATE_POST_DATA);
 
-    expect(result).toEqual({ post: VALID_UPDATED_POST });
+    expect(result).toEqual({ post: VALID_UPDATED_POST.toStruct() });
 
     expect(module.service.update).toHaveBeenCalledTimes(1);
     expect(module.service.update).toHaveBeenCalledWith(UPDATE_POST_DATA);
@@ -68,7 +68,7 @@ describe('[CONTROLLER] | POST', () => {
 
     const result = await module.controller.details({ id: VALID_POST.id });
 
-    expect(result).toEqual({ post: VALID_POST });
+    expect(result).toEqual({ post: VALID_POST.toStruct() });
 
     expect(module.service.detail).toHaveBeenCalledTimes(1);
     expect(module.service.detail).toHaveBeenCalledWith({ id: VALID_POST.id });
@@ -81,7 +81,7 @@ describe('[CONTROLLER] | POST', () => {
       id: VALID_POST.authorId,
     });
 
-    expect(result).toEqual({ posts: [VALID_POST] });
+    expect(result).toEqual({ posts: [VALID_POST.toStruct()] });
 
     expect(module.service.listPostsFromUser).toHaveBeenCalledTimes(1);
     expect(module.service.listPostsFromUser).toHaveBeenCalledWith({
