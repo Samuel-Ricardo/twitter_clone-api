@@ -69,7 +69,7 @@ model Comment {
 model Like {
   id String @id @default(auto()) @map("_id") @db.ObjectId
  
-  likedId String @db.ObjectId
+  likedId String @db.ObjectId @unique
   userId String @db.ObjectId
 
   createdAt DateTime @default(now())
