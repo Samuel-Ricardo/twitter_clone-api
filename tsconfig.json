@@ -28,6 +28,8 @@
       "@User/*": ["./modules/@core/user/*"],
       "@Post": ["./modules/@core/post/index.ts"],
       "@Post/*": ["./modules/@core/post/*"],
+      "@Like": ["./modules/@core/like/index.ts"],
+      "@Like/*": ["./modules/@core/like/*"],
       "@Core": ["./modules/@core/index.ts"],
       "@Core/*": ["./modules/@core/*"],
       "@logger": ["./modules/logger/index.ts"],
