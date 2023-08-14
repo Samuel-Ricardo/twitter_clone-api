@@ -24,4 +24,17 @@ describe('[CONTROLLER] | LIKE', () => {
     expect(module.service.like).toHaveBeenCalledTimes(1);
     expect(module.service.like).toHaveBeenCalledWith(CREATE_POST_LIKE_DATA);
   });
+
+  it('[UNIT] | Should: delete => Like', async () => {
+    module.service.dislike.mockResolvedValue();
+
+    expect(
+      module.controller.dislike({ id: VALID_POST_LIKE.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.service.dislike).toHaveBeenCalledTimes(1);
+    expect(module.service.dislike).toHaveBeenCalledWith({
+      id: VALID_POST_LIKE.id,
+    });
+  });
 });
