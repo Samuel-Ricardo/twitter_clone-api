@@ -10,18 +10,18 @@ import {
 
 export const MockLikeModule = new Container({ autoBindInjectable: true });
 
-MockLikeModule.bind(MockLikeRegistry.CREATE).toDynamicValue(
+MockLikeModule.bind(MockLikeRegistry.USE_CASE.CREATE).toDynamicValue(
   mockCreateLikeUseCase,
 );
-MockLikeModule.bind(MockLikeRegistry.DELETE).toDynamicValue(
+MockLikeModule.bind(MockLikeRegistry.USE_CASE.DELETE).toDynamicValue(
   mockDeleteLikeUseCase,
 );
-MockLikeModule.bind(MockLikeRegistry.GET.BY.POST).toDynamicValue(
+MockLikeModule.bind(MockLikeRegistry.USE_CASE.GET.BY.POST).toDynamicValue(
   mockGetLikeOfPostUseCase,
 );
-MockLikeModule.bind(MockLikeRegistry.GET.BY.USER).toDynamicValue(
+MockLikeModule.bind(MockLikeRegistry.USE_CASE.GET.BY.USER).toDynamicValue(
   mockGetLikeOfUserUseCase,
 );
-MockLikeModule.bind(MockLikeRegistry.GET.BY.COMMENT).toDynamicValue(
+MockLikeModule.bind(MockLikeRegistry.USE_CASE.GET.BY.COMMENT).toDynamicValue(
   mockGetLikesOfCommentUseCase,
 );
