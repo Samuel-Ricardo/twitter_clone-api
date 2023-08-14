@@ -8,6 +8,7 @@ import {
   mockGetLikesOfCommentUseCase,
 } from './use-case';
 import { mockLikeService, simulateLikeService } from './service/like.service';
+import { mockLikeController, simulateLikeController } from './controller';
 
 export const MockLikeModule = new Container({ autoBindInjectable: true });
 
@@ -30,4 +31,11 @@ MockLikeModule.bind(MockLikeRegistry.USE_CASE.GET.BY.COMMENT).toDynamicValue(
 MockLikeModule.bind(MockLikeRegistry.SERVICE).toDynamicValue(mockLikeService);
 MockLikeModule.bind(MockLikeRegistry.SERVICE_DEV).toDynamicValue(
   simulateLikeService,
+);
+
+MockLikeModule.bind(MockLikeRegistry.CONTROLLER).toDynamicValue(
+  mockLikeController,
+);
+MockLikeModule.bind(MockLikeRegistry.CONTROLLER_DEV).toDynamicValue(
+  simulateLikeController,
 );
