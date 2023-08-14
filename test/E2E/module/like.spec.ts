@@ -8,6 +8,7 @@ import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 import supertest from 'supertest';
 import { ILikeDTO } from '@Like';
 import { VALID_POST } from '@test/mock/data/post';
+import { VALID_USER } from '@test/mock';
 
 describe('[MODULE] | LIKE', () => {
   let liked: ILikeDTO;
@@ -33,14 +34,26 @@ describe('[MODULE] | LIKE', () => {
     );
     const body = response.body;
 
-    console.log({ body });
-
     expect(response.status).toBe(200);
     expect(body.likes).toBeDefined();
     expect(body.likes).toBeInstanceOf(Array);
     expect(body.likes.length).toBeGreaterThanOrEqual(1);
     expect(body.likes[0]).toHaveProperty('id');
     expect(body.likes[0].likedId).toEqual(VALID_POST.id);
+  });
+
+  it('[E2E] | Should: get from user => [Like]', async () => {
+    const response = await supertest(app).get(
+      `${like.prefix}/user/${VALID_USER.id}`,
+    );
+    const body = response.body;
+
+    expect(response.status).toBe(200);
+    expect(body.likes).toBeDefined();
+    expect(body.likes).toBeInstanceOf(Array);
+    expect(body.likes.length).toBeGreaterThanOrEqual(1);
+    expect(body.likes[0]).toHaveProperty('id');
+    expect(body.likes[0].userId).toEqual(VALID_USER.id);
   });
 
   it('[E2E] | Should: delete => [Like]', async () => {
