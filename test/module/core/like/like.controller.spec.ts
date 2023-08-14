@@ -1,6 +1,7 @@
 import { ISimulateLikeController } from '@test/@types/simulate/like/controller';
 import { MockFactory } from '@test/mock';
 import { CREATE_POST_LIKE_DATA, VALID_POST_LIKE } from '@test/mock/data/like';
+import { VALID_POST } from '@test/mock/data/post';
 
 describe('[CONTROLLER] | LIKE', () => {
   let module: ISimulateLikeController;
@@ -35,6 +36,25 @@ describe('[CONTROLLER] | LIKE', () => {
     expect(module.service.dislike).toHaveBeenCalledTimes(1);
     expect(module.service.dislike).toHaveBeenCalledWith({
       id: VALID_POST_LIKE.id,
+    });
+  });
+
+  it('[UNIT] | Should: get post likes => Like', async () => {
+    module.service.postLikes.mockResolvedValue([VALID_POST_LIKE]);
+
+    const result = await module.controller.getPostLikes({
+      likedId: VALID_POST.id,
+    });
+
+    console.log({ lik: result.likes, likes: [VALID_POST_LIKE.toStruct()] });
+
+    expect(result).toBeDefined();
+    expect(result.likes).toBeDefined();
+    expect(result.likes.length).toBe(1);
+    expect(result.likes[0]).toStrictEqual(VALID_POST_LIKE.toStruct());
+    expect(module.service.postLikes).toHaveBeenCalledTimes(1);
+    expect(module.service.postLikes).toHaveBeenCalledWith({
+      likedId: VALID_POST.id,
     });
   });
 });
