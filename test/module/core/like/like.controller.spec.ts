@@ -46,8 +46,6 @@ describe('[CONTROLLER] | LIKE', () => {
       likedId: VALID_POST.id,
     });
 
-    console.log({ lik: result.likes, likes: [VALID_POST_LIKE.toStruct()] });
-
     expect(result).toBeDefined();
     expect(result.likes).toBeDefined();
     expect(result.likes.length).toBe(1);
