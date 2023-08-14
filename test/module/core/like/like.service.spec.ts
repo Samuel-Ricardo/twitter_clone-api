@@ -1,7 +1,7 @@
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { MockFactory } from '@test/mock';
 import { VALID_POST_LIKE, VALID_POST_LIKE_DATA } from '@test/mock/data/like';
-import { VALID_POST } from '@test/mock/data/post';
+import { VALID_POST, VALID_POST_DATA } from '@test/mock/data/post';
 
 describe('[SERVICE] | LIKE', () => {
   let module: ISimulateLikeService;
@@ -37,6 +37,18 @@ describe('[SERVICE] | LIKE', () => {
     expect(module.use_case.deleteLike.execute).toHaveBeenCalledTimes(1);
     expect(module.use_case.deleteLike.execute).toHaveBeenCalledWith({
       id: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: get post likes => Like', async () => {
+    module.use_case.getPostLikes.execute.mockResolvedValue([VALID_POST_LIKE]);
+
+    const result = await module.service.postLikes({ likedId: VALID_POST.id });
+
+    expect(result).toEqual([VALID_POST_LIKE]);
+    expect(module.use_case.getPostLikes.execute).toHaveBeenCalledTimes(1);
+    expect(module.use_case.getPostLikes.execute).toHaveBeenCalledWith({
+      likedId: VALID_POST.id,
     });
   });
 });
