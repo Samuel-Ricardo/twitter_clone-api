@@ -6,9 +6,10 @@ import { app } from '@/app';
 import { like } from '../../../src/modules/router/like';
 import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 import supertest from 'supertest';
+import { ILikeDTO } from '@Like';
 
 describe('[MODULE] | LIKE', () => {
-  let liked;
+  let liked: ILikeDTO;
 
   it('[E2E] | Should: create => [Like]', async () => {
     const response = await supertest(app)
@@ -23,5 +24,11 @@ describe('[MODULE] | LIKE', () => {
     expect(body.like.likedId).toEqual(CREATE_POST_LIKE_DATA.likedId);
 
     liked = body.like;
+  });
+
+  it('[E2E] | Should: delete => [Like]', async () => {
+    const response = await supertest(app).delete(`${like.prefix}/${liked.id}`);
+
+    expect(response.status).toBe(204);
   });
 });
