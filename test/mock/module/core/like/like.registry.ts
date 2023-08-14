@@ -1,4 +1,5 @@
 export const MockLikeRegistry = {
+  SERVICE: Symbol.for('MOCK:LIKE.SERVICE'),
   USE_CASE: {
     CREATE: Symbol.for('MOCK:LIKE.USE_CASE.CREATE'),
     DELETE: Symbol.for('MOCK:LIKE.USE_CASE.DELETE'),

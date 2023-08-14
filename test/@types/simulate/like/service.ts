@@ -11,7 +11,7 @@ import { DeepMockProxy } from 'jest-mock-extended';
 export interface ISimulateLikeService {
   use_case: {
     create: DeepMockProxy<CreateLikeUseCase>;
-    delete: DeepMockProxy<DeleteLikeUseCase>;
+    deleteLike: DeepMockProxy<DeleteLikeUseCase>;
     getPostLikes: DeepMockProxy<GetPostLikesUseCase>;
     getUserLikes: DeepMockProxy<GetUserLikesUseCase>;
     getCommentLikes: DeepMockProxy<GetCommentLikesUseCase>;
