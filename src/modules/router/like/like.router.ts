@@ -1,7 +1,10 @@
-import { CreateLikeSchema } from '@Core/like/DTO/create.dto';
-import { DeleteLikeSchema } from '@Core/like/DTO/delete.dto';
-import { GetLikesOfPostSchema } from '@Core/like/DTO/get_by_post.dto';
-import { GetLikesOfUserSchema } from '@Core/like/DTO/get_by_user.dto';
+import {
+  CreateLikeSchema,
+  DeleteLikeSchema,
+  GetLikesOfPostSchema,
+  GetLikesOfUserSchema,
+  GetLikesOfCommentSchema,
+} from '@Like';
 import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
 import { Router } from 'express';
