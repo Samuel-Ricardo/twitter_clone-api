@@ -1,5 +1,5 @@
 import { ISimulateLikeController } from '@test/@types/simulate/like/controller';
-import { MockFactory } from '@test/mock';
+import { MockFactory, VALID_USER } from '@test/mock';
 import { CREATE_POST_LIKE_DATA, VALID_POST_LIKE } from '@test/mock/data/like';
 import { VALID_POST } from '@test/mock/data/post';
 
@@ -55,6 +55,20 @@ describe('[CONTROLLER] | LIKE', () => {
     expect(module.service.postLikes).toHaveBeenCalledTimes(1);
     expect(module.service.postLikes).toHaveBeenCalledWith({
       likedId: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: get user likes => Like', async () => {
+    module.service.userLikes.mockResolvedValue([VALID_POST_LIKE]);
+
+    const result = await module.controller.getUserLikes({
+      userId: VALID_USER.id,
+    });
+
+    expect(result).toStrictEqual({ likes: [VALID_POST_LIKE.toStruct()] });
+    expect(module.service.userLikes).toHaveBeenCalledTimes(1);
+    expect(module.service.userLikes).toHaveBeenCalledWith({
+      userId: VALID_USER.id,
     });
   });
 });
