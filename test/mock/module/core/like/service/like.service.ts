@@ -11,7 +11,7 @@ import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { MockLikeRegistry } from '../like.registry';
 
-export const mockLikeService = mockDeep<LikeService>();
+export const mockLikeService = () => mockDeep<LikeService>();
 
 export const simulateLikeService = ({
   container,
