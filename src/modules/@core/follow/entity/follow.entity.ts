@@ -42,4 +42,20 @@ export class Follow {
   static fromPrismaArray(data: PrismaFollow[]) {
     return data.map((item) => Follow.fromPrisma(item));
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get followerId() {
+    return this._followerId;
+  }
+
+  get followingId() {
+    return this._followingId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
 }
