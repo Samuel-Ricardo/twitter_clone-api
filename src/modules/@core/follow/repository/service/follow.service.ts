@@ -9,9 +9,11 @@ import {
 import { MODULE } from '../../../../app.registry';
 import { inject, injectable } from 'inversify';
 import {
+  ICountFollowingsDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IGetFollowersDTO,
+  IGetFollowingsDTO,
 } from '@Core/follow/DTO';
 
 @injectable()
@@ -41,5 +43,13 @@ export class FollowService {
 
   async getFollowers(data: IGetFollowersDTO) {
     return await this.getFollowersUseCase.execute(data);
+  }
+
+  async getFollowings(data: IGetFollowingsDTO) {
+    return await this.getFollowingsUseCase.execute(data);
+  }
+
+  async countFollowings(data: ICountFollowingsDTO) {
+    return await this.countFollowingsUseCase.execute(data);
   }
 }
