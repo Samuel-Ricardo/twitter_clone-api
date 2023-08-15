@@ -1,5 +1,6 @@
 import { IFollowDTO } from '../DTO/follow.dto';
 import { FollowSchema } from '../validator';
+import { Follow as PrismaFollow } from '@prisma/client';
 
 export class Follow {
   constructor(
@@ -27,5 +28,14 @@ export class Follow {
       data.followingId,
       data.createdAt,
     );
+  }
+
+  static fromPrisma(data: PrismaFollow) {
+    return Follow.create({
+      id: data.id,
+      followerId: data.followerId,
+      followingId: data.followingId,
+      createdAt: data.createdAt,
+    });
   }
 }
