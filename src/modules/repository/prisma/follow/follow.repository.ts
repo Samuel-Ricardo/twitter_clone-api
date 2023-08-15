@@ -1,13 +1,12 @@
-import {
-  Follow,
-  ICountFollowersDTO,
-  ICountFollowingsDTO,
-  ICreateFollowDTO,
-  IDeleteFollowDTO,
-  IFollowRepository,
-  IGetFollowersDTO,
-} from '@Core';
-import { MODULE } from '@modules/app.registry';
+import { Follow } from '../../../@core/follow/entity/follow.entity';
+import { IFollowRepository } from '../../../@core/follow/repository/follow.repository';
+import { ICreateFollowDTO } from '../../../@core/follow/DTO/create.dto';
+import { IDeleteFollowDTO } from '../../../@core/follow/DTO/delete.dto';
+import { IGetFollowersDTO } from '../../../@core/follow/DTO/get_followers.dto';
+import { ICountFollowersDTO } from '../../../@core/follow/DTO/count_followers.dto';
+import { ICountFollowingsDTO } from '../../../@core/follow/DTO/count_followings.dto';
+import { IGetFollowingsDTO } from '../../../@core/follow/DTO/get_followings.dto';
+import { MODULE } from '@modules';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 
@@ -46,7 +45,7 @@ export class PrismaFollowRepository implements IFollowRepository {
     });
   }
 
-  async getFollowings(data: ICountFollowingsDTO) {
+  async getFollowings(data: IGetFollowingsDTO) {
     const result = await this.prisma.follow.findMany({
       where: { followerId: data.followerId },
     });
