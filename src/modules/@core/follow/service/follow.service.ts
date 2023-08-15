@@ -6,7 +6,7 @@ import {
   GetFollowingsUseCase,
   UnFollowUseCase,
 } from '@Core/follow/use-case';
-import { MODULE } from '../../../../app.registry';
+import { MODULE } from '../../../app.registry';
 import { inject, injectable } from 'inversify';
 import {
   ICountFollowersDTO,
