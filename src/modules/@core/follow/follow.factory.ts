@@ -1,5 +1,7 @@
+import { FollowController } from './controller';
 import { FollowModule } from './follow.module';
 import { FollowRegistry } from './follow.registry';
+import { FollowService } from './service';
 import {
   CountFollowersUseCase,
   CountFollowingsUseCase,
@@ -10,6 +12,10 @@ import {
 } from './use-case';
 
 export const FollowFactory = {
+  DEFAULT: () => FollowModule.get<FollowController>(FollowRegistry.CONTROLLER),
+  SERVICE: () => FollowModule.get<FollowService>(FollowRegistry.SERVICE),
+  CONTROLLER: () =>
+    FollowModule.get<FollowController>(FollowRegistry.CONTROLLER),
   USE_CASE: {
     CREATE: () =>
       FollowModule.get<CreateFollowUseCase>(FollowRegistry.USE_CASE.CREATE),
