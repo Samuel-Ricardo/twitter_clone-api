@@ -44,4 +44,12 @@ export class PrismaFollowRepository implements IFollowRepository {
       where: { followingId: data.followingId },
     });
   }
+
+  async getFollowings(data: ICountFollowingsDTO) {
+    const result = await this.prisma.follow.findMany({
+      where: { followerId: data.followerId },
+    });
+
+    return Follow.fromPrismaArray(result);
+  }
 }
