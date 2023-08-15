@@ -7,6 +7,7 @@ import { PrismaFactory } from './prisma';
 import { USER_MODULE as USER } from './@core/user/user.factory';
 import { PostFactory as POST } from './@core/post/post.factory';
 import { LikeFactory as LIKE } from './@core/like/like.factory';
+import { FollowFactory as FOLLOW } from './@core/follow/follow.factory';
 import { MiddlewareFactory as MIDDLEWARE } from './middleware/middleware.factory';
 
 import { Express } from 'express';
@@ -18,6 +19,7 @@ export const MODULES = {
   USER,
   POST,
   LIKE,
+  FOLLOW,
   REPOSITORY,
   MIDDLEWARE,
   APP: () => AppModule.get<Express>(MODULE.APP),
