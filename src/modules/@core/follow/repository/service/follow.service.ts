@@ -8,7 +8,7 @@ import {
 } from '@Core/follow/use-case';
 import { MODULE } from '../../../../app.registry';
 import { inject, injectable } from 'inversify';
-import { ICreateFollowDTO } from '@Core/follow/DTO';
+import { ICreateFollowDTO, IDeleteFollowDTO } from '@Core/follow/DTO';
 
 @injectable()
 export class FollowService {
@@ -16,7 +16,7 @@ export class FollowService {
     @inject(MODULE.FOLLOW.USE_CASE.CREATE)
     private readonly create: CreateFollowUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.DELETE)
-    private readonly unfollow: UnFollowUseCase,
+    private readonly deleteFollow: UnFollowUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.GET.FOLLOWERS)
     private readonly getFollowers: GetFollowersUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.GET.FOLLOWINGS)
@@ -29,5 +29,9 @@ export class FollowService {
 
   async follow(data: ICreateFollowDTO) {
     return await this.create.execute(data);
+  }
+
+  async unfollow(data: IDeleteFollowDTO) {
+    return await this.deleteFollow.execute(data);
   }
 }
