@@ -38,4 +38,8 @@ export class Follow {
       createdAt: data.createdAt,
     });
   }
+
+  static fromPrismaArray(data: PrismaFollow[]) {
+    return data.map((item) => Follow.fromPrisma(item));
+  }
 }
