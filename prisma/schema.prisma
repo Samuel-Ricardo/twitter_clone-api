@@ -83,7 +83,7 @@ model Follow {
   id String @id @default(auto()) @map("_id") @db.ObjectId
     
   followerId String @db.ObjectId 
-  followedId String @db.ObjectId
+  followingId String @db.ObjectId
 
   createdAt DateTime @default(now()) 
 }
