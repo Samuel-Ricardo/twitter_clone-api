@@ -8,9 +8,9 @@ import { IGetFollowingsDTO } from '../DTO/get_followings.dto';
 
 export interface IFollowRepository {
   create(data: ICreateFollowDTO): Promise<Follow>;
-  getFollowing(data: IGetFollowingsDTO): Promise<Follow[]>;
+  getFollowings(data: IGetFollowingsDTO): Promise<Follow[]>;
   getFollowers(data: IGetFollowersDTO): Promise<Follow[]>;
-  countFollowing(data: ICountFollowingsDTO): Promise<number>;
+  countFollowings(data: ICountFollowingsDTO): Promise<number>;
   countFollowers(data: ICountFollowersDTO): Promise<number>;
   delete(data: IDeleteLikeDTO): Promise<void>;
 }
