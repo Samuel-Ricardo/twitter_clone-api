@@ -1,5 +1,6 @@
 import {
   Follow,
+  ICountFollowersDTO,
   ICountFollowingsDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
@@ -36,5 +37,11 @@ export class PrismaFollowRepository implements IFollowRepository {
     });
 
     return result;
+  }
+
+  async countFollowers(data: ICountFollowersDTO) {
+    return await this.prisma.follow.count({
+      where: { followingId: data.followingId },
+    });
   }
 }
