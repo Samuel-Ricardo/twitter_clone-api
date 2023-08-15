@@ -8,8 +8,11 @@ import {
   GetFollowingsUseCase,
   UnFollowUseCase,
 } from './use-case';
+import { PrismaRepositoryModule } from '../../repository/prisma/prisma-repository.module';
 
-export const FollowModule = new Container({ autoBindInjectable: true });
+const Module = new Container({ autoBindInjectable: true });
+
+export const FollowModule = Container.merge(Module, PrismaRepositoryModule);
 
 FollowModule.bind(FollowRegistry.USE_CASE.CREATE).to(CreateFollowUseCase);
 FollowModule.bind(FollowRegistry.USE_CASE.DELETE).to(UnFollowUseCase);
@@ -25,3 +28,6 @@ FollowModule.bind(FollowRegistry.USE_CASE.GET.FOLLOWERS).to(
 FollowModule.bind(FollowRegistry.USE_CASE.GET.FOLLOWINGS).to(
   GetFollowingsUseCase,
 );
+
+
+
