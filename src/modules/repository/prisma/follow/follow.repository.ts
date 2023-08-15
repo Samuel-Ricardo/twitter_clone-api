@@ -5,6 +5,7 @@ import {
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IFollowRepository,
+  IGetFollowersDTO,
 } from '@Core';
 import { MODULE } from '@modules/app.registry';
 import { PrismaClient } from '@prisma/client';
@@ -48,6 +49,14 @@ export class PrismaFollowRepository implements IFollowRepository {
   async getFollowings(data: ICountFollowingsDTO) {
     const result = await this.prisma.follow.findMany({
       where: { followerId: data.followerId },
+    });
+
+    return Follow.fromPrismaArray(result);
+  }
+
+  async getFollowers(data: IGetFollowersDTO) {
+    const result = await this.prisma.follow.findMany({
+      where: { followingId: data.followingId },
     });
 
     return Follow.fromPrismaArray(result);
