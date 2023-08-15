@@ -43,6 +43,15 @@ export class Follow {
     return data.map((item) => Follow.fromPrisma(item));
   }
 
+  toStruct(): IFollowDTO {
+    return {
+      id: this._id,
+      followerId: this._followerId,
+      followingId: this._followingId,
+      createdAt: this._createdAt,
+    };
+  }
+
   get id() {
     return this._id;
   }
