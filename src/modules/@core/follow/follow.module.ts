@@ -9,6 +9,8 @@ import {
   UnFollowUseCase,
 } from './use-case';
 import { PrismaRepositoryModule } from '../../repository/prisma/prisma-repository.module';
+import { FollowService } from './service';
+import { FollowController } from './controller';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -29,5 +31,5 @@ FollowModule.bind(FollowRegistry.USE_CASE.GET.FOLLOWINGS).to(
   GetFollowingsUseCase,
 );
 
-
-
+FollowModule.bind(FollowRegistry.SERVICE).to(FollowService);
+FollowModule.bind(FollowRegistry.CONTROLLER).to(FollowController);
