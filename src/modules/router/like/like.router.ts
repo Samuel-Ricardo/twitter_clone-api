@@ -38,7 +38,9 @@ router.get(
   validate(GetLikesOfPostSchema),
   async (req, res, next) => {
     try {
-      res.status(200).json(Like.getPostLikes({ likedId: req.params.likedId }));
+      res
+        .status(200)
+        .json(await Like.getPostLikes({ likedId: req.params.likedId }));
     } catch (error) {
       next(error);
     }
