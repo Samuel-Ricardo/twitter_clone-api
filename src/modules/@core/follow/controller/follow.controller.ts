@@ -3,6 +3,7 @@ import { FollowService } from '../service';
 import { MODULE } from '../../../app.registry';
 import {
   ICountFollowersDTO,
+  ICountFollowingsDTO,
   ICreateFollowDTO,
   IDeleteFollowDTO,
   IGetFollowersDTO,
@@ -34,5 +35,9 @@ export class FollowController {
 
   async countFollowers(data: ICountFollowersDTO) {
     return { follwers: await this.service.countFollowers(data) };
+  }
+
+  async countFollowing(data: ICountFollowingsDTO) {
+    return { following: await this.service.countFollowings(data) };
   }
 }
