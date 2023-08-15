@@ -1,4 +1,9 @@
-import { Follow, ICreateFollowDTO, IFollowRepository } from '@Core';
+import {
+  Follow,
+  ICreateFollowDTO,
+  IDeleteFollowDTO,
+  IFollowRepository,
+} from '@Core';
 import { MODULE } from '@modules/app.registry';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
@@ -16,5 +21,11 @@ export class PrismaFollowRepository implements IFollowRepository {
     });
 
     return Follow.fromPrisma(follow);
+  }
+
+  async delete(data: IDeleteFollowDTO) {
+    await this.prisma.follow.delete({
+      where: { id: data.id },
+    });
   }
 }
