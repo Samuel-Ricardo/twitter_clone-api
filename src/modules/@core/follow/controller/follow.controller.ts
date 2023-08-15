@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { FollowService } from '../service';
 import { MODULE } from '../../../app.registry';
-import { ICreateFollowDTO } from '../DTO';
+import { ICreateFollowDTO, IDeleteFollowDTO } from '../DTO';
 
 @injectable()
 export class FollowController {
@@ -12,5 +12,9 @@ export class FollowController {
 
   async follow(data: ICreateFollowDTO) {
     return await this.service.follow(data);
+  }
+
+  async unfollow(data: IDeleteFollowDTO) {
+    return await this.service.unfollow(data);
   }
 }
