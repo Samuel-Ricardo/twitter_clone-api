@@ -8,6 +8,7 @@ import {
   mockGetFollowingUseCase,
   mockUnFollowUseCase,
 } from './use-case';
+import { mockFollowService, simulateFollowService } from './service';
 
 export const FollowMockModule = new Container({ autoBindInjectable: true });
 
@@ -28,4 +29,10 @@ FollowMockModule.bind(FollowMockRegistry.USE_CASE.GET.FOLLOWERS).toDynamicValue(
 );
 FollowMockModule.bind(FollowMockRegistry.USE_CASE.GET.FOLLOWING).toDynamicValue(
   mockGetFollowingUseCase,
+);
+FollowMockModule.bind(FollowMockRegistry.SERVICE).toDynamicValue(
+  mockFollowService,
+);
+FollowMockModule.bind(FollowMockRegistry.SERVICE_DEV).toDynamicValue(
+  simulateFollowService,
 );
