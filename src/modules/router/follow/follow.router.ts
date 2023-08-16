@@ -54,3 +54,13 @@ router.get(
     }
   },
 );
+
+router.get(`${prefix}/me/:followingId`, (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(module.getFollowers({ followingId: req.params.followingId }));
+  } catch (error) {
+    next(error);
+  }
+});
