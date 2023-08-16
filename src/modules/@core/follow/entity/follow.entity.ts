@@ -1,4 +1,6 @@
+import { InvalidDataError } from '@modules/error/data';
 import { IFollowDTO } from '../DTO/follow.dto';
+import { FollowPolicy } from '../policy/follow.policy';
 import { FollowSchema } from '../validator';
 import { Follow as PrismaFollow } from '@prisma/client';
 
@@ -10,15 +12,17 @@ export class Follow {
     private _createdAt: Date,
   ) {
     Follow.validate({
-      id: this._id,
-      followerId: this._followerId,
-      followingId: this._followingId,
-      createdAt: this._createdAt,
+      id: _id,
+      followerId: _followerId,
+      followingId: _followingId,
+      createdAt: _createdAt,
     });
   }
 
   static validate(follow: IFollowDTO) {
-    return FollowSchema.parse(follow);
+    const result = FollowSchema.parse(follow);
+    if (!FollowPolicy.isAllowed(result))
+      throw new InvalidDataError("User can't follow himself");
   }
 
   static create(data: IFollowDTO) {
