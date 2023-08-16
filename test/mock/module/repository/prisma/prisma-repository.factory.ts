@@ -5,6 +5,8 @@ import { PrismaUserRepository, PrismaPostRepository } from '@modules';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 import { PrismaLikeRepository } from '@modules/repository/prisma/like';
 import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
+import { PrismaFollowRepository } from '@modules/repository/prisma/follow';
+import { ISimulateFollowRepository } from '@test/@types/simulate/follow/repository';
 
 type simulatePostType = {
   repository: PrismaPostRepository;
@@ -35,5 +37,13 @@ export const PrismaRepositoryFactoryMock = {
   LIKE_DEV: () =>
     PrismaRepositoryMockModule.get<ISimulatePrismaLikeRepository>(
       PrismaRepositoryMockRegistry.LIKE_DEV,
+    ),
+  FOLLOW: () =>
+    PrismaRepositoryMockModule.get<DeepMockProxy<PrismaFollowRepository>>(
+      PrismaRepositoryMockRegistry.FOLLOW,
+    ),
+  FOLLOW_DEV: () =>
+    PrismaRepositoryMockModule.get<ISimulateFollowRepository>(
+      PrismaRepositoryMockRegistry.FOLLOW_DEV,
     ),
 };
