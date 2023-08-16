@@ -6,7 +6,7 @@ import { MODULES } from '@modules/app.factory';
 import { validate } from '@modules/middleware/validator';
 import { Router } from 'express';
 
-const prefix = '/follows';
+const prefix = '/follow';
 const router = Router();
 
 const module = MODULES.FOLLOW.DEFAULT();
@@ -60,6 +60,16 @@ router.get(`${prefix}/me/:followingId`, (req, res, next) => {
     res
       .status(200)
       .json(module.getFollowers({ followingId: req.params.followingId }));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get(`${prefix}/:followerId`, (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(module.getFollowings({ followerId: req.params.followerId }));
   } catch (error) {
     next(error);
   }
