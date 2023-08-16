@@ -17,3 +17,15 @@ export const VALID_USER_DATA: UpdateUserDTO = {
 };
 
 export const VALID_USER = User.create(VALID_USER_DATA);
+
+export const generateValidUser = () =>
+  User.create({
+    id: randomID(),
+    name: 'Pedro ' + randomID(),
+    username: 'pedro ' + randomID(),
+    bio: randomID(),
+    email: `pedro${randomID()}@email.com`,
+    password: randomID(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
