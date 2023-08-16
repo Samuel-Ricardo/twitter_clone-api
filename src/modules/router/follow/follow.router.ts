@@ -74,3 +74,5 @@ router.get(`${prefix}/:followerId`, (req, res, next) => {
     next(error);
   }
 });
+
+export const follow = { router, prefix };
