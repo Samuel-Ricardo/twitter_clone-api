@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { user_routes } from './user';
 import { post } from './post';
 import { like } from './like/like.router';
+import { follow } from './follow';
 
 const routes = Router();
 
@@ -16,5 +17,6 @@ routes.get('/', (req, res, next) => {
 routes.use(user_routes);
 routes.use(post.router);
 routes.use(like.router);
+routes.use(follow.router);
 
 export { routes };

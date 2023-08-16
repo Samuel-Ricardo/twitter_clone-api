@@ -1,19 +1,19 @@
-import { CountFollowersSchema } from '@Core/follow/validator/count_followers.validator';
-import { CountFollowingsSchema } from '@Core/follow/validator/count_followings.validator';
-import { CreateFollowSchema } from '@Core/follow/validator/create.validator';
-import { DeleteFollowSchema } from '@Core/follow/validator/delete.validator';
-import { MODULES } from '@modules/app.factory';
-import { validate } from '@modules/middleware/validator';
+import { CountFollowersSchema } from '../../@core/follow/validator/count_followers.validator';
+import { CountFollowingsSchema } from '../../@core/follow/validator/count_followings.validator';
+import { CreateFollowSchema } from '../../@core/follow/validator/create.validator';
+import { DeleteFollowSchema } from '../../@core/follow/validator/delete.validator';
+import { MODULES } from '../../app.factory';
+import { validate } from '../../middleware/validator';
 import { Router } from 'express';
 
 const prefix = '/follow';
 const router = Router();
 
-const module = MODULES.FOLLOW.DEFAULT();
+const followModule = MODULES.FOLLOW.DEFAULT();
 
 router.post(prefix, validate(CreateFollowSchema), (req, res, next) => {
   try {
-    res.status(201).json(module.follow(req.body));
+    res.status(201).json(followModule.follow(req.body));
   } catch (error) {
     next(error);
   }
@@ -21,7 +21,7 @@ router.post(prefix, validate(CreateFollowSchema), (req, res, next) => {
 
 router.delete(prefix, validate(DeleteFollowSchema), (req, res, next) => {
   try {
-    res.status(204).json(module.unfollow(req.body));
+    res.status(204).json(followModule.unfollow(req.body));
   } catch (error) {
     next(error);
   }
@@ -34,7 +34,9 @@ router.get(
     try {
       res
         .status(200)
-        .json(module.countFollowers({ followingId: req.params.followingId }));
+        .json(
+          followModule.countFollowers({ followingId: req.params.followingId }),
+        );
     } catch (error) {
       next(error);
     }
@@ -48,7 +50,9 @@ router.get(
     try {
       res
         .status(200)
-        .json(module.countFollowing({ followerId: req.params.followerId }));
+        .json(
+          followModule.countFollowing({ followerId: req.params.followerId }),
+        );
     } catch (error) {
       next(error);
     }
@@ -59,7 +63,7 @@ router.get(`${prefix}/me/:followingId`, (req, res, next) => {
   try {
     res
       .status(200)
-      .json(module.getFollowers({ followingId: req.params.followingId }));
+      .json(followModule.getFollowers({ followingId: req.params.followingId }));
   } catch (error) {
     next(error);
   }
@@ -69,7 +73,7 @@ router.get(`${prefix}/:followerId`, (req, res, next) => {
   try {
     res
       .status(200)
-      .json(module.getFollowing({ followerId: req.params.followerId }));
+      .json(followModule.getFollowing({ followerId: req.params.followerId }));
   } catch (error) {
     next(error);
   }
