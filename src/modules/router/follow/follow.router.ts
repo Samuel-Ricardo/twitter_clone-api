@@ -1,4 +1,5 @@
 import { CountFollowersSchema } from '@Core/follow/validator/count_followers.validator';
+import { CountFollowingsSchema } from '@Core/follow/validator/count_followings.validator';
 import { CreateFollowSchema } from '@Core/follow/validator/create.validator';
 import { DeleteFollowSchema } from '@Core/follow/validator/delete.validator';
 import { MODULES } from '@modules/app.factory';
@@ -34,6 +35,20 @@ router.get(
       res
         .status(200)
         .json(module.countFollowers({ followingId: req.params.followingId }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+router.get(
+  `${prefix}/count/following/:followerId`,
+  validate(CountFollowingsSchema),
+  (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(module.countFollowing({ followerId: req.params.followerId }));
     } catch (error) {
       next(error);
     }
