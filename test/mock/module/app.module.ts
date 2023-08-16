@@ -6,6 +6,7 @@ import { PrismaRepositoryMockModule } from './repository/prisma/prisma-repositor
 import { UserMockModule } from './core/user';
 import { PostMockModule } from './core/post';
 import { MockLikeModule } from './core/like';
+import { FollowMockModule } from './core/follow';
 
 export const AppModuleMock = Container.merge(
   PrismaMockModule,
@@ -13,4 +14,5 @@ export const AppModuleMock = Container.merge(
   UserMockModule,
   PostMockModule,
   MockLikeModule,
+  FollowMockModule,
 );
