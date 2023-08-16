@@ -1,6 +1,8 @@
 export const FollowMockRegistry = {
   SERVICE: Symbol.for('MOCK.FOLLOW.SERVICE'),
+  SERVICE_DEV: Symbol.for('MOCK.FOLLOW.SERVICE_DEV'),
   CONTROLLER: Symbol.for('MOCK.FOLLOW.CONTROLLER'),
+  CONTROLLER_DEV: Symbol.for('MOCK.FOLLOW.CONTROLLER_DEV'),
   USE_CASE: {
     CREATE: Symbol.for('MOCK.FOLLOW.USE_CASE.CREATE'),
     DELETE: Symbol.for('MOCK.FOLLOW.USE_CASE.DELETE'),
