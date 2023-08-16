@@ -9,8 +9,28 @@ import {
   UnFollowUseCase,
 } from '@Core';
 import { FollowMockRegistry } from './follow.registry';
+import { FollowService } from '@Core/follow/service';
+import { ISimulateFollowService } from '@test/@types/simulate/follow/service';
+import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
+import { FollowController } from '@Core/follow/controller';
 
 export const FollowMockFactory = {
+  SERVICE: () =>
+    FollowMockModule.get<DeepMockProxy<FollowService>>(
+      FollowMockRegistry.SERVICE,
+    ),
+  SERVICE_DEV: () =>
+    FollowMockModule.get<ISimulateFollowService>(
+      FollowMockRegistry.SERVICE_DEV,
+    ),
+  CONTROLLER: () =>
+    FollowMockModule.get<DeepMockProxy<FollowController>>(
+      FollowMockRegistry.CONTROLLER,
+    ),
+  CONTROLLER_DEV: () =>
+    FollowMockModule.get<ISimulateFollowController>(
+      FollowMockRegistry.CONTROLLER_DEV,
+    ),
   USE_CASE: {
     CREATE: () =>
       FollowMockModule.get<DeepMockProxy<CreateFollowUseCase>>(
