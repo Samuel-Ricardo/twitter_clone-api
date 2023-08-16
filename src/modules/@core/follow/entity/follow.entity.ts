@@ -1,4 +1,3 @@
-import { InvalidDataError } from '@modules/error/data';
 import { IFollowDTO } from '../DTO/follow.dto';
 import { FollowPolicy } from '../policy/follow.policy';
 import { FollowSchema } from '../validator';
@@ -21,8 +20,7 @@ export class Follow {
 
   static validate(follow: IFollowDTO) {
     const result = FollowSchema.parse(follow);
-    if (!FollowPolicy.isAllowed(result))
-      throw new InvalidDataError("User can't follow himself");
+    FollowPolicy.isAllowed(result);
   }
 
   static create(data: IFollowDTO) {
