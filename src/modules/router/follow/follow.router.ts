@@ -69,7 +69,7 @@ router.get(`${prefix}/:followerId`, (req, res, next) => {
   try {
     res
       .status(200)
-      .json(module.getFollowings({ followerId: req.params.followerId }));
+      .json(module.getFollowing({ followerId: req.params.followerId }));
   } catch (error) {
     next(error);
   }
