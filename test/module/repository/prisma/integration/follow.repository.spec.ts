@@ -6,6 +6,7 @@ import { MODULES } from '@modules';
 import { Follow } from '../../../../../src/modules/@core/follow/entity/follow.entity';
 import { IFollowRepository } from '../../../../../src/modules/@core/follow/repository/follow.repository';
 import { PrismaFollowRepository } from '../../../../../src/modules/repository/prisma/follow/follow.repository';
+import { CREATE_FOLLOW_DATA } from '@test/mock/data/follow';
 
 describe('[REPOSITORY] | FOLLOW', () => {
   let repository: IFollowRepository;
@@ -19,6 +20,12 @@ describe('[REPOSITORY] | FOLLOW', () => {
   });
 
   it('[INTEGRATION] | Should: Create => [FOLLOW]', async () => {
-    expect(true).toBe(true);
+    const result = await repository.create(CREATE_FOLLOW_DATA);
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Follow);
+    expect(result).toHaveProperty('id');
+    expect(result.followerId).toBe(CREATE_FOLLOW_DATA.followerId);
+    expect(result.followingId).toBe(CREATE_FOLLOW_DATA.followingId);
   });
 });
