@@ -74,4 +74,20 @@ describe('[REPOSITORY] | FOLLOW', () => {
       where: { id: VALID_FOLLOW.id },
     });
   });
+
+  it('[UNIT] | Should: get => [FOLLOWERS]', async () => {
+    module.prisma.follow.findMany.mockResolvedValue([VALID_FOLLOW]);
+
+    const result = await module.repository.getFollowers({
+      followingId: USER_FOLLOWED.id,
+    });
+
+    expect(result).toStrictEqual([VALID_FOLLOW]);
+    expect(module.prisma.follow.findMany).toBeCalledTimes(1);
+    expect(module.prisma.follow.findMany).toBeCalledWith({
+      where: {
+        followingId: USER_FOLLOWED.id,
+      },
+    });
+  });
 });
