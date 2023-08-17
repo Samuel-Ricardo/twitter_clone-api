@@ -1,6 +1,7 @@
 import { FollowController } from '../../../../src/modules/@core/follow/controller';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
 import { MockFactory } from '@test/mock';
+import { CREATE_FOLLOW_DATA, VALID_FOLLOW } from '@test/mock/data/follow';
 
 describe('[CONTROLLER] | FOLLOW ', () => {
   let module: ISimulateFollowController;
@@ -15,7 +16,14 @@ describe('[CONTROLLER] | FOLLOW ', () => {
     expect(module.service).toBeDefined();
   });
 
-  it('should be defined', () => {
-    expect(module).toBeDefined();
+  it('[UNIT] | Should: be able to => [FOLLOW]', async () => {
+    module.service.follow.mockResolvedValue(VALID_FOLLOW);
+
+    const result = await module.controller.follow(CREATE_FOLLOW_DATA);
+
+    expect(result).toStrictEqual({ follow: VALID_FOLLOW.toStruct() });
+
+    expect(module.service.follow).toHaveBeenCalledTimes(1);
+    expect(module.service.follow).toHaveBeenCalledWith(CREATE_FOLLOW_DATA);
   });
 });
