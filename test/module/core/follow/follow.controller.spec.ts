@@ -1,7 +1,11 @@
 import { FollowController } from '../../../../src/modules/@core/follow/controller';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
 import { MockFactory } from '@test/mock';
-import { CREATE_FOLLOW_DATA, VALID_FOLLOW } from '@test/mock/data/follow';
+import {
+  CREATE_FOLLOW_DATA,
+  USER_FOLLOWED,
+  VALID_FOLLOW,
+} from '@test/mock/data/follow';
 import { resolve } from 'path';
 
 describe('[CONTROLLER] | FOLLOW ', () => {
@@ -38,6 +42,23 @@ describe('[CONTROLLER] | FOLLOW ', () => {
     expect(module.service.unfollow).toHaveBeenCalledTimes(1);
     expect(module.service.unfollow).toHaveBeenCalledWith({
       id: VALID_FOLLOW.id,
+    });
+  });
+
+  it('[UNIT] | Should: be able to [GET] => [FOLLOWERS]', async () => {
+    module.service.getFollowers.mockResolvedValue([VALID_FOLLOW]);
+
+    const result = await module.controller.getFollowers({
+      followingId: USER_FOLLOWED.id,
+    });
+
+    expect(result).toStrictEqual({
+      followers: [VALID_FOLLOW.toStruct()],
+    });
+
+    expect(module.service.getFollowers).toHaveBeenCalledTimes(1);
+    expect(module.service.getFollowers).toHaveBeenCalledWith({
+      followingId: USER_FOLLOWED.id,
     });
   });
 });
