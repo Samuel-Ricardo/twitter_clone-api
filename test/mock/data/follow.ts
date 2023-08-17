@@ -1,4 +1,8 @@
-import { Follow, ICreateFollowDTO, IFollowDTO } from '@Core';
+import {
+  Follow,
+  ICreateFollowDTO,
+  IFollowDTO,
+} from '../../../src/modules/@core/follow';
 import { generateValidUser } from './user';
 import { randomID } from '../../../src/modules/util/mongo';
 
