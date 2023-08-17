@@ -26,4 +26,20 @@ describe('[REPOSITORY] | FOLLOW', () => {
       data: CREATE_FOLLOW_DATA,
     });
   });
+
+  it('[UNIT] | Should: count => [FOLLOWERS]', async () => {
+    module.prisma.follow.count.mockResolvedValue(1);
+
+    const result = await module.repository.countFollowers({
+      followingId: VALID_FOLLOW.id,
+    });
+
+    expect(result).toBe(1);
+    expect(module.prisma.follow.count).toBeCalledTimes(1);
+    expect(module.prisma.follow.count).toBeCalledWith({
+      where: {
+        followingId: VALID_FOLLOW.id,
+      },
+    });
+  });
 });
