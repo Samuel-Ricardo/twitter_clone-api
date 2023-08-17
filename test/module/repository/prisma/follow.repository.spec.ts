@@ -61,4 +61,17 @@ describe('[REPOSITORY] | FOLLOW', () => {
       where: { followerId: USER_FOLLOWER.id },
     });
   });
+
+  it('[UNIT] | Should: delete => [FOLLOW]', async () => {
+    module.prisma.follow.delete.mockResolvedValue(VALID_FOLLOW);
+
+    expect(
+      module.repository.delete({ id: VALID_FOLLOW.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.prisma.follow.delete).toBeCalledTimes(1);
+    expect(module.prisma.follow.delete).toBeCalledWith({
+      where: { id: VALID_FOLLOW.id },
+    });
+  });
 });
