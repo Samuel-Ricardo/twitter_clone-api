@@ -79,4 +79,19 @@ describe('[CONTROLLER] | FOLLOW ', () => {
       followerId: USER_FOLLOWER.id,
     });
   });
+
+  it('[UNIT] | Should: be able to [COUNT] => [FOLLOWERS]', async () => {
+    module.service.countFollowers.mockResolvedValue(1);
+
+    const result = await module.controller.countFollowers({
+      followingId: USER_FOLLOWED.id,
+    });
+
+    expect(result).toStrictEqual({ follwers: 1 });
+
+    expect(module.service.countFollowers).toHaveBeenCalledTimes(1);
+    expect(module.service.countFollowers).toHaveBeenCalledWith({
+      followingId: USER_FOLLOWED.id,
+    });
+  });
 });
