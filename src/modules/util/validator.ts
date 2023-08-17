@@ -1,4 +1,4 @@
-import { InvalidDataError } from '@modules/error/data';
+import { InvalidDataError } from '../error/data';
 import { z } from 'zod';
 
 export const catchZod = (zod: {
