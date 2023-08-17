@@ -1,6 +1,11 @@
 import { ISimulateFollowRepository } from '@test/@types/simulate/follow/repository';
 import { MockFactory } from '@test/mock';
-import { CREATE_FOLLOW_DATA, VALID_FOLLOW } from '@test/mock/data/follow';
+import {
+  CREATE_FOLLOW_DATA,
+  USER_FOLLOWED,
+  USER_FOLLOWER,
+  VALID_FOLLOW,
+} from '@test/mock/data/follow';
 
 describe('[REPOSITORY] | FOLLOW', () => {
   let module: ISimulateFollowRepository;
@@ -31,15 +36,29 @@ describe('[REPOSITORY] | FOLLOW', () => {
     module.prisma.follow.count.mockResolvedValue(1);
 
     const result = await module.repository.countFollowers({
-      followingId: VALID_FOLLOW.id,
+      followingId: USER_FOLLOWED.id,
     });
 
     expect(result).toBe(1);
     expect(module.prisma.follow.count).toBeCalledTimes(1);
     expect(module.prisma.follow.count).toBeCalledWith({
       where: {
-        followingId: VALID_FOLLOW.id,
+        followingId: USER_FOLLOWED.id,
       },
+    });
+  });
+
+  it('[UNIT] | Should: count => [FOLLOWING]', async () => {
+    module.prisma.follow.count.mockResolvedValue(1);
+
+    const result = await module.repository.countFollowings({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result).toBe(1);
+    expect(module.prisma.follow.count).toBeCalledTimes(1);
+    expect(module.prisma.follow.count).toBeCalledWith({
+      where: { followerId: USER_FOLLOWER.id },
     });
   });
 });
