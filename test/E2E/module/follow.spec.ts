@@ -67,6 +67,21 @@ describe('[MODULE] | Follow', () => {
     expect(body.followers[0]).toStrictEqual(follow_relation);
   });
 
+  it('[E2E] | Should: be able to [GET] => [FOLLOWING]', async () => {
+    const response = await supertest(app).get(
+      `${follow.prefix}/${follow_relation.followerId}/following`,
+    );
+
+    expect(response.status).toBe(200);
+
+    const body = response.body;
+
+    expect(body).toHaveProperty('following');
+    expect(body.following.length).toBeGreaterThanOrEqual(0);
+    expect(body.following[0]).toHaveProperty('id');
+    expect(body.following[0]).toStrictEqual(follow_relation);
+  });
+
   it('[E2E] | Should: be able to => [UNFOLLOW]', async () => {
     const resonse = await supertest(app).delete(
       `${follow.prefix}/${follow_relation.id}`,
