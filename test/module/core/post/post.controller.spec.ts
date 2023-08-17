@@ -4,7 +4,6 @@ import {
   CREATE_POST_DATA,
   UPDATE_POST_DATA,
   VALID_POST,
-  VALID_POST_DATA,
   VALID_UPDATED_POST,
 } from '../../../mock/data/post';
 
