@@ -58,4 +58,10 @@ describe('[REPOSITORY] | FOLLOW', () => {
     expect(result[0].followerId).toBe(follow_relation.followerId);
     expect(result[0].followingId).toBe(follow_relation.followingId);
   });
+
+  it('[INTEGRATION] | Should: Delete => [FOLLOW]', async () => {
+    expect(
+      repository.delete({ id: follow_relation.id }),
+    ).resolves.not.toThrow();
+  });
 });
