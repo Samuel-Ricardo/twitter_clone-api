@@ -39,6 +39,19 @@ describe('[MODULE] | Follow', () => {
     expect(body.followers).toBeGreaterThanOrEqual(0);
   });
 
+  it('[E2E] | Should: be able to [COUNT] => [FOLLOWING]', async () => {
+    const resonse = await supertest(app).get(
+      `${follow.prefix}/count/following/${follow_relation.followerId}`,
+    );
+
+    expect(resonse.status).toBe(200);
+
+    const body: { following: number } = resonse.body;
+
+    expect(body).toHaveProperty('following');
+    expect(body.following).toBeGreaterThanOrEqual(0);
+  });
+
   it('[E2E] | Should: be able to => [UNFOLLOW]', async () => {
     const resonse = await supertest(app).delete(
       `${follow.prefix}/${follow_relation.id}`,
