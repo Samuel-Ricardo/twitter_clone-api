@@ -1,4 +1,4 @@
-import { GetFollowersSchema } from '@Core/follow/validator/get_followers.validator';
+import { GetFollowersSchema } from '../../@core/follow/validator/get_followers.validator';
 import { CountFollowersSchema } from '../../@core/follow/validator/count_followers.validator';
 import { CountFollowingsSchema } from '../../@core/follow/validator/count_followings.validator';
 import { CreateFollowSchema } from '../../@core/follow/validator/create.validator';
@@ -6,7 +6,7 @@ import { DeleteFollowSchema } from '../../@core/follow/validator/delete.validato
 import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
 import { Router } from 'express';
-import { GetFollowingsSchema } from '@Core/follow/validator/get_followings.validator';
+import { GetFollowingsSchema } from '../../@core/follow/validator/get_followings.validator';
 
 const prefix = '/follow';
 const router = Router();
@@ -66,7 +66,7 @@ router.get(
 );
 
 router.get(
-  `${prefix}/me/:followingId`,
+  `${prefix}/:followingId/followers`,
   validate(GetFollowersSchema),
   async (req, res, next) => {
     try {
@@ -82,7 +82,7 @@ router.get(
 );
 
 router.get(
-  `${prefix}/:followerId`,
+  `${prefix}/:followerId/following`,
   validate(GetFollowingsSchema),
   async (req, res, next) => {
     try {
