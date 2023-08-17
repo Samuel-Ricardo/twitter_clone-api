@@ -1,4 +1,4 @@
-import { IFollowRepository } from '@Core';
+import { IFollowRepository } from '../../../../src/modules/@core/follow/repository';
 import { PrismaClient } from '@prisma/client';
 import { DeepMockProxy } from 'jest-mock-extended';
 
