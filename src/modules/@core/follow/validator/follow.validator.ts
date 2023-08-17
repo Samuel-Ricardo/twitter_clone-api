@@ -1,4 +1,4 @@
-import { catchZod } from '@modules/util/validator';
+import { catchZod } from '../../../util/validator';
 import { z } from 'zod';
 
 export const FollowSchema = z
