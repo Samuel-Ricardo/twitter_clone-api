@@ -6,6 +6,7 @@ import {
   CREATE_FOLLOW_DATA,
   FOLLOW_DATA,
   USER_FOLLOWED,
+  USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
 
@@ -59,6 +60,21 @@ describe('[SERVICE] | FOLLOW ', () => {
     expect(module.use_case.count_followers.execute).toBeCalledTimes(1);
     expect(module.use_case.count_followers.execute).toBeCalledWith({
       followingId: USER_FOLLOWED.id,
+    });
+  });
+
+  it('[UNIT] | Should: count => [FOLLOWING]', async () => {
+    module.use_case.count_following.execute.mockResolvedValue(1);
+
+    const result = await module.service.countFollowings({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result).toBe(1);
+
+    expect(module.use_case.count_following.execute).toBeCalledTimes(1);
+    expect(module.use_case.count_following.execute).toBeCalledWith({
+      followerId: USER_FOLLOWER.id,
     });
   });
 });
