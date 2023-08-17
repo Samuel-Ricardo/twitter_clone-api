@@ -44,5 +44,6 @@ describe('[MODULE] | Follow', () => {
     const body: { followers: number } = resonse.body;
 
     expect(body).toHaveProperty('followers');
+    expect(body.followers).toBeGreaterThanOrEqual(0);
   });
 });
