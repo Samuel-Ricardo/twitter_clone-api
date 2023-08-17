@@ -1,4 +1,4 @@
-import { CountFollowersUseCase } from '@Core';
+import { CountFollowersUseCase } from '../../../../../../src/modules/@core/follow/use-case';
 import { mockDeep } from 'jest-mock-extended';
 
 export const mockCountFollowersUseCase = () =>

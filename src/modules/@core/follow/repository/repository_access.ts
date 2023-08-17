@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IFollowRepository } from './follow.repository';
-import { MODULE } from '@modules/app.registry';
+import { MODULE } from '../../../app.registry';
 
 @injectable()
 export class FollowRepositoryAccess {

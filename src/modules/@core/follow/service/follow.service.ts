@@ -5,7 +5,7 @@ import {
   GetFollowersUseCase,
   GetFollowingsUseCase,
   UnFollowUseCase,
-} from '@Core/follow/use-case';
+} from '../use-case';
 import { MODULE } from '../../../app.registry';
 import { inject, injectable } from 'inversify';
 import {
@@ -15,7 +15,7 @@ import {
   IDeleteFollowDTO,
   IGetFollowersDTO,
   IGetFollowingsDTO,
-} from '@Core/follow/DTO';
+} from '../DTO';
 
 @injectable()
 export class FollowService {

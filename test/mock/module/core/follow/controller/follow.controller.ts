@@ -1,5 +1,5 @@
-import { FollowController } from '@Core/follow/controller';
-import { FollowService } from '@Core/follow/service';
+import { FollowController } from '../../../../../../src/modules/@core/follow/controller';
+import { FollowService } from '../../../../../../src/modules/@core/follow/service';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
 import { MOCK_MODULE } from '@test/mock/module/app.registry';
 import { interfaces } from 'inversify';

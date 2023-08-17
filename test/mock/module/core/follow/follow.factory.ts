@@ -7,12 +7,12 @@ import {
   GetFollowersUseCase,
   GetFollowingsUseCase,
   UnFollowUseCase,
-} from '@Core';
+} from '../../../../../src/modules/@core/follow/use-case';
 import { FollowMockRegistry } from './follow.registry';
-import { FollowService } from '@Core/follow/service';
+import { FollowService } from '../../../../../src/modules/@core/follow/service';
+import { FollowController } from '../../../../../src/modules/@core/follow/controller';
 import { ISimulateFollowService } from '@test/@types/simulate/follow/service';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
-import { FollowController } from '@Core/follow/controller';
 
 export const FollowMockFactory = {
   SERVICE: () =>

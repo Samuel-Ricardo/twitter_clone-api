@@ -5,8 +5,8 @@ import {
   GetFollowersUseCase,
   GetFollowingsUseCase,
   UnFollowUseCase,
-} from '@Core';
-import { FollowService } from '@Core/follow/service';
+} from '../../../../../../src/modules/@core/follow/use-case';
+import { FollowService } from '../../../../../../src/modules/@core/follow/service';
 import { ISimulateFollowService } from '@test/@types/simulate/follow/service';
 import { MOCK_MODULE } from '@test/mock/module/app.registry';
 import { interfaces } from 'inversify';
