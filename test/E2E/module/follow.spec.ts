@@ -25,4 +25,24 @@ describe('[MODULE] | Follow', () => {
 
     follow_relation = body.follow;
   });
+
+  it('[E2E] | Should: be able to => [UNFOLLOW]', async () => {
+    const resonse = await supertest(app).delete(
+      `${follow.prefix}/${follow_relation.id}`,
+    );
+    expect(resonse.status).toBe(204);
+    expect(resonse.body).toEqual({});
+  });
+
+  it('[E2E] | Should: be able to [COUNT] => [FOLLOWERS]', async () => {
+    const resonse = await supertest(app).get(
+      `${follow.prefix}/count/followers/${follow_relation.followingId}`,
+    );
+
+    expect(resonse.status).toBe(200);
+
+    const body: { followers: number } = resonse.body;
+
+    expect(body).toHaveProperty('followers');
+  });
 });

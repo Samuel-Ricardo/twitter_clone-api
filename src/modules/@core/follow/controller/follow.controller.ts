@@ -39,7 +39,7 @@ export class FollowController {
   }
 
   async countFollowers(data: ICountFollowersDTO) {
-    return { follwers: await this.service.countFollowers(data) };
+    return { followers: await this.service.countFollowers(data) };
   }
 
   async countFollowing(data: ICountFollowingsDTO) {

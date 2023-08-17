@@ -21,13 +21,17 @@ router.post(prefix, validate(CreateFollowSchema), async (req, res, next) => {
   }
 });
 
-router.delete(prefix, validate(DeleteFollowSchema), async (req, res, next) => {
-  try {
-    res.status(204).json(await followModule.unfollow(req.body));
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete(
+  `${prefix}/:id`,
+  validate(DeleteFollowSchema),
+  async (req, res, next) => {
+    try {
+      res.status(204).json(await followModule.unfollow({ id: req.params.id }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 router.get(
   `${prefix}/count/followers/:followingId`,

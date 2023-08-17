@@ -86,7 +86,7 @@ describe('[CONTROLLER] | FOLLOW ', () => {
       followingId: USER_FOLLOWED.id,
     });
 
-    expect(result).toStrictEqual({ follwers: 1 });
+    expect(result).toStrictEqual({ followers: 1 });
 
     expect(module.service.countFollowers).toHaveBeenCalledTimes(1);
     expect(module.service.countFollowers).toHaveBeenCalledWith({
