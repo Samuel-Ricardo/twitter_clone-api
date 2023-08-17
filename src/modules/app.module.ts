@@ -12,7 +12,7 @@ import { RoutesModule } from './router/router.module';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { PostModule } from './@core/post/post.module';
 import { LikeModule } from './@core/like/like.module';
-import { FollowModule } from '@Core';
+import { FollowModule } from './@core/follow/follow.module';
 
 const Module = new Container();
 

@@ -1,4 +1,4 @@
-import { InvalidDataError } from '@modules/error/data';
+import { InvalidDataError } from '../../../error/data';
 import { ICreateFollowDTO } from '../DTO';
 
 export class FollowPolicy {
@@ -7,7 +7,7 @@ export class FollowPolicy {
   }
 
   private static isUserFollowingHimself(follow: ICreateFollowDTO) {
-    if (follow.followerId === follow.followingId) return true;
+    if (follow.followerId !== follow.followingId) return true;
 
     throw new InvalidDataError("User can't follow himself");
   }

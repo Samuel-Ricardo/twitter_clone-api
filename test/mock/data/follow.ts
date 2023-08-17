@@ -1,19 +1,19 @@
 import { Follow, ICreateFollowDTO, IFollowDTO } from '@Core';
 import { generateValidUser } from './user';
-import { randomID } from '@modules/util/mongo';
+import { randomID } from '../../../src/modules/util/mongo';
 
-const USER_FOLLOWED = generateValidUser();
-const USER_FOLLOWER = generateValidUser();
+export const USER_FOLLOWED = generateValidUser();
+export const USER_FOLLOWER = generateValidUser();
 
-const CREATE_FOLLOW_DATA: ICreateFollowDTO = {
+export const CREATE_FOLLOW_DATA: ICreateFollowDTO = {
   followingId: USER_FOLLOWED.id,
   followerId: USER_FOLLOWER.id,
 };
 
-const FOLLOW_DATA: IFollowDTO = {
+export const FOLLOW_DATA: IFollowDTO = {
   ...CREATE_FOLLOW_DATA,
   id: randomID(),
   createdAt: new Date(),
 };
 
-const VALID_FOLLOW = Follow.create(FOLLOW_DATA);
+export const VALID_FOLLOW = Follow.create(FOLLOW_DATA);
