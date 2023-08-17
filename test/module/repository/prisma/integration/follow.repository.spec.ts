@@ -27,5 +27,21 @@ describe('[REPOSITORY] | FOLLOW', () => {
     expect(result).toHaveProperty('id');
     expect(result.followerId).toBe(CREATE_FOLLOW_DATA.followerId);
     expect(result.followingId).toBe(CREATE_FOLLOW_DATA.followingId);
+
+    follow_relation = result;
+  });
+
+  it('[INTEGRATION] | Should: get followers => [FOLLOW]', async () => {
+    const result = await repository.getFollowers({
+      followingId: follow_relation.followingId,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toBeInstanceOf(Follow);
+    expect(result[0]).toHaveProperty('id');
+    expect(result[0].followingId).toBe(follow_relation.followingId);
+    expect(result[0].followerId).toBe(follow_relation.followerId);
   });
 });
