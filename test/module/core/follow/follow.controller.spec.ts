@@ -7,7 +7,6 @@ import {
   USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
-import { resolve } from 'path';
 
 describe('[CONTROLLER] | FOLLOW ', () => {
   let module: ISimulateFollowController;
