@@ -92,4 +92,19 @@ describe('[SERVICE] | FOLLOW ', () => {
       followingId: USER_FOLLOWED.id,
     });
   });
+
+  it('[UNIT] | Should: get => [FOLLOWING]', async () => {
+    module.use_case.get_following.execute.mockResolvedValue([VALID_FOLLOW]);
+
+    const result = await module.service.getFollowings({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result).toStrictEqual([VALID_FOLLOW]);
+
+    expect(module.use_case.get_following.execute).toBeCalledTimes(1);
+    expect(module.use_case.get_following.execute).toBeCalledWith({
+      followerId: USER_FOLLOWER.id,
+    });
+  });
 });
