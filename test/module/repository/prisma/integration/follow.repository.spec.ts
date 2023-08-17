@@ -44,4 +44,18 @@ describe('[REPOSITORY] | FOLLOW', () => {
     expect(result[0].followingId).toBe(follow_relation.followingId);
     expect(result[0].followerId).toBe(follow_relation.followerId);
   });
+
+  it('[INTEGRATION] | Should: get following => [FOLLOW]', async () => {
+    const result = await repository.getFollowings({
+      followerId: follow_relation.followerId,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toBeInstanceOf(Follow);
+    expect(result[0]).toHaveProperty('id');
+    expect(result[0].followerId).toBe(follow_relation.followerId);
+    expect(result[0].followingId).toBe(follow_relation.followingId);
+  });
 });
