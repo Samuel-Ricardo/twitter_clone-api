@@ -4,6 +4,7 @@ import { MockFactory } from '@test/mock';
 import {
   CREATE_FOLLOW_DATA,
   USER_FOLLOWED,
+  USER_FOLLOWER,
   VALID_FOLLOW,
 } from '@test/mock/data/follow';
 import { resolve } from 'path';
@@ -59,6 +60,23 @@ describe('[CONTROLLER] | FOLLOW ', () => {
     expect(module.service.getFollowers).toHaveBeenCalledTimes(1);
     expect(module.service.getFollowers).toHaveBeenCalledWith({
       followingId: USER_FOLLOWED.id,
+    });
+  });
+
+  it('[UNIT] | Should: be able to [GET] => [FOLLOWING]', async () => {
+    module.service.getFollowings.mockResolvedValue([VALID_FOLLOW]);
+
+    const result = await module.controller.getFollowing({
+      followerId: USER_FOLLOWER.id,
+    });
+
+    expect(result).toStrictEqual({
+      following: [VALID_FOLLOW.toStruct()],
+    });
+
+    expect(module.service.getFollowings).toHaveBeenCalledTimes(1);
+    expect(module.service.getFollowings).toHaveBeenCalledWith({
+      followerId: USER_FOLLOWER.id,
     });
   });
 });
