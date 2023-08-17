@@ -14,10 +14,10 @@ const BASE = {
   getURL: () => {
     if (!BASE._URL) {
       // DEV Container
-      BASE._URL = process.env.DATABASE_URL;
+      // BASE._URL = process.env.DATABASE_URL;
 
       // CI Container
-      // BASE._URL = process.env.CI_DATABASE_URL
+      BASE._URL = process.env.CI_DATABASE_URL
     }
 
     return BASE._URL;
