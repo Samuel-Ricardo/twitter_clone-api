@@ -68,6 +68,15 @@ describe('[REPOSITORY] | FOLLOW', () => {
     expect(result).toBe(1);
   });
 
+  it('[INTEGRATION] | Should: count => [FOLLOWING]', async () => {
+    const result = await repository.countFollowings({
+      followerId: follow_relation.followerId,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toBe(1);
+  });
+
   it('[INTEGRATION] | Should: Delete => [FOLLOW]', async () => {
     expect(
       repository.delete({ id: follow_relation.id }),
