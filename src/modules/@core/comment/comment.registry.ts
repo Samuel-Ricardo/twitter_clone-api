@@ -1,4 +1,6 @@
 export const CommentRegistry = {
+  SERVICE: Symbol.for('COMMENT.SERVICE'),
+  CONTROLLER: Symbol.for('COMMENT.CONTROLLER'),
   USE_CASE: {
     CREATE: Symbol.for('COMMENT.USE_CASE.CREATE'),
     UPDATE: Symbol.for('COMMENT.USE_CASE.UPDATE'),

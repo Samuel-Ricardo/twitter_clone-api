@@ -6,7 +6,7 @@ import {
   GetUserCommnetsUseCase,
   UpdateCommentUseCase,
 } from '../use-case';
-import { MODULE } from '@modules/app.registry';
+import { MODULE } from '../../../app.registry';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
