@@ -5,7 +5,7 @@ npm run lint:fix
 npm run format:fix
 
 docker-compose down
-docker compose -f docker-compose.ci.yaml up --abort-on-container-exit --build
+docker compose -f docker-compose.ci.yaml up --abort-on-container-exit --build --force-recreate
 
 # npm run build
 
