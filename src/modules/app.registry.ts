@@ -8,6 +8,7 @@ import { PrismaRegistry } from './prisma';
 import { RepositoryRegistry as REPOSITORY } from './repository/repository.registry';
 import { RoutesRegistry } from './router/router.registry';
 import { MiddlewareRegistry as MIDDLEWARE } from './middleware/middleware.registry';
+import { CommentRegistry as COMMENT } from './@core/comment/comment.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -16,6 +17,7 @@ export const MODULE = {
   POST,
   LIKE,
   FOLLOW,
+  COMMENT,
   REPOSITORY,
   MIDDLEWARE,
   APP: Symbol.for('app'),
