@@ -7,7 +7,11 @@ import {
   UpdateCommentUseCase,
 } from '../use-case';
 import { MODULE } from '@modules/app.registry';
-import { ICreateCommentDTO, IUpdateCommentDTO } from '../DTO';
+import {
+  ICreateCommentDTO,
+  IDeleteCommentDTO,
+  IUpdateCommentDTO,
+} from '../DTO';
 
 @injectable()
 export class CommentService {
@@ -30,5 +34,9 @@ export class CommentService {
 
   async updateComment(data: IUpdateCommentDTO) {
     return await this.update.execute(data);
+  }
+
+  async delete(comment: IDeleteCommentDTO) {
+    return await this.deleteComment.execute(comment);
   }
 }
