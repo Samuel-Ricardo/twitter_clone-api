@@ -13,6 +13,7 @@ import { MiddlewareModule } from './middleware/middleware.module';
 import { PostModule } from './@core/post/post.module';
 import { LikeModule } from './@core/like/like.module';
 import { FollowModule } from './@core/follow/follow.module';
+import { CommentModule } from '@Core/comment/comment.module';
 
 const Module = new Container();
 
@@ -27,6 +28,7 @@ export const AppModule = Container.merge(
   PostModule,
   LikeModule,
   FollowModule,
+  CommentModule,
   RoutesModule,
   MiddlewareModule,
 );
