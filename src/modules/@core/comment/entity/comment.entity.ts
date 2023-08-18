@@ -45,4 +45,28 @@ export class Comment {
   static fromPrismaArray(comments: PrismaComment[]) {
     return comments.map((comment) => Comment.fromPrisma(comment));
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get body() {
+    return this._body;
+  }
+
+  get authorId() {
+    return this._authorId;
+  }
+
+  get postId() {
+    return this._postId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
 }
