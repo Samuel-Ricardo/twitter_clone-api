@@ -1,3 +1,3 @@
-export interface IGetCommentsByPostDTO {
+export interface IGetPostCommentsDTO {
   postId: string;
 }
