@@ -1,3 +1,3 @@
-export interface IDeleteDTO {
+export interface IDeleteCommentDTO {
   id: string;
 }
