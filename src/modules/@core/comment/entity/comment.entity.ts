@@ -1,4 +1,5 @@
 import { injectable } from 'inversify';
+import { ICommentDTO } from '../DTO/comment.dto';
 
 @injectable()
 export class Comment {
@@ -10,4 +11,15 @@ export class Comment {
     private _createdAt: Date,
     private _updatedAt: Date,
   ) {}
+
+  static create(comment: ICommentDTO) {
+    return new Comment(
+      comment.id,
+      comment.body,
+      comment.authorId,
+      comment.postId,
+      comment.createdAt,
+      comment.updatedAt,
+    );
+  }
 }
