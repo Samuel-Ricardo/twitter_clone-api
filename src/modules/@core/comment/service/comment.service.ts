@@ -11,6 +11,7 @@ import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
   IGetPostCommentsDTO,
+  IGetUserCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
 
@@ -43,5 +44,9 @@ export class CommentService {
 
   async listPostComments(comment: IGetPostCommentsDTO) {
     return await this.getPostComments.execute(comment);
+  }
+
+  async listUserCommnets(comment: IGetUserCommentsDTO) {
+    return await this.getUserCommnets.execute(comment);
   }
 }
