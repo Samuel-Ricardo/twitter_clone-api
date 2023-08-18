@@ -10,6 +10,7 @@ import { MODULE } from '@modules/app.registry';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IGetPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
 
@@ -23,7 +24,7 @@ export class CommentService {
     @inject(MODULE.COMMENT.USE_CASE.DELETE)
     private readonly deleteComment: DeleteCommentUseCase,
     @inject(MODULE.COMMENT.USE_CASE.GET.BY.POST)
-    private readonly getPostComment: GetPostCommentUseCase,
+    private readonly getPostComments: GetPostCommentUseCase,
     @inject(MODULE.COMMENT.USE_CASE.GET.BY.AUTHOR)
     private readonly getUserCommnets: GetUserCommnetsUseCase,
   ) {}
@@ -38,5 +39,9 @@ export class CommentService {
 
   async delete(comment: IDeleteCommentDTO) {
     return await this.deleteComment.execute(comment);
+  }
+
+  async listPostComments(comment: IGetPostCommentsDTO) {
+    return await this.getPostComments.execute(comment);
   }
 }
