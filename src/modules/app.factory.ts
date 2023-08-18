@@ -9,6 +9,7 @@ import { PostFactory as POST } from './@core/post/post.factory';
 import { LikeFactory as LIKE } from './@core/like/like.factory';
 import { FollowFactory as FOLLOW } from './@core/follow/follow.factory';
 import { MiddlewareFactory as MIDDLEWARE } from './middleware/middleware.factory';
+import { CommentFactory as COMMENT } from './@core/comment/comment.factory';
 
 import { Express } from 'express';
 import { RoutesFactory } from './router/router.factory';
@@ -20,6 +21,7 @@ export const MODULES = {
   POST,
   LIKE,
   FOLLOW,
+  COMMENT,
   REPOSITORY,
   MIDDLEWARE,
   APP: () => AppModule.get<Express>(MODULE.APP),
