@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import { ICommentDTO } from '../DTO/comment.dto';
 import { CommentSchema } from '../validator/comment.validator';
+import { Comment as PrismaComment } from '@prisma/client';
 
 @injectable()
 export class Comment {
@@ -35,5 +36,9 @@ export class Comment {
       comment.createdAt,
       comment.updatedAt,
     );
+  }
+
+  static fromPrisma(comment: PrismaComment) {
+    return Comment.create(comment);
   }
 }
