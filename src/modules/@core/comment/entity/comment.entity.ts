@@ -41,4 +41,8 @@ export class Comment {
   static fromPrisma(comment: PrismaComment) {
     return Comment.create(comment);
   }
+
+  static fromPrismaArray(comments: PrismaComment[]) {
+    return comments.map((comment) => Comment.fromPrisma(comment));
+  }
 }
