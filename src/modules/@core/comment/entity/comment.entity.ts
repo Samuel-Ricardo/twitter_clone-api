@@ -46,6 +46,17 @@ export class Comment {
     return comments.map((comment) => Comment.fromPrisma(comment));
   }
 
+  toStruct(): ICommentDTO {
+    return {
+      id: this._id,
+      body: this._body,
+      authorId: this._authorId,
+      postId: this._postId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+    };
+  }
+
   get id() {
     return this._id;
   }
