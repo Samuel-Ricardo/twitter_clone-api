@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run code:ci
+npm run lint:fix
+npm run format:fix
+
+docker-compose down
+docker compose -f docker-compose.ci.yaml up --abort-on-container-exit --build
+
 # npm run build
+
