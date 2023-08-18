@@ -5,6 +5,7 @@ import { PrismaRepositoryRegistry } from './prisma-repository.registry';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { PrismaLikeRepository } from './like';
 import { PrismaFollowRepository } from './follow';
+import { PrismaCommentRepository } from './comment';
 
 const Module = new Container({
   autoBindInjectable: true,
@@ -25,4 +26,8 @@ PrismaRepositoryModule.bind(PrismaRepositoryRegistry.LIKE).to(
 
 PrismaRepositoryModule.bind(PrismaRepositoryRegistry.FOLLOW).to(
   PrismaFollowRepository,
+);
+
+PrismaRepositoryModule.bind(PrismaRepositoryRegistry.COMMENT).to(
+  PrismaCommentRepository,
 );
