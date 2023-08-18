@@ -7,6 +7,7 @@ import { Comment as PrismaComment } from '@prisma/client';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IGetPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../../../@core/comment/DTO';
 
@@ -36,9 +37,17 @@ export class PrismaCommentRepository implements ICommentRepository {
     return Comment.fromPrisma(result);
   }
 
-  async delete({ id }: IDeleteCommentDTO) {
-    const result = await this.prisma.comment.delete({
-      where: { id },
+  async delete(where: IDeleteCommentDTO) {
+    await this.prisma.comment.delete({
+      where,
     });
+  }
+
+  async getPostComments({ postId }: IGetPostCommentsDTO) {
+    const result = await this.prisma.comment.findMany({
+      where: { postId },
+    });
+
+    return Comment.fromPrismaArray(result);
   }
 }
