@@ -1,3 +1,4 @@
+import { PrismaCommentRepository } from './comment';
 import { PrismaFollowRepository } from './follow';
 import { PrismaLikeRepository } from './like';
 import { PrismaPostRepository } from './post';
@@ -21,5 +22,9 @@ export const PrismaRepositoryFactory = {
   FOLLOW: () =>
     PrismaRepositoryModule.get<PrismaFollowRepository>(
       PrismaRepositoryRegistry.FOLLOW,
+    ),
+  COMMENT: () =>
+    PrismaRepositoryModule.get<PrismaCommentRepository>(
+      PrismaRepositoryRegistry.COMMENT,
     ),
 };
