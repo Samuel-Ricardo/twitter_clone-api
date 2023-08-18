@@ -10,6 +10,6 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-RUN npx prisma generate && npm run format:fix && npm run lint:fix && npm run build
+RUN npx prisma generate && npm run format:fix && npm run lint:fix
 
 #CMD ["npm", "run", "start"]
