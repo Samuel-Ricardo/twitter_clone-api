@@ -7,6 +7,7 @@ import {
   UpdateCommentUseCase,
 } from '../use-case';
 import { MODULE } from '@modules/app.registry';
+import { ICreateCommentDTO } from '../DTO';
 
 @injectable()
 export class CommentService {
@@ -22,4 +23,8 @@ export class CommentService {
     @inject(MODULE.COMMENT.USE_CASE.GET.BY.AUTHOR)
     private readonly getUserCommnets: GetUserCommnetsUseCase,
   ) {}
+
+  async comment(data: ICreateCommentDTO) {
+    return await this.create.execute(data);
+  }
 }
