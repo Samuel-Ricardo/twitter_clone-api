@@ -11,6 +11,8 @@ import {
 } from './use-case';
 
 export const CommentFactory = {
+  DEFAULT: () =>
+    CommentModule.get<CommentController>(CommentRegistry.CONTROLLER),
   SERVICE: () => CommentModule.get<CommentService>(CommentRegistry.SERVICE),
   CONTROLLER: () =>
     CommentModule.get<CommentController>(CommentRegistry.CONTROLLER),
