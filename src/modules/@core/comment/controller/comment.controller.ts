@@ -4,6 +4,8 @@ import { inject, injectable } from 'inversify';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
+  IGetPostCommentsDTO,
+  IGetUserCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
 
@@ -25,5 +27,14 @@ export class CommentController {
 
   async delete(comment: IDeleteCommentDTO) {
     return await this.service.delete(comment);
+  }
+
+  async getPostComments(post: IGetPostCommentsDTO) {
+    return { comments: await this.service.listPostComments(post) };
+  }
+
+  async getUserComments(user: IGetUserCommentsDTO) {
+    const comments = await this.service.listUserCommnets(user);
+    return { comments };
   }
 }
