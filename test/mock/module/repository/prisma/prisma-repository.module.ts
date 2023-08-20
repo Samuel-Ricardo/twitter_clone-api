@@ -20,6 +20,10 @@ import {
   mockPrismaFollowRepository,
   simulatePrismaFollowRepository,
 } from './impl/follow.repository';
+import {
+  mockPrismaCommentRepository,
+  simulatePrismaCommentRepository,
+} from './impl/comment.repository';
 
 type simulatePostType = {
   repository: PrismaPostRepository;
@@ -63,3 +67,11 @@ PrismaRepositoryMockModule.bind(
 PrismaRepositoryMockModule.bind(
   PrismaRepositoryMockRegistry.FOLLOW_DEV,
 ).toDynamicValue(simulatePrismaFollowRepository);
+
+PrismaRepositoryMockModule.bind(
+  PrismaRepositoryMockRegistry.COMMENT,
+).toDynamicValue(mockPrismaCommentRepository);
+
+PrismaRepositoryMockModule.bind(
+  PrismaRepositoryMockRegistry.COMMENT_DEV,
+).toDynamicValue(simulatePrismaCommentRepository);
