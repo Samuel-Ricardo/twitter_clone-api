@@ -1,7 +1,11 @@
 import { CommentService } from '../service';
 import { MODULE } from '@modules/app.registry';
 import { inject, injectable } from 'inversify';
-import { ICreateCommentDTO, IUpdateCommentDTO } from '../DTO';
+import {
+  ICreateCommentDTO,
+  IDeleteCommentDTO,
+  IUpdateCommentDTO,
+} from '../DTO';
 
 @injectable()
 export class CommentController {
@@ -17,5 +21,9 @@ export class CommentController {
 
   async udpate(data: IUpdateCommentDTO) {
     return { comment: await this.service.updateComment(data) };
+  }
+
+  async delete(comment: IDeleteCommentDTO) {
+    return await this.service.delete(comment);
   }
 }
