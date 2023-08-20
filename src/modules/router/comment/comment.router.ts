@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { CreateCommentSchema } from '../../@core/comment/validator';
+import {
+  CreateCommentSchema,
+  GetCommentByPostSchema,
+  GetUserCommentsSchema,
+  UpdateCommentSchema,
+} from '../../@core/comment/validator';
 import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
 
@@ -15,22 +20,42 @@ router.post(prefix, validate(CreateCommentSchema), async (req, res, next) => {
   }
 });
 
-router.get(`${prefix}/post/:postId`, async (req, res, next) => {
-  try {
-    res
-      .status(200)
-      .json(await module.getPostComments({ postId: req.params.postId }));
-  } catch (error) {
-    next(error);
-  }
-});
+router.get(
+  `${prefix}/post/:postId`,
+  validate(GetCommentByPostSchema),
+  async (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(await module.getPostComments({ postId: req.params.postId }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
-router.get(`${prefix}/user/:userId`, async (req, res, next) => {
-  try {
-    res
-      .status(200)
-      .json(await module.getUserComments({ authorId: req.params.userId }));
-  } catch (error) {
-    next(error);
-  }
-});
+router.get(
+  `${prefix}/user/:userId`,
+  validate(GetUserCommentsSchema),
+  async (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(await module.getUserComments({ authorId: req.params.userId }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+router.patch(
+  `${prefix}`,
+  validate(UpdateCommentSchema),
+  async (req, res, next) => {
+    try {
+      res.status(200).json(await module.udpate(req.body));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
