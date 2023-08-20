@@ -1,7 +1,7 @@
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
-  IGeUserCommentsDTO,
+  IGetUserCommentsDTO,
   IGetPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
@@ -12,5 +12,5 @@ export interface ICommentRepository {
   update(comment: IUpdateCommentDTO): Promise<Comment>;
   delete(comment: IDeleteCommentDTO): Promise<void>;
   getPostComments(post: IGetPostCommentsDTO): Promise<Comment[]>;
-  getUserComments(user: IGeUserCommentsDTO): Promise<Comment[]>;
+  getUserComments(user: IGetUserCommentsDTO): Promise<Comment[]>;
 }
