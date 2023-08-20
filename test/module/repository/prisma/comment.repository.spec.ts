@@ -48,4 +48,19 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
       data: { body: UPDATE_POST_COMMENT_DATA.body },
     });
   });
+
+  it('[UNIT] | Should: delete => [COMMENT]', async () => {
+    module.prisma.comment.delete.mockResolvedValue(VALID_POST_COMMENT);
+
+    expect(
+      module.repository.delete({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrowError();
+
+    expect(module.prisma.comment.delete).toHaveBeenCalledTimes(1);
+    expect(module.prisma.comment.delete).toHaveBeenCalledWith({
+      where: {
+        id: VALID_POST_COMMENT.id,
+      },
+    });
+  });
 });
