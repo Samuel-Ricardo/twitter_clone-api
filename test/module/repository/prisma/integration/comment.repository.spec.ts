@@ -6,6 +6,7 @@ import {
   MODULES,
   Comment,
   ICommentRepository,
+  RepositoryModule,
 } from '../../../../../src/modules';
 import {
   CREATE_POST_COMMENT_DATA,
@@ -78,5 +79,9 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
     expect(result.body).toBe(UPDATE_POST_COMMENT_DATA.body);
 
     commented = result;
+  });
+
+  it('[INTEGRATION] | Should: delete => [COMMENT]', async () => {
+    expect(repositoy.delete({ id: commented.id })).resolves.not.toThrowError();
   });
 });
