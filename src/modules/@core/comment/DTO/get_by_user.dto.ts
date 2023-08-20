@@ -1,3 +1,3 @@
-export interface IGeUserCommentsDTO {
+export interface IGetUserCommentsDTO {
   authorId: string;
 }
