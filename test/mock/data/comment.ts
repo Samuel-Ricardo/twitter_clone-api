@@ -31,7 +31,7 @@ export const UPDATE_POST_COMMENT_DATA: IUpdateCommentDTO = {
   body: 'UPDATED Hello World Comment! :D',
 };
 
-const UPDATE_POST_COMMENT: Comment = VALID_POST_COMMENT;
+const UPDATE_POST_COMMENT = Comment.create(VALID_POST_COMMENT_DATA);
 UPDATE_POST_COMMENT.body = UPDATE_POST_COMMENT_DATA.body;
 
 export { UPDATE_POST_COMMENT };

@@ -3,6 +3,8 @@ import { ISimulatePrismaRepository } from '@test/@types/simulate/repository';
 import { MockFactory } from '@test/mock';
 import {
   CREATE_POST_COMMENT_DATA,
+  UPDATE_POST_COMMENT,
+  UPDATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
   VALID_POST_COMMENT_DATA,
 } from '@test/mock/data/comment';
@@ -29,6 +31,21 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
     expect(module.prisma.comment.create).toHaveBeenCalledTimes(1);
     expect(module.prisma.comment.create).toHaveBeenCalledWith({
       data: CREATE_POST_COMMENT_DATA,
+    });
+  });
+
+  it('[UNIT] | Should: update => [COMMENT]', async () => {
+    module.prisma.comment.update.mockResolvedValue(UPDATE_POST_COMMENT);
+
+    const result = await module.repository.update(UPDATE_POST_COMMENT_DATA);
+
+    expect(result).toEqual(UPDATE_POST_COMMENT);
+    expect(module.prisma.comment.update).toHaveBeenCalledTimes(1);
+    expect(module.prisma.comment.update).toHaveBeenCalledWith({
+      where: {
+        id: UPDATE_POST_COMMENT_DATA.id,
+      },
+      data: { body: UPDATE_POST_COMMENT_DATA.body },
     });
   });
 });

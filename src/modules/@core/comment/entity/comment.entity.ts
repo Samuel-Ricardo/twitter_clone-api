@@ -66,7 +66,7 @@ export class Comment {
   }
 
   set body(data: string) {
-    this.body = data;
+    this._body = data;
   }
 
   get authorId() {
