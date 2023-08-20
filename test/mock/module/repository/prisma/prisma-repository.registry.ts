@@ -7,4 +7,6 @@ export const PrismaRepositoryMockRegistry = {
   LIKE_DEV: Symbol.for('PRISMA.LIKE.REPOSITORY.DEV'),
   FOLLOW: Symbol.for('PRISMA.FOLLOW>REPOSITORY'),
   FOLLOW_DEV: Symbol.for('PRISMA.FOLLOW.REPOSITORY.DEV'),
+  COMMENT: Symbol.for('PRISMA.COMMENT>REPOSITORY'),
+  COMMENT_DEV: Symbol.for('PRISMA.COMMENT.REPOSITORY.DEV'),
 };
