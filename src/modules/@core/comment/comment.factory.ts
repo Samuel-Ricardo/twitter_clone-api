@@ -1,5 +1,6 @@
 import { CommentModule } from './comment.module';
 import { CommentRegistry } from './comment.registry';
+import { CommentController } from './controller';
 import { CommentService } from './service/comment.service';
 import {
   CreateCommentUseCase,
@@ -11,6 +12,8 @@ import {
 
 export const CommentFactory = {
   SERVICE: () => CommentModule.get<CommentService>(CommentRegistry.SERVICE),
+  CONTROLLER: () =>
+    CommentModule.get<CommentController>(CommentRegistry.CONTROLLER),
   USE_CASE: {
     CREATE: () =>
       CommentModule.get<CreateCommentUseCase>(CommentRegistry.USE_CASE.CREATE),
