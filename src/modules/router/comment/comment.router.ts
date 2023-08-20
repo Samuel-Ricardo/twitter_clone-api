@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   CreateCommentSchema,
+  DeleteCommentSchema,
   GetCommentByPostSchema,
   GetUserCommentsSchema,
   UpdateCommentSchema,
@@ -59,3 +60,17 @@ router.patch(
     }
   },
 );
+
+router.delete(
+  `${prefix}`,
+  validate(DeleteCommentSchema),
+  async (req, res, next) => {
+    try {
+      res.status(204).json(await module.delete(req.body));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+export const comment = { router, prefix };
