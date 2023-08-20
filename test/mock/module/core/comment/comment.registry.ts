@@ -1,4 +1,6 @@
 export const CommentMockRegistry = {
+  CONTROLLER: Symbol.for('MOCK:>COMMENT.CONTROLLER'),
+  CONTROLLER_DEV: Symbol.for('MOCK:>COMMENT.CONTROLLER_DEV'),
   SERVICE: Symbol.for('MOCK:>COMMENT.SERVICE'),
   SERVICE_DEV: Symbol.for('MOCK:>COMMENT.SERVICE_DEV'),
   USE_CASE: {
