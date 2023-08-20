@@ -11,11 +11,11 @@ import { validate } from '../../middleware/validator';
 
 const prefix = '/comment';
 const router = Router();
-const module = MODULES.COMMENT.DEFAULT();
+const comment_module = MODULES.COMMENT.DEFAULT();
 
 router.post(prefix, validate(CreateCommentSchema), async (req, res, next) => {
   try {
-    res.status(201).json(await module.create(req.body));
+    res.status(201).json(await comment_module.create(req.body));
   } catch (error) {
     next(error);
   }
@@ -28,7 +28,9 @@ router.get(
     try {
       res
         .status(200)
-        .json(await module.getPostComments({ postId: req.params.postId }));
+        .json(
+          await comment_module.getPostComments({ postId: req.params.postId }),
+        );
     } catch (error) {
       next(error);
     }
@@ -42,7 +44,9 @@ router.get(
     try {
       res
         .status(200)
-        .json(await module.getUserComments({ authorId: req.params.userId }));
+        .json(
+          await comment_module.getUserComments({ authorId: req.params.userId }),
+        );
     } catch (error) {
       next(error);
     }
@@ -54,7 +58,7 @@ router.patch(
   validate(UpdateCommentSchema),
   async (req, res, next) => {
     try {
-      res.status(200).json(await module.udpate(req.body));
+      res.status(200).json(await comment_module.udpate(req.body));
     } catch (error) {
       next(error);
     }
@@ -66,7 +70,7 @@ router.delete(
   validate(DeleteCommentSchema),
   async (req, res, next) => {
     try {
-      res.status(204).json(await module.delete(req.body));
+      res.status(204).json(await comment_module.delete(req.body));
     } catch (error) {
       next(error);
     }
