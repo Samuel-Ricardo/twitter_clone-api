@@ -9,9 +9,19 @@ import {
 } from '../../../../../src/modules/@core/comment/use-case';
 import { CommentMockRegistry } from './comment.registry';
 import { CommentService } from '../../../../../src/modules/@core/comment/service';
+import { CommentController } from '../../../../../src/modules/@core/comment/controller';
 import { ISimulateCommentService } from '@test/@types/simulate/comment';
+import { ISimulateController } from '@test/@types/simulate/controller';
 
 export const CommentMockFactory = {
+  CONTROLLER: () =>
+    CommentMockModule.get<DeepMockProxy<CommentController>>(
+      CommentMockRegistry.CONTROLLER,
+    ),
+  CONTROLLER_DEV: () =>
+    CommentMockModule.get<
+      ISimulateController<CommentService, CommentController>
+    >(CommentMockRegistry.CONTROLLER_DEV),
   SERVICE: () =>
     CommentMockModule.get<DeepMockProxy<CommentService>>(
       CommentMockRegistry.SERVICE,
