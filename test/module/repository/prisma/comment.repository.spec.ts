@@ -63,4 +63,21 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
       },
     });
   });
+
+  it('[UNIT] | Should: find by post => [COMMENT]', async () => {
+    module.prisma.comment.findMany.mockResolvedValue([VALID_POST_COMMENT]);
+
+    const result = await module.repository.getPostComments({
+      postId: VALID_POST_COMMENT.postId,
+    });
+
+    expect(result).toEqual([VALID_POST_COMMENT]);
+
+    expect(module.prisma.comment.findMany).toHaveBeenCalledTimes(1);
+    expect(module.prisma.comment.findMany).toHaveBeenCalledWith({
+      where: {
+        postId: VALID_POST_COMMENT.postId,
+      },
+    });
+  });
 });
