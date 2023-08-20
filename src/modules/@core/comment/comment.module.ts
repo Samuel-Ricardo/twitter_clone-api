@@ -9,6 +9,7 @@ import {
 } from './use-case';
 import { RepositoryModule } from '../../repository/repository.module';
 import { CommentService } from './service/comment.service';
+import { CommentController } from './controller';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -25,3 +26,4 @@ CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.AUTHOR).to(
 );
 
 CommentModule.bind(CommentRegistry.SERVICE).to(CommentService);
+CommentModule.bind(CommentRegistry.CONTROLLER).to(CommentController);
