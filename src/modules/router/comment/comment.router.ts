@@ -14,3 +14,13 @@ router.post(prefix, validate(CreateCommentSchema), async (req, res, next) => {
     next(error);
   }
 });
+
+router.get(`${prefix}/post/:postId`, async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(await module.getPostComments({ postId: req.params.postId }));
+  } catch (error) {
+    next(error);
+  }
+});
