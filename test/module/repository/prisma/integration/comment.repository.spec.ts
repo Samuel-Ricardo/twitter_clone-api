@@ -49,6 +49,20 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
     expect(result[0]).toStrictEqual(commented);
   });
 
+  it('[INTEGRATION] | Should: find by [USER] => [COMMENT]', async () => {
+    const result = await repositoy.getUserComments({
+      authorId: commented.authorId,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toBeInstanceOf(Comment);
+
+    expect(result[0]).toHaveProperty('_id');
+    expect(result[0]).toStrictEqual(commented);
+  });
+
   it('[INTEGRATION] | Should: Update => [COMMENT]', async () => {
     const result = await repositoy.update({
       id: commented.id,
