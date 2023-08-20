@@ -1,3 +1,4 @@
+import { CommentService } from '../../../../src/modules/@core/comment/service';
 import {
   CreateCommentUseCase,
   GetPostCommentUseCase,
@@ -5,11 +6,10 @@ import {
   DeleteCommentUseCase,
   UpdateCommentUseCase,
 } from '../../../../src/modules/@core/comment/use-case';
-import { FollowService } from '../../../../src/modules/@core/follow/service';
 import { DeepMockProxy } from 'jest-mock-extended';
 
 export interface ISimulateCommentService {
-  service: FollowService;
+  service: CommentService;
   use_case: {
     create: DeepMockProxy<CreateCommentUseCase>;
     update: DeepMockProxy<UpdateCommentUseCase>;
