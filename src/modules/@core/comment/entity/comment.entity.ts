@@ -65,6 +65,10 @@ export class Comment {
     return this._body;
   }
 
+  set body(data: string) {
+    this.body = data;
+  }
+
   get authorId() {
     return this._authorId;
   }

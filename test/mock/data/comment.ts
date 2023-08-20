@@ -4,6 +4,7 @@ import { randomID } from '../../../src/modules/util/mongo';
 import {
   ICommentDTO,
   ICreateCommentDTO,
+  IUpdateCommentDTO,
 } from '../../../src/modules/@core/comment/DTO';
 import { Comment } from '../../../src/modules/@core/comment/entity';
 
@@ -23,4 +24,9 @@ export const VALID_POST_COMMENT_DATA: ICommentDTO = {
   updatedAt: new Date(),
 };
 
-export const VALID_POST_LIKE = Comment.create(VALID_POST_COMMENT_DATA);
+export const VALID_POST_COMMENT = Comment.create(VALID_POST_COMMENT_DATA);
+
+export const UPDATE_POST_COMMENT_DATA: IUpdateCommentDTO = {
+  id: VALID_POST_COMMENT.id,
+  body: 'UPDATED Hello World Comment! :D',
+};
