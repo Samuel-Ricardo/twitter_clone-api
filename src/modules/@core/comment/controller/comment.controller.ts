@@ -1,6 +1,7 @@
 import { CommentService } from '../service';
 import { MODULE } from '@modules/app.registry';
 import { inject, injectable } from 'inversify';
+import { ICreateCommentDTO } from '../DTO';
 
 @injectable()
 export class CommentController {
@@ -9,5 +10,8 @@ export class CommentController {
     private readonly service: CommentService,
   ) {}
 
-  // async create
+  async create(data: ICreateCommentDTO) {
+    const comment = await this.service.comment(data);
+    return { comment };
+  }
 }
