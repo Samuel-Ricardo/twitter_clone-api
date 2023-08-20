@@ -3,11 +3,10 @@ import { inject, injectable } from 'inversify';
 import { PrismaClient } from '@prisma/client';
 import { ICommentRepository } from '../../../@core/comment/repository/comment.repository';
 import { Comment } from '../../../@core/comment/entity';
-import { Comment as PrismaComment } from '@prisma/client';
 import {
   ICreateCommentDTO,
   IDeleteCommentDTO,
-  IGeUserCommentsDTO,
+  IGetUserCommentsDTO,
   IGetPostCommentsDTO,
   IUpdateCommentDTO,
 } from '../../../@core/comment/DTO';
@@ -52,7 +51,7 @@ export class PrismaCommentRepository implements ICommentRepository {
     return Comment.fromPrismaArray(result);
   }
 
-  async getUserComments({ authorId }: IGeUserCommentsDTO) {
+  async getUserComments({ authorId }: IGetUserCommentsDTO) {
     const result = await this.prisma.comment.findMany({
       where: { authorId },
     });
