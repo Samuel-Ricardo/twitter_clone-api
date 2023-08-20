@@ -1,12 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { PrismaRepositoryMockModule } from './prisma-repository.module';
-import { PrismaUserRepository, PrismaPostRepository } from '@modules';
+import {
+  PrismaUserRepository,
+  PrismaPostRepository,
+  PrismaCommentRepository,
+} from '@modules';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 import { PrismaLikeRepository } from '@modules/repository/prisma/like';
 import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
 import { PrismaFollowRepository } from '@modules/repository/prisma/follow';
 import { ISimulateFollowRepository } from '@test/@types/simulate/follow/repository';
+import { ISimulatePrismaRepository } from '@test/@types/simulate/repository';
 
 type simulatePostType = {
   repository: PrismaPostRepository;
@@ -46,4 +51,12 @@ export const PrismaRepositoryFactoryMock = {
     PrismaRepositoryMockModule.get<ISimulateFollowRepository>(
       PrismaRepositoryMockRegistry.FOLLOW_DEV,
     ),
+  COMMENT: () =>
+    PrismaRepositoryMockModule.get<DeepMockProxy<PrismaCommentRepository>>(
+      PrismaRepositoryMockRegistry.COMMENT,
+    ),
+  COMMENT_DEV: () =>
+    PrismaRepositoryMockModule.get<
+      ISimulatePrismaRepository<PrismaCommentRepository>
+    >(PrismaRepositoryMockRegistry.COMMENT_DEV),
 };
