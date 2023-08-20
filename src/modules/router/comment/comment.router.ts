@@ -24,3 +24,13 @@ router.get(`${prefix}/post/:postId`, async (req, res, next) => {
     next(error);
   }
 });
+
+router.get(`${prefix}/user/:userId`, async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(await module.getUserComments({ authorId: req.params.userId }));
+  } catch (error) {
+    next(error);
+  }
+});
