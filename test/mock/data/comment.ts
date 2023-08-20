@@ -30,3 +30,8 @@ export const UPDATE_POST_COMMENT_DATA: IUpdateCommentDTO = {
   id: VALID_POST_COMMENT.id,
   body: 'UPDATED Hello World Comment! :D',
 };
+
+const UPDATE_POST_COMMENT: Comment = VALID_POST_COMMENT;
+UPDATE_POST_COMMENT.body = UPDATE_POST_COMMENT_DATA.body;
+
+export { UPDATE_POST_COMMENT };
