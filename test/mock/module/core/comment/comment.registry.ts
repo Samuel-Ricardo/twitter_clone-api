@@ -1,4 +1,5 @@
 export const CommentMockRegistry = {
+  SERICE: Symbol.for('MOCK:>COMMENT.SERVICE'),
   USE_CASE: {
     CREATE: Symbol.for('MOCK:>COMMENT.USE_CASE.CREATE'),
     UPDATE: Symbol.for('MOCK:>COMMENT.USE_CASE.UPDATE'),
