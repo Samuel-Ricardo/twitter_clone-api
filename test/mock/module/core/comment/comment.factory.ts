@@ -8,8 +8,18 @@ import {
   UpdateCommentUseCase,
 } from '../../../../../src/modules/@core/comment/use-case';
 import { CommentMockRegistry } from './comment.registry';
+import { CommentService } from '../../../../../src/modules/@core/comment/service';
+import { ISimulateCommentService } from '@test/@types/simulate/comment';
 
 export const CommentMockFactory = {
+  SERVICE: () =>
+    CommentMockModule.get<DeepMockProxy<CommentService>>(
+      CommentMockRegistry.SERVICE,
+    ),
+  SERVICE_DEV: () =>
+    CommentMockModule.get<ISimulateCommentService>(
+      CommentMockRegistry.SERVICE_DEV,
+    ),
   USE_CASE: {
     CREATE: () =>
       CommentMockModule.get<DeepMockProxy<CreateCommentUseCase>>(
