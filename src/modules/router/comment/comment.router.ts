@@ -9,7 +9,7 @@ import {
 import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
 
-const prefix = '/comment';
+const prefix = '/comments';
 const router = Router();
 const comment_module = MODULES.COMMENT.DEFAULT();
 
@@ -38,7 +38,7 @@ router.get(
 );
 
 router.get(
-  `${prefix}/user/:userId`,
+  `${prefix}/author/:userId`,
   validate(GetUserCommentsSchema),
   async (req, res, next) => {
     try {
