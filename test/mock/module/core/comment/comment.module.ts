@@ -7,7 +7,8 @@ import {
   mockGetUserCommentsUseCase,
 } from './use-case';
 import { CommentMockRegistry } from './comment.registry';
-import { simulateCommentService } from './service';
+import { mockCommentService, simulateCommentService } from './service';
+import { mockCommentController, simulateCommentController } from './controller';
 
 export const CommentMockModule = new Container({ autoBindInjectable: true });
 
@@ -28,9 +29,16 @@ CommentMockModule.bind(
 ).toDynamicValue(mockGetUserCommentsUseCase);
 
 CommentMockModule.bind(CommentMockRegistry.SERVICE).toDynamicValue(
-  mockCreateCommentUseCase,
+  mockCommentService,
 );
 
 CommentMockModule.bind(CommentMockRegistry.SERVICE_DEV).toDynamicValue(
   simulateCommentService,
+);
+
+CommentMockModule.bind(CommentMockRegistry.CONTROLLER).toDynamicValue(
+  mockCommentController,
+);
+CommentMockModule.bind(CommentMockRegistry.CONTROLLER_DEV).toDynamicValue(
+  simulateCommentController,
 );
