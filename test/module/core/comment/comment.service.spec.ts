@@ -6,6 +6,7 @@ import {
   VALID_POST_COMMENT,
   VALID_POST_COMMENT_DATA,
   VALID_POST,
+  VALID_USER,
 } from '@test/mock/data/comment';
 
 describe('[SERVICE] | COMMENT', () => {
@@ -74,6 +75,23 @@ describe('[SERVICE] | COMMENT', () => {
     expect(module.use_case.get_post_comments.execute).toBeCalledTimes(1);
     expect(module.use_case.get_post_comments.execute).toBeCalledWith({
       postId: VALID_POST.id,
+    });
+  });
+
+  it('[UNIT] | Should: get by [USER] => [COMMENT]', async () => {
+    module.use_case.get_user_comments.execute.mockResolvedValue([
+      VALID_POST_COMMENT,
+    ]);
+
+    const result = await module.service.listUserCommnets({
+      authorId: VALID_USER.id,
+    });
+
+    expect(result).toStrictEqual([VALID_POST_COMMENT]);
+
+    expect(module.use_case.get_user_comments.execute).toBeCalledTimes(1);
+    expect(module.use_case.get_user_comments.execute).toBeCalledWith({
+      authorId: VALID_USER.id,
     });
   });
 });
