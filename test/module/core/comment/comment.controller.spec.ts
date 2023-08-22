@@ -63,4 +63,18 @@ describe('[CONTROLLER] | COMMENT', () => {
       id: VALID_POST_COMMENT.id,
     });
   });
+
+  it('[UNIT] | Should: get by [POST] => [COMMENT]', async () => {
+    module.service.listPostComments.mockResolvedValue([VALID_POST_COMMENT]);
+
+    const result = await module.controller.getPostComments({
+      postId: VALID_POST_COMMENT.postId,
+    });
+
+    expect(result).toStrictEqual({ comments: [VALID_POST_COMMENT.toStruct()] });
+    expect(module.service.listPostComments).toHaveBeenCalledTimes(1);
+    expect(module.service.listPostComments).toHaveBeenCalledWith({
+      postId: VALID_POST_COMMENT.postId,
+    });
+  });
 });
