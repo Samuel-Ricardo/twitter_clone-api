@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme",
   "dependencies": {
-    "@prisma/client": "^5.0.0",
+    "@prisma/client": "^5.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
