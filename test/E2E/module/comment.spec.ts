@@ -46,4 +46,21 @@ describe('[MODULE] | COMMENT', () => {
     expect(body.comments[0].authorId).toEqual(VALID_POST_COMMENT.authorId);
     expect(body.comments[0].postId).toEqual(VALID_POST_COMMENT.postId);
   });
+
+  it('[E2E] | should: get from [USER] => [COMMENT]', async () => {
+    const response = await supertest(app).get(
+      `${comment.prefix}/user/${VALID_POST_COMMENT.authorId}`,
+    );
+    const body = response.body;
+
+    expect(response.status).toBe(200);
+    expect(body.comments).toBeDefined();
+    expect(body.comments).toBeInstanceOf(Array);
+    expect(body.comments.length).toBeGreaterThanOrEqual(1);
+    expect(body.comments[0]).toHaveProperty('id');
+    expect(body.comments[0].createdAt).toBeDefined();
+    expect(body.comments[0].body).toEqual(VALID_POST_COMMENT.body);
+    expect(body.comments[0].authorId).toEqual(VALID_POST_COMMENT.authorId);
+    expect(body.comments[0].postId).toEqual(VALID_POST_COMMENT.postId);
+  });
 });
