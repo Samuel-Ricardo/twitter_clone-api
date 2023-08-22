@@ -5,6 +5,7 @@ import { UserMockFactory as USER } from './core/user';
 import { PostMockFactory as POST } from './core/post';
 import { MockLikeFactory as LIKE } from './core/like';
 import { FollowMockFactory as FOLLOW } from './core/follow';
+import { CommentMockFactory as COMMENT } from './core/comment';
 
 export const MockFactory = {
   ...PrismaMockFactory,
@@ -14,4 +15,5 @@ export const MockFactory = {
   POST,
   LIKE,
   FOLLOW,
+  COMMENT,
 };

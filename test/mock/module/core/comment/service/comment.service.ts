@@ -27,9 +27,9 @@ export const simulateCommentService = ({
   );
   const get_user_comments = container.get<
     DeepMockProxy<GetUserCommnetsUseCase>
-  >(MOCK_MODULE.COMMENT.USE_CASE.GET.USER);
+  >(MOCK_MODULE.COMMENT.USE_CASE.GET.BY.AUTHOR);
   const get_post_comments = container.get<DeepMockProxy<GetPostCommentUseCase>>(
-    MOCK_MODULE.COMMENT.USE_CASE.GET.POST,
+    MOCK_MODULE.COMMENT.USE_CASE.GET.BY.POST,
   );
 
   const service = new CommentService(
