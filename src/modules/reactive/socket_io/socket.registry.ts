@@ -1,3 +1,3 @@
-export const SocketIORegistry = {
+export const SocketRegistry = {
   IO: Symbol.for('socket.io'),
 };

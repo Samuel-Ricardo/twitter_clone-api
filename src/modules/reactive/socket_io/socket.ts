@@ -47,7 +47,7 @@ export const setup = ({ http, events, global }: ISocketIOConfig) => {
     }); // emit global event
   });
 
-  if (process.env.NODE_ENV !== 'production') globalForSocket.io = io;
+  if (ENV.NODE_ENV !== 'production') globalForSocket.io = io;
 
   return io;
 };
