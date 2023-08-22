@@ -50,4 +50,17 @@ describe('[CONTROLLER] | COMMENT', () => {
       UPDATE_POST_COMMENT_DATA,
     );
   });
+
+  it('[UNIT] | Should: delete => [COMMENT]', async () => {
+    module.service.delete.mockResolvedValue();
+
+    expect(
+      module.controller.delete({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.service.delete).toHaveBeenCalledTimes(1);
+    expect(module.service.delete).toHaveBeenCalledWith({
+      id: VALID_POST_COMMENT.id,
+    });
+  });
 });
