@@ -1,3 +1,5 @@
-export const WebsocketRegistry = {
-  SOCKETIO: Symbol.for('SOCKET.IO'),
+import { SocketRegistry as SOCKET } from './socket_io/socket.registry';
+
+export const ReactiveRegistry = {
+  SOCKET,
 };
