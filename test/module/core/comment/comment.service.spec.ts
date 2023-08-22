@@ -40,9 +40,18 @@ describe('[SERVICE] | COMMENT', () => {
     expect(result).toStrictEqual(UPDATE_POST_COMMENT);
     expect(result.id).toEqual(VALID_POST_COMMENT.id);
     expect(result.body).not.toEqual(VALID_POST_COMMENT.body);
+
     expect(module.use_case.update.execute).toBeCalledTimes(1);
     expect(module.use_case.update.execute).toBeCalledWith(
       UPDATE_POST_COMMENT_DATA,
     );
+  });
+
+  it('[UNIT] | Should: delete => Comment', async () => {
+    module.use_case.deleteComment.execute.mockResolvedValue();
+
+    expect(
+      module.service.delete({ id: VALID_POST_COMMENT.id }),
+    ).resolves.not.toThrow();
   });
 });
