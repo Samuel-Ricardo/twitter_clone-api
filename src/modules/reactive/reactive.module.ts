@@ -1,3 +1,6 @@
 import { Container } from 'inversify';
+import { SocketModule } from './socket_io/socket.module';
 
-export const WebSocketModule = new Container({ autoBindInjectable: true });
+const Module = new Container({ autoBindInjectable: true });
+
+export const ReactiveModule = Container.merge(Module, SocketModule);
