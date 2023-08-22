@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
-import { SocketIORegistry } from './socket.registry';
+import { SocketRegistry } from './socket.registry';
 import { setup } from './socket';
 
-export const SocketIOModule = new Container({ autoBindInjectable: true });
+export const SocketModule = new Container({ autoBindInjectable: true });
 
-SocketIOModule.bind<typeof setup>(SocketIORegistry.IO).toConstantValue(setup);
+SocketModule.bind<typeof setup>(SocketRegistry.IO).toConstantValue(setup);
