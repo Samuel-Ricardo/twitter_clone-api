@@ -66,11 +66,11 @@ router.patch(
 );
 
 router.delete(
-  `${prefix}`,
+  `${prefix}/:id`,
   validate(DeleteCommentSchema),
   async (req, res, next) => {
     try {
-      res.status(204).json(await comment_module.delete(req.body));
+      res.status(204).json(await comment_module.delete({ id: req.params.id }));
     } catch (error) {
       next(error);
     }
