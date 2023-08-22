@@ -17,12 +17,12 @@ export class CommentController {
   ) {}
 
   async create(data: ICreateCommentDTO) {
-    const comment = await this.service.comment(data);
+    const comment = (await this.service.comment(data)).toStruct();
     return { comment };
   }
 
   async udpate(data: IUpdateCommentDTO) {
-    return { comment: await this.service.updateComment(data) };
+    return { comment: (await this.service.updateComment(data)).toStruct() };
   }
 
   async delete(comment: IDeleteCommentDTO) {
@@ -30,11 +30,15 @@ export class CommentController {
   }
 
   async getPostComments(post: IGetPostCommentsDTO) {
-    return { comments: await this.service.listPostComments(post) };
+    return {
+      comments: (await this.service.listPostComments(post)).map((c) =>
+        c.toStruct(),
+      ),
+    };
   }
 
   async getUserComments(user: IGetUserCommentsDTO) {
     const comments = await this.service.listUserCommnets(user);
-    return { comments };
+    return { comments: comments.map((c) => c.toStruct()) };
   }
 }
