@@ -7,3 +7,4 @@ export * from './logger';
 export * from './manager';
 export * from './prisma';
 export * from './repository';
+export * from './@core';
