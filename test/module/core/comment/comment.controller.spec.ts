@@ -65,16 +65,33 @@ describe('[CONTROLLER] | COMMENT', () => {
   });
 
   it('[UNIT] | Should: get by [POST] => [COMMENT]', async () => {
+
     module.service.listPostComments.mockResolvedValue([VALID_POST_COMMENT]);
 
     const result = await module.controller.getPostComments({
       postId: VALID_POST_COMMENT.postId,
-    });
+    })
 
-    expect(result).toStrictEqual({ comments: [VALID_POST_COMMENT.toStruct()] });
+    expect(result).toStrictEqual({comments: [VALID_POST_COMMENT.toStruct()]});
     expect(module.service.listPostComments).toHaveBeenCalledTimes(1);
     expect(module.service.listPostComments).toHaveBeenCalledWith({
       postId: VALID_POST_COMMENT.postId,
-    });
-  });
+    })
+  })
+
+  it('[UNIT] | Should: get by [USER] => [COMMENT]', async () => {
+
+    module.service.listUserCommnets.mockResolvedValue([VALID_POST_COMMENT]);
+
+    const result = await module.controller.getUserComments({
+      authorId: VALID_POST_COMMENT.authorId,
+    })
+
+    expect(result).toStrictEqual({comments: [VALID_POST_COMMENT.toStruct()]});
+    expect(module.service.listUserCommnets).toHaveBeenCalledTimes(1);
+    expect(module.service.listUserCommnets).toHaveBeenCalledWith({
+      authorId: VALID_POST_COMMENT.authorId,
+    })
+  })
+
 });
