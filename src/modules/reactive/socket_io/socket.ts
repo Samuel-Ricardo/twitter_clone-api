@@ -2,9 +2,15 @@ import { logger } from '@logger';
 import { Server, Socket } from 'socket.io';
 import { EVENTS } from '../events.config';
 import { ISocketIOConfig } from '@Type/socket/config';
+import { ENV } from '@env';
+
+const globalForSocket = globalThis as unknown as {
+  io: Server | undefined;
+};
 
 export const setup = ({ http, events, global }: ISocketIOConfig) => {
-  const io = new Server(http);
+  const io = globalForSocket.io ?? new Server(http);
+
   const { HEALTH_CHECK, HANDSHAKE, CONNECTION, DISCONNECT } = EVENTS;
 
   io.on(CONNECTION, (socket: Socket) => {
@@ -40,6 +46,8 @@ export const setup = ({ http, events, global }: ISocketIOConfig) => {
       data: socket,
     }); // emit global event
   });
+
+  if (process.env.NODE_ENV !== 'production') globalForSocket.io = io;
 
   return io;
 };
