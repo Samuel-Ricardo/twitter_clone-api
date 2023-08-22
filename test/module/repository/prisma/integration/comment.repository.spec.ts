@@ -6,7 +6,6 @@ import {
   MODULES,
   Comment,
   ICommentRepository,
-  RepositoryModule,
 } from '../../../../../src/modules';
 import {
   CREATE_POST_COMMENT_DATA,
