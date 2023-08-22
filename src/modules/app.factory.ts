@@ -10,6 +10,7 @@ import { LikeFactory as LIKE } from './@core/like/like.factory';
 import { FollowFactory as FOLLOW } from './@core/follow/follow.factory';
 import { MiddlewareFactory as MIDDLEWARE } from './middleware/middleware.factory';
 import { CommentFactory as COMMENT } from './@core/comment/comment.factory';
+import { ReactiveFactory as REACTIVE } from './reactive/reactive.factory';
 
 import { Express } from 'express';
 import { RoutesFactory } from './router/router.factory';
@@ -24,6 +25,7 @@ export const MODULES = {
   COMMENT,
   REPOSITORY,
   MIDDLEWARE,
+  REACTIVE,
   APP: () => AppModule.get<Express>(MODULE.APP),
   BODY_PARSER: () => AppModule.get<any>(MODULE.BODY_PARSER),
 };
