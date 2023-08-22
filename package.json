@@ -48,6 +48,7 @@
     "mongodb": "^5.7.0",
     "prisma": "^5.0.0",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.7.2",
     "swagger-ui-express": "^5.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6",
