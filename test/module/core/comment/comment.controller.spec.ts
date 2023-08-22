@@ -33,4 +33,21 @@ describe('[CONTROLLER] | COMMENT', () => {
       VALID_POST_COMMENT_DATA,
     );
   });
+
+  it('[UNIT] | Should: update => [COMMENT]', async () => {
+    module.service.updateComment.mockResolvedValue(UPDATE_POST_COMMENT);
+
+    const result = await module.controller.udpate(UPDATE_POST_COMMENT_DATA);
+
+    expect(result).toStrictEqual({ comment: UPDATE_POST_COMMENT.toStruct() });
+
+    expect(result.comment.id).toEqual(VALID_POST_COMMENT.id);
+    expect(result.comment.body).not.toEqual(VALID_POST_COMMENT.body);
+    expect(result.comment.body).toEqual(UPDATE_POST_COMMENT_DATA.body);
+
+    expect(module.service.updateComment).toHaveBeenCalledTimes(1);
+    expect(module.service.updateComment).toHaveBeenCalledWith(
+      UPDATE_POST_COMMENT_DATA,
+    );
+  });
 });
