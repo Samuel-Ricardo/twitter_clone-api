@@ -7,9 +7,10 @@ import { Comment } from '../../../src/modules';
 import { app } from '@/app';
 import {
   CREATE_POST_COMMENT_DATA,
+  UPDATE_POST_COMMENT_DATA,
   VALID_POST_COMMENT,
 } from '@test/mock/data/comment';
-import { comment } from '@modules/router/comment';
+import { comment } from '../../../src/modules/router/comment';
 
 describe('[MODULE] | COMMENT', () => {
   let commented: Comment;
@@ -47,9 +48,9 @@ describe('[MODULE] | COMMENT', () => {
     expect(body.comments[0].postId).toEqual(VALID_POST_COMMENT.postId);
   });
 
-  it('[E2E] | should: get from [USER] => [COMMENT]', async () => {
+  it('[E2E] | should: get from [AUTHOR] => [COMMENT]', async () => {
     const response = await supertest(app).get(
-      `${comment.prefix}/user/${VALID_POST_COMMENT.authorId}`,
+      `${comment.prefix}/author/${VALID_POST_COMMENT.authorId}`,
     );
     const body = response.body;
 
@@ -62,5 +63,27 @@ describe('[MODULE] | COMMENT', () => {
     expect(body.comments[0].body).toEqual(VALID_POST_COMMENT.body);
     expect(body.comments[0].authorId).toEqual(VALID_POST_COMMENT.authorId);
     expect(body.comments[0].postId).toEqual(VALID_POST_COMMENT.postId);
+  });
+
+  it('[E2E] | should: update => [COMMENT]', async () => {
+    const response = await supertest(app).patch(comment.prefix).send({
+      id: commented.id,
+      body: UPDATE_POST_COMMENT_DATA.body,
+    });
+
+    const body = response.body;
+
+    expect(response.status).toBe(200);
+    expect(body.comment.id).toEqual(commented.id);
+    expect(body.comment.body).toEqual(UPDATE_POST_COMMENT_DATA.body);
+    expect(body.comment.body).not.toEqual(commented.body);
+  });
+
+  it('[E2E] | Should: delete => [COMMENT]', async () => {
+    const response = await supertest(app).delete(
+      `${comment.prefix}/${commented.id}`,
+    );
+
+    expect(response.status).toBe(204);
   });
 });
