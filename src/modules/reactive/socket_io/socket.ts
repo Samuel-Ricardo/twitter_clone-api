@@ -1,6 +1,6 @@
 import { logger } from '@logger';
 import { Server, Socket } from 'socket.io';
-import { EVENTS } from '../events.config';
+import { EVENTS } from '../reactive.config';
 import { ISocketIOConfig } from '@Type/socket/config';
 import { ENV } from '@env';
 
