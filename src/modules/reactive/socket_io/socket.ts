@@ -2,7 +2,6 @@ import { logger } from '@logger';
 import { Server, Socket } from 'socket.io';
 import { EVENTS } from '../reactive.config';
 import { ISocketIOConfig } from '@Type/socket/config';
-import { ENV } from '@env';
 
 const globalForSocket = globalThis as unknown as {
   io: Server | undefined;
@@ -50,7 +49,7 @@ export const setup = (config?: ISocketIOConfig) => {
       );
     });
 
-    // io.emit(HEALTH_CHECK, {setup: true}); // emit global event
+    io.emit(HEALTH_CHECK, { setup: true }); // emit global event
 
     socket.emit(START.CONNECTION, { connected: true });
 
