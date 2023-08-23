@@ -10,6 +10,7 @@ import { RoutesRegistry } from './router/router.registry';
 import { MiddlewareRegistry as MIDDLEWARE } from './middleware/middleware.registry';
 import { CommentRegistry as COMMENT } from './@core/comment/comment.registry';
 import { ReactiveRegistry as REACTIVE } from './reactive/reactive.registry';
+import { ServerRegistry as SERVER } from './server/server.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -22,7 +23,9 @@ export const MODULE = {
   REPOSITORY,
   MIDDLEWARE,
   REACTIVE,
+  SERVER,
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
+  SERVER: Symbol.for('app.server'),
 };
