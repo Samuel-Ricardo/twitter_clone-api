@@ -36,6 +36,7 @@
   "homepage": "https://github.com/Samuel-Ricardo/twitter_clone-api#readme",
   "dependencies": {
     "@prisma/client": "^5.0.0",
+    "@types/socket.io": "^3.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
@@ -49,6 +50,7 @@
     "prisma": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
     "swagger-ui-express": "^5.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6",
