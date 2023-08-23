@@ -8,27 +8,36 @@ const globalForSocket = globalThis as unknown as {
   io: Server | undefined;
 };
 
-export const setup = ({ http, events, global }: ISocketIOConfig) => {
-  const io = globalForSocket.io ?? new Server(http);
+export const setup = (config?: ISocketIOConfig) => {
+  if (!config) return globalForSocket.io;
 
-  const { HEALTH_CHECK, HANDSHAKE, CONNECTION, DISCONNECT } = EVENTS;
+  const { events, server } = config;
+
+  const io = globalForSocket.io ?? new Server(server);
+
+  const { HEALTH_CHECK, HANDSHAKE, CONNECTION, DISCONNECT, START } = EVENTS;
+
+  logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
   io.on(CONNECTION, (socket: Socket) => {
-    logger.info(
-      { context: 'WEBSOCKET', message: 'Socket.IO: starts a connection' },
-      socket,
-    );
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Socket.IO: starts a connection' + socket.id,
+    });
 
-    socket.on(HEALTH_CHECK, () =>
+    socket.on(HEALTH_CHECK, (data) =>
       logger.info(
         { context: 'WEBSOCKET', message: 'Socket.IO: health check success' },
-        socket,
+        { id: socket.id },
+        { data },
       ),
     );
-    socket.on(HANDSHAKE, () =>
+
+    socket.on(HANDSHAKE, (data) =>
       logger.info(
         { context: 'WEBSOCKET', message: 'Socket.IO: handshake success' },
-        socket,
+        { id: socket.id },
+        { data },
       ),
     );
 
@@ -37,17 +46,21 @@ export const setup = ({ http, events, global }: ISocketIOConfig) => {
     socket.on(DISCONNECT, () => {
       logger.info(
         { context: 'WEBSOCKET', message: 'Socket.IO: ends a connection' },
-        socket,
+        { id: socket.id },
       );
     });
 
-    socket.broadcast.emit(HEALTH_CHECK, {
-      message: 'Socket.IO starts a connection',
-      data: socket,
-    }); // emit global event
+    // io.emit(HEALTH_CHECK, {setup: true}); // emit global event
+
+    socket.emit(START.CONNECTION, { connected: true });
+
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Socket.IO: ends event => [connection]',
+    });
   });
 
-  if (ENV.NODE_ENV !== 'production') globalForSocket.io = io;
+  logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
 
   return io;
 };
