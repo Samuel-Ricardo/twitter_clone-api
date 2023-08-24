@@ -27,5 +27,4 @@ export const MODULE = {
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
-  SERVER: Symbol.for('app.server'),
 };
