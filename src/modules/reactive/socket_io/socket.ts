@@ -16,6 +16,10 @@ export class SocketIO {
   }
 
   async setup() {}
+
+  get server() {
+    return this._server;
+  }
 }
 
 const globalForSocket = globalThis as unknown as {
