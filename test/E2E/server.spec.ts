@@ -1,4 +1,4 @@
-import { app, server, io } from '@/app';
+import { app, server, socket } from '@/app';
 import supertest from 'supertest';
 
 import { createServer } from 'http';
@@ -25,7 +25,7 @@ describe('[WEBSOCKET] | health check', () => {
     server.listen(8576, () => {
       clientSocket = Client('http://localhost:8576');
 
-      io!.on('connection', (socket) => {
+      socket.io.on('connection', (socket) => {
         serverSocket = socket;
       });
 
@@ -34,7 +34,7 @@ describe('[WEBSOCKET] | health check', () => {
   });
 
   afterAll((done) => {
-    io!.close();
+    socket.io.close();
     clientSocket.close();
     done();
   });
