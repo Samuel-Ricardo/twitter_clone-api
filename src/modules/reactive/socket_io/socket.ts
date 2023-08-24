@@ -14,18 +14,18 @@ export class SocketIO {
     @inject(MODULE.SERVER.HTTP)
     private readonly _server: HTTPServer,
   ) {
-    setup();
+    this.setup();
   }
 
   setup() {
-    if (this.io !== undefined) return;
+    if (this.io) return;
 
     const { CONNECTION } = EVENTS;
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
     this.io = new Server(this.server.instance);
-    this.io.on(CONNECTION, this.handleOnConnect);
+    this.io.on(CONNECTION, (socket) => this.handleOnConnect(socket));
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
   }
@@ -39,7 +39,7 @@ export class SocketIO {
     );
 
     socket.on(HANDSHAKE, this.handleOnHandshake(socket));
-    socket.on(DISCONNECT, this.handleOnDisconnect);
+    socket.on(DISCONNECT, this.handleOnDisconnect(socket));
     socket.emit(START.CONNECTION, { connected: true });
 
     logger.info({
@@ -58,10 +58,10 @@ export class SocketIO {
   }
 
   private handleOnHandshake(socket: Socket) {
-    return (data: any) =>
+    return (data?: any) =>
       logger.info(
         { context: 'WEBSOCKET', message: 'Socket.IO: handshake success' },
-        { id: data.id },
+        { id: socket.id },
         { data },
       );
   }

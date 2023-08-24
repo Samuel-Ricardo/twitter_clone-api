@@ -5,7 +5,7 @@ import { EVENTS } from './modules/reactive/reactive.config';
 
 const app = MODULES.APP();
 const socket = MODULES.REACTIVE.SOCKET.IO;
-const server = socket.server;
+const server = socket.server.instance;
 
 SwaggerModule.setup({ app: app });
 
