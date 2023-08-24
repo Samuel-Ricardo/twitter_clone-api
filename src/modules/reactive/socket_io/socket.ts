@@ -48,6 +48,15 @@ export class SocketIO {
     });
   }
 
+  private handleOnDisconnect(socket: Socket) {
+    return (data?: any) =>
+      logger.info(
+        { context: 'WEBSOCKET', message: 'Socket.IO: ends a connection' },
+        { id: socket.id },
+        { data },
+      );
+  }
+
   private handleOnHandshake(socket: Socket) {
     return (data: any) =>
       logger.info(
