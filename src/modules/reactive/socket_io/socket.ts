@@ -2,6 +2,21 @@ import { logger } from '@logger';
 import { Server, Socket } from 'socket.io';
 import { EVENTS } from '../reactive.config';
 import { ISocketIOConfig } from '@Type/socket/config';
+import { HTTPServer } from '@modules/server/http/http.server';
+import { inject, injectable } from 'inversify';
+import { MODULE } from '@modules/app.registry';
+
+@injectable()
+export class SocketIO {
+  constructor(
+    @inject(MODULE.SERVER.HTTP)
+    private readonly _server: HTTPServer,
+  ) {
+    setup();
+  }
+
+  async setup() {}
+}
 
 const globalForSocket = globalThis as unknown as {
   io: Server | undefined;
