@@ -30,6 +30,24 @@ export class SocketIO {
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
   }
 
+  private handleOnConnect(socket: Socket) {
+    const { HANDSHAKE, DISCONNECT, START } = EVENTS;
+
+    logger.info(
+      { context: 'WEBSOCKET', message: 'Socket.IO: starts a connection' },
+      { id: socket.id },
+    );
+
+    socket.on(HANDSHAKE, this.handleOnHandshake);
+    socket.on(DISCONNECT, this.handleOnDisconnect);
+    socket.emit(START.CONNECTION, { connected: true });
+
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Socket.IO: ends event => [connection]',
+    });
+  }
+
   get server() {
     return this._server;
   }
