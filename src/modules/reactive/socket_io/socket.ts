@@ -8,6 +8,8 @@ import { MODULE } from '@modules/app.registry';
 
 @injectable()
 export class SocketIO {
+  private io: Server | undefined;
+
   constructor(
     @inject(MODULE.SERVER.HTTP)
     private readonly _server: HTTPServer,
@@ -15,10 +17,18 @@ export class SocketIO {
     setup();
   }
 
-  async setup() {}
+  async setup() {
+    logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
+
+    this.io = new Server(this.server.instance);
+  }
 
   get server() {
     return this._server;
+  }
+
+  get instance() {
+    return this.io;
   }
 }
 
