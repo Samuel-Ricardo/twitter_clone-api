@@ -17,10 +17,17 @@ export class SocketIO {
     setup();
   }
 
-  async setup() {
+  setup() {
+    if (this.io) return;
+
+    const { CONNECTION } = EVENTS;
+
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
     this.io = new Server(this.server.instance);
+    this.io.on(CONNECTION, this.handleOnConnect);
+
+    logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
   }
 
   get server() {
@@ -28,6 +35,7 @@ export class SocketIO {
   }
 
   get instance() {
+    setup();
     return this.io;
   }
 }
@@ -50,7 +58,7 @@ export const setup = (config?: ISocketIOConfig) => {
   io.on(CONNECTION, (socket: Socket) => {
     logger.info({
       context: 'WEBSOCKET',
-      message: 'Socket.IO: starts a connection' + socket.id,
+      message: 'Socket.IO: starts a connection - ' + socket.id,
     });
 
     socket.on(HEALTH_CHECK, (data) =>
