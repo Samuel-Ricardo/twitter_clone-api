@@ -38,7 +38,7 @@ export class SocketIO {
       { id: socket.id },
     );
 
-    socket.on(HANDSHAKE, this.handleOnHandshake);
+    socket.on(HANDSHAKE, this.handleOnHandshake(socket));
     socket.on(DISCONNECT, this.handleOnDisconnect);
     socket.emit(START.CONNECTION, { connected: true });
 
@@ -46,6 +46,15 @@ export class SocketIO {
       context: 'WEBSOCKET',
       message: 'Socket.IO: ends event => [connection]',
     });
+  }
+
+  private handleOnHandshake(socket: Socket) {
+    return (data: any) =>
+      logger.info(
+        { context: 'WEBSOCKET', message: 'Socket.IO: handshake success' },
+        { id: data.id },
+        { data },
+      );
   }
 
   get server() {
