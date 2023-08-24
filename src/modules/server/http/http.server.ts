@@ -1,10 +1,10 @@
 import { Server, createServer } from 'node:http';
 import { injectable } from 'inversify';
-import { Application } from '@modules/manager';
+import { Application } from '../../manager';
 
 @injectable()
 export class HTTPServer {
-  server: Server;
+  private server: Server;
 
   constructor() {
     this.server = createServer(Application.Instance());
