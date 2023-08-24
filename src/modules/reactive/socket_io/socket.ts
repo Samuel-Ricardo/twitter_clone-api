@@ -8,7 +8,7 @@ import { MODULE } from '@modules/app.registry';
 
 @injectable()
 export class SocketIO {
-  private io: Server | undefined;
+  private _io: Server;
 
   constructor(
     @inject(MODULE.SERVER.HTTP)
@@ -18,7 +18,7 @@ export class SocketIO {
   }
 
   setup() {
-    if (this.io) return;
+    if (this.io !== undefined) return;
 
     const { CONNECTION } = EVENTS;
 
@@ -70,9 +70,12 @@ export class SocketIO {
     return this._server;
   }
 
-  get instance() {
-    setup();
-    return this.io;
+  get io() {
+    return this._io;
+  }
+
+  set io(io: Server) {
+    this._io = io;
   }
 }
 
