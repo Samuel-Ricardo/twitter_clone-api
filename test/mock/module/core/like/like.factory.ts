@@ -12,6 +12,7 @@ import { MockLikeModule } from './like.module';
 import { MockLikeRegistry } from './like.registry';
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { ISimulateLikeController } from '@test/@types/simulate/like/controller';
+import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
 
 export const MockLikeFactory = {
   SERVICE: () =>
@@ -27,6 +28,12 @@ export const MockLikeFactory = {
       MockLikeRegistry.CONTROLLER_DEV,
     ),
   USE_CASE: {
+    EVENTS: {
+      CREATE: () =>
+        MockLikeModule.get<DeepMockProxy<EmitCreateLikeEventUseCase>>(
+          MockLikeRegistry.USE_CASE.EVENTS.CREATE,
+        ),
+    },
     CREATE: () =>
       MockLikeModule.get<DeepMockProxy<CreateLikeUseCase>>(
         MockLikeRegistry.USE_CASE.CREATE,
