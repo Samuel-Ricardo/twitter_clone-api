@@ -96,6 +96,7 @@ model Follow {
   body String
   eventId String @db.ObjectId
 
+  visualizedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -106,7 +107,7 @@ enum NotificationType {
   FOLLOW
   UNFOLLOW
   LIKE
-  UNLIKE
+  DISLIKE
   COMMENT
   POST
 }
