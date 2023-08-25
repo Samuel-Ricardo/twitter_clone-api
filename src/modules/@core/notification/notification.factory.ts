@@ -1,3 +1,4 @@
+import { NotificationController } from './controller';
 import { NotificationModule } from './notification.module';
 import { NotificationRegistry } from './notification.registry';
 import { NotificationService } from './service';
@@ -9,6 +10,14 @@ import {
 } from './use-case';
 
 export const NotificationFactory = {
+  DEFAULT: () =>
+    NotificationModule.get<NotificationController>(
+      NotificationRegistry.CONTROLLER,
+    ),
+  CONTROLLER: () =>
+    NotificationModule.get<NotificationController>(
+      NotificationRegistry.CONTROLLER,
+    ),
   SERVICE: () =>
     NotificationModule.get<NotificationService>(NotificationRegistry.SERVICE),
   USE_CASE: {
