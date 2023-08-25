@@ -4,6 +4,7 @@ import { LikeRegistry } from './like.registry';
 import { LikeService } from './service/like.service';
 import { CreateLikeUseCase } from './use-case/create.use-case';
 import { DeleteLikeUseCase } from './use-case/delete.use-case';
+import { EmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
 import { GetCommentLikesUseCase } from './use-case/get_comment_likes.use-case';
 import { GetPostLikesUseCase } from './use-case/get_post_likes.use-case';
 import { GetUserLikesUseCase } from './use-case/get_user_likes.use-case';
@@ -19,6 +20,12 @@ export const LikeFactory = {
     DEFAULT: () => LikeModule.get<LikeService>(LikeRegistry.SERVICE.DEFAULT),
   },
   USE_CASE: {
+    EVENTS: {
+      CREATE: () =>
+        LikeModule.get<EmitCreateLikeEventUseCase>(
+          LikeRegistry.USE_CASE.EVENTS.CREATE,
+        ),
+    },
     CREATE: () =>
       LikeModule.get<CreateLikeUseCase>(LikeRegistry.USE_CASE.CREATE),
     DELETE: () =>
