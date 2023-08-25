@@ -1,4 +1,4 @@
-export interface SetNotificationVisualizedDTO {
+export interface ISetNotificationVisualizedDTO {
   id: string;
   visualizedAt: Date;
 }
