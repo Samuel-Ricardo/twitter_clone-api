@@ -6,6 +6,7 @@ import {
   ICreateNotificationDTO,
   IDeleteNotificationDTO,
   IGetNotificationByUserDTO,
+  ISetNotificationVisualizedDTO,
 } from '../../../@core/notification/DTO';
 import { Notification } from '../../../@core/notification/entity';
 
@@ -35,6 +36,13 @@ export class PrismaNotificationRepository implements INotificationRepository {
   async delete(notification: IDeleteNotificationDTO) {
     await this.prisma.notification.delete({
       where: notification,
+    });
+  }
+
+  async setVisualized(notification: ISetNotificationVisualizedDTO) {
+    await this.prisma.notification.update({
+      where: { id: notification.id },
+      data: { visualizedAt: notification.visualizedAt },
     });
   }
 }
