@@ -4,4 +4,5 @@ export const PrismaRepositoryRegistry = {
   LIKE: Symbol.for('PRISMA_LIKE_REPOSITORY'),
   FOLLOW: Symbol.for('PRISMA_FOLLOW_REPOSITORY'),
   COMMENT: Symbol.for('PRISMA_COMMENT_REPOSITORY'),
+  NOTIFICATION: Symbol.for('PRISMA_NOTIFICATION_REPOSITORY'),
 };
