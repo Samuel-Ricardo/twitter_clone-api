@@ -16,8 +16,9 @@ describe('[SERVICE] | LIKE', () => {
     expect(module.use_case).toBeDefined();
   });
 
-  it('[UNIT] | Should: create => Like', async () => {
+  it('[UNIT] | Should: create => [Like] && Emit: event [create]', async () => {
     module.use_case.create.execute.mockResolvedValue(VALID_POST_LIKE);
+    module.use_case.emitCreateLike.execute.mockResolvedValue({} as never);
 
     const result = await module.service.like(VALID_POST_LIKE_DATA);
 
@@ -25,6 +26,10 @@ describe('[SERVICE] | LIKE', () => {
     expect(module.use_case.create.execute).toHaveBeenCalledTimes(1);
     expect(module.use_case.create.execute).toHaveBeenCalledWith(
       VALID_POST_LIKE_DATA,
+    );
+    expect(module.use_case.emitCreateLike.execute).toHaveBeenCalledTimes(1);
+    expect(module.use_case.emitCreateLike.execute).toHaveBeenCalledWith(
+      VALID_POST_LIKE.toStruct(),
     );
   });
 
