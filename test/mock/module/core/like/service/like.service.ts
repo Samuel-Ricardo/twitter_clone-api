@@ -10,6 +10,7 @@ import {
 import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { MockLikeRegistry } from '../like.registry';
+import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
 
 export const mockLikeService = () => mockDeep<LikeService>();
 
@@ -32,12 +33,17 @@ export const simulateLikeService = ({
     MockLikeRegistry.USE_CASE.GET.BY.USER,
   );
 
+  const emitCreateLike = container.get<
+    DeepMockProxy<EmitCreateLikeEventUseCase>
+  >(MockLikeRegistry.USE_CASE.EVENTS.CREATE);
+
   const service = new LikeService(
     create,
     deleteLike,
     getPostLikes,
     getUserLikes,
     getCommentLikes,
+    emitCreateLike,
   );
 
   return {
@@ -47,6 +53,7 @@ export const simulateLikeService = ({
       getPostLikes,
       getUserLikes,
       getCommentLikes,
+      emitCreateLike,
     },
     service,
   };
