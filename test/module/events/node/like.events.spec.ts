@@ -10,4 +10,14 @@ describe('[EVENTS] | Node => [LIKE]', () => {
 
     expect(events).toBeDefined();
   });
+
+  it('[UNIT] | Should: emit event [create] => [LIKE]', (done) => {
+    events.subscribeCreateLike({
+      execute: (data) => {
+        expect(data).toStrictEqual(VALID_POST_LIKE.toStruct());
+        done();
+      },
+    });
+    events.emitCreateLike(VALID_POST_LIKE.toStruct());
+  });
 });
