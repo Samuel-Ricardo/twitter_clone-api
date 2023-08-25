@@ -17,13 +17,13 @@ import {
 export class NotificationService {
   constructor(
     @inject(MODULE.NOTIFICATION.USE_CASE.CREATE)
-    private create: CreateNotificationUseCase,
+    private readonly create: CreateNotificationUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.VISUALIZE)
-    private visualize: VisualizeNotificationUseCase,
+    private readonly visualize: VisualizeNotificationUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.GET.BY.USER)
-    private getUserNotifications: GetUserNotificationsUseCase,
+    private readonly getUserNotifications: GetUserNotificationsUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.DELETE)
-    private deleteNotification: DeleteNotificationUseCase,
+    private readonly deleteNotification: DeleteNotificationUseCase,
   ) {}
 
   async createNotification(notification: ICreateNotificationDTO) {
