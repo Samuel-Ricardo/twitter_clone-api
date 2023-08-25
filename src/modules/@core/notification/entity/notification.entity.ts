@@ -66,6 +66,19 @@ export class Notification {
     );
   }
 
+  toStruct(): INotificationDTO {
+    return {
+      id: this._id,
+      userId: this._userId,
+      type: this._type,
+      body: this._body,
+      eventId: this._eventId,
+      createdAt: this._createdAt,
+      updatedAt: this._updatedAt,
+      visualizedAt: this._visualizedAt,
+    };
+  }
+
   get id() {
     return this._id;
   }
