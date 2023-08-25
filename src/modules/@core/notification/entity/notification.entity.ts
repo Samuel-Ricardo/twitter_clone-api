@@ -1,5 +1,7 @@
 import { injectable } from 'inversify';
 import { NotificationType } from './notification_type.enitity';
+import { INotificationDTO } from '../dto/notification.dto';
+import { NotificationSchema } from '../validator';
 
 @injectable()
 export class Notification {
@@ -11,5 +13,21 @@ export class Notification {
     private readonly _eventId: string,
     private readonly _createdAt: Date,
     private readonly _updatedAt: Date,
-  ) {}
+    private readonly _visualizedAt?: Date,
+  ) {
+    Notification.validate({
+      id: _id,
+      userId: _userId,
+      type: _type,
+      body: _body,
+      eventId: _eventId,
+      createdAt: _createdAt,
+      updatedAt: _updatedAt,
+      visualizedAt: _visualizedAt,
+    });
+  }
+
+  static validate(notification: INotificationDTO) {
+    return NotificationSchema.parse(notification);
+  }
 }
