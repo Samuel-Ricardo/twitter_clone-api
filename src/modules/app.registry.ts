@@ -11,6 +11,7 @@ import { MiddlewareRegistry as MIDDLEWARE } from './middleware/middleware.regist
 import { CommentRegistry as COMMENT } from './@core/comment/comment.registry';
 import { ReactiveRegistry as REACTIVE } from './reactive/reactive.registry';
 import { ServerRegistry as SERVER } from './server/server.registry';
+import { EventsRegistry as EVENTS } from './event/event.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -24,6 +25,7 @@ export const MODULE = {
   MIDDLEWARE,
   REACTIVE,
   SERVER,
+  EVENTS,
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
