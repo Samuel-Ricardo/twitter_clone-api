@@ -65,4 +65,36 @@ export class Notification {
       Notification.fromPrisma(notification),
     );
   }
+
+  get id() {
+    return this._id;
+  }
+
+  get userId() {
+    return this._userId;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get body() {
+    return this._body;
+  }
+
+  get eventId() {
+    return this._eventId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
+  }
+
+  get visualizedAt() {
+    return this._visualizedAt;
+  }
 }
