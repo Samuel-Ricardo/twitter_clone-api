@@ -1,3 +1,3 @@
-export interface IGetNotificationByUserDto {
+export interface IGetNotificationByUserDTO {
   userId: string;
 }
