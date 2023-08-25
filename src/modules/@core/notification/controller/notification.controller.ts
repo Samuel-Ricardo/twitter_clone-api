@@ -24,6 +24,10 @@ export class NotificationController {
   }
 
   async listUserNotifications(user: IGetNotificationByUserDTO) {
-    return this.service.listUserNotifications(user);
+    return { notifications: this.service.listUserNotifications(user) };
+  }
+
+  async visualize(notification: ISetNotificationVisualizedDTO) {
+    return this.service.visualizeNotification(notification);
   }
 }
