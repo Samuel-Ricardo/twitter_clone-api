@@ -1,5 +1,5 @@
 import { injectable } from 'inversify';
-import { NotificationType } from './notification_type.enitity';
+import { NotificationType } from '@prisma/client';
 import { INotificationDTO } from '../dto/notification.dto';
 import { NotificationSchema } from '../validator';
 
@@ -29,5 +29,18 @@ export class Notification {
 
   static validate(notification: INotificationDTO) {
     return NotificationSchema.parse(notification);
+  }
+
+  static create(notification: INotificationDTO) {
+    return new Notification(
+      notification.id,
+      notification.userId,
+      notification.type,
+      notification.body,
+      notification.eventId,
+      notification.createdAt,
+      notification.updatedAt,
+      notification.visualizedAt,
+    );
   }
 }
