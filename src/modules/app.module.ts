@@ -14,6 +14,7 @@ import { PostModule } from './@core/post/post.module';
 import { LikeModule } from './@core/like/like.module';
 import { FollowModule } from './@core/follow/follow.module';
 import { CommentModule } from './@core/comment/comment.module';
+import { NotificationModule } from './@core/notification/notification.module';
 import { ReactiveModule } from './reactive/reactive.module';
 import { ServerModule } from './server/server.module';
 
@@ -31,6 +32,7 @@ export const AppModule = Container.merge(
   LikeModule,
   FollowModule,
   CommentModule,
+  NotificationModule,
   RoutesModule,
   MiddlewareModule,
   ReactiveModule,
