@@ -22,4 +22,8 @@ export class NotificationController {
   async delete(notification: IDeleteNotificationDTO) {
     return this.service.delete(notification);
   }
+
+  async listUserNotifications(user: IGetNotificationByUserDTO) {
+    return this.service.listUserNotifications(user);
+  }
 }
