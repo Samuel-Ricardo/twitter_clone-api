@@ -4,6 +4,9 @@ export const MockLikeRegistry = {
   CONTROLLER: Symbol.for('MOCK:LIKE.CONTROLLER'),
   CONTROLLER_DEV: Symbol.for('MOCK:LIKE.CONTROLLER.DEV'),
   USE_CASE: {
+    EVENTS: {
+      CREATE: Symbol.for('MOCK:LIKE.USE_CASE.EVENTS.CREATE'),
+    },
     CREATE: Symbol.for('MOCK:LIKE.USE_CASE.CREATE'),
     DELETE: Symbol.for('MOCK:LIKE.USE_CASE.DELETE'),
     GET: {
