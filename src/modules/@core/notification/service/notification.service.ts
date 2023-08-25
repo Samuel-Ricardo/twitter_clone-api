@@ -37,4 +37,8 @@ export class NotificationService {
   async listUserNotifications(user: IGetNotificationByUserDTO) {
     return await this.getUserNotifications.execute(user);
   }
+
+  async delete(notification: IDeleteNotificationDTO) {
+    return await this.deleteNotification.execute(notification);
+  }
 }
