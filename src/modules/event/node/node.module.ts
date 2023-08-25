@@ -4,4 +4,5 @@ import { Events } from './event_emmiter';
 
 export const NodeEventsModule = new Container({ autoBindInjectable: true });
 
-NodeEventsModule.bind(NodeEventsRegistry.EMITTER).to(Events);
+NodeEventsModule.bind(NodeEventsRegistry.INSTANCE.EMITTER).to(Events);
+NodeEventsModule.bind(NodeEventsRegistry.EMITTER).toConstantValue(Events);
