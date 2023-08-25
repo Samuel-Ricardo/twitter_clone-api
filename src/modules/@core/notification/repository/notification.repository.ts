@@ -2,11 +2,13 @@ import { Notification } from '../entity';
 import {
   ICreateNotificationDTO,
   IDeleteNotificationDTO,
-  IGetNotificationByUserDto,
+  IGetNotificationByUserDTO,
+  ISetNotificationVisualizedDTO,
 } from '../DTO';
 
 export interface INotificationRepository {
   create(notification: ICreateNotificationDTO): Promise<Notification>;
+  setVisualized(notification: ISetNotificationVisualizedDTO): Promise<void>;
   delete(notification: IDeleteNotificationDTO): Promise<void>;
-  getByUser(notification: IGetNotificationByUserDto): Promise<Notification[]>;
+  getByUser(notification: IGetNotificationByUserDTO): Promise<Notification[]>;
 }
