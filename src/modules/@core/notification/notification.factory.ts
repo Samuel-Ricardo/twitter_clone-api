@@ -1,5 +1,6 @@
 import { NotificationModule } from './notification.module';
 import { NotificationRegistry } from './notification.registry';
+import { NotificationService } from './service';
 import {
   CreateNotificationUseCase,
   GetUserNotificationsUseCase,
@@ -8,6 +9,8 @@ import {
 } from './use-case';
 
 export const NotificationFactory = {
+  SERVICE: () =>
+    NotificationModule.get<NotificationService>(NotificationRegistry.SERVICE),
   USE_CASE: {
     CREATE: () =>
       NotificationModule.get<CreateNotificationUseCase>(
