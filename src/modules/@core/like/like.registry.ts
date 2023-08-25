@@ -7,6 +7,9 @@ export const LikeRegistry = {
     DEFAULT: Symbol.for('LIKE.CONTROLLER.DEFAULT'),
   },
   USE_CASE: {
+    EVENTS: {
+      CREATE: Symbol.for('LIKE.USE_CASE.EVENTS.CREATE'),
+    },
     CREATE: Symbol.for('LIKE.USE_CASE.CREATE'),
     DELETE: Symbol.for('LIKE.USE_CASE.DELETE'),
     GET: {
