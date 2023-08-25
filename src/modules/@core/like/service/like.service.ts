@@ -10,6 +10,7 @@ import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 import { IGetLikesOfCommentDTO } from '../DTO/get_by_comment.dto';
 import { MODULE } from '@modules/app.registry';
+import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
 
 @injectable()
 export class LikeService {
@@ -24,10 +25,14 @@ export class LikeService {
     private readonly getUserLikes: GetUserLikesUseCase,
     @inject(MODULE.LIKE.USE_CASE.GET.BY.COMMENT)
     private readonly getCommentLikes: GetCommentLikesUseCase,
+    @inject(MODULE.LIKE.USE_CASE.EVENTS.CREATE)
+    private readonly emitCreateLike: EmitCreateLikeEventUseCase,
   ) {}
 
   async like(data: ICreateLikeDTO) {
-    return await this.giveLike.execute(data);
+    const result = await this.giveLike.execute(data);
+    this.emitCreateLike.execute(result.toStruct());
+    return result;
   }
 
   async dislike(data: IDeleteLikeDTO) {
