@@ -1,4 +1,5 @@
 export const NotificationRegistry = {
+  SERVICE: Symbol.for('NOTIFICATION.SERVICE'),
   USE_CASE: {
     EVENTS: {
       CREATE: Symbol.for('USE_CASE.EVENTS.CREATE.NOTIFICATION'),
