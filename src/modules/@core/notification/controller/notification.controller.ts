@@ -16,6 +16,10 @@ export class NotificationController {
   ) {}
 
   async create(data: ICreateNotificationDTO) {
-    return this.service.createNotification(data);
+    return { notification: this.service.createNotification(data) };
+  }
+
+  async delete(notification: IDeleteNotificationDTO) {
+    return this.service.delete(notification);
   }
 }
