@@ -5,6 +5,7 @@ import {
   GetPostLikesUseCase,
   GetUserLikesUseCase,
   LikeService,
+  EmitCreateLikeEventUseCase,
 } from '../../../../src/modules/@core/like';
 import { DeepMockProxy } from 'jest-mock-extended';
 
@@ -15,6 +16,7 @@ export interface ISimulateLikeService {
     getPostLikes: DeepMockProxy<GetPostLikesUseCase>;
     getUserLikes: DeepMockProxy<GetUserLikesUseCase>;
     getCommentLikes: DeepMockProxy<GetCommentLikesUseCase>;
+    emitCreateLike: DeepMockProxy<EmitCreateLikeEventUseCase>;
   };
   service: LikeService;
 }
