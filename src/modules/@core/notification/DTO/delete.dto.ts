@@ -1,3 +1,3 @@
-export interface IDeleteNotificationDto {
+export interface IDeleteNotificationDTO {
   id: string;
 }
