@@ -1,6 +1,12 @@
+import { MODULE } from '@modules';
 import { inject, injectable } from 'inversify';
 import { NotificationService } from '../service';
-import { MODULE } from '@modules';
+import {
+  ICreateNotificationDTO,
+  IDeleteNotificationDTO,
+  IGetNotificationByUserDTO,
+  ISetNotificationVisualizedDTO,
+} from '../DTO';
 
 @injectable()
 export class NotificationController {
@@ -8,4 +14,8 @@ export class NotificationController {
     @inject(MODULE.NOTIFICATION.SERVICE)
     private readonly service: NotificationService,
   ) {}
+
+  async create(data: ICreateNotificationDTO) {
+    return this.service.createNotification(data);
+  }
 }
