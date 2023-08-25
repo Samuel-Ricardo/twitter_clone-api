@@ -9,6 +9,7 @@ import { LikeService } from './service/like.service';
 import { LikeController } from './controller/like.controller';
 import { RepositoryModule } from '../../repository/repository.module';
 import { EventsModule } from '../../event/event.module';
+import { EmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -18,6 +19,9 @@ export const LikeModule = Container.merge(
   EventsModule,
 );
 
+LikeModule.bind(LikeRegistry.USE_CASE.EVENTS.CREATE).to(
+  EmitCreateLikeEventUseCase,
+);
 LikeModule.bind(LikeRegistry.USE_CASE.CREATE).to(CreateLikeUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.DELETE).to(DeleteLikeUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.GET.BY.POST).to(GetPostLikesUseCase);
