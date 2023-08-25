@@ -4,7 +4,7 @@ import {
   ILikeDTO,
   ILikeEvents,
 } from '../../../@core/like';
-import { Events } from '../event_emmiter';
+import { EventEmitter } from 'node:events';
 import { EVENT } from '../../event.config';
 import { MODULE } from '@modules/app.registry';
 
@@ -12,7 +12,7 @@ import { MODULE } from '@modules/app.registry';
 export class NodeLikeEvents implements ILikeEvents {
   constructor(
     @inject(MODULE.EVENTS.NODE.EMITTER)
-    private events: Events,
+    private events: EventEmitter,
   ) {}
 
   subscribeCreateLike(job: ICreateLikeEventDTO) {
