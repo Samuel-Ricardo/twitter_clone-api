@@ -4,6 +4,7 @@ import { inject, injectable } from 'inversify';
 import { MODULE } from '@modules';
 import {
   ICreateNotificationDTO,
+  IDeleteNotificationDTO,
   IGetNotificationByUserDTO,
 } from '../../../@core/notification/DTO';
 import { Notification } from '../../../@core/notification/entity';
@@ -29,5 +30,11 @@ export class PrismaNotificationRepository implements INotificationRepository {
     });
 
     return Notification.fromPrismaArray(result);
+  }
+
+  async delete(notification: IDeleteNotificationDTO) {
+    await this.prisma.notification.delete({
+      where: notification,
+    });
   }
 }
