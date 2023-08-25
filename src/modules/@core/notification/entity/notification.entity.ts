@@ -59,4 +59,10 @@ export class Notification {
       visualizedAt: notification.visualizedAt || undefined,
     });
   }
+
+  static fromPrismaArray(notifications: PrismaNotification[]) {
+    return notifications.map((notification) =>
+      Notification.fromPrisma(notification),
+    );
+  }
 }
