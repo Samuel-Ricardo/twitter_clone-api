@@ -29,4 +29,8 @@ export class NotificationService {
   async createNotification(notification: ICreateNotificationDTO) {
     return await this.create.execute(notification);
   }
+
+  async visualizeNotification(notification: ISetNotificationVisualizedDTO) {
+    return await this.visualize.execute(notification);
+  }
 }
