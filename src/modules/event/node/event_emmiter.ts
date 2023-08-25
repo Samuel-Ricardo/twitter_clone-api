@@ -2,7 +2,7 @@ import { injectable } from 'inversify';
 import { EventEmitter } from 'node:events';
 
 @injectable()
-class Event extends EventEmitter {
+export class Events extends EventEmitter {
   constructor() {
     super();
   }
