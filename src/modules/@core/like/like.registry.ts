@@ -1,18 +1,19 @@
 export const LikeRegistry = {
+  EVENTS: Symbol.for('LIKE.EVENTS'),
   SERVICE: {
-    DEFAULT: Symbol('LIKE.SERVICE.DEFAULT'),
+    DEFAULT: Symbol.for('LIKE.SERVICE.DEFAULT'),
   },
   CONTROLLER: {
-    DEFAULT: Symbol('LIKE.CONTROLLER.DEFAULT'),
+    DEFAULT: Symbol.for('LIKE.CONTROLLER.DEFAULT'),
   },
   USE_CASE: {
-    CREATE: Symbol('LIKE.USE_CASE.CREATE'),
-    DELETE: Symbol('LIKE.USE_CASE.DELETE'),
+    CREATE: Symbol.for('LIKE.USE_CASE.CREATE'),
+    DELETE: Symbol.for('LIKE.USE_CASE.DELETE'),
     GET: {
       BY: {
-        POST: Symbol('LIKE.GET.BY.POST'),
-        COMMENT: Symbol('LIKE.GET.BY.COMMENT'),
-        USER: Symbol('LIKE.GET.BY.USER'),
+        POST: Symbol.for('LIKE.GET.BY.POST'),
+        COMMENT: Symbol.for('LIKE.GET.BY.COMMENT'),
+        USER: Symbol.for('LIKE.GET.BY.USER'),
       },
     },
   },
