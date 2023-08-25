@@ -8,10 +8,15 @@ import { GetCommentLikesUseCase } from './use-case/get_comment_likes.use-case';
 import { LikeService } from './service/like.service';
 import { LikeController } from './controller/like.controller';
 import { RepositoryModule } from '../../repository/repository.module';
+import { EventsModule } from '../../event/event.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
-export const LikeModule = Container.merge(Module, RepositoryModule);
+export const LikeModule = Container.merge(
+  Module,
+  RepositoryModule,
+  EventsModule,
+);
 
 LikeModule.bind(LikeRegistry.USE_CASE.CREATE).to(CreateLikeUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.DELETE).to(DeleteLikeUseCase);
