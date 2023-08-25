@@ -33,4 +33,8 @@ export class NotificationService {
   async visualizeNotification(notification: ISetNotificationVisualizedDTO) {
     return await this.visualize.execute(notification);
   }
+
+  async listUserNotifications(user: IGetNotificationByUserDTO) {
+    return await this.getUserNotifications.execute(user);
+  }
 }
