@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
-import { NodeEventRegistry } from './node.registry';
+import { NodeEventsRegistry } from './node.registry';
 import { Events } from './event_emmiter';
 
-export const NodeEventModule = new Container({ autoBindInjectable: true });
+export const NodeEventsModule = new Container({ autoBindInjectable: true });
 
-NodeEventModule.bind(NodeEventRegistry.EMITTER).to(Events);
+NodeEventsModule.bind(NodeEventsRegistry.EMITTER).to(Events);
