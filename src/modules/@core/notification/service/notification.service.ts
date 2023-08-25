@@ -6,6 +6,12 @@ import {
   GetUserNotificationsUseCase,
   DeleteNotificationUseCase,
 } from '../use-case';
+import {
+  ICreateNotificationDTO,
+  ISetNotificationVisualizedDTO,
+  IGetNotificationByUserDTO,
+  IDeleteNotificationDTO,
+} from '../DTO';
 
 @injectable()
 export class NotificationService {
@@ -19,4 +25,8 @@ export class NotificationService {
     @inject(MODULE.NOTIFICATION.USE_CASE.DELETE)
     private deleteNotification: DeleteNotificationUseCase,
   ) {}
+
+  async createNotification(notification: ICreateNotificationDTO) {
+    return await this.create.execute(notification);
+  }
 }
