@@ -1,4 +1,5 @@
 export * from './DTO';
+export * from './events';
 export * from './entity';
 export * from './repository';
 export * from './use-case';
