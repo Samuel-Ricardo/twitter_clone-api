@@ -3,7 +3,7 @@ import {
   NotificationType,
   Notification as PrismaNotification,
 } from '@prisma/client';
-import { INotificationDTO } from '../dto/notification.dto';
+import { INotificationDTO } from '../DTO';
 import { NotificationSchema } from '../validator';
 
 @injectable()
