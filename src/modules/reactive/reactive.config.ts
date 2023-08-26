@@ -8,4 +8,8 @@ export const EVENTS = {
 
   HEALTH_CHECK: 'HEALTH_CHECK',
   HANDSHAKE: 'HANDSHAKE',
+
+  NOTIFICATION: {
+    NEW: 'new.notification',
+  },
 };
