@@ -1,7 +1,7 @@
 import { catchZod } from '@modules/util/validator';
 import { z } from 'zod';
 
-export const notificationSchema = z
+export const NotificationSchema = z
   .object({
     id: z.string(),
     userId: z.string(),

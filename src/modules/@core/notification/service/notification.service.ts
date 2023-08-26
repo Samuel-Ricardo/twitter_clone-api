@@ -31,6 +31,8 @@ export class NotificationService {
   }
 
   async visualizeNotification(notification: ISetNotificationVisualizedDTO) {
+    // const notification = getByID();
+    // policy.execute(notification);
     return await this.visualize.execute(notification);
   }
 
