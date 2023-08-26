@@ -4,13 +4,13 @@ import { DeleteLikeUseCase } from '../use-case/delete.use-case';
 import { GetPostLikesUseCase } from '../use-case/get_post_likes.use-case';
 import { GetUserLikesUseCase } from '../use-case/get_user_likes.use-case';
 import { GetCommentLikesUseCase } from '../use-case/get_comment_likes.use-case';
+import { EmitCreateLikeEventUseCase } from '../use-case/events/create.use-case';
 import { ICreateLikeDTO } from '../DTO/create.dto';
 import { IDeleteLikeDTO } from '../DTO/delete.dto';
 import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 import { IGetLikesOfCommentDTO } from '../DTO/get_by_comment.dto';
 import { MODULE } from '@modules/app.registry';
-import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
 
 @injectable()
 export class LikeService {
