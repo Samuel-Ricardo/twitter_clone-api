@@ -20,4 +20,24 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
   ) {
     this.subscribe();
   }
+
+  subscribe() {
+    this.socket.io.on(EVENTS.CONNECTION, (socket) => {
+      this.subscribeToNewNotification(socket);
+    });
+  }
+
+  async subscribeToNewNotification(socket: Socket) {
+    socket.on(
+      EVENTS.NOTIFICATION.NEW,
+      async (notification: ICreateNotificationDTO) => {
+        try {
+          const result = await this.notification.create(notification);
+          socket.to(this.room).emit(EVENTS.NOTIFICATION.CREATED, result);
+        } catch (error) {
+          socket.emit('error', error);
+        }
+      },
+    );
+  }
 }
