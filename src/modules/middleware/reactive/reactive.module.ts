@@ -9,12 +9,12 @@ const Module = new Container({ autoBindInjectable: true });
 
 export const ReactiveMiddlewareModule = Container.merge(Module, ReactiveModule);
 
-Module.bind(ReactiveMiddlewareRegistry.ERROR)
+ReactiveMiddlewareModule.bind(ReactiveMiddlewareRegistry.ERROR)
   .to(ReactiveErrorMiddleware)
   .inSingletonScope();
-Module.bind(ReactiveMiddlewareRegistry.LOGGER.APP)
+ReactiveMiddlewareModule.bind(ReactiveMiddlewareRegistry.LOGGER.APP)
   .to(ReactiveLoggerMiddleware)
   .inSingletonScope();
-Module.bind(ReactiveMiddlewareRegistry.LOGGER.ERROR)
+ReactiveMiddlewareModule.bind(ReactiveMiddlewareRegistry.LOGGER.ERROR)
   .to(ReactiveErrorLoggerMiddleware)
   .inSingletonScope();
