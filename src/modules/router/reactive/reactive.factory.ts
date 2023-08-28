@@ -1,5 +1,5 @@
-import { ReactiveSocketRouterRegistry as SOCKET } from './socket/socket.registry';
+import { ReactiveSocketRouterFactory as SOCKET } from './socket/socket.factory';
 
-export const ReactiveRouterRegistry = {
+export const ReactiveRouterFactory = {
   SOCKET,
 };
