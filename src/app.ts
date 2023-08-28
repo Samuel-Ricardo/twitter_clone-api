@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 import { SwaggerModule } from './modules/documentation';
 import { MODULES } from '@modules';
-import { EVENTS } from './modules/reactive/reactive.config';
 
 const app = MODULES.APP();
 const socket = MODULES.REACTIVE.SOCKET.IO;
@@ -15,9 +14,10 @@ app.use(MODULES.ROUTER());
 app.use(MODULES.MIDDLEWARE.LOGGER.ERROR());
 app.use(MODULES.MIDDLEWARE.ERROR());
 
-socket.io.on(EVENTS.START.CONNECTION, (data) => {
-  console.log({ data });
-  socket.io.emit(EVENTS.HEALTH_CHECK, { setup: true });
-});
+MODULES.MIDDLEWARE.REACTIVE.LOGGER.APP();
+MODULES.MIDDLEWARE.REACTIVE.LOGGER.ERROR();
+MODULES.MIDDLEWARE.REACTIVE.ERROR();
+
+// MODULES.ROUTER.REACTIVE;
 
 export { app, socket, server };
