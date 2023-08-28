@@ -10,8 +10,6 @@ import {
   INotificationDTO,
   ISetNotificationVisualizedDTO,
 } from '@Core/notification/DTO';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import { socket } from '@/app';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -39,7 +37,10 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       async (notification: ICreateNotificationDTO) => {
         try {
           const result = await this.notification.create(notification);
-          this.publishNotificationCreated(result.notification, socket);
+          this.publishNotificationCreated(
+            result.notification.toStruct(),
+            socket,
+          );
         } catch (error) {
           socket.emit('error', error);
         }
@@ -53,7 +54,10 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       async (notification: ISetNotificationVisualizedDTO) => {
         try {
           const result = await this.notification.visualize(notification);
-          this.publishNotificationVisualized(result.notification, socket);
+          this.publishNotificationVisualized(
+            result.notification.toStruct(),
+            socket,
+          );
         } catch (error) {
           socket.emit('error', error);
         }
