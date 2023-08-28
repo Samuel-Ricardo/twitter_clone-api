@@ -7,7 +7,7 @@ import { NotificationModule as NOTIFICATION } from '../../../@core/notification/
 
 const Module = new Container({ autoBindInjectable: true });
 
-Module.bind(ReactiveSocketRouterRegistry.NOTIFIACTION)
+Module.bind(ReactiveSocketRouterRegistry.NOTIFICATION)
   .to(NotificationSocket)
   .inSingletonScope();
 
