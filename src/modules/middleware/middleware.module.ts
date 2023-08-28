@@ -8,6 +8,7 @@ import { validateCreateUserData } from './validator';
 import { validateUpdateUserDTO } from './validator/user/update-validator.middleware';
 import { validateDeleteUserDTO } from './validator/user/delete-validator.middleware';
 import { validateSelectUserByIdDTO } from './validator/user/select_by_id-validator.middleware';
+import { ReactiveMiddlewareModule } from './reactive/reactive.module';
 
 const Module = new Container();
 
@@ -34,4 +35,8 @@ Module.bind(MiddlewareRegistry.VALIDATOR.USER.SELECT.BY.ID).toConstantValue(
   validateSelectUserByIdDTO,
 );
 
-export const MiddlewareModule = Container.merge(Module, UserModule);
+export const MiddlewareModule = Container.merge(
+  Module,
+  UserModule,
+  ReactiveMiddlewareModule,
+);
