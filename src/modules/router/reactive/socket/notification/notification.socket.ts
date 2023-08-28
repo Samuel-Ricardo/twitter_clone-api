@@ -3,10 +3,12 @@ import { IReactiveNotification } from '../../../../@core/notification/reactive';
 import { NotificationController } from '../../../../@core/notification/controller';
 import { Socket } from 'socket.io';
 import { inject, injectable } from 'inversify';
-import { MODULE } from '@modules/app.registry';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
-import { EVENTS } from '@modules/reactive/reactive.config';
-import { ICreateNotificationDTO } from '@Core/notification/DTO';
+import { MODULE } from '@modules';
+import { EVENTS } from '../../../../reactive/reactive.config';
+import {
+  ICreateNotificationDTO,
+  INotificationDTO,
+} from '@Core/notification/DTO';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -33,11 +35,20 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       async (notification: ICreateNotificationDTO) => {
         try {
           const result = await this.notification.create(notification);
-          socket.to(this.room).emit(EVENTS.NOTIFICATION.CREATED, result);
+          this.publishNotificationCreated(result.notification, socket);
         } catch (error) {
           socket.emit('error', error);
         }
       },
     );
+  }
+
+  async publishNotificationCreated(
+    notification: INotificationDTO,
+    socket: Socket,
+  ) {
+    socket
+      ? socket.emit(EVENTS.NOTIFICATION.CREATED, notification)
+      : this.socket.io.emit(EVENTS.NOTIFICATION.CREATED, notification);
   }
 }
