@@ -1,7 +1,7 @@
 import { logger } from '@logger';
-import { MODULE } from '@modules/app.registry';
-import { EVENTS } from '@modules/reactive/reactive.config';
-import { SocketIO } from '@modules/reactive/socket_io/socket';
+import { MODULE } from '@modules';
+import { EVENTS } from '../../../../reactive/reactive.config';
+import { SocketIO } from '../../../../reactive/socket_io/socket';
 import { inject, injectable } from 'inversify';
 import { Socket } from 'socket.io';
 
