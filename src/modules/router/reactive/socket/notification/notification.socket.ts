@@ -13,6 +13,7 @@ import {
 import { validate } from 'class-validator';
 import { CreateNotificationSchema } from '@Core/notification/validator';
 import { IAppEvents } from '@modules/event/app';
+import { SetVisualizedSchema } from '@Core/notification/validator/set_visualized.validator';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -61,13 +62,16 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       EVENTS.NOTIFICATION.VISUALIZED,
       async (notification: ISetNotificationVisualizedDTO) => {
         try {
+          SetVisualizedSchema.parse(notification);
+
           const result = await this.notification.visualize(notification);
+
           this.publishNotificationVisualized(
             result.notification.toStruct(),
             socket,
           );
-        } catch (error) {
-          socket.emit('error', error);
+        } catch (error: any) {
+          this.app.publishErrorEvent({ error, socket });
         }
       },
     );
