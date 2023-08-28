@@ -1,12 +1,18 @@
 import { INotificationDTO } from '../DTO';
-import { INotificationEventDTO } from '../DTO/reactive';
+// import { INotificationEventDTO } from '../DTO/reactive';
 
-export interface IReactiveNotification {
-  publishNotificationCreated(notification: INotificationDTO): void;
-  subscribeToNewNotification(execute: INotificationEventDTO): void;
+export interface IReactiveNotification<C> {
+  publishNotificationCreated(
+    notification: INotificationDTO,
+    context?: C,
+  ): Promise<void>;
+  subscribeToNewNotification(context: C): Promise<void>;
 
-  publishNotificationVisualized(notification: INotificationDTO): void;
-  subscribeToNotificationVisualized(execute: INotificationEventDTO): void;
+  publishNotificationVisualized(
+    notification: INotificationDTO,
+    context?: C,
+  ): Promise<void>;
+  subscribeToNotificationVisualized(conext: C): Promise<void>;
 
-  setupToggleNotification(context: any): void;
+  setupToggleNotification(context: C): Promise<void>;
 }
