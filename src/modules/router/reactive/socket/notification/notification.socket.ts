@@ -78,4 +78,9 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       ? socket.emit(EVENTS.NOTIFICATION.VISUALIZED, notification)
       : this.socket.io.emit(EVENTS.NOTIFICATION.VISUALIZED, notification);
   }
+
+  async setupToggleNotification(socket: Socket) {
+    if (this.room in socket.rooms) return socket.leave(this.room);
+    return socket.join(this.room);
+  }
 }
