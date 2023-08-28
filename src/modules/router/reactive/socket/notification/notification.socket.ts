@@ -9,10 +9,10 @@ import {
   ICreateNotificationDTO,
   INotificationDTO,
   ISetNotificationVisualizedDTO,
-} from '@Core/notification/DTO';
-import { CreateNotificationSchema } from '@Core/notification/validator';
-import { IAppEvents } from '@modules/event/app';
-import { SetVisualizedSchema } from '@Core/notification/validator/set_visualized.validator';
+} from '../../../../@core/notification/DTO';
+import { CreateNotificationSchema } from '../../../../@core/notification/validator';
+import { IAppEvents } from '../../../../event/app';
+import { SetVisualizedSchema } from '../../../../@core/notification/validator/set_visualized.validator';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
