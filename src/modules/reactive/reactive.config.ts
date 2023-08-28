@@ -1,4 +1,8 @@
 export const EVENTS = {
+  ERROR: {
+    APP: 'error.app',
+  },
+
   START: {
     CONNECTION: 'start.connection',
   },
