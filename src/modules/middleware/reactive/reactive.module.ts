@@ -4,10 +4,15 @@ import { ReactiveErrorMiddleware } from './error/error.middleware';
 import { ReactiveLoggerMiddleware } from './logger/logger.middleware';
 import { ReactiveErrorLoggerMiddleware } from './logger/error/error_logger.middleware';
 import { ReactiveModule } from '../../reactive/reactive.module';
+import { EventsModule } from '../../event/event.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
-export const ReactiveMiddlewareModule = Container.merge(Module, ReactiveModule);
+export const ReactiveMiddlewareModule = Container.merge(
+  Module,
+  ReactiveModule,
+  EventsModule,
+);
 
 ReactiveMiddlewareModule.bind(ReactiveMiddlewareRegistry.ERROR)
   .to(ReactiveErrorMiddleware)
