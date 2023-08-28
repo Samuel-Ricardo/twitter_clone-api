@@ -18,6 +18,6 @@ describe('[EVENTS] | Node => [LIKE]', () => {
         done();
       },
     });
-    events.emitCreateLike(VALID_POST_LIKE.toStruct());
+    events.publishCreateLike(VALID_POST_LIKE.toStruct());
   });
 });
