@@ -23,7 +23,11 @@ export class ReactiveErrorLoggerMiddleware {
     socket.onAnyOutgoing((event: string, error: Error) => {
       if (event == EVENTS.ERROR.APP)
         logger.error(
-          { context: 'WEBSOCKET', message: error.message, error },
+          {
+            context: 'WEBSOCKET',
+            message: 'Erro: an error occurred in the app:',
+            error,
+          },
           { id: socket.id },
         );
     });
