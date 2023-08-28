@@ -42,6 +42,12 @@ describe('[WEBSOCKET] | health check', () => {
   it('[E2E] | Should: be healthy => [WEBSOCKET]', (done) => {
     clientSocket.on(EVENTS.HEALTH_CHECK, (data: string) => {
       expect(data).toBe('Hello World! :D');
+      // done();
+    });
+
+    clientSocket.onAny((event, data: any) => {
+      expect(event).toBe(EVENTS.HEALTH_CHECK);
+      expect(data).toBe('Hello World! :D');
       done();
     });
 
