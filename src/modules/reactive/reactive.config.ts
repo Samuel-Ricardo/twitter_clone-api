@@ -12,5 +12,6 @@ export const EVENTS = {
   NOTIFICATION: {
     NEW: 'new.notification',
     CREATED: 'notification.created',
+    VISUALIZED: 'notification.visualized',
   },
 };
