@@ -10,7 +10,6 @@ import {
   INotificationDTO,
   ISetNotificationVisualizedDTO,
 } from '@Core/notification/DTO';
-import { validate } from 'class-validator';
 import { CreateNotificationSchema } from '@Core/notification/validator';
 import { IAppEvents } from '@modules/event/app';
 import { SetVisualizedSchema } from '@Core/notification/validator/set_visualized.validator';
