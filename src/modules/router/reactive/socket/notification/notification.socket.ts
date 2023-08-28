@@ -69,4 +69,13 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       ? socket.emit(EVENTS.NOTIFICATION.CREATED, notification)
       : this.socket.io.emit(EVENTS.NOTIFICATION.CREATED, notification);
   }
+
+  async publishNotificationVisualized(
+    notification: INotificationDTO,
+    socket?: Socket,
+  ) {
+    socket
+      ? socket.emit(EVENTS.NOTIFICATION.VISUALIZED, notification)
+      : this.socket.io.emit(EVENTS.NOTIFICATION.VISUALIZED, notification);
+  }
 }
