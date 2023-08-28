@@ -1,4 +1,5 @@
 import { IErrorDTO } from '@Type';
+import { logger } from '@logger';
 import { MODULE } from '@modules/app.registry';
 import { AppError } from '@modules/error';
 import { IAppEvents, IErrorEvent, IErrorEventDTO } from '@modules/event/app';
@@ -34,7 +35,15 @@ export class ReactiveErrorMiddleware {
   }
 
   async setup() {
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Middleware: error -> start setup',
+    });
     this.events.subscribeErrorEvents(this.errorHandler);
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Middleware: error -> finish setup',
+    });
   }
 
   async errorHandler({ error, socket }: IErrorEventDTO) {
