@@ -5,6 +5,6 @@ import { LikeEventsSupport } from '../../events';
 @injectable()
 export class EmitCreateLikeEventUseCase extends LikeEventsSupport {
   execute(data: ILikeDTO) {
-    this.events.emitCreateLike(data);
+    this.events.publishCreateLike(data);
   }
 }
