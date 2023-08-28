@@ -11,6 +11,10 @@ Module.bind(ReactiveSocketRouterRegistry.NOTIFIACTION)
   .to(NotificationSocket)
   .inSingletonScope();
 
+Module.bind(ReactiveSocketRouterRegistry.ALL)
+  .to(NotificationSocket)
+  .inSingletonScope();
+
 export const ReactiveSocketRouterModule = Container.merge(
   Module,
   REACTIVE,
