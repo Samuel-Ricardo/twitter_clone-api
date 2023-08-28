@@ -45,6 +45,8 @@ export class PrismaNotificationRepository implements INotificationRepository {
       data: { visualizedAt: notification.visualizedAt },
     });
 
+    result.visualizedAt = notification.visualizedAt;
+
     return Notification.fromPrisma(result);
   }
 }
