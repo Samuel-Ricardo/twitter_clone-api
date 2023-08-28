@@ -1,7 +1,7 @@
 import { MODULE } from '@modules/app.registry';
 import EventEmitter2 from 'eventemitter2';
 import { inject, injectable } from 'inversify';
-import { EVENT } from '@modules/event/event.config';
+import { EVENT } from '../../event.config';
 import { IErrorEvent, IErrorEventDTO } from '../../app/DTO';
 import { IAppEvents } from '../../app';
 
