@@ -16,7 +16,7 @@ export class NotificationController {
   ) {}
 
   async create(data: ICreateNotificationDTO) {
-    return { notification: this.service.createNotification(data) };
+    return { notification: await this.service.createNotification(data) };
   }
 
   async delete(notification: IDeleteNotificationDTO) {
@@ -24,10 +24,12 @@ export class NotificationController {
   }
 
   async listUserNotifications(user: IGetNotificationByUserDTO) {
-    return { notifications: this.service.listUserNotifications(user) };
+    return { notifications: await this.service.listUserNotifications(user) };
   }
 
   async visualize(notification: ISetNotificationVisualizedDTO) {
-    return this.service.visualizeNotification(notification);
+    return {
+      notification: await this.service.visualizeNotification(notification),
+    };
   }
 }
