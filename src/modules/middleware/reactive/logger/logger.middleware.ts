@@ -14,23 +14,31 @@ export class ReactiveLoggerMiddleware {
   }
 
   async setup() {
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Middleware: logger -> start setup',
+    });
     this.socket.io.on(EVENTS.CONNECTION, (socket) =>
       this.subscribeLogs(socket),
     );
+    logger.info({
+      context: 'WEBSOCKET',
+      message: 'Middleware: logger -> finish setup',
+    });
   }
 
   async subscribeLogs(socket: Socket) {
     socket.onAny((event, ...args) => {
       logger.info(
         { context: 'WEBSOCKET', message: 'Event received' },
-        { event, args },
+        { id: socket.id, event, args },
       );
     });
 
     socket.onAnyOutgoing((event, ...args) => {
       logger.info(
         { context: 'WEBSOCKET', message: 'Event sent' },
-        { event, args },
+        { id: socket.id, event, args },
       );
     });
   }
