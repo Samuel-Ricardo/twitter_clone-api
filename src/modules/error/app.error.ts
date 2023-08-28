@@ -1,4 +1,4 @@
-import { IError } from '@Type';
+import { IError, IErrorDTO } from '@Type';
 
 export class AppError extends Error implements IError {
   constructor(
@@ -10,7 +10,7 @@ export class AppError extends Error implements IError {
     super(message);
   }
 
-  toStruct() {
+  toStruct(): IErrorDTO {
     return {
       message: this.message,
       cause: this.cause,
@@ -20,7 +20,7 @@ export class AppError extends Error implements IError {
     };
   }
 
-  fromStruct(struct: IError): AppError {
+  fromStruct(struct: IError | IErrorDTO): AppError {
     return new AppError(
       struct.message,
       struct.status,
