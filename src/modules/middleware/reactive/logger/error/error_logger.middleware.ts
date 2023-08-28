@@ -15,17 +15,9 @@ export class ReactiveErrorLoggerMiddleware {
   }
 
   async setup() {
-    logger.info({
-      context: 'WEBSOCKET',
-      message: 'Middleware: error logger -> start setup',
-    });
     this.socket.io.on(EVENTS.CONNECTION, (socket) =>
       this.subscribeErrorLogs(socket),
     );
-    logger.info({
-      context: 'WEBSOCKET',
-      message: 'Middleware: error logger -> finish setup',
-    });
   }
   subscribeErrorLogs(socket: Socket) {
     socket.onAnyOutgoing((event: string, error: Error) => {
