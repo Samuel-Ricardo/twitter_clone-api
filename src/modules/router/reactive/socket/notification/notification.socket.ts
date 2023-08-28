@@ -10,6 +10,9 @@ import {
   INotificationDTO,
   ISetNotificationVisualizedDTO,
 } from '@Core/notification/DTO';
+import { validate } from 'class-validator';
+import { CreateNotificationSchema } from '@Core/notification/validator';
+import { IAppEvents } from '@modules/event/app';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -20,6 +23,8 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     private readonly socket: SocketIO,
     @inject(MODULE.NOTIFICATION.CONTROLLER)
     private readonly notification: NotificationController,
+    @inject(MODULE.EVENTS.NODE.APP)
+    private readonly app: IAppEvents,
   ) {
     this.subscribe();
   }
@@ -36,13 +41,16 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       EVENTS.NOTIFICATION.NEW,
       async (notification: ICreateNotificationDTO) => {
         try {
+          CreateNotificationSchema.parse(notification);
+
           const result = await this.notification.create(notification);
+
           this.publishNotificationCreated(
             result.notification.toStruct(),
             socket,
           );
-        } catch (error) {
-          socket.emit('error', error);
+        } catch (error: any) {
+          this.app.publishErrorEvent({ error, socket });
         }
       },
     );
