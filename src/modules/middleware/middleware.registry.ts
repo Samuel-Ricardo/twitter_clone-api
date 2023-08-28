@@ -1,4 +1,7 @@
+import { ReactiveMiddlewareRegistry as REACTIVE } from './reactive/reactive.registry';
+
 export const MiddlewareRegistry = {
+  REACTIVE,
   ERROR: Symbol('Middleware.ERROR'),
   LOGGER: {
     APP: Symbol('Middleware.LOGGER.APP'),
