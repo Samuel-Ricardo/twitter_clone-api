@@ -3,6 +3,7 @@ import { NodeEventsRegistry } from './node.registry';
 import { Events } from './event_emmiter';
 import { EventEmitter2 } from 'eventemitter2';
 import { NodeLikeEvents } from './like';
+import { AppEvents } from './app';
 
 export const NodeEventsModule = new Container({ autoBindInjectable: true });
 
@@ -12,3 +13,5 @@ NodeEventsModule.bind(NodeEventsRegistry.EMITTER).toConstantValue(
 );
 
 NodeEventsModule.bind(NodeEventsRegistry.LIKE).to(NodeLikeEvents);
+
+NodeEventsModule.bind(NodeEventsRegistry.APP).to(AppEvents);
