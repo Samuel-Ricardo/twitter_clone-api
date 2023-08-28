@@ -8,7 +8,10 @@ import { EVENTS } from '../../../../reactive/reactive.config';
 import {
   ICreateNotificationDTO,
   INotificationDTO,
+  ISetNotificationVisualizedDTO,
 } from '@Core/notification/DTO';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { socket } from '@/app';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -23,9 +26,10 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     this.subscribe();
   }
 
-  subscribe() {
+  async subscribe() {
     this.socket.io.on(EVENTS.CONNECTION, (socket) => {
       this.subscribeToNewNotification(socket);
+      this.subscribeToNotificationVisualized(socket);
     });
   }
 
@@ -43,9 +47,23 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     );
   }
 
+  async subscribeToNotificationVisualized(socket: Socket) {
+    socket.on(
+      EVENTS.NOTIFICATION.VISUALIZED,
+      async (notification: ISetNotificationVisualizedDTO) => {
+        try {
+          const result = await this.notification.visualize(notification);
+          this.publishNotificationVisualized(result.notification, socket);
+        } catch (error) {
+          socket.emit('error', error);
+        }
+      },
+    );
+  }
+
   async publishNotificationCreated(
     notification: INotificationDTO,
-    socket: Socket,
+    socket?: Socket,
   ) {
     socket
       ? socket.emit(EVENTS.NOTIFICATION.CREATED, notification)
