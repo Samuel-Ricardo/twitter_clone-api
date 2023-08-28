@@ -27,7 +27,7 @@ export const PUBLISH_ERROR: IErrorEvent = async ({
 @injectable()
 export class ReactiveErrorMiddleware {
   constructor(
-    @inject(MODULE.EVENTS.NODE.EMITTER)
+    @inject(MODULE.EVENTS.NODE.APP)
     private readonly events: IAppEvents,
   ) {
     this.setup();
