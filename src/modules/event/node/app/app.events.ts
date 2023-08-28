@@ -12,7 +12,7 @@ export class NodeAppEvents implements IAppEvents {
     protected readonly events: EventEmitter2,
   ) {}
 
-  async supscribeErrorEvents(job: IErrorEvent) {
+  async subscribeErrorEvents(job: IErrorEvent) {
     this.events.on(EVENT.ERROR.APP, job);
   }
 

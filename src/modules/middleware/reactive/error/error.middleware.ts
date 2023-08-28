@@ -34,7 +34,7 @@ export class ReactiveErrorMiddleware {
   }
 
   async setup() {
-    this.events.supscribeErrorEvents(this.errorHandler);
+    this.events.subscribeErrorEvents(this.errorHandler);
   }
 
   async errorHandler({ error, socket }: IErrorEventDTO) {
