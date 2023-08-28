@@ -5,7 +5,7 @@ import { IErrorEvent, IErrorEventDTO } from './DTO/error.dto';
 import { EVENT } from '@modules/event/event.config';
 
 @injectable()
-export class AppEvents {
+export class NodeAppEvents {
   constructor(
     @inject(MODULE.EVENTS.NODE.EMITTER)
     protected readonly events: EventEmitter2,
