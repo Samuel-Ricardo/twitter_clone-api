@@ -40,9 +40,11 @@ export class PrismaNotificationRepository implements INotificationRepository {
   }
 
   async setVisualized(notification: ISetNotificationVisualizedDTO) {
-    await this.prisma.notification.update({
+    const result = await this.prisma.notification.update({
       where: { id: notification.id },
       data: { visualizedAt: notification.visualizedAt },
     });
+
+    return Notification.fromPrisma(result);
   }
 }
