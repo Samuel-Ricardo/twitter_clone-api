@@ -1,8 +1,10 @@
 import { ErrorRequestHandler, RequestHandler } from 'express';
 import { MiddlewareModule } from './middleware.module';
 import { MiddlewareRegistry } from './middleware.registry';
+import { ReactiveMiddlewareFactory as REACTIVE } from './reactive/reactive.factory';
 
 export const MiddlewareFactory = {
+  REACTIVE,
   ERROR: () =>
     MiddlewareModule.get<ErrorRequestHandler>(MiddlewareRegistry.ERROR),
   LOGGER: {
