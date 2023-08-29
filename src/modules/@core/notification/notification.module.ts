@@ -7,6 +7,7 @@ import { VisualizeNotificationUseCase } from './use-case/set_visualized.use-case
 import { GetUserNotificationsUseCase } from './use-case/get_by_user.use-case';
 import { NotificationService } from './service';
 import { NotificationController } from './controller';
+import { EmitNotificationCreatedEventUseCase } from './use-case/events';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
@@ -26,6 +27,10 @@ NotificationModule.bind(NotificationRegistry.USE_CASE.VISUALIZE).to(
 
 NotificationModule.bind(NotificationRegistry.USE_CASE.GET.BY.USER).to(
   GetUserNotificationsUseCase,
+);
+
+NotificationModule.bind(NotificationRegistry.USE_CASE.EVENTS.CREATE).to(
+  EmitNotificationCreatedEventUseCase,
 );
 
 NotificationModule.bind(NotificationRegistry.SERVICE).to(NotificationService);
