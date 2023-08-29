@@ -1,5 +1,6 @@
 import {
   CreateNotificationSchema,
+  DeleteNotificationSchema,
   GetNotificationByUserSchema,
 } from '@Core/notification/validator';
 import { MODULES } from '@modules';
@@ -16,6 +17,18 @@ router.post(
   async (req, res, next) => {
     try {
       res.status(201).json(await notification.create(req.body));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+router.delete(
+  `${prefix}/:id`,
+  validate(DeleteNotificationSchema),
+  async (req, res, next) => {
+    try {
+      res.status(204).json(await notification.delete({ id: req.params.id }));
     } catch (error) {
       next(error);
     }
