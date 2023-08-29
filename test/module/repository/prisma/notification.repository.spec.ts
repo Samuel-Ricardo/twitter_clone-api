@@ -80,4 +80,20 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
       },
     });
   });
+
+  it('[UNIT] | Should: find by [user] => [NOTIFICATION]', async () => {
+    module.prisma.notification.findMany.mockResolvedValue([
+      VALID_POST_NOTIFICATION as PrismaNotification,
+    ]);
+
+    const result = await module.repository.getByUser({ userId: VALID_USER.id });
+
+    expect(result).toStrictEqual([VALID_POST_NOTIFICATION]);
+    expect(module.prisma.notification.findMany).toHaveBeenCalledTimes(1);
+    expect(module.prisma.notification.findMany).toHaveBeenCalledWith({
+      where: {
+        userId: VALID_USER.id,
+      },
+    });
+  });
 });
