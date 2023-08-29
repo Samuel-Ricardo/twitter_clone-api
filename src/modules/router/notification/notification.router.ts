@@ -42,13 +42,11 @@ router.get(
   validate(GetNotificationByUserSchema),
   async (req, res, next) => {
     try {
-      res
-        .status(200)
-        .json(
-          await notification_module.listUserNotifications({
-            userId: req.params.userId,
-          }),
-        );
+      res.status(200).json(
+        await notification_module.listUserNotifications({
+          userId: req.params.userId,
+        }),
+      );
     } catch (error) {
       next(error);
     }
