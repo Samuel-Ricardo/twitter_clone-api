@@ -5,5 +5,5 @@ import { ReactiveRouterFactory as REACTIVE } from './reactive/reactive.factory';
 
 export const RoutesFactory = {
   REACTIVE,
-  ROUTER: () => RoutesModule.get<Router>(RoutesRegistry.ROUTES),
+  EXPRESS: () => RoutesModule.get<Router>(RoutesRegistry.ROUTES),
 };
