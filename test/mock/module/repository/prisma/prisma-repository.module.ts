@@ -75,3 +75,11 @@ PrismaRepositoryMockModule.bind(
 PrismaRepositoryMockModule.bind(
   PrismaRepositoryMockRegistry.COMMENT_DEV,
 ).toDynamicValue(simulatePrismaCommentRepository);
+
+PrismaRepositoryMockModule.bind(
+  PrismaRepositoryMockRegistry.NOTIFICATION,
+).toDynamicValue(mockPrismaCommentRepository);
+
+PrismaRepositoryMockModule.bind(
+  PrismaRepositoryMockRegistry.NOTIFICATION_DEV,
+).toDynamicValue(simulatePrismaCommentRepository);
