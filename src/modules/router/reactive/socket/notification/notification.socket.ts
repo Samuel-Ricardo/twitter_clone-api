@@ -66,7 +66,10 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
           const result = await this.notification.visualize(notification);
 
           this.publishNotificationVisualized(
-            result.notification.toStruct(),
+            {
+              id: result.notification.id,
+              visualizedAt: result.notification.visualizedAt!,
+            },
             socket,
           );
         } catch (error: any) {
@@ -86,7 +89,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
   }
 
   async publishNotificationVisualized(
-    notification: INotificationDTO,
+    notification: ISetNotificationVisualizedDTO,
     socket?: Socket,
   ) {
     socket
