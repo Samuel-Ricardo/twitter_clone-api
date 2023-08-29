@@ -13,7 +13,7 @@ import {
 import { CreateNotificationSchema } from '../../../../@core/notification/validator';
 import { IAppEvents } from '../../../../event/app';
 import { SetVisualizedSchema } from '../../../../@core/notification/validator/set_visualized.validator';
-import { INotificationEvents } from '@Core/notification/events';
+import { INotificationEvents } from '../../../../@core/notification/events';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
