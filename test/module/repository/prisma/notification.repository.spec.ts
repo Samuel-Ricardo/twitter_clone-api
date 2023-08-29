@@ -3,6 +3,11 @@ import { MockFactory } from '@test/mock';
 import {
   VALID_POST_NOTIFICATION,
   VALID_POST_NOTIFICATION_DATA,
+  VALID_POST,
+  VALID_USER,
+  CREATE_POST_NOTIFICATION_DATA,
+  SET_VISUALIZED_POST_NOTIFICATION,
+  SET_VISUALIZED_POST_NOTIFICATION_DATA,
 } from '@test/mock/data/notification';
 import { Notification as PrismaNotification } from '@prisma/client';
 
@@ -26,10 +31,36 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
 
     const result = await module.repository.create(VALID_POST_NOTIFICATION_DATA);
 
-    expect(result).toEqual(VALID_POST_NOTIFICATION);
+    expect(result).toStrictEqual(VALID_POST_NOTIFICATION);
     expect(module.prisma.notification.create).toHaveBeenCalledTimes(1);
     expect(module.prisma.notification.create).toHaveBeenCalledWith({
       data: VALID_POST_NOTIFICATION_DATA,
+    });
+  });
+
+  it('[UNIT] | Should: update => [NOTIFICATION]', async () => {
+    module.prisma.notification.update.mockResolvedValue(
+      VALID_POST_NOTIFICATION_DATA as PrismaNotification,
+    );
+
+    const result = await module.repository.setVisualized(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
+
+    expect(result).toStrictEqual(SET_VISUALIZED_POST_NOTIFICATION);
+    expect(result.id).toEqual(VALID_POST_NOTIFICATION.id);
+    expect(result.visualizedAt).not.toEqual(
+      VALID_POST_NOTIFICATION.visualizedAt,
+    );
+
+    expect(module.prisma.notification.update).toHaveBeenCalledTimes(1);
+    expect(module.prisma.notification.update).toHaveBeenCalledWith({
+      where: {
+        id: VALID_POST_NOTIFICATION.id,
+      },
+      data: {
+        visualizedAt: SET_VISUALIZED_POST_NOTIFICATION_DATA.visualizedAt,
+      },
     });
   });
 });
