@@ -1,4 +1,7 @@
-import { CreateNotificationSchema } from '@Core/notification/validator';
+import {
+  CreateNotificationSchema,
+  GetNotificationByUserSchema,
+} from '@Core/notification/validator';
 import { MODULES } from '@modules';
 import { validate } from '../../middleware/validator';
 import { Router } from 'express';
@@ -13,6 +16,24 @@ router.post(
   async (req, res, next) => {
     try {
       res.status(201).json(await notification.create(req.body));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+router.get(
+  `${prefix}/user/:userId`,
+  validate(GetNotificationByUserSchema),
+  async (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(
+          await notification.listUserNotifications({
+            userId: req.params.userId,
+          }),
+        );
     } catch (error) {
       next(error);
     }
