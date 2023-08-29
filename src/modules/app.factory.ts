@@ -16,11 +16,11 @@ import { ServerFactory as SERVER } from './server/server.factory';
 import { EventsFactory as EVENTS } from './event/event.factory';
 
 import { Express } from 'express';
-import { RoutesFactory } from './router/router.factory';
+import { RoutesFactory as ROUTER } from './router/router.factory';
 
 export const MODULES = {
   ...PrismaFactory,
-  ...RoutesFactory,
+  ROUTER,
   USER,
   POST,
   LIKE,
