@@ -8,6 +8,10 @@ import {
   mockEmitNotificationCreatedEventUseCase,
   mockEmitNotificationVisualizedEventUseCase,
 } from './use-case';
+import {
+  mockNotificationService,
+  simulateNotificationService,
+} from './service';
 
 export const NotificationMockModule = new Container({
   autoBindInjectable: true,
@@ -36,3 +40,10 @@ NotificationMockModule.bind(
 NotificationMockModule.bind(
   NotificationMockRegistry.USE_CASE.EMIT.VISUALIZED,
 ).toDynamicValue(mockEmitNotificationVisualizedEventUseCase);
+
+NotificationMockModule.bind(NotificationMockRegistry.SERVICE).toDynamicValue(
+  mockNotificationService,
+);
+NotificationMockModule.bind(
+  NotificationMockRegistry.SERVICE_DEV,
+).toDynamicValue(simulateNotificationService);
