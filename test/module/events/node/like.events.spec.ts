@@ -13,7 +13,7 @@ describe('[EVENTS] | Node => [LIKE]', () => {
 
   it('[UNIT] | Should: emit event [create] => [LIKE]', (done) => {
     events.subscribeCreateLike({
-      execute: (data) => {
+      job: (data) => {
         expect(data).toStrictEqual(VALID_POST_LIKE.toStruct());
         done();
       },

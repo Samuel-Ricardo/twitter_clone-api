@@ -9,8 +9,8 @@ import { NodeAppEvents } from '../app';
 
 @injectable()
 export class NodeLikeEvents extends NodeAppEvents implements ILikeEvents {
-  subscribeCreateLike(job: ICreateLikeEventDTO) {
-    this.events.on(EVENT.LIKE.CREATE, job.execute);
+  subscribeCreateLike(scheduled: ICreateLikeEventDTO) {
+    this.events.on(EVENT.LIKE.CREATE, scheduled.job);
   }
 
   publishCreateLike(data: ILikeDTO) {
