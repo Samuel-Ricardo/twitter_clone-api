@@ -9,14 +9,14 @@ import { Router } from 'express';
 
 const prefix = '/notifications';
 const router = Router();
-const notification = MODULES.NOTIFICATION.DEFAULT();
+const notification_module = MODULES.NOTIFICATION.DEFAULT();
 
 router.post(
   prefix,
   validate(CreateNotificationSchema),
   async (req, res, next) => {
     try {
-      res.status(201).json(await notification.create(req.body));
+      res.status(201).json(await notification_module.create(req.body));
     } catch (error) {
       next(error);
     }
@@ -28,7 +28,9 @@ router.delete(
   validate(DeleteNotificationSchema),
   async (req, res, next) => {
     try {
-      res.status(204).json(await notification.delete({ id: req.params.id }));
+      res
+        .status(204)
+        .json(await notification_module.delete({ id: req.params.id }));
     } catch (error) {
       next(error);
     }
@@ -43,7 +45,7 @@ router.get(
       res
         .status(200)
         .json(
-          await notification.listUserNotifications({
+          await notification_module.listUserNotifications({
             userId: req.params.userId,
           }),
         );
@@ -52,3 +54,5 @@ router.get(
     }
   },
 );
+
+export const notification = { router, prefix };
