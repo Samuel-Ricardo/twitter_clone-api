@@ -12,6 +12,7 @@ import {
   IGetNotificationByUserDTO,
   IDeleteNotificationDTO,
 } from '../DTO';
+import { EmitNotificationCreatedEventUseCase } from '../use-case/events/created.use-case';
 
 @injectable()
 export class NotificationService {
@@ -24,10 +25,14 @@ export class NotificationService {
     private readonly getUserNotifications: GetUserNotificationsUseCase,
     @inject(MODULE.NOTIFICATION.USE_CASE.DELETE)
     private readonly deleteNotification: DeleteNotificationUseCase,
+    @inject(MODULE.NOTIFICATION.USE_CASE.EVENTS.CREATE)
+    private readonly emitNotificationCreated: EmitNotificationCreatedEventUseCase,
   ) {}
 
   async createNotification(notification: ICreateNotificationDTO) {
-    return await this.create.execute(notification);
+    const result = await this.create.execute(notification);
+    this.emitNotificationCreated.emit(result.toStruct());
+    return result;
   }
 
   async visualizeNotification(notification: ISetNotificationVisualizedDTO) {
