@@ -6,6 +6,7 @@ import {
   ICreatedNotificationEventDTO,
   IVisualizedNotificationEventDTO,
 } from '@Core/notification/DTO/events';
+import { INotificationDTO } from '@Core/notification/DTO';
 
 @injectable()
 export class NodeNotificationEvents
@@ -20,5 +21,9 @@ export class NodeNotificationEvents
     scheduled: IVisualizedNotificationEventDTO,
   ) {
     this.events.on(EVENT.NOTIFICATION.VISUALIZED, scheduled.job);
+  }
+
+  async emitNotificationCreated(data: INotificationDTO) {
+    this.events.emit(EVENT.NOTIFICATION.CREATED, data);
   }
 }
