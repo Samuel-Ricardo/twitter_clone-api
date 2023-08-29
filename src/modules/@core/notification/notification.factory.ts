@@ -8,6 +8,7 @@ import {
   DeleteNotificationUseCase,
   VisualizeNotificationUseCase,
 } from './use-case';
+import { EmitNotificationCreatedEventUseCase } from './use-case/events';
 
 export const NotificationFactory = {
   DEFAULT: () =>
@@ -21,6 +22,12 @@ export const NotificationFactory = {
   SERVICE: () =>
     NotificationModule.get<NotificationService>(NotificationRegistry.SERVICE),
   USE_CASE: {
+    EVENTS: {
+      CREATE: () =>
+        NotificationModule.get<EmitNotificationCreatedEventUseCase>(
+          NotificationRegistry.USE_CASE.EVENTS.CREATE,
+        ),
+    },
     CREATE: () =>
       NotificationModule.get<CreateNotificationUseCase>(
         NotificationRegistry.USE_CASE.CREATE,
