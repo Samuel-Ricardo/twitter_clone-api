@@ -9,8 +9,18 @@ import {
   EmitNotificationCreatedEventUseCase,
 } from '../../../../../src/modules/@core/notification/use-case';
 import { NotificationMockRegistry } from './notification.registry';
+import { ISimulatedNotificationService } from '@test/@types/simulate/notification/service';
+import { NotificationService } from '@Core/notification/service';
 
 export const NotificationMockFactory = {
+  SERVICE: () =>
+    NotificationMockModule.get<DeepMockProxy<NotificationService>>(
+      NotificationMockRegistry.SERVICE,
+    ),
+  SERVICE_DEV: () =>
+    NotificationMockModule.get<ISimulatedNotificationService>(
+      NotificationMockRegistry.SERVICE_DEV,
+    ),
   USE_CASE: {
     EMIT: {
       CREATED: () =>
