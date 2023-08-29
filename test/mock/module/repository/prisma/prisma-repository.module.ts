@@ -14,7 +14,12 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaRepositoryMockRegistry } from './prisma-repository.registry';
 import { PrismaMockModule } from '../../prisma';
 import { PrismaLikeRepository } from '@modules/repository/prisma/like';
-import { mockPrismaLikeRepository, simulatePrismaLikeRepository } from './impl';
+import {
+  mockPrismaLikeRepository,
+  mockPrismaNotificationRepository,
+  simulatePrismaLikeRepository,
+  simulatePrismaNotificationRepository,
+} from './impl';
 import { ISimulatePrismaLikeRepository } from '@test/@types/simulate/like/repository';
 import {
   mockPrismaFollowRepository,
@@ -78,8 +83,8 @@ PrismaRepositoryMockModule.bind(
 
 PrismaRepositoryMockModule.bind(
   PrismaRepositoryMockRegistry.NOTIFICATION,
-).toDynamicValue(mockPrismaCommentRepository);
+).toDynamicValue(mockPrismaNotificationRepository);
 
 PrismaRepositoryMockModule.bind(
   PrismaRepositoryMockRegistry.NOTIFICATION_DEV,
-).toDynamicValue(simulatePrismaCommentRepository);
+).toDynamicValue(simulatePrismaNotificationRepository);
