@@ -1,15 +1,15 @@
-import { INotificationEvents } from '@Core/notification/events/notification.events';
+import { INotificationEvents } from '../../../@core/notification/events';
 import { NodeAppEvents } from '../app';
 import { injectable } from 'inversify';
 import { EVENT } from '../../event.config';
 import {
   ICreatedNotificationEventDTO,
   IVisualizedNotificationEventDTO,
-} from '@Core/notification/DTO/events';
+} from '../../../@core/notification/DTO/events';
 import {
   INotificationDTO,
   ISetNotificationVisualizedDTO,
-} from '@Core/notification/DTO';
+} from '../../../@core/notification/DTO';
 
 @injectable()
 export class NodeNotificationEvents
