@@ -1,4 +1,4 @@
-import { INotificationDTO } from '../DTO';
+import { INotificationDTO, ISetNotificationVisualizedDTO } from '../DTO';
 // import { INotificationEventDTO } from '../DTO/reactive';
 
 export interface IReactiveNotification<C> {
@@ -9,7 +9,7 @@ export interface IReactiveNotification<C> {
   subscribeToNewNotification(context: C): Promise<void>;
 
   publishNotificationVisualized(
-    notification: INotificationDTO,
+    notification: ISetNotificationVisualizedDTO,
     context?: C,
   ): Promise<void>;
   subscribeToNotificationVisualized(conext: C): Promise<void>;
