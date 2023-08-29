@@ -38,4 +38,15 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
 
     notification = result;
   });
+
+  it('[INTEGRATION] | Shoudl: find by [USER] => [NOTIFICATION]', async () => {
+    const result = await repository.getByUser({
+      userId: VALID_USER.id,
+    });
+
+    expect(result.length).toBeGreaterThanOrEqual(1);
+    expect(result[0]).toBeInstanceOf(Notification);
+    expect(result[0]).toHaveProperty('_id');
+    expect(result[0].id).toBe(notification.id);
+  });
 });
