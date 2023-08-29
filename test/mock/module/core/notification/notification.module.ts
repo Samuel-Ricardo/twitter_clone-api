@@ -12,6 +12,10 @@ import {
   mockNotificationService,
   simulateNotificationService,
 } from './service';
+import {
+  mockNotificationController,
+  simulateNotificationController,
+} from './controller';
 
 export const NotificationMockModule = new Container({
   autoBindInjectable: true,
@@ -47,3 +51,11 @@ NotificationMockModule.bind(NotificationMockRegistry.SERVICE).toDynamicValue(
 NotificationMockModule.bind(
   NotificationMockRegistry.SERVICE_DEV,
 ).toDynamicValue(simulateNotificationService);
+
+NotificationMockModule.bind(NotificationMockRegistry.CONTROLLER).toDynamicValue(
+  mockNotificationController,
+);
+
+NotificationMockModule.bind(
+  NotificationMockRegistry.CONTROLLER_DEV,
+).toDynamicValue(simulateNotificationController);
