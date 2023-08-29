@@ -2,7 +2,10 @@ import { INotificationEvents } from '@Core/notification/events/notification.even
 import { NodeAppEvents } from '../app';
 import { injectable } from 'inversify';
 import { EVENT } from '../../event.config';
-import { ICreatedNotificationEventDTO } from '@Core/notification/DTO/events';
+import {
+  ICreatedNotificationEventDTO,
+  IVisualizedNotificationEventDTO,
+} from '@Core/notification/DTO/events';
 
 @injectable()
 export class NodeNotificationEvents
@@ -11,5 +14,11 @@ export class NodeNotificationEvents
 {
   async listenNotificationCreated(scheduled: ICreatedNotificationEventDTO) {
     this.events.on(EVENT.NOTIFICATION.CREATED, scheduled.job);
+  }
+
+  async listenNotificationVisualized(
+    scheduled: IVisualizedNotificationEventDTO,
+  ) {
+    this.events.on(EVENT.NOTIFICATION.VISUALIZED, scheduled.job);
   }
 }
