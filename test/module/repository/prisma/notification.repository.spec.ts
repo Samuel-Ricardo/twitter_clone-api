@@ -63,4 +63,21 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
       },
     });
   });
+
+  it('[UNIT] | Should: delete => [NOTIFICATION]', async () => {
+    module.prisma.notification.delete.mockResolvedValue(
+      VALID_POST_NOTIFICATION_DATA as PrismaNotification,
+    );
+
+    expect(
+      module.repository.delete({ id: VALID_POST_NOTIFICATION.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.prisma.notification.delete).toHaveBeenCalledTimes(1);
+    expect(module.prisma.notification.delete).toHaveBeenCalledWith({
+      where: {
+        id: VALID_POST_NOTIFICATION.id,
+      },
+    });
+  });
 });
