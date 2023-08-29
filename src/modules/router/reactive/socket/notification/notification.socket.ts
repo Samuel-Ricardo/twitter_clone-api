@@ -13,6 +13,7 @@ import {
 import { CreateNotificationSchema } from '../../../../@core/notification/validator';
 import { IAppEvents } from '../../../../event/app';
 import { SetVisualizedSchema } from '../../../../@core/notification/validator/set_visualized.validator';
+import { INotificationEvents } from '@Core/notification/events';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -25,8 +26,25 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     private readonly notification: NotificationController,
     @inject(MODULE.EVENTS.NODE.APP)
     private readonly app: IAppEvents,
+    @inject(MODULE.EVENTS.NODE.NOTIFICATION)
+    private readonly notificationEvents: INotificationEvents,
   ) {
+    this.setup();
+  }
+
+  async setup() {
     this.subscribe();
+    this.listen();
+  }
+
+  async listen() {
+    this.notificationEvents.listenNotificationCreated({
+      job: (data) => this.publishNotificationCreated(data),
+    });
+
+    this.notificationEvents.listenNotificationVisualized({
+      job: (data) => this.publishNotificationVisualized(data),
+    });
   }
 
   async subscribe() {
@@ -42,13 +60,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       async (notification: ICreateNotificationDTO) => {
         try {
           CreateNotificationSchema.parse(notification);
-
-          const result = await this.notification.create(notification);
-
-          this.publishNotificationCreated(
-            result.notification.toStruct(),
-            socket,
-          );
+          this.notification.create(notification);
         } catch (error: any) {
           this.app.publishErrorEvent({ error, socket });
         }
