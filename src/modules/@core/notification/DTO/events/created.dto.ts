@@ -1,5 +1,5 @@
 import { INotificationDTO } from '../notification.dto';
 
-export interface ICreatedNotificationDTO {
+export interface ICreatedNotificationEventDTO {
   job: (notification: INotificationDTO) => any | Promise<any>;
 }
