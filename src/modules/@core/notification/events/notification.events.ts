@@ -1,7 +1,10 @@
 import { INotificationDTO, ISetNotificationVisualizedDTO } from '../DTO';
+import { ICreatedNotificationEventDTO } from '../DTO/events/created.dto';
 
 export interface INotificationEvents {
-  listenNotificationCreated(scheduled: any): void | any | Promise<void | any>;
+  listenNotificationCreated(
+    scheduled: ICreatedNotificationEventDTO,
+  ): void | any | Promise<void | any>;
   emitNotificationCreated(
     data: INotificationDTO,
   ): void | any | Promise<void | any>;
