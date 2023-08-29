@@ -1,0 +1,18 @@
+export const MockNotificationRegistry = {
+  CONTROLLER: Symbol.for('MOCK:NOTIFICATION.CONTROLLER'),
+  SERVICE: Symbol.for('MOCK:NOTIFICATION.SERVICE'),
+  USE_CASE: {
+    EVENTS: {
+      CREATE: Symbol.for('MOCK:USE_CASE.EVENTS.CREATE.NOTIFICATION'),
+      VISUALIZE: Symbol.for('MOCK:USE_CASE.EVENTS.VISUALIZE.NOTIFICATION'),
+    },
+    CREATE: Symbol.for('MOCK:USE_CASE.CREATE.NOTIFICATION'),
+    DELETE: Symbol.for('MOCK:USE_CASE.DELETE.NOTIFICATION'),
+    VISUALIZE: Symbol.for('MOCK:USE_CASE.VISUALIZE.NOTIFICATION'),
+    GET: {
+      BY: {
+        USER: Symbol.for('MOCK:USE_CASE.GET.NOTIFICATION.BY.USER'),
+      },
+    },
+  },
+};
