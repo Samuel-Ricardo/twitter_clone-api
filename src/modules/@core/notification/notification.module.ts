@@ -11,11 +11,11 @@ import {
   EmitNotificationCreatedEventUseCase,
   EmitNotificationVisualizedEventUseCase,
 } from './use-case/events';
-import { NotificationEventSupport } from './events';
+import { EventsModule as EVENTS } from '../../event/event.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
-export const NotificationModule = Container.merge(MODULE, REPOSITORY);
+export const NotificationModule = Container.merge(MODULE, REPOSITORY, EVENTS);
 
 NotificationModule.bind(NotificationRegistry.USE_CASE.CREATE).to(
   CreateNotificationUseCase,

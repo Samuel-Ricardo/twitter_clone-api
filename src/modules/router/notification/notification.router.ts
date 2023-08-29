@@ -2,8 +2,8 @@ import {
   CreateNotificationSchema,
   DeleteNotificationSchema,
   GetNotificationByUserSchema,
-} from '@Core/notification/validator';
-import { MODULES } from '@modules';
+} from '../../@core/notification/validator';
+import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
 import { Router } from 'express';
 
