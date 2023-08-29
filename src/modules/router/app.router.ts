@@ -4,6 +4,7 @@ import { post } from './post';
 import { like } from './like/like.router';
 import { follow } from './follow';
 import { comment } from './comment';
+import { notification } from './notification';
 
 const routes = Router();
 
@@ -20,5 +21,6 @@ routes.use(post.router);
 routes.use(like.router);
 routes.use(follow.router);
 routes.use(comment.router);
+routes.use(notification.router);
 
 export { routes };
