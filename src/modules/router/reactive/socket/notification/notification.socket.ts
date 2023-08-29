@@ -17,7 +17,7 @@ import { INotificationEvents } from '@Core/notification/events';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
-  private readonly room = 'notifications';
+  public readonly room = 'notifications';
 
   constructor(
     @inject(MODULE.REACTIVE.SOCKET.IO)
@@ -51,6 +51,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     this.socket.io.on(EVENTS.CONNECTION, (socket) => {
       this.subscribeToNewNotification(socket);
       this.subscribeToNotificationVisualized(socket);
+      this.setupToggleNotification(socket);
     });
   }
 
@@ -96,8 +97,10 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     socket?: Socket,
   ) {
     socket
-      ? socket.emit(EVENTS.NOTIFICATION.CREATED, notification)
-      : this.socket.io.emit(EVENTS.NOTIFICATION.CREATED, notification);
+      ? socket.to(this.room).emit(EVENTS.NOTIFICATION.CREATED, notification)
+      : this.socket.io
+          .to(this.room)
+          .emit(EVENTS.NOTIFICATION.CREATED, notification);
   }
 
   async publishNotificationVisualized(
@@ -105,12 +108,16 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     socket?: Socket,
   ) {
     socket
-      ? socket.emit(EVENTS.NOTIFICATION.VISUALIZED, notification)
-      : this.socket.io.emit(EVENTS.NOTIFICATION.VISUALIZED, notification);
+      ? socket.to(this.room).emit(EVENTS.NOTIFICATION.VISUALIZED, notification)
+      : this.socket.io
+          .to(this.room)
+          .emit(EVENTS.NOTIFICATION.VISUALIZED, notification);
   }
 
   async setupToggleNotification(socket: Socket) {
-    if (this.room in socket.rooms) return socket.leave(this.room);
-    return socket.join(this.room);
+    socket.on(EVENTS.NOTIFICATION.TOGGLE, async () => {
+      if (this.room in socket.rooms) return socket.leave(this.room);
+      socket.join(this.room);
+    });
   }
 }
