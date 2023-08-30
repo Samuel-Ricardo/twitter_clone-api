@@ -62,4 +62,10 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
       SET_VISUALIZED_POST_NOTIFICATION_DATA.visualizedAt,
     );
   });
+
+  it('[INTEGRATION] | Should: delete => [NOTIFICATION]', async () => {
+    expect(
+      repository.delete({ id: notification.id }),
+    ).resolves.not.toThrowError();
+  });
 });
