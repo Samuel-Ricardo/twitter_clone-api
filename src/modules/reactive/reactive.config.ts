@@ -7,6 +7,7 @@ export const EVENTS = {
     CONNECTION: 'start.connection',
   },
 
+  CONNECT: 'connect',
   CONNECTION: 'connection',
   DISCONNECT: 'disconnect',
 

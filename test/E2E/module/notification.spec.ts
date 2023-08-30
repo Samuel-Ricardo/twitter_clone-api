@@ -12,8 +12,7 @@ import { Notification } from '../../../src/modules/@core/notification/entity';
 import { notification } from '../../../src/modules/router/notification';
 import supertest from 'supertest';
 import { VALID_POST_NOTIFICATION_DATA } from '@test/mock/data/notification';
-import { EVENTS } from '@modules/reactive/reactive.config';
-import { EVENT } from '@modules/event/event.config';
+import { EVENT } from '../../../src/modules/event/event.config';
 
 describe('[MODULE] | NOTIFICATION', () => {
   const module: {
@@ -37,7 +36,7 @@ describe('[MODULE] | NOTIFICATION', () => {
         module.server.socket = socket;
       });
 
-      module.client.socket.on(CONNECTION, (_) => done());
+      module.client.socket.on(CONNECTION, done);
     });
   });
 
