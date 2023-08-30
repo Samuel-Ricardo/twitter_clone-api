@@ -1,5 +1,9 @@
 import { ISimulatedNotificationService } from '@test/@types/simulate/notification/service';
 import { MockFactory } from '@test/mock';
+import {
+  VALID_POST_NOTIFICATION,
+  VALID_POST_NOTIFICATION_DATA,
+} from '@test/mock/data/notification';
 
 describe('[SERVICE] | COMMENT', () => {
   let module: ISimulatedNotificationService;
@@ -15,8 +19,16 @@ describe('[SERVICE] | COMMENT', () => {
   });
 
   it('[UNIT] | Should: create => [COMMENT]', async () => {
-    // module.use_case.create.execute.mockResolvedValue(VALID_POST_COMMENT);
+    module.use_case.create.execute.mockResolvedValue(VALID_POST_NOTIFICATION);
 
-    expect(true).toEqual(true);
+    const result = await module.service.createNotification(
+      VALID_POST_NOTIFICATION_DATA,
+    );
+
+    expect(result).toStrictEqual(VALID_POST_NOTIFICATION);
+    expect(module.use_case.create.execute).toBeCalledTimes(1);
+    expect(module.use_case.create.execute).toBeCalledWith(
+      VALID_POST_NOTIFICATION_DATA,
+    );
   });
 });
