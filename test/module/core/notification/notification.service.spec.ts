@@ -42,5 +42,16 @@ describe('[SERVICE] | NOTIFICATION', () => {
     module.use_case.get.by.user.execute.mockResolvedValue([
       VALID_POST_NOTIFICATION,
     ]);
+
+    const result = await module.service.listUserNotifications({
+      userId: VALID_POST_NOTIFICATION.userId,
+    });
+
+    expect(result).toStrictEqual([VALID_POST_NOTIFICATION]);
+
+    expect(module.use_case.get.by.user.execute).toBeCalledTimes(1);
+    expect(module.use_case.get.by.user.execute).toBeCalledWith({
+      userId: VALID_POST_NOTIFICATION.userId,
+    });
   });
 });
