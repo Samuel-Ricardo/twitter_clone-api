@@ -1,6 +1,6 @@
-import { NotificationController } from '@Core/notification/controller';
+import { NotificationController } from '../../../../src/modules/@core/notification/controller';
 import { ISimulateController } from '../controller';
-import { NotificationService } from '@Core/notification/service';
+import { NotificationService } from '../../../../src/modules/@core/notification/service';
 
 export interface ISimulatedNotificationController
   extends ISimulateController<NotificationService, NotificationController> {}
