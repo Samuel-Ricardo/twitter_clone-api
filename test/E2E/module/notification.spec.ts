@@ -33,7 +33,7 @@ describe('[MODULE] | NOTIFICATION', () => {
 
   it('[E2E] | Should: find by [user] => [NOTIFICATION]', async () => {
     const response = await supertest(app).get(
-      `${notification.prefix}/user/${VALID_POST_NOTIFICATION_DATA.userId}`,
+      `${notification.prefix}/user/${module.notification?.userId}`,
     );
     const body = response.body;
 
@@ -43,5 +43,13 @@ describe('[MODULE] | NOTIFICATION', () => {
     expect(body.notifications.length).toBeGreaterThanOrEqual(1);
     expect(body.notifications[0]).toHaveProperty('id');
     expect(body.notifications[0]).toStrictEqual(module.notification);
+  });
+
+  it('[E2E] | Should: delete => [NOTIFICATION]', async () => {
+    const response = await supertest(app).delete(
+      `${notification.prefix}/${module.notification?.id}`,
+    );
+
+    expect(response.status).toBe(204);
   });
 });
