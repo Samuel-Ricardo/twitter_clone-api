@@ -16,7 +16,9 @@ export class NotificationController {
   ) {}
 
   async create(data: ICreateNotificationDTO) {
-    return { notification: await this.service.createNotification(data) };
+    return {
+      notification: (await this.service.createNotification(data)).toStruct(),
+    };
   }
 
   async delete(notification: IDeleteNotificationDTO) {
@@ -24,12 +26,17 @@ export class NotificationController {
   }
 
   async listUserNotifications(user: IGetNotificationByUserDTO) {
-    return { notifications: await this.service.listUserNotifications(user) };
+    const result = await this.service.listUserNotifications(user);
+    const notifications = result.map((notification) => notification.toStruct());
+
+    return { notifications };
   }
 
   async visualize(notification: ISetNotificationVisualizedDTO) {
     return {
-      notification: await this.service.visualizeNotification(notification),
+      notification: (
+        await this.service.visualizeNotification(notification)
+      ).toStruct(),
     };
   }
 }

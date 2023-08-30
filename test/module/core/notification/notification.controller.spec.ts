@@ -34,4 +34,21 @@ describe('[CONTROLLER] | NOTIFICATION', () => {
       VALID_POST_NOTIFICATION_DATA,
     );
   });
+
+  it('[UNIT] | Should: find by [user] => [NOTIFICATION]', async () => {
+    module.service.listUserNotifications.mockResolvedValue([
+      VALID_POST_NOTIFICATION,
+    ]);
+
+    const result = await module.controller.listUserNotifications({
+      userId: VALID_POST_NOTIFICATION.userId,
+    });
+
+    expect(result).toStrictEqual({ notifications: [VALID_POST_NOTIFICATION] });
+
+    expect(module.service.listUserNotifications).toHaveBeenCalledTimes(1);
+    expect(module.service.listUserNotifications).toHaveBeenCalledWith({
+      userId: VALID_POST_NOTIFICATION.userId,
+    });
+  });
 });
