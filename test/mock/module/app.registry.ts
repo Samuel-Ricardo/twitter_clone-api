@@ -5,6 +5,7 @@ import { PostMockRegistry as POST } from './core/post';
 import { MockLikeRegistry as LIKE } from './core/like';
 import { FollowMockRegistry as FOLLOW } from './core/follow';
 import { CommentMockRegistry as COMMENT } from './core/comment';
+import { NotificationMockRegistry as NOTIFICATION } from './core/notification';
 
 export const MOCK_MODULE = {
   ...PrismaMockResgistry,
@@ -14,4 +15,5 @@ export const MOCK_MODULE = {
   LIKE,
   FOLLOW,
   COMMENT,
+  NOTIFICATION,
 };
