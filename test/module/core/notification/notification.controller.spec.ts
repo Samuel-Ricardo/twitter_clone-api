@@ -1,6 +1,8 @@
 import { ISimulatedNotificationController } from '@test/@types/simulate/notification/controller';
 import { MockFactory } from '@test/mock';
 import {
+  SET_VISUALIZED_POST_NOTIFICATION,
+  SET_VISUALIZED_POST_NOTIFICATION_DATA,
   VALID_POST_NOTIFICATION,
   VALID_POST_NOTIFICATION_DATA,
 } from '@test/mock/data/notification';
@@ -63,5 +65,27 @@ describe('[CONTROLLER] | NOTIFICATION', () => {
     expect(module.service.delete).toHaveBeenCalledWith({
       id: VALID_POST_NOTIFICATION.id,
     });
+  });
+
+  it('[UNIT] | Should: visualize => [NOTIFICATION]', async () => {
+    module.service.visualizeNotification.mockResolvedValue(
+      SET_VISUALIZED_POST_NOTIFICATION,
+    );
+
+    const result = await module.controller.visualize(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
+
+    expect(result).toStrictEqual({
+      notification: SET_VISUALIZED_POST_NOTIFICATION,
+    });
+    expect(result.notification.visualizedAt).not.toEqual(
+      VALID_POST_NOTIFICATION.visualizedAt,
+    );
+
+    expect(module.service.visualizeNotification).toHaveBeenCalledTimes(1);
+    expect(module.service.visualizeNotification).toHaveBeenCalledWith(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
   });
 });
