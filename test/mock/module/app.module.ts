@@ -7,6 +7,7 @@ import { UserMockModule } from './core/user';
 import { PostMockModule } from './core/post';
 import { MockLikeModule } from './core/like';
 import { FollowMockModule } from './core/follow';
+import { NotificationMockModule } from './core/notification';
 
 export const AppModuleMock = Container.merge(
   PrismaMockModule,
@@ -15,4 +16,5 @@ export const AppModuleMock = Container.merge(
   PostMockModule,
   MockLikeModule,
   FollowMockModule,
+  NotificationMockModule,
 );
