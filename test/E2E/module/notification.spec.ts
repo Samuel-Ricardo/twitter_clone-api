@@ -2,14 +2,50 @@
  * @jest-environment ./test/environment
  */
 
-import { app } from '@/app';
+import { Socket as ServerSocker } from 'socket.io';
+import { Socket as SocketClient } from 'socket.io-client';
+
+import Client from 'socket.io-client';
+
+import { app, server, socket } from '@/app';
 import { Notification } from '../../../src/modules/@core/notification/entity';
 import { notification } from '../../../src/modules/router/notification';
 import supertest from 'supertest';
 import { VALID_POST_NOTIFICATION_DATA } from '@test/mock/data/notification';
+import { EVENTS } from '@modules/reactive/reactive.config';
+import { EVENT } from '@modules/event/event.config';
 
 describe('[MODULE] | NOTIFICATION', () => {
-  const module: { notification?: Notification } = {};
+  const module: {
+    port?: number;
+    notification?: Notification;
+    server: {
+      socket?: ServerSocker;
+    };
+    client: {
+      socket?: SocketClient;
+    };
+  } = { port: 8576, server: {}, client: {} };
+
+  const { CONNECTION } = EVENT;
+
+  beforeAll((done) => {
+    server.listen(module.port, () => {
+      module.client.socket = Client(`http://localhost:${module.port}`);
+
+      socket.io.on(CONNECTION, (socket) => {
+        module.server.socket = socket;
+      });
+
+      module.client.socket.on(CONNECTION, (_) => done());
+    });
+  });
+
+  afterAll((done) => {
+    socket.io.close();
+    module.client.socket?.close();
+    done();
+  });
 
   it('[E2E] | should: create => [NOTIFICATION]', async () => {
     const response = await supertest(app)
