@@ -72,7 +72,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
 
   async subscribeToNotificationVisualized(socket: Socket) {
     socket.on(
-      EVENTS.NOTIFICATION.VISUALIZED,
+      EVENTS.NOTIFICATION.VISUALIZE,
       async (notification: ISetNotificationVisualizedDTO) => {
         try {
           SetVisualizedSchema.parse(notification);
