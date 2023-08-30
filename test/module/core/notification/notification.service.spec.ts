@@ -1,6 +1,8 @@
 import { ISimulatedNotificationService } from '@test/@types/simulate/notification/service';
 import { MockFactory } from '@test/mock';
 import {
+  SET_VISUALIZED_POST_NOTIFICATION,
+  SET_VISUALIZED_POST_NOTIFICATION_DATA,
   VALID_POST_NOTIFICATION,
   VALID_POST_NOTIFICATION_DATA,
 } from '@test/mock/data/notification';
@@ -61,5 +63,31 @@ describe('[SERVICE] | NOTIFICATION', () => {
     expect(
       module.service.delete({ id: VALID_POST_NOTIFICATION.id }),
     ).resolves.not.toThrow();
+  });
+
+  it('[UNIT] | Should: visualize => [NOTIFICATION]', async () => {
+    module.use_case.visualize.execute.mockResolvedValue(
+      SET_VISUALIZED_POST_NOTIFICATION,
+    );
+
+    const result = await module.service.visualizeNotification(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
+
+    expect(result).toStrictEqual(SET_VISUALIZED_POST_NOTIFICATION);
+    expect(result.id).toEqual(VALID_POST_NOTIFICATION.id);
+    expect(result.visualizedAt).not.toEqual(
+      VALID_POST_NOTIFICATION.visualizedAt,
+    );
+
+    expect(module.use_case.visualize.execute).toBeCalledTimes(1);
+    expect(module.use_case.visualize.execute).toBeCalledWith(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
+
+    expect(module.use_case.emit.visualized.emit).toBeCalledTimes(1);
+    expect(module.use_case.emit.visualized.emit).toBeCalledWith(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA,
+    );
   });
 });
