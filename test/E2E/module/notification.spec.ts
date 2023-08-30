@@ -30,4 +30,18 @@ describe('[MODULE] | NOTIFICATION', () => {
 
     module.notification = body.notification;
   });
+
+  it('[E2E] | Should: find by [user] => [NOTIFICATION]', async () => {
+    const response = await supertest(app).get(
+      `${notification.prefix}/user/${VALID_POST_NOTIFICATION_DATA.userId}`,
+    );
+    const body = response.body;
+
+    expect(response.status).toBe(200);
+    expect(body.notifications).toBeDefined();
+    expect(body.notifications).toBeInstanceOf(Array);
+    expect(body.notifications.length).toBeGreaterThanOrEqual(1);
+    expect(body.notifications[0]).toHaveProperty('id');
+    expect(body.notifications[0]).toStrictEqual(module.notification);
+  });
 });
