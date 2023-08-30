@@ -54,4 +54,12 @@ describe('[SERVICE] | NOTIFICATION', () => {
       userId: VALID_POST_NOTIFICATION.userId,
     });
   });
+
+  it('[UNIT] | Should: delete => [NOTIFICATION]', async () => {
+    module.use_case.delete_notification.execute.mockResolvedValue();
+
+    expect(
+      module.service.delete({ id: VALID_POST_NOTIFICATION.id }),
+    ).resolves.not.toThrow();
+  });
 });
