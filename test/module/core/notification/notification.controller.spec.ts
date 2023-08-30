@@ -77,7 +77,7 @@ describe('[CONTROLLER] | NOTIFICATION', () => {
     );
 
     expect(result).toStrictEqual({
-      notification: SET_VISUALIZED_POST_NOTIFICATION,
+      notification: SET_VISUALIZED_POST_NOTIFICATION.toStruct(),
     });
     expect(result.notification.visualizedAt).not.toEqual(
       VALID_POST_NOTIFICATION.visualizedAt,
