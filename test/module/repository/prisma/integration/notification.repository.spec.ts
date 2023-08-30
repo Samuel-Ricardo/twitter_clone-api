@@ -49,4 +49,17 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
     expect(result[0]).toHaveProperty('_id');
     expect(result[0].id).toBe(notification.id);
   });
+
+  it('[INTEGRATION] | Should: set [visualizedAt] => [NOTIFICATION]', async () => {
+    const result = await repository.setVisualized({
+      id: notification.id,
+      visualizedAt: SET_VISUALIZED_POST_NOTIFICATION_DATA.visualizedAt,
+    });
+
+    expect(result).toBeInstanceOf(Notification);
+    expect(result.id).toEqual(notification.id);
+    expect(result.visualizedAt).toEqual(
+      SET_VISUALIZED_POST_NOTIFICATION_DATA.visualizedAt,
+    );
+  });
 });
