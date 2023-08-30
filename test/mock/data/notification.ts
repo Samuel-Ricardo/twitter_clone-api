@@ -25,7 +25,7 @@ export const VALID_POST_NOTIFICATION_DATA: INotificationDTO = {
   updatedAt: new Date(),
 };
 
-export const VALID_POST_COMMENT = Notification.create(
+export const VALID_POST_NOTIFICATION = Notification.create(
   VALID_POST_NOTIFICATION_DATA,
 );
 
