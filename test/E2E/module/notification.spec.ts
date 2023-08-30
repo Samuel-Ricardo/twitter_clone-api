@@ -18,8 +18,10 @@ import { IAppEvents } from '../../../src/modules/event/app';
 import {
   ICreateNotificationDTO,
   INotificationDTO,
+  ISetNotificationVisualizedDTO,
 } from '../../../src/modules/@core/notification/DTO';
 import { CreateNotificationSchema } from '../../../src/modules/@core/notification/validator';
+import { SetVisualizedSchema } from '../../../src/modules/@core/notification/validator/set_visualized.validator';
 import { MODULES } from '@modules';
 
 describe('[MODULE] | NOTIFICATION', () => {
@@ -144,5 +146,41 @@ describe('[MODULE] | NOTIFICATION', () => {
     );
 
     module.client.socket?.emit(NOTIFICATION.NEW, VALID_POST_NOTIFICATION_DATA);
+  });
+
+  it('[E2E] | Should: visualize => [NOTIFICATION]', (done) => {
+    const visualizedAt = new Date();
+
+    module.server.socket?.on(
+      NOTIFICATION.VISUALIZE,
+      (data: ISetNotificationVisualizedDTO) => {
+        expect(data).toBeDefined();
+        expect(SetVisualizedSchema.parse(data)).toBeDefined();
+      },
+    );
+
+    module.events.notification?.listenNotificationVisualized({
+      job: (notification) => {
+        expect(notification).toBeDefined();
+        expect(notification).toHaveProperty('id');
+        expect(notification.visualizedAt).toBeDefined();
+      },
+    });
+
+    module.client.socket?.on(
+      NOTIFICATION.VISUALIZED,
+      (notification: ISetNotificationVisualizedDTO) => {
+        expect(notification).toBeDefined();
+        expect(notification).toHaveProperty('id');
+        expect(notification.visualizedAt).toBeDefined();
+
+        done();
+      },
+    );
+
+    module.client.socket?.emit(NOTIFICATION.VISUALIZE, {
+      id: module.notification?.id,
+      visualizedAt,
+    });
   });
 });

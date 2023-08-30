@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const SetVisualizedSchema = z
   .object({
-    id: z.string(),
-    visualizedAt: z.date(),
+    id: z.string().catch(catchZod),
+    visualizedAt: z.date().catch(catchZod),
   })
   .catch(catchZod);
