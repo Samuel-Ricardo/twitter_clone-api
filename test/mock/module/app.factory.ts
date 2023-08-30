@@ -6,6 +6,7 @@ import { PostMockFactory as POST } from './core/post';
 import { MockLikeFactory as LIKE } from './core/like';
 import { FollowMockFactory as FOLLOW } from './core/follow';
 import { CommentMockFactory as COMMENT } from './core/comment';
+import { NotificationMockFactory as NOTIFICATION } from './core/notification/notification.factory';
 
 export const MockFactory = {
   ...PrismaMockFactory,
@@ -16,4 +17,5 @@ export const MockFactory = {
   LIKE,
   FOLLOW,
   COMMENT,
+  NOTIFICATION,
 };
