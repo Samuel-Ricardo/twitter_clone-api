@@ -7,12 +7,8 @@ import { MODULES } from '@modules';
 import { PrismaNotificationRepository } from '../../../../../src/modules/repository/prisma/notification';
 import {
   VALID_POST_NOTIFICATION_DATA,
-  VALID_POST_NOTIFICATION,
-  SET_VISUALIZED_POST_NOTIFICATION,
   SET_VISUALIZED_POST_NOTIFICATION_DATA,
-  CREATE_POST_NOTIFICATION_DATA,
   VALID_USER,
-  VALID_POST,
 } from '@test/mock/data/notification';
 
 import { Notification } from '../../../../../src/modules/@core/notification/entity';
