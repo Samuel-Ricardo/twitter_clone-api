@@ -5,7 +5,8 @@ import { randomUUID } from 'crypto';
 import { execSync } from 'child_process';
 import { MongoClient } from 'mongodb';
 
-dotenv.config({ path: resolve(__dirname, '..', '.env.test') });
+// dotenv.config({ path: resolve(__dirname, '..', '.env.test') });
+dotenv.config({ path: resolve(__dirname, '..', '.env.ci') });
 
 const DB_SYNC = 'npm run db:sync';
 
@@ -13,11 +14,7 @@ const BASE = {
   _URL: null,
   getURL: () => {
     if (!BASE._URL) {
-      // DEV Container
-      // BASE._URL = process.env.DATABASE_URL;
-
-      // CI Container
-      BASE._URL = process.env.CI_DATABASE_URL
+      BASE._URL = process.env.DATABASE_URL;
     }
 
     return BASE._URL;
