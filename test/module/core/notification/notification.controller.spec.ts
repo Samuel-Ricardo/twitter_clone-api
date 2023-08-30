@@ -53,4 +53,15 @@ describe('[CONTROLLER] | NOTIFICATION', () => {
       userId: VALID_POST_NOTIFICATION.userId,
     });
   });
+
+  it('[UNIT] | Should: delete => [NOTIFICATION]', async () => {
+    expect(
+      module.controller.delete({ id: VALID_POST_NOTIFICATION.id }),
+    ).resolves.not.toThrow();
+
+    expect(module.service.delete).toHaveBeenCalledTimes(1);
+    expect(module.service.delete).toHaveBeenCalledWith({
+      id: VALID_POST_NOTIFICATION.id,
+    });
+  });
 });
