@@ -13,7 +13,7 @@ export interface ISimulatedNotificationService {
   service: NotificationService;
   use_case: {
     create: DeepMockProxy<CreateNotificationUseCase>;
-    delete: DeepMockProxy<DeleteNotificationUseCase>;
+    delete_notification: DeepMockProxy<DeleteNotificationUseCase>;
     visualize: DeepMockProxy<VisualizeNotificationUseCase>;
     get: {
       by: {
