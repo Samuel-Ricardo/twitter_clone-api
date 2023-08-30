@@ -44,7 +44,9 @@ describe('[CONTROLLER] | NOTIFICATION', () => {
       userId: VALID_POST_NOTIFICATION.userId,
     });
 
-    expect(result).toStrictEqual({ notifications: [VALID_POST_NOTIFICATION] });
+    expect(result).toStrictEqual({
+      notifications: [VALID_POST_NOTIFICATION.toStruct()],
+    });
 
     expect(module.service.listUserNotifications).toHaveBeenCalledTimes(1);
     expect(module.service.listUserNotifications).toHaveBeenCalledWith({
