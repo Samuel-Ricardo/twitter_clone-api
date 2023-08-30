@@ -49,6 +49,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
 
   async subscribe() {
     this.socket.io.on(EVENTS.CONNECTION, (socket) => {
+      socket.join(this.room);
       this.subscribeToNewNotification(socket);
       this.subscribeToNotificationVisualized(socket);
       this.setupToggleNotification(socket);

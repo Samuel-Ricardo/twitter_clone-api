@@ -13,6 +13,14 @@ import { notification } from '../../../src/modules/router/notification';
 import supertest from 'supertest';
 import { VALID_POST_NOTIFICATION_DATA } from '@test/mock/data/notification';
 import { EVENT } from '../../../src/modules/event/event.config';
+import { INotificationEvents } from '../../../src/modules/@core/notification/events';
+import { IAppEvents } from '../../../src/modules/event/app';
+import {
+  ICreateNotificationDTO,
+  INotificationDTO,
+} from '../../../src/modules/@core/notification/DTO';
+import { CreateNotificationSchema } from '../../../src/modules/@core/notification/validator';
+import { MODULES } from '@modules';
 
 describe('[MODULE] | NOTIFICATION', () => {
   const module: {
@@ -24,11 +32,18 @@ describe('[MODULE] | NOTIFICATION', () => {
     client: {
       socket?: SocketClient;
     };
-  } = { port: 8576, server: {}, client: {} };
+    events: {
+      app?: IAppEvents;
+      notification?: INotificationEvents;
+    };
+  } = { port: 8576, server: {}, client: {}, events: {} };
 
-  const { CONNECTION } = EVENT;
+  const { CONNECTION, CONNECT, NOTIFICATION } = EVENT;
 
   beforeAll((done) => {
+    module.events.app = MODULES.EVENTS.NODE.APP();
+    module.events.notification = MODULES.EVENTS.NODE.NOTIFICATION();
+
     server.listen(module.port, () => {
       module.client.socket = Client(`http://localhost:${module.port}`);
 
@@ -36,7 +51,7 @@ describe('[MODULE] | NOTIFICATION', () => {
         module.server.socket = socket;
       });
 
-      module.client.socket.on(CONNECTION, done);
+      module.client.socket.on(CONNECT, done);
     });
   });
 
@@ -86,5 +101,48 @@ describe('[MODULE] | NOTIFICATION', () => {
     );
 
     expect(response.status).toBe(204);
+  });
+
+  it('[E2E] | Should: create => [NOTIFICATION]', (done) => {
+    module.server.socket?.on(
+      NOTIFICATION.NEW,
+      (data: ICreateNotificationDTO) => {
+        expect(data).toBeDefined();
+        expect(CreateNotificationSchema.parse(data)).toBeDefined();
+      },
+    );
+
+    module.events.notification?.listenNotificationCreated({
+      job: (notification) => {
+        expect(notification).toBeDefined();
+        expect(notification).toHaveProperty('id');
+        expect(notification.body).toEqual(VALID_POST_NOTIFICATION_DATA.body);
+        expect(notification.userId).toEqual(
+          VALID_POST_NOTIFICATION_DATA.userId,
+        );
+        expect(notification.eventId).toEqual(
+          VALID_POST_NOTIFICATION_DATA.eventId,
+        );
+      },
+    });
+
+    module.client.socket?.on(
+      NOTIFICATION.CREATED,
+      (notification: INotificationDTO) => {
+        expect(notification).toBeDefined();
+        expect(notification).toHaveProperty('id');
+        expect(notification.body).toEqual(VALID_POST_NOTIFICATION_DATA.body);
+        expect(notification.userId).toEqual(
+          VALID_POST_NOTIFICATION_DATA.userId,
+        );
+        expect(notification.eventId).toEqual(
+          VALID_POST_NOTIFICATION_DATA.eventId,
+        );
+
+        done();
+      },
+    );
+
+    module.client.socket?.emit(NOTIFICATION.NEW, VALID_POST_NOTIFICATION_DATA);
   });
 });
