@@ -9,6 +9,8 @@ import {
   UpdateUserUseCase,
   UserService,
 } from '@User';
+import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
+import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 
 export const UserMockFactory = {
   SERVICE: {
@@ -44,6 +46,18 @@ export const UserMockFactory = {
       ALL: () =>
         UserMockModule.get<DeepMockProxy<SelectAllUsersUseCase>>(
           UserMockRegistry.USE_CASE.SELECT.ALL,
+        ),
+      BY: {
+        CREDENTIALS: () =>
+          UserMockModule.get<DeepMockProxy<SelectUserByCredentialsUseCase>>(
+            UserMockRegistry.USE_CASE.SELECT.BY.CREDENTIALS,
+          ),
+      },
+    },
+    VALIDATE: {
+      PASSWORD: () =>
+        UserMockModule.get<DeepMockProxy<ValidateUserPasswordUseCase>>(
+          UserMockRegistry.USE_CASE.VALIDATE.PASSWORD,
         ),
     },
   },
