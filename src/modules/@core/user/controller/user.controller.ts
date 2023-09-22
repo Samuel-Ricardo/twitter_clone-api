@@ -7,6 +7,7 @@ import {
   SelectUserByIdDTO,
   UpdateUserDTO,
 } from '@User/DTO';
+import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
 
 @injectable()
 export class UserController {
@@ -40,5 +41,13 @@ export class UserController {
 
   async delete(data: IDeleteuserDTO) {
     return await this.service.delete(data);
+  }
+
+  async selectByCredentials(data: ISelectUserByCredentialsDTO) {
+    const user = await this.service.selectByCredentials(data);
+
+    return user
+      ? { user }
+      : { error: 'User not found, verify your credentials' };
   }
 }
