@@ -12,6 +12,8 @@ import {
 import { UserService } from '@User/service';
 import { MockFactory, VALID_USER, VALID_USER_DATA } from '@test/mock';
 import { DeepMockProxy } from 'jest-mock-extended';
+import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
+import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 
 describe('[SERVICE] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -22,6 +24,8 @@ describe('[SERVICE] | USER', () => {
   let update: DeepMockProxy<UpdateUserUseCase>;
   let selectAll: DeepMockProxy<SelectAllUsersUseCase>;
   let selectById: DeepMockProxy<SelectUserByIdUseCase>;
+  let selectByCredentials: DeepMockProxy<SelectUserByCredentialsUseCase>;
+  let validatePasword: DeepMockProxy<ValidateUserPasswordUseCase>;
   let deleteUser: DeepMockProxy<DeleteUserUseCase>;
 
   beforeEach(() => {
@@ -31,6 +35,8 @@ describe('[SERVICE] | USER', () => {
     update = MockFactory.USER.USE_CASE.UPDATE();
     selectAll = MockFactory.USER.USE_CASE.SELECT.ALL();
     selectById = MockFactory.USER.USE_CASE.SELECT.BY_ID();
+    selectByCredentials = MockFactory.USER.USE_CASE.SELECT.BY.CREDENTIALS();
+    validatePasword = MockFactory.USER.USE_CASE.VALIDATE.PASSWORD();
     deleteUser = MockFactory.USER.USE_CASE.DELETE();
 
     service = new UserService(
@@ -39,7 +45,11 @@ describe('[SERVICE] | USER', () => {
       deleteUser,
       selectAll,
       selectById,
+      selectByCredentials,
+      validatePasword,
     );
+
+    // service = MockFactory.USER.SERVICE.SIMULATE_DEFAULT();
 
     expect(service).toBeDefined();
     expect(service).toBeInstanceOf(UserService);
@@ -73,6 +83,33 @@ describe('[SERVICE] | USER', () => {
     expect(user).toStrictEqual(VALID_USER);
     expect(selectById.execute).toHaveBeenCalledTimes(1);
     expect(selectById.execute).toHaveBeenCalledWith({ id: VALID_USER.id });
+  });
+
+  it('should: select - by [credentials] => [USER]', async () => {
+    selectByCredentials.execute.mockResolvedValue(VALID_USER);
+    validatePasword.execute.mockResolvedValue(true);
+
+    const user = await service.selectByCredentials({
+      email: VALID_USER.email,
+      password: VALID_USER.password,
+    });
+
+    expect(user).toBeDefined();
+    expect(user).toStrictEqual(VALID_USER);
+
+    expect(selectByCredentials.execute).toHaveBeenCalledTimes(1);
+    expect(selectByCredentials.execute).toHaveBeenCalledWith({
+      email: VALID_USER.email,
+      password: VALID_USER.password,
+    });
+
+    expect(validatePasword.execute).toHaveBeenCalledTimes(1);
+    expect(validatePasword.execute).toHaveBeenCalledWith({
+      password: {
+        expected: VALID_USER.password,
+        given: VALID_USER.password,
+      },
+    });
   });
 
   it('should: create [USER]', async () => {

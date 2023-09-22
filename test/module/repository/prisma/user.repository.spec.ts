@@ -78,6 +78,27 @@ describe('[REPOSITORY] | User - [UNIT]', () => {
     });
   });
 
+  it('[UNIT] | Should: select by [credentials] => [USER]', async () => {
+    prismaMock.user.findUnique.mockResolvedValue(VALID_USER as PrismaUser);
+
+    const user = await repository.selectByCredentials({
+      email: VALID_USER.email,
+      password: VALID_USER.password,
+    });
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+    expect(user).toStrictEqual(VALID_USER);
+
+    expect(prismaMock.user.findUnique).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
+      where: {
+        email: VALID_USER.email,
+      },
+    });
+  });
+
   it('[UNIT] | should update a user', async () => {
     const UPDATED_USER = {
       ...VALID_USER,
