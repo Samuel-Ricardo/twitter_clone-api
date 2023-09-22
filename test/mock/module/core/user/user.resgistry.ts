@@ -16,6 +16,12 @@ export const UserMockRegistry = {
     SELECT: {
       BY_ID: Symbol.for('SelectUserByIdMockUseCase'),
       ALL: Symbol.for('SelectAllUserMockUseCase'),
+      BY: {
+        CREDENTIALS: Symbol.for('SelectUserByCredentialsMockUseCase'),
+      },
+    },
+    VALIDATE: {
+      PASSWORD: Symbol.for('ValidateUserPasswordMockUseCase'),
     },
     DELETE: Symbol.for('DeleteUserMockUseCase'),
   },
