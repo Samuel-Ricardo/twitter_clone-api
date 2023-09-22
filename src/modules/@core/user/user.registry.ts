@@ -13,6 +13,12 @@ export const UserRegistry = {
     SELECT: {
       BY_ID: Symbol.for('SelectUserByIdUseCase'),
       ALL: Symbol.for('SelectAllUsersUseCase'),
+      BY: {
+        CREDENTIALS: Symbol.for('SelectUserByCredentialsUseCase'),
+      },
+    },
+    VALIDATE: {
+      PASSWORD: Symbol.for('ValidatePasswordUseCase'),
     },
     DELETE: Symbol.for('DeleteUserUseCase'),
   },
