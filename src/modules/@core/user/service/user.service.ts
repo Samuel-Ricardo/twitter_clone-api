@@ -11,6 +11,9 @@ import { UpdateUserUseCase } from '@User/use-case/update.use-case';
 import { DeleteUserUseCase } from '@User/use-case/delete.use-case';
 import { SelectAllUsersUseCase } from '@User/use-case/select_all.use-case';
 import { SelectUserByIdUseCase } from '@User/use-case/select_by_id.use-case';
+import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
+import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
+import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 
 @injectable()
 export class UserService {
@@ -29,6 +32,12 @@ export class UserService {
 
     @inject(USER_MODULE.USE_CASE.SELECT.BY_ID)
     private selectUserById: SelectUserByIdUseCase,
+
+    @inject(USER_MODULE.USE_CASE.VALIDATE.PASSWORD)
+    private validateUserPassword: ValidateUserPasswordUseCase,
+
+    @inject(USER_MODULE.USE_CASE.SELECT.BY_CREDENTIALS)
+    private selectUserByCredentials: SelectUserByCredentialsUseCase,
   ) {}
 
   async create(data: CreateUserDTO) {
@@ -49,5 +58,15 @@ export class UserService {
 
   async selectById(data: SelectUserByIdDTO) {
     return await this.selectUserById.execute(data);
+  }
+
+  async selectByCredentials(data: ISelectUserByCredentialsDTO) {
+    const user = await this.selectUserByCredentials.execute(data);
+
+    return this.validateUserPassword.execute({
+      password: { expected: data.password, given: user.password },
+    })
+      ? user
+      : null;
   }
 }
