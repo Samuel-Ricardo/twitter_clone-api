@@ -87,7 +87,7 @@ describe('[SERVICE] | USER', () => {
 
   it('should: select - by [credentials] => [USER]', async () => {
     selectByCredentials.execute.mockResolvedValue(VALID_USER);
-    validatePasword.execute.mockResolvedValue(true);
+    validatePasword.execute.mockReturnValue(true);
 
     const user = await service.selectByCredentials({
       email: VALID_USER.email,
