@@ -33,11 +33,11 @@ export class UserService {
     @inject(USER_MODULE.USE_CASE.SELECT.BY_ID)
     private selectUserById: SelectUserByIdUseCase,
 
+    @inject(USER_MODULE.USE_CASE.SELECT.BY.CREDENTIALS)
+    private selectUserByCredentials: SelectUserByCredentialsUseCase,
+
     @inject(USER_MODULE.USE_CASE.VALIDATE.PASSWORD)
     private validateUserPassword: ValidateUserPasswordUseCase,
-
-    @inject(USER_MODULE.USE_CASE.SELECT.BY_CREDENTIALS)
-    private selectUserByCredentials: SelectUserByCredentialsUseCase,
   ) {}
 
   async create(data: CreateUserDTO) {
