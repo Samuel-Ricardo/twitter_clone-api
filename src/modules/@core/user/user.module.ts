@@ -12,6 +12,9 @@ import { SelectAllUsersUseCase } from './use-case/select_all.use-case';
 import { SelectUserByIdUseCase } from './use-case/select_by_id.use-case';
 import { RepositoryModule } from '../../repository/repository.module';
 import { UserValidator } from './validator/user.validator';
+import { MODULE } from '@modules/app.registry';
+import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
+import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -59,6 +62,12 @@ Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
 Module.bind(UserRegistry.USE_CASE.SELECT.ALL).to(SelectAllUsersUseCase);
 Module.bind(UserRegistry.USE_CASE.SELECT.BY_ID).to(SelectUserByIdUseCase);
+Module.bind(UserRegistry.USE_CASE.VALIDATE.PASSWORD).to(
+  ValidateUserPasswordUseCase,
+);
+Module.bind(UserRegistry.USE_CASE.SELECT.BY.CREDENTIALS).to(
+  SelectUserByCredentialsUseCase,
+);
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
 
