@@ -8,7 +8,7 @@ const user_routes = Router();
 
 user_routes.get(prefix, async (req, res, next) => {
   try {
-    res.status(302).send(await USER.seletcAll());
+    res.status(200).send(await USER.seletcAll());
   } catch (e) {
     next(e);
   }
@@ -25,6 +25,14 @@ user_routes.post(
     }
   },
 );
+
+user_routes.post(`${prefix}/by/credentials`, async (req, res, next) => {
+  try {
+    res.status(201).json(await USER.selectByCredentials(req.body));
+  } catch (e) {
+    next(e);
+  }
+});
 
 user_routes.patch(
   prefix,
@@ -61,7 +69,7 @@ user_routes.get(
 
   async (req, res, next) => {
     try {
-      res.status(302).json(await USER.selectById({ id: req.params.id }));
+      res.status(200).json(await USER.selectById({ id: req.params.id }));
     } catch (e) {
       next(e);
     }
