@@ -1,3 +1,6 @@
 export class IValidateUserPasswordDTO {
-  password: string;
+  password: {
+    expected: string;
+    given: string;
+  };
 }
