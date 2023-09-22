@@ -54,7 +54,7 @@ describe('[MODULE] | User', () => {
   it('[E2E] | Should: Select - [all] => [USER]', async () => {
     const response = await supertest(app).get('/users');
 
-    expect(response.status).toBe(302);
+    expect(response.status).toBe(200);
     expect(response.body.users).toBeInstanceOf(Array);
     expect(response.body.users.length).toBeGreaterThanOrEqual(0);
     expect(response.body.users).toContainEqual(user);
@@ -64,10 +64,24 @@ describe('[MODULE] | User', () => {
     const response = await supertest(app).get(`/users/${user.id}`);
     const body: { user: User } = response.body;
 
-    expect(response.status).toBe(302);
+    expect(response.status).toBe(200);
     expect(body.user).toHaveProperty('id');
     expect(body.user.id).toEqual(user.id);
     expect(body.user).toStrictEqual(user);
+  });
+
+  it('[E2E] | Should: Select - [by credentials] => [USER]', async () => {
+    const response = await supertest(app).post(`/users/by/credentials`).send({
+      email: user.email,
+      password: user.password,
+    });
+    const body: { user: User } = response.body;
+
+    expect(response.status).toBe(201);
+
+    expect(body.user).toBeDefined();
+    expect(body.user).toHaveProperty('id');
+    expect(body.user.id).toEqual(user.id);
   });
 
   it('[E2E] | Should: Delete - by [id] => [USER]', async () => {
@@ -82,6 +96,6 @@ describe('[MODULE] | User', () => {
 
   it('[E2E] | Should: return error when select - wrong [id] => [USER]', async () => {
     const response = await supertest(app).get(`/users/pedro`);
-    expect(response.status).not.toBe(302);
+    expect(response.status).not.toBe(200);
   });
 });
