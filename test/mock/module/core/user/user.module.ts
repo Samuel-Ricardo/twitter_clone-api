@@ -9,6 +9,8 @@ import {
 import { UserMockRegistry } from './user.resgistry';
 import { mockUserService, simulateUserService } from './service/user.service';
 import { simulateUserController } from './controller/user.controller';
+import { mockSelectUserByCredentialsUseCase } from './use-case/select_by_credentials';
+import { mockValidateUserPasswordUseCase } from './use-case/validate_password';
 
 export const UserMockModule = new Container({ autoBindInjectable: true });
 
@@ -30,6 +32,14 @@ UserMockModule.bind(UserMockRegistry.USE_CASE.SELECT.ALL).toDynamicValue(
 
 UserMockModule.bind(UserMockRegistry.USE_CASE.SELECT.BY_ID).toDynamicValue(
   mockSelectUserByIdUseCase,
+);
+
+UserMockModule.bind(
+  UserMockRegistry.USE_CASE.SELECT.BY.CREDENTIALS,
+).toDynamicValue(mockSelectUserByCredentialsUseCase);
+
+UserMockModule.bind(UserMockRegistry.USE_CASE.VALIDATE.PASSWORD).toDynamicValue(
+  mockValidateUserPasswordUseCase,
 );
 
 UserMockModule.bind(UserMockRegistry.SERVICE.SIMULATE_DEFAULT).toDynamicValue(
