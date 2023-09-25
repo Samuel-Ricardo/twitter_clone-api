@@ -14,6 +14,8 @@ import { SelectUserByIdUseCase } from '@User/use-case/select_by_id.use-case';
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
+import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
+import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
 
 @injectable()
 export class UserService {
@@ -38,6 +40,9 @@ export class UserService {
 
     @inject(USER_MODULE.USE_CASE.VALIDATE.PASSWORD)
     private validateUserPassword: ValidateUserPasswordUseCase,
+
+    @inject(USER_MODULE.USE_CASE.SELECT.BY.EMAIL)
+    private selectUserByEmail: SelectUserByEmailUseCase,
   ) {}
 
   async create(data: CreateUserDTO) {
@@ -68,5 +73,9 @@ export class UserService {
     })
       ? user
       : null;
+  }
+
+  async selectByEmail(data: ISelectUserByEmailDTO) {
+    return await this.selectUserByEmail.execute(data);
   }
 }
