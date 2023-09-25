@@ -8,6 +8,7 @@ import {
   UpdateUserDTO,
 } from '@User/DTO';
 import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
+import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
 
 @injectable()
 export class UserController {
@@ -29,6 +30,12 @@ export class UserController {
 
   async selectById(data: SelectUserByIdDTO) {
     const user = await this.service.selectById(data);
+
+    return { user };
+  }
+
+  async selectByEmail(data: ISelectUserByEmailDTO) {
+    const user = await this.service.selectByEmail(data);
 
     return { user };
   }
