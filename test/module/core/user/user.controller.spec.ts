@@ -50,6 +50,22 @@ describe('[CONTROLLER] | USER', () => {
     expect(service.selectById).toHaveBeenCalledWith({ id: VALID_USER.id });
   });
 
+  it('[UNIT] | Should: Select by - [email] => [USER]', async () => {
+    service.selectByEmail.mockResolvedValue(VALID_USER);
+
+    const result = await controller.selectByEmail({
+      email: VALID_USER.email,
+    });
+
+    expect(result).toBeDefined();
+    expect(result).toEqual({ user: VALID_USER });
+
+    expect(service.selectByEmail).toHaveBeenCalledTimes(1);
+    expect(service.selectByEmail).toHaveBeenCalledWith({
+      email: VALID_USER.email,
+    });
+  });
+
   it('[UNIT] | Should: Select by - [credentials] => [USER]', async () => {
     service.selectByCredentials.mockResolvedValue(VALID_USER);
 
