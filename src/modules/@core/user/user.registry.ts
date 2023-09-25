@@ -15,6 +15,7 @@ export const UserRegistry = {
       ALL: Symbol.for('SelectAllUsersUseCase'),
       BY: {
         CREDENTIALS: Symbol.for('SelectUserByCredentialsUseCase'),
+        EMAIL: Symbol.for('SelectUserByEmailUseCase'),
       },
     },
     VALIDATE: {
