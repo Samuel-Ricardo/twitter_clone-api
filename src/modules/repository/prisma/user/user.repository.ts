@@ -6,7 +6,8 @@ import {
   User,
 } from '@User';
 import { IDeleteuserDTO } from '@User/DTO';
-import { ISelectUserByCredentials } from '@User/DTO/select_by_credentials.dto';
+import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
+import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
 import { MODULE } from '@modules';
 import { PrismaClient, User as PrismaUser } from '@prisma/client';
 import { inject, injectable, interfaces } from 'inversify';
@@ -48,9 +49,15 @@ export class PrismaUserRepository implements IUserRepository {
     return this.userFactory(user as PrismaUser) as User;
   }
 
+  async selectByEmail({ email }: ISelectUserByEmailDTO): Promise<User> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+
+    return this.userFactory(user as PrismaUser) as User;
+  }
+
   async selectByCredentials({
     email,
-  }: ISelectUserByCredentials): Promise<User> {
+  }: ISelectUserByCredentialsDTO): Promise<User> {
     const user = await this.prisma.user.findUnique({ where: { email } });
 
     return this.userFactory(user as PrismaUser) as User;
