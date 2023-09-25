@@ -14,6 +14,7 @@ import { SelectUserByIdUseCase } from './use-case/select_by_id.use-case';
 import { UserValidator } from './validator/user.validator';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
+import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -43,6 +44,10 @@ export const USER_MODULE = {
         CREDENTIALS: () =>
           UserModule.get<SelectUserByCredentialsUseCase>(
             UserRegistry.USE_CASE.SELECT.BY.CREDENTIALS,
+          ),
+        EMAIL: () =>
+          UserModule.get<SelectUserByEmailUseCase>(
+            UserRegistry.USE_CASE.SELECT.BY.EMAIL,
           ),
       },
     },
