@@ -70,6 +70,18 @@ describe('[MODULE] | User', () => {
     expect(body.user).toStrictEqual(user);
   });
 
+  it('[E2E] | Should: Select - [by email] => [USER]', async () => {
+    const response = await supertest(app).get(`/users/email/${user.email}`);
+
+    expect(response.status).toBe(200);
+
+    const body: { user: User } = response.body;
+
+    expect(body.user).toHaveProperty('id');
+    expect(body.user.id).toEqual(user.id);
+    expect(body.user).toStrictEqual(user);
+  });
+
   it('[E2E] | Should: Select - [by credentials] => [USER]', async () => {
     const response = await supertest(app).post(`/users/by/credentials`).send({
       email: user.email,
