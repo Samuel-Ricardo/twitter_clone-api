@@ -12,9 +12,9 @@ import { SelectAllUsersUseCase } from './use-case/select_all.use-case';
 import { SelectUserByIdUseCase } from './use-case/select_by_id.use-case';
 import { RepositoryModule } from '../../repository/repository.module';
 import { UserValidator } from './validator/user.validator';
-import { MODULE } from '@modules/app.registry';
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
+import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -68,6 +68,7 @@ Module.bind(UserRegistry.USE_CASE.VALIDATE.PASSWORD).to(
 Module.bind(UserRegistry.USE_CASE.SELECT.BY.CREDENTIALS).to(
   SelectUserByCredentialsUseCase,
 );
+Module.bind(UserRegistry.USE_CASE.SELECT.BY.EMAIL).to(SelectUserByEmailUseCase);
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
 
