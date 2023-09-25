@@ -18,6 +18,7 @@ export const UserMockRegistry = {
       ALL: Symbol.for('SelectAllUserMockUseCase'),
       BY: {
         CREDENTIALS: Symbol.for('SelectUserByCredentialsMockUseCase'),
+        EMAIL: Symbol.for('SelectUserByEmailMockUseCase'),
       },
     },
     VALIDATE: {
