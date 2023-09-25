@@ -14,6 +14,7 @@ import { MockFactory, VALID_USER, VALID_USER_DATA } from '@test/mock';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
+import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 
 describe('[SERVICE] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -25,6 +26,7 @@ describe('[SERVICE] | USER', () => {
   let selectAll: DeepMockProxy<SelectAllUsersUseCase>;
   let selectById: DeepMockProxy<SelectUserByIdUseCase>;
   let selectByCredentials: DeepMockProxy<SelectUserByCredentialsUseCase>;
+  let selectByEmail: DeepMockProxy<SelectUserByEmailUseCase>;
   let validatePasword: DeepMockProxy<ValidateUserPasswordUseCase>;
   let deleteUser: DeepMockProxy<DeleteUserUseCase>;
 
@@ -36,6 +38,7 @@ describe('[SERVICE] | USER', () => {
     selectAll = MockFactory.USER.USE_CASE.SELECT.ALL();
     selectById = MockFactory.USER.USE_CASE.SELECT.BY_ID();
     selectByCredentials = MockFactory.USER.USE_CASE.SELECT.BY.CREDENTIALS();
+    selectByEmail = MockFactory.USER.USE_CASE.SELECT.BY.EMAIL();
     validatePasword = MockFactory.USER.USE_CASE.VALIDATE.PASSWORD();
     deleteUser = MockFactory.USER.USE_CASE.DELETE();
 
@@ -47,6 +50,7 @@ describe('[SERVICE] | USER', () => {
       selectById,
       selectByCredentials,
       validatePasword,
+      selectByEmail,
     );
 
     // service = MockFactory.USER.SERVICE.SIMULATE_DEFAULT();
@@ -83,6 +87,22 @@ describe('[SERVICE] | USER', () => {
     expect(user).toStrictEqual(VALID_USER);
     expect(selectById.execute).toHaveBeenCalledTimes(1);
     expect(selectById.execute).toHaveBeenCalledWith({ id: VALID_USER.id });
+  });
+
+  it('should: select - by email [USER]', async () => {
+    selectByEmail.execute.mockResolvedValue(VALID_USER);
+
+    const user = await service.selectByEmail({
+      email: VALID_USER.email,
+    });
+
+    expect(user).toBeDefined();
+    expect(user).toStrictEqual(VALID_USER);
+
+    expect(selectByEmail.execute).toHaveBeenCalledTimes(1);
+    expect(selectByEmail.execute).toHaveBeenCalledWith({
+      email: VALID_USER.email,
+    });
   });
 
   it('should: select - by [credentials] => [USER]', async () => {
