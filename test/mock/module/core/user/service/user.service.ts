@@ -12,6 +12,7 @@ export const simulateUserService = (context: interfaces.Context) =>
     context.container.get(UserMockRegistry.USE_CASE.SELECT.BY_ID),
     context.container.get(UserMockRegistry.USE_CASE.SELECT.BY.CREDENTIALS),
     context.container.get(UserMockRegistry.USE_CASE.VALIDATE.PASSWORD),
+    context.container.get(UserMockRegistry.USE_CASE.SELECT.BY.EMAIL),
   );
 
 export const mockUserService = () => mockDeep<UserService>();
