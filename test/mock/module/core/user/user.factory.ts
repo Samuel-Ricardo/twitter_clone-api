@@ -11,6 +11,7 @@ import {
 } from '@User';
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
+import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 
 export const UserMockFactory = {
   SERVICE: {
@@ -51,6 +52,10 @@ export const UserMockFactory = {
         CREDENTIALS: () =>
           UserMockModule.get<DeepMockProxy<SelectUserByCredentialsUseCase>>(
             UserMockRegistry.USE_CASE.SELECT.BY.CREDENTIALS,
+          ),
+        EMAIL: () =>
+          UserMockModule.get<DeepMockProxy<SelectUserByEmailUseCase>>(
+            UserMockRegistry.USE_CASE.SELECT.BY.EMAIL,
           ),
       },
     },
