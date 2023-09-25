@@ -1,7 +1,3 @@
-/*
- * @jest-environment ./test/environment.js
- */
-
 import 'reflect-metadata';
 import { User as PrismaUser } from '@prisma/client';
 import { MODULES, PrismaUserRepository } from '@modules';
@@ -74,6 +70,26 @@ describe('[REPOSITORY] | User - [UNIT]', () => {
     expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
       where: {
         id: VALID_USER.id,
+      },
+    });
+  });
+
+  it('[UNIT] | Should: select by [email] => [USER]', async () => {
+    prismaMock.user.findUnique.mockResolvedValue(VALID_USER as PrismaUser);
+
+    const user = await repository.selectByEmail({
+      email: VALID_USER.email,
+    });
+
+    expect(user).toBeDefined();
+    expect(user).toBeInstanceOf(User);
+    expect(user).toHaveProperty('id');
+    expect(user).toStrictEqual(VALID_USER);
+
+    expect(prismaMock.user.findUnique).toHaveBeenCalledTimes(1);
+    expect(prismaMock.user.findUnique).toHaveBeenCalledWith({
+      where: {
+        email: VALID_USER.email,
       },
     });
   });
