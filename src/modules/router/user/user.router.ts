@@ -34,6 +34,14 @@ user_routes.post(`${prefix}/by/credentials`, async (req, res, next) => {
   }
 });
 
+user_routes.get(`${prefix}/email/:email`, async (req, res, next) => {
+  try {
+    res.status(200).json(await USER.selectByEmail({ email: req.params.email }));
+  } catch (e) {
+    next(e);
+  }
+});
+
 user_routes.patch(
   prefix,
 
