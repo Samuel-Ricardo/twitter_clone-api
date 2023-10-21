@@ -9,7 +9,9 @@ import {
   IGetUserCommentsDTO,
   IGetPostCommentsDTO,
   IUpdateCommentDTO,
+  ICommentDTO,
 } from '../../../@core/comment/DTO';
+import { IGetCommentByIdDTO } from '@Core/comment/DTO/get_by_id.dto';
 
 @injectable()
 export class PrismaCommentRepository implements ICommentRepository {
@@ -46,6 +48,7 @@ export class PrismaCommentRepository implements ICommentRepository {
   async getPostComments({ postId }: IGetPostCommentsDTO) {
     const result = await this.prisma.comment.findMany({
       where: { postId },
+      orderBy: { updatedAt: 'desc' },
     });
 
     return Comment.fromPrismaArray(result);
@@ -57,5 +60,13 @@ export class PrismaCommentRepository implements ICommentRepository {
     });
 
     return Comment.fromPrismaArray(result);
+  }
+
+  async getById(comment: IGetCommentByIdDTO): Promise<Comment> {
+    const result = await this.prisma.comment.findUnique({
+      where: { id: comment.id },
+    });
+
+    return Comment.fromPrisma(result as ICommentDTO);
   }
 }
