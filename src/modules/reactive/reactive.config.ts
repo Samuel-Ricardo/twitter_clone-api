@@ -19,6 +19,8 @@ export const EVENTS = {
     CREATED: 'notification.created',
     VISUALIZE: 'visualize.notification',
     VISUALIZED: 'notification.visualized',
+    DELETE: 'delete.notification',
+    DELETED: 'notification.deleted',
     TOGGLE: 'notification.toggle',
   },
 };
