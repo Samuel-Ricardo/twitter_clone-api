@@ -25,7 +25,9 @@ export class PrismaPostRepository implements IPostRepository {
   }
 
   async findAll() {
-    return Post.fromPrismaArray(await this.prisma.post.findMany());
+    return Post.fromPrismaArray(
+      await this.prisma.post.findMany({ orderBy: { createdAt: 'desc' } }),
+    );
   }
 
   async findById(data: IFindPostByIdDTO) {
