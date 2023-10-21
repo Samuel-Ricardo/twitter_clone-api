@@ -33,6 +33,7 @@ export class NotificationController {
   }
 
   async visualize(notification: ISetNotificationVisualizedDTO) {
+    notification.visualizedAt = new Date(notification.visualizedAt);
     return {
       notification: (
         await this.service.visualizeNotification(notification)
