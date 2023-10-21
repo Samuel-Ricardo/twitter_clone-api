@@ -18,6 +18,8 @@ import { EventsFactory as EVENTS } from './event/event.factory';
 import { Express } from 'express';
 import { RoutesFactory as ROUTER } from './router/router.factory';
 
+import cors from 'cors';
+
 export const MODULES = {
   ...PrismaFactory,
   ROUTER,
@@ -34,4 +36,5 @@ export const MODULES = {
   EVENTS,
   APP: () => AppModule.get<Express>(MODULE.APP),
   BODY_PARSER: () => AppModule.get<any>(MODULE.BODY_PARSER),
+  CORS: () => AppModule.get<typeof cors>(MODULE.CORS),
 };
