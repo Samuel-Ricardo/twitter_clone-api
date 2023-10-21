@@ -28,6 +28,7 @@ export class PrismaNotificationRepository implements INotificationRepository {
   async getByUser(notification: IGetNotificationByUserDTO) {
     const result = await this.prisma.notification.findMany({
       where: notification,
+      orderBy: { createdAt: 'desc' },
     });
 
     return Notification.fromPrismaArray(result);
@@ -45,7 +46,7 @@ export class PrismaNotificationRepository implements INotificationRepository {
       data: { visualizedAt: notification.visualizedAt },
     });
 
-    result.visualizedAt = notification.visualizedAt;
+    result.visualizedAt = new Date(notification.visualizedAt);
 
     return Notification.fromPrisma(result);
   }
