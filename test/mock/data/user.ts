@@ -8,6 +8,12 @@ export const CREATE_USER_DATA: CreateUserDTO = {
   password: 'h3j2f6',
 };
 
+export const CREATE_USER_DATA2: CreateUserDTO = {
+  ...CREATE_USER_DATA,
+  username: 'us3r',
+  email: 'us3r@email.com',
+};
+
 export const VALID_USER_DATA: UpdateUserDTO = {
   ...CREATE_USER_DATA,
   id: randomID(),
