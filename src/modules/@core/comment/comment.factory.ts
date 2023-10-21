@@ -9,6 +9,7 @@ import {
   GetUserCommnetsUseCase,
   UpdateCommentUseCase,
 } from './use-case';
+import { GetCommentByIdUseCase } from './use-case/get_by_id.use-case';
 
 export const CommentFactory = {
   DEFAULT: () =>
@@ -25,6 +26,10 @@ export const CommentFactory = {
       CommentModule.get<DeleteCommentUseCase>(CommentRegistry.USE_CASE.DELETE),
     GET: {
       BY: {
+        ID: () =>
+          CommentModule.get<GetCommentByIdUseCase>(
+            CommentRegistry.USE_CASE.GET.BY.ID,
+          ),
         POST: () =>
           CommentModule.get<GetPostCommentUseCase>(
             CommentRegistry.USE_CASE.GET.BY.POST,
