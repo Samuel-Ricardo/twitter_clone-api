@@ -1,7 +1,7 @@
 import { IUserRepository } from '@User/user.repository';
 import { MODULE } from '../../../app.registry';
 import { inject, injectable } from 'inversify';
-import { ISelectUserByCredentials } from '@User/DTO/select_by_credentials.dto';
+import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto';
 
 @injectable()
 export class SelectUserByCredentialsUseCase {
@@ -9,8 +9,7 @@ export class SelectUserByCredentialsUseCase {
     @inject(MODULE.REPOSITORY.PRISMA.USER)
     private readonly repository: IUserRepository,
   ) {}
-
-  async execute(user: ISelectUserByCredentials) {
+  async execute(user: ISelectUserByCredentialsDTO) {
     return await this.repository.selectByCredentials(user);
   }
 }
