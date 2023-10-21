@@ -14,6 +14,8 @@ import {
   IGetUserCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { GetCommentByIdUseCase } from '../use-case/get_by_id.use-case';
+import { IGetCommentByIdDTO } from '../DTO/get_by_id.dto';
 
 @injectable()
 export class CommentService {
@@ -28,10 +30,16 @@ export class CommentService {
     private readonly getPostComments: GetPostCommentUseCase,
     @inject(MODULE.COMMENT.USE_CASE.GET.BY.AUTHOR)
     private readonly getUserCommnets: GetUserCommnetsUseCase,
+    @inject(MODULE.COMMENT.USE_CASE.GET.BY.ID)
+    private readonly getCommentById: GetCommentByIdUseCase,
   ) {}
 
   async comment(data: ICreateCommentDTO) {
     return await this.create.execute(data);
+  }
+
+  async getById(comment: IGetCommentByIdDTO) {
+    return await this.getCommentById.execute(comment);
   }
 
   async updateComment(data: IUpdateCommentDTO) {
