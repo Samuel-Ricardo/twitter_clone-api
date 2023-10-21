@@ -17,11 +17,13 @@ import { CommentModule } from './@core/comment/comment.module';
 import { NotificationModule } from './@core/notification/notification.module';
 import { ReactiveModule } from './reactive/reactive.module';
 import { ServerModule } from './server/server.module';
+import cors from 'cors';
 
 const Module = new Container();
 
 Module.bind<Express>(MODULE.APP).toConstantValue(Application.Instance());
-Module.bind(MODULE.BODY_PARSER).toConstantValue(json());
+Module.bind(MODULE.BODY_PARSER).toConstantValue(json({ limit: '20mb' }));
+Module.bind(MODULE.CORS).toConstantValue(cors({ origin: '*' }));
 
 export const AppModule = Container.merge(
   Module,
