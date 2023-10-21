@@ -38,15 +38,15 @@ router.get(
 );
 
 router.get(
-  `${prefix}/author/:userId`,
+  `${prefix}/author/:authorId`,
   validate(GetUserCommentsSchema),
   async (req, res, next) => {
     try {
-      res
-        .status(200)
-        .json(
-          await comment_module.getUserComments({ authorId: req.params.userId }),
-        );
+      res.status(200).json(
+        await comment_module.getUserComments({
+          authorId: req.params.authorId,
+        }),
+      );
     } catch (error) {
       next(error);
     }
@@ -76,5 +76,13 @@ router.delete(
     }
   },
 );
+
+router.get(`${prefix}/:id`, async (req, res, next) => {
+  try {
+    res.status(200).json(await comment_module.getById({ id: req.params.id }));
+  } catch (error) {
+    next(error);
+  }
+});
 
 export const comment = { router, prefix };
