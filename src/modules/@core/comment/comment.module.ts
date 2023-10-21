@@ -10,6 +10,7 @@ import {
 import { RepositoryModule } from '../../repository/repository.module';
 import { CommentService } from './service/comment.service';
 import { CommentController } from './controller';
+import { GetCommentByIdUseCase } from './use-case/get_by_id.use-case';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -23,6 +24,9 @@ CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.POST).to(
 );
 CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.AUTHOR).to(
   GetUserCommnetsUseCase,
+);
+CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.ID).to(
+  GetCommentByIdUseCase,
 );
 
 CommentModule.bind(CommentRegistry.SERVICE).to(CommentService);
