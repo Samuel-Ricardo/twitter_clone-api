@@ -8,6 +8,7 @@ import {
   IGetUserCommentsDTO,
   IUpdateCommentDTO,
 } from '../DTO';
+import { IGetCommentByIdDTO } from '../DTO/get_by_id.dto';
 
 @injectable()
 export class CommentController {
@@ -27,6 +28,10 @@ export class CommentController {
 
   async delete(comment: IDeleteCommentDTO) {
     return await this.service.delete(comment);
+  }
+
+  async getById(data: IGetCommentByIdDTO) {
+    return { comment: (await this.service.getById(data)).toStruct() };
   }
 
   async getPostComments(post: IGetPostCommentsDTO) {
