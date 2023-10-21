@@ -7,10 +7,14 @@ import { MODULE } from '@modules';
 import { EVENTS } from '../../../../reactive/reactive.config';
 import {
   ICreateNotificationDTO,
+  IDeleteNotificationDTO,
   INotificationDTO,
   ISetNotificationVisualizedDTO,
 } from '../../../../@core/notification/DTO';
-import { CreateNotificationSchema } from '../../../../@core/notification/validator';
+import {
+  CreateNotificationSchema,
+  DeleteNotificationSchema,
+} from '../../../../@core/notification/validator';
 import { IAppEvents } from '../../../../event/app';
 import { SetVisualizedSchema } from '../../../../@core/notification/validator/set_visualized.validator';
 import { INotificationEvents } from '../../../../@core/notification/events';
@@ -52,6 +56,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       socket.join(this.room);
       this.subscribeToNewNotification(socket);
       this.subscribeToNotificationVisualized(socket);
+      this.subscribeToNewNotificationDeleted(socket);
       this.setupToggleNotification(socket);
     });
   }
@@ -91,6 +96,34 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
         }
       },
     );
+  }
+
+  async subscribeToNewNotificationDeleted(socket: Socket) {
+    socket.on(
+      EVENTS.NOTIFICATION.DELETE,
+      async (notification: IDeleteNotificationDTO) => {
+        try {
+          DeleteNotificationSchema.parse(notification);
+
+          const result = await this.notification.delete(notification);
+
+          this.publishNotificationDeleted(notification, socket);
+        } catch (error: any) {
+          this.app.publishErrorEvent({ error, socket });
+        }
+      },
+    );
+  }
+
+  async publishNotificationDeleted(
+    notification: IDeleteNotificationDTO,
+    socket?: Socket,
+  ) {
+    socket
+      ? socket?.to(this.room).emit(EVENTS.NOTIFICATION.DELETED, notification)
+      : this.socket.io
+          .to(this.room)
+          .emit(EVENTS.NOTIFICATION.DELETED, notification);
   }
 
   async publishNotificationCreated(
