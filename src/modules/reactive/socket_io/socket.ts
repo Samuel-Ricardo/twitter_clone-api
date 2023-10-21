@@ -24,7 +24,7 @@ export class SocketIO {
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup starts' });
 
-    this.io = new Server(this.server.instance);
+    this.io = new Server(this.server.instance, { cors: { origin: '*' } });
     this.io.on(CONNECTION, (socket) => this.handleOnConnect(socket));
 
     logger.info({ context: 'WEBSOCKET', message: 'Socket.IO: setup ends' });
