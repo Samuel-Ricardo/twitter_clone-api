@@ -1,4 +1,4 @@
 export interface ISetNotificationVisualizedDTO {
   id: string;
-  visualizedAt: Date;
+  visualizedAt: Date | string;
 }
