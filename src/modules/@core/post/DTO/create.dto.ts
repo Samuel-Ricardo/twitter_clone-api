@@ -10,5 +10,5 @@ export interface ICreatePostDTO {
 export const CreatePostSchema = z.object({
   authorId: z.string().nonempty().catch(catchZod),
   body: z.string().nonempty().catch(catchZod),
-  image: z.string().optional().catch(catchZod),
+  image: z.string().nullish().catch(catchZod),
 });
