@@ -44,7 +44,9 @@ describe('[REPOSITORY] | Post', () => {
     expect(result).toEqual([VALID_POST]);
 
     expect(prisma.post.findMany).toHaveBeenCalledTimes(1);
-    expect(prisma.post.findMany).toHaveBeenCalledWith();
+    expect(prisma.post.findMany).toHaveBeenCalledWith({
+      orderBy: { createdAt: 'desc' },
+    });
   });
 
   it('[UNIT] | Should: FindById => [POST]', async () => {
