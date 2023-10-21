@@ -31,4 +31,5 @@ export const MODULE = {
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
+  CORS: Symbol.for('app.cors'),
 };
