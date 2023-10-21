@@ -17,6 +17,6 @@ export const IPostSchema = z
     authorId: z.string().catch(catchZod),
     createdAt: z.date().catch(catchZod),
     updatedAt: z.date().catch(catchZod),
-    image: z.string().optional().catch(catchZod),
+    image: z.string().nullish().catch(catchZod),
   })
   .catch(catchZod);
