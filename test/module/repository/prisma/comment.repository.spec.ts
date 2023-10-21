@@ -75,6 +75,9 @@ describe('[REPOSITORY] | PRISMA => [COMMENT]', () => {
 
     expect(module.prisma.comment.findMany).toHaveBeenCalledTimes(1);
     expect(module.prisma.comment.findMany).toHaveBeenCalledWith({
+      orderBy: {
+        updatedAt: 'desc',
+      },
       where: {
         postId: VALID_POST_COMMENT.postId,
       },
