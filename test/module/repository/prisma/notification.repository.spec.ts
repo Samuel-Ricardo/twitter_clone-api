@@ -94,6 +94,9 @@ describe('[REPOSITORY] | PRISMA => [NOTIFICATION]', () => {
       where: {
         userId: VALID_USER.id,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
   });
 });
