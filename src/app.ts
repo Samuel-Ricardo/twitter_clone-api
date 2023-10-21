@@ -8,6 +8,7 @@ const server = socket.server.instance;
 
 SwaggerModule.setup({ app: app });
 
+app.use(MODULES.CORS());
 app.use(MODULES.BODY_PARSER());
 app.use(MODULES.MIDDLEWARE.LOGGER.APP());
 app.use(MODULES.ROUTER.EXPRESS());
