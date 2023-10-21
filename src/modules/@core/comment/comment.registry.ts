@@ -7,6 +7,7 @@ export const CommentRegistry = {
     DELETE: Symbol.for('COMMENT.USE_CASE.DELETE'),
     GET: {
       BY: {
+        ID: Symbol.for('COMMENT.USE_CASE.GET.BY.ID'),
         POST: Symbol.for('COMMENT.USE_CASE.GET.BY.POST'),
         AUTHOR: Symbol.for('COMMENT.USE_CASE.GET.BY.AUTHOR'),
       },
