@@ -3,6 +3,7 @@ import { User as PrismaUser } from '@prisma/client';
 import { MODULES, PrismaUserRepository } from '@modules';
 import {
   CREATE_USER_DATA,
+  CREATE_USER_DATA2,
   VALID_USER,
   VALID_USER_DATA,
 } from '@test/mock/data/user';
@@ -175,7 +176,7 @@ describe('[REPOSITORY] | User - [INTEGRATION]', () => {
   });
 
   it('[INTEGRATION] - Should: Create => User', async () => {
-    const user = await repository.create(CREATE_USER_DATA);
+    const user = await repository.create(CREATE_USER_DATA2);
 
     expect(user).toBeDefined();
     expect(user).toBeInstanceOf(User);
