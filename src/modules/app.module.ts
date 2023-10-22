@@ -20,6 +20,7 @@ import { ServerModule } from './server/server.module';
 import cors from 'cors';
 import { CRYPTO_MODULE } from './crypto/crypto.module';
 import { ARGON_MODULE } from './argon/argon.module';
+import { SECURITY_MODULE } from './security/security.module';
 
 const Module = new Container();
 
@@ -43,4 +44,5 @@ export const AppModule = Container.merge(
   ServerModule,
   CRYPTO_MODULE,
   ARGON_MODULE,
+  SECURITY_MODULE,
 );
