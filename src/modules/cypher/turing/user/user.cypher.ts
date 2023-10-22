@@ -9,4 +9,8 @@ export class TuringUserCypher implements IUserCypher {
     @inject(MODULE.SECURITY.CRYPTOGRAPHY.TURING)
     protected readonly cryptographer: ICryptographer,
   ) {}
+
+  async hashPassword(password: string) {
+    return await this.cryptographer.hash(password);
+  }
 }
