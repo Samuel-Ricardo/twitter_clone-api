@@ -14,6 +14,7 @@ import { MiddlewareFactory as MIDDLEWARE } from './middleware/middleware.factory
 import { ReactiveFactory as REACTIVE } from './reactive/reactive.factory';
 import { ServerFactory as SERVER } from './server/server.factory';
 import { EventsFactory as EVENTS } from './event/event.factory';
+import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 
 import { Express } from 'express';
 import { RoutesFactory as ROUTER } from './router/router.factory';
@@ -22,6 +23,7 @@ import cors from 'cors';
 
 export const MODULES = {
   ...PrismaFactory,
+  ...CRYPTO_FACTORY,
   ROUTER,
   USER,
   POST,
