@@ -20,7 +20,11 @@ export class TuringUserCypher implements IUserCypher {
     return await this.cryptographer.compareHash(password, hashedPassword);
   }
 
-  encryptCreateUserDTO(user: CreateUserDTO): IEncriptedIV {
+  encryptCreateUserDTO(user: CreateUserDTO) {
     return this.cryptographer.encryptIV(JSON.stringify(user));
+  }
+
+  decryptCreateUserDTO(user: IEncriptedIV): CreateUserDTO {
+    return JSON.parse(this.cryptographer.decryptIV(user));
   }
 }
