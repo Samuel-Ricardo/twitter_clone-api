@@ -15,6 +15,7 @@ import { ServerRegistry as SERVER } from './server/server.registry';
 import { EventsRegistry as EVENTS } from './event/event.registry';
 import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 import { ARGON_REGISTRY as ARGON } from './argon/argon.registry';
+import { SECURITY_MODULE as SECURITY } from './security/security.module';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -32,6 +33,7 @@ export const MODULE = {
   SERVER,
   EVENTS,
   ARGON,
+  SECURITY,
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
