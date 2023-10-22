@@ -13,10 +13,12 @@ import { CommentRegistry as COMMENT } from './@core/comment/comment.registry';
 import { ReactiveRegistry as REACTIVE } from './reactive/reactive.registry';
 import { ServerRegistry as SERVER } from './server/server.registry';
 import { EventsRegistry as EVENTS } from './event/event.registry';
+import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
   ...RoutesRegistry,
+  ...CRYPTO_REGISTRY,
   USER,
   POST,
   LIKE,
