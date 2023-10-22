@@ -20,4 +20,20 @@ export const MiddlewareRegistry = {
       },
     },
   },
+  SECURITY: {
+    CRYPTOGRAPHY: {
+      USER: {
+        ENCRYPT: {
+          CREATE: Symbol(
+            'Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.CREATE',
+          ),
+        },
+        DECRYPT: {
+          CREATE: Symbol(
+            'Middleware.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE',
+          ),
+        },
+      },
+    },
+  },
 };
