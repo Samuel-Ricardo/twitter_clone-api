@@ -21,6 +21,15 @@ export class Crypto implements ICryptographyIVAlgotihm {
     return { data, iv };
   }
 
+  decryptIV(encrypted: IEncriptedIV) {
+    const { decipher, iv } = this.decipher;
+
+    let data = decipher.update(encrypted.data, 'hex', 'utf8');
+    data += decipher.final('utf8');
+
+    return data;
+  }
+
   get cipher() {
     const iv = this.initialVector;
     return {
