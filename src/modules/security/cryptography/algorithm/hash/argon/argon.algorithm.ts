@@ -8,4 +8,8 @@ import argon2 from 'argon2';
 export class Argon2 implements IHashAlgorithm {
   @injectArgon(MODULE.ARGON[2])
   protected readonly argon: typeof argon2;
+
+  async hash(word: string) {
+    return await this.argon.hash(word, { type: this.argon.argon2id });
+  }
 }
