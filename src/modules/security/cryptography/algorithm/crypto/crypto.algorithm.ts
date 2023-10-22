@@ -33,6 +33,18 @@ export class Crypto implements ICryptographyIVAlgotihm {
     };
   }
 
+  get decipher() {
+    const iv = this.initialVector;
+    return {
+      decipher: this.crypto.createDecipheriv(
+        ENV.SECURITY.CRYPTOGRAPHY.ALGORITHM,
+        ENV.SECURITY.CRYPTOGRAPHY.KEY,
+        iv,
+      ),
+      iv,
+    };
+  }
+
   get initialVector() {
     return this.crypto.randomBytes(32);
   }
