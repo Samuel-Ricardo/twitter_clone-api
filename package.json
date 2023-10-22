@@ -37,6 +37,7 @@
   "dependencies": {
     "@prisma/client": "^5.0.0",
     "@types/socket.io": "^3.0.2",
+    "argon2": "^0.31.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cors": "^2.8.5",
