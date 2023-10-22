@@ -19,6 +19,7 @@ import { ReactiveModule } from './reactive/reactive.module';
 import { ServerModule } from './server/server.module';
 import cors from 'cors';
 import { CRYPTO_MODULE } from './crypto/crypto.module';
+import { ARGON_MODULE } from './argon/argon.module';
 
 const Module = new Container();
 
@@ -41,4 +42,5 @@ export const AppModule = Container.merge(
   ReactiveModule,
   ServerModule,
   CRYPTO_MODULE,
+  ARGON_MODULE,
 );
