@@ -12,4 +12,7 @@ export class Argon2 implements IHashAlgorithm {
   async hash(word: string) {
     return await this.argon.hash(word, { type: this.argon.argon2id });
   }
+  async compareHash(word: string | Buffer, hash: string) {
+    return await this.argon.verify(hash, word, { type: this.argon.argon2id });
+  }
 }
