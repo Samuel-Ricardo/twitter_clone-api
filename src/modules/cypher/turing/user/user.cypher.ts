@@ -13,4 +13,8 @@ export class TuringUserCypher implements IUserCypher {
   async hashPassword(password: string) {
     return await this.cryptographer.hash(password);
   }
+
+  async comparePassword(password: string, hashedPassword: string) {
+    return await this.cryptographer.compareHash(password, hashedPassword);
+  }
 }
