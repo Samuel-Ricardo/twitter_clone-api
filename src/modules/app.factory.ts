@@ -16,6 +16,7 @@ import { ServerFactory as SERVER } from './server/server.factory';
 import { EventsFactory as EVENTS } from './event/event.factory';
 import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 import { ARGON_FACTORY as ARGON } from './argon/argon.factory';
+import { SECURITY_FACTORY as SECURITY } from './security/security.factory';
 
 import { Express } from 'express';
 import { RoutesFactory as ROUTER } from './router/router.factory';
@@ -38,6 +39,7 @@ export const MODULES = {
   SERVER,
   EVENTS,
   ARGON,
+  SECURITY,
   APP: () => AppModule.get<Express>(MODULE.APP),
   BODY_PARSER: () => AppModule.get<any>(MODULE.BODY_PARSER),
   CORS: () => AppModule.get<typeof cors>(MODULE.CORS),
