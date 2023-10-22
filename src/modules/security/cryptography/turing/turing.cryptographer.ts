@@ -23,4 +23,8 @@ export class TuringCryptographer implements ICryptographer {
   hash(plain: string) {
     return this.hashAlgorithm.hash(plain);
   }
+
+  compareHash(plain: string, hash: string) {
+    return this.hashAlgorithm.compareHash(plain, hash);
+  }
 }
