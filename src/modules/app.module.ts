@@ -18,6 +18,7 @@ import { NotificationModule } from './@core/notification/notification.module';
 import { ReactiveModule } from './reactive/reactive.module';
 import { ServerModule } from './server/server.module';
 import cors from 'cors';
+import { CRYPTO_MODULE } from './crypto/crypto.module';
 
 const Module = new Container();
 
@@ -39,4 +40,5 @@ export const AppModule = Container.merge(
   MiddlewareModule,
   ReactiveModule,
   ServerModule,
+  CRYPTO_MODULE,
 );
