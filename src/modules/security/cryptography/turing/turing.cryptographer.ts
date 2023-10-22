@@ -26,4 +26,8 @@ export class Turing implements ICryptographer {
   encryptIV(plain: string): IEncriptedIV | Promise<IEncriptedIV> {
     return this.crypto.encryptIV(plain);
   }
+
+  decryptIV(encrypted: IEncriptedIV): string | Promise<string> {
+    return this.crypto.decryptIV(encrypted);
+  }
 }
