@@ -12,6 +12,15 @@ export class Crypto implements ICryptographyIVAlgotihm {
   @injectCrypto(MODULE.CRYPTO)
   protected readonly crypto: typeof crypto;
 
+  encryptIV(plain: string): IEncriptedIV {
+    const { cipher, iv } = this.cipher;
+
+    let data = cipher.update(plain, 'utf8', 'hex');
+    data += cipher.final('hex');
+
+    return { data, iv };
+  }
+
   get cipher() {
     const iv = this.initialVector;
     return {
