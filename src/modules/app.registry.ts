@@ -14,6 +14,7 @@ import { ReactiveRegistry as REACTIVE } from './reactive/reactive.registry';
 import { ServerRegistry as SERVER } from './server/server.registry';
 import { EventsRegistry as EVENTS } from './event/event.registry';
 import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
+import { ARGON_REGISTRY as ARGON } from './argon/argon.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -30,6 +31,7 @@ export const MODULE = {
   REACTIVE,
   SERVER,
   EVENTS,
+  ARGON,
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
