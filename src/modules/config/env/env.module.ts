@@ -9,4 +9,15 @@ export const ENV = {
 
   ENVIRONMENT: process.env.ENVIRONMENT || 'dev',
   PORT: process.env.PORT || 3000,
+
+  SECURITY: {
+    CRYPTOGRAPHY: {
+      ALGORITHM: process.env.SECURITY_CRYPTOGRAPHY_ALGORITHM || '',
+      KEY: process.env.SECURITY_CRYPTOGRAPHY_KEY || '',
+      BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_BREAKPOINT || '',
+      AUTH: {
+        BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_AUTH_BREAKPOINT || '',
+      },
+    },
+  },
 };
