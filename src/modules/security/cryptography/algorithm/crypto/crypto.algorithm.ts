@@ -29,4 +29,13 @@ export class Crypto implements ICryptographyIVAlgotihm {
 
     return data;
   }
+
+  decryptIV(encrypted: string) {
+    const { decipher, secret } = this.getDecipher(encrypted);
+
+    let data = decipher.update(secret, 'hex', 'utf8');
+    data += decipher.final('utf8');
+
+    return data;
+  }
 }
