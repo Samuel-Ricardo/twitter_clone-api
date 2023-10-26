@@ -36,4 +36,8 @@ export class Argon2 implements IHashAlgorithm {
   get salt() {
     return Buffer.from(randomUUID() + randomBytes(32).toString('hex'));
   }
+
+  injectSalt(hash: string, salt: Buffer) {
+    return this.injectOnHash(hash, salt.toString('hex'), this.saltBreakpoint);
+  }
 }
