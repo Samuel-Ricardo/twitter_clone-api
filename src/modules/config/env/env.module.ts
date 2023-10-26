@@ -22,6 +22,7 @@ export const ENV = {
         BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_IV_BREAKPOINT || '',
       },
       HASH: {
+        BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_HASH_BREAKPOINT || '',
         SALT: {
           BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_SALT_BREAKPOINT || '',
         },
