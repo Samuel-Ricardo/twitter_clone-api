@@ -7,6 +7,13 @@ export const UserRegistry = {
   CONTROLLER: {
     DEFAULT: Symbol.for('UserController'),
   },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        USER: Symbol.for('EncryptUserBeforeSend'),
+      },
+    },
+  },
   USE_CASE: {
     CREATE: Symbol.for('CreateUserUseCase'),
     UPDATE: Symbol.for('UpdateUserUseCase'),
