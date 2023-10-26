@@ -32,4 +32,8 @@ export class Argon2 implements IHashAlgorithm {
       salt: this.extractSalt(hash),
     });
   }
+
+  get salt() {
+    return Buffer.from(randomUUID() + randomBytes(32).toString('hex'));
+  }
 }
