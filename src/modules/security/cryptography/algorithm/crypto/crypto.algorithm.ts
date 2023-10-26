@@ -82,4 +82,12 @@ export class Crypto implements ICryptographyIVAlgotihm {
       this._authBreakpoint,
     );
   }
+
+  injectIV(secret: string, iv: Buffer) {
+    return Crypto.injectDataInSecret(
+      secret,
+      iv.toString('hex'),
+      this._ivBreakpoint,
+    );
+  }
 }
