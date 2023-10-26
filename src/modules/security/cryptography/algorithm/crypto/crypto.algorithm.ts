@@ -90,4 +90,11 @@ export class Crypto implements ICryptographyIVAlgotihm {
       this._ivBreakpoint,
     );
   }
+
+  getAuthTag(secret: string) {
+    return Buffer.from(
+      Crypto.getDataFromSecret(secret, this._authBreakpoint),
+      'hex',
+    );
+  }
 }
