@@ -7,6 +7,7 @@ import { MockLikeFactory as LIKE } from './core/like';
 import { FollowMockFactory as FOLLOW } from './core/follow';
 import { CommentMockFactory as COMMENT } from './core/comment';
 import { NotificationMockFactory as NOTIFICATION } from './core/notification/notification.factory';
+import { CYPHER_FACTORY_MOCK as CYPHER } from './cypher/cypher.module';
 
 export const MockFactory = {
   ...PrismaMockFactory,
@@ -18,4 +19,5 @@ export const MockFactory = {
   FOLLOW,
   COMMENT,
   NOTIFICATION,
+  CYPHER,
 };
