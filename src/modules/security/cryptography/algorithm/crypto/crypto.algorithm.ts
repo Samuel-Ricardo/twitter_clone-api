@@ -75,7 +75,7 @@ export class Crypto implements ICryptographyIVAlgotihm {
     return this.crypto.randomBytes(32);
   }
 
-  injectAuthTag(secret: string, authTag: Buffer) {
+  protected injectAuthTag(secret: string, authTag: Buffer) {
     return Crypto.injectDataInSecret(
       secret,
       authTag.toString('hex'),
@@ -83,7 +83,7 @@ export class Crypto implements ICryptographyIVAlgotihm {
     );
   }
 
-  injectIV(secret: string, iv: Buffer) {
+  protected injectIV(secret: string, iv: Buffer) {
     return Crypto.injectDataInSecret(
       secret,
       iv.toString('hex'),
@@ -91,21 +91,21 @@ export class Crypto implements ICryptographyIVAlgotihm {
     );
   }
 
-  getAuthTag(secret: string) {
+  protected getAuthTag(secret: string) {
     return Buffer.from(
       Crypto.getDataFromSecret(secret, this._authBreakpoint),
       'hex',
     );
   }
 
-  extractIV(data: string) {
+  protected extractIV(data: string) {
     return Buffer.from(
       Crypto.getDataFromSecret(data, this._ivBreakpoint),
       'hex',
     );
   }
 
-  extractSecret(data: string) {
+  protected extractSecret(data: string) {
     return data.split(this._breakpoint)[0];
   }
 }
