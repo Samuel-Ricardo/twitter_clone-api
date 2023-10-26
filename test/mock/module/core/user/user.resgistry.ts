@@ -10,6 +10,13 @@ export const UserMockRegistry = {
       DEFAULT: Symbol.for('SIMULATE_DEFAULT_USER_CONTROLLER'),
     },
   },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        USER: Symbol.for('EncryptUserBeforeSendPolicy'),
+      },
+    },
+  },
   USE_CASE: {
     CREATE: Symbol.for('CreateUserMockUseCase'),
     UPDATE: Symbol.for('UpdateUserMockUseCase'),
