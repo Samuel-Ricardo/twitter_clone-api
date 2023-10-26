@@ -1,4 +1,3 @@
-import { IEncriptedIV } from '@Type/security/cryptography/iv/encrypted';
 import { MODULES } from '@modules/app.factory';
 import { RequestHandler } from 'express';
 
@@ -9,8 +8,13 @@ export const decryptCreateUserDTOMiddleware: RequestHandler = (
 ) => {
   const cypher = MODULES.CYPHER.USER();
 
-  const body = req.body as IEncriptedIV;
-  if (!body.iv) return next(); //not encrypted or bad implemented
+  const body = req.body as { encrypted: string };
 
-  return next(cypher.decryptCreateUserDTO(body));
+  if (!body.encrypted) return next(); //not encrypted or bad implemented
+
+  const user = cypher.decryptCreateUserDTO(body.encrypted);
+
+  req.body = user;
+
+  return next();
 };
