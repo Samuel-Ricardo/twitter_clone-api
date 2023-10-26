@@ -8,7 +8,7 @@ import { PostMockModule } from './core/post';
 import { MockLikeModule } from './core/like';
 import { FollowMockModule } from './core/follow';
 import { NotificationMockModule } from './core/notification';
-import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
+import { CYPHER_MODULE_MOCK } from './cypher/cypher.module';
 
 export const AppModuleMock = Container.merge(
   PrismaMockModule,
@@ -18,5 +18,5 @@ export const AppModuleMock = Container.merge(
   MockLikeModule,
   FollowMockModule,
   NotificationMockModule,
-  CYPHER_MODULE,
+  CYPHER_MODULE_MOCK,
 );
