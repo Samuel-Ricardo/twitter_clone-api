@@ -104,4 +104,8 @@ export class Crypto implements ICryptographyIVAlgotihm {
       'hex',
     );
   }
+
+  extractSecret(data: string) {
+    return data.split(this._breakpoint)[0];
+  }
 }
