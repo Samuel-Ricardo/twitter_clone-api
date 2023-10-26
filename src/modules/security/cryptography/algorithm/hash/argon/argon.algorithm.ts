@@ -47,4 +47,8 @@ export class Argon2 implements IHashAlgorithm {
       'hex',
     );
   }
+
+  extractHash(hash: string) {
+    return hash.split(this.breakpoint)[0];
+  }
 }
