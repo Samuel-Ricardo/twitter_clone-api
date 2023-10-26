@@ -14,4 +14,15 @@ export class Argon2 implements IHashAlgorithm {
   protected readonly breakpoint = ENV.SECURITY.CRYPTOGRAPHY.HASH.BREAKPOINT;
   protected readonly saltBreakpoint =
     ENV.SECURITY.CRYPTOGRAPHY.HASH.SALT.BREAKPOINT;
+
+  async hash(plain: string) {
+    const salt = this.salt;
+
+    const hashString = await this.argon.hash(plain, {
+      type: this.argon.argon2id,
+      salt,
+    });
+
+    return this.injectSalt(hashString.concat(this.breakpoint), salt);
+  }
 }
