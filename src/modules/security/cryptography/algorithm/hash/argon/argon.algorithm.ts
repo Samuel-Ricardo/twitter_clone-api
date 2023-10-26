@@ -40,4 +40,11 @@ export class Argon2 implements IHashAlgorithm {
   injectSalt(hash: string, salt: Buffer) {
     return this.injectOnHash(hash, salt.toString('hex'), this.saltBreakpoint);
   }
+
+  extractSalt(hash: string) {
+    return Buffer.from(
+      this.extractHashMetadata(hash, this.saltBreakpoint),
+      'hex',
+    );
+  }
 }
