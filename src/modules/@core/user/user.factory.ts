@@ -15,6 +15,7 @@ import { UserValidator } from './validator/user.validator';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
+import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -25,6 +26,16 @@ export const USER_MODULE = {
   CONTROLLER: {
     DEFAULT: () =>
       UserModule.get<UserController>(UserRegistry.CONTROLLER.DEFAULT),
+  },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        USER: () =>
+          UserModule.get<EncryptUserBeforeSendPolicy>(
+            UserRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+      },
+    },
   },
   USE_CASE: {
     CREATE: () =>
