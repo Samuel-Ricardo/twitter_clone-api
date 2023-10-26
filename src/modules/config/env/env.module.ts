@@ -18,6 +18,9 @@ export const ENV = {
       AUTH: {
         BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_AUTH_BREAKPOINT || '',
       },
+      IV: {
+        BREAKPOINT: process.env.SECURITY_CRYPTOGRAPHY_IV_BREAKPOINT || '',
+      },
     },
   },
 };
