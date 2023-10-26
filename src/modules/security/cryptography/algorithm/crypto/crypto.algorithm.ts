@@ -70,4 +70,8 @@ export class Crypto implements ICryptographyIVAlgotihm {
       secret: this.extractSecret(encrypted),
     };
   }
+
+  get initialVector() {
+    return this.crypto.randomBytes(32);
+  }
 }
