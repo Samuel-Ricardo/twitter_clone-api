@@ -97,4 +97,11 @@ export class Crypto implements ICryptographyIVAlgotihm {
       'hex',
     );
   }
+
+  extractIV(data: string) {
+    return Buffer.from(
+      Crypto.getDataFromSecret(data, this._ivBreakpoint),
+      'hex',
+    );
+  }
 }
