@@ -10,11 +10,19 @@ import {
   UpdateUserUseCase,
 } from '@User/use-case';
 import { UserService } from '@User/service';
-import { MockFactory, VALID_USER, VALID_USER_DATA } from '@test/mock';
+import {
+  CREATE_USER_DATA,
+  MockFactory,
+  VALID_USER,
+  VALID_USER_DATA,
+} from '@test/mock';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
+import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
+import { IUserCypher } from '@User/cypher/user.cypher';
+import { UserCypher } from '@modules/cypher/user/user.cypher';
 
 describe('[SERVICE] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -29,6 +37,9 @@ describe('[SERVICE] | USER', () => {
   let selectByEmail: DeepMockProxy<SelectUserByEmailUseCase>;
   let validatePasword: DeepMockProxy<ValidateUserPasswordUseCase>;
   let deleteUser: DeepMockProxy<DeleteUserUseCase>;
+  let encryptUserBeforeSendPolicy: DeepMockProxy<EncryptUserBeforeSendPolicy>;
+
+  let cypher: DeepMockProxy<UserCypher>;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -41,6 +52,8 @@ describe('[SERVICE] | USER', () => {
     selectByEmail = MockFactory.USER.USE_CASE.SELECT.BY.EMAIL();
     validatePasword = MockFactory.USER.USE_CASE.VALIDATE.PASSWORD();
     deleteUser = MockFactory.USER.USE_CASE.DELETE();
+    encryptUserBeforeSendPolicy =
+      MockFactory.USER.POLICY.SECURITY.ENCRYPT.USER();
 
     service = new UserService(
       create,
@@ -51,9 +64,12 @@ describe('[SERVICE] | USER', () => {
       selectByCredentials,
       validatePasword,
       selectByEmail,
+      encryptUserBeforeSendPolicy,
     );
 
     // service = MockFactory.USER.SERVICE.SIMULATE_DEFAULT();
+
+    cypher = MockFactory.CYPHER.USER();
 
     expect(service).toBeDefined();
     expect(service).toBeInstanceOf(UserService);
@@ -134,13 +150,21 @@ describe('[SERVICE] | USER', () => {
 
   it('should: create [USER]', async () => {
     create.execute.mockResolvedValue(VALID_USER);
+    encryptUserBeforeSendPolicy.execute.mockReturnValue('encrpted_data');
 
-    const user = await service.create(VALID_USER);
+    const encrypted = await service.create(CREATE_USER_DATA);
 
-    expect(user).toBeDefined();
-    expect(user).toStrictEqual(VALID_USER);
+    expect(encrypted).toBeDefined();
+    expect(encrypted.length).toBeGreaterThanOrEqual(1);
+    //    expect(user).toStrictEqual(VALID_USER);
+
     expect(create.execute).toHaveBeenCalledTimes(1);
-    expect(create.execute).toHaveBeenCalledWith(VALID_USER);
+    expect(create.execute).toHaveBeenCalledWith(CREATE_USER_DATA);
+
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
+      VALID_USER,
+    );
   });
 
   it('should: update [USER]', async () => {
