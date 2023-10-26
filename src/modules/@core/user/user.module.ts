@@ -15,6 +15,7 @@ import { UserValidator } from './validator/user.validator';
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
+import { EncryptUserBeforeSend } from './policy/security/encrypt/user.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -57,6 +58,11 @@ Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
       user.profileImage,
     ),
 );
+
+Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USER).to(
+  EncryptUserBeforeSend,
+);
+
 Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
