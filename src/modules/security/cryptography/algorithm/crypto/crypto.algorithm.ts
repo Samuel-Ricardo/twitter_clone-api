@@ -108,4 +108,12 @@ export class Crypto implements ICryptographyIVAlgotihm {
   protected extractSecret(data: string) {
     return data.split(this._breakpoint)[0];
   }
+
+  protected static injectDataInSecret(
+    secret: string,
+    data: string,
+    breakpoint: string,
+  ) {
+    return secret.concat(breakpoint, data, breakpoint);
+  }
 }
