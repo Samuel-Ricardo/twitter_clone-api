@@ -38,4 +38,16 @@ export class Crypto implements ICryptographyIVAlgotihm {
 
     return data;
   }
+
+  protected get cipher() {
+    const iv = this.initialVector;
+    return {
+      cipher: this.crypto.createCipheriv(
+        ENV.SECURITY.CRYPTOGRAPHY.ALGORITHM,
+        ENV.SECURITY.CRYPTOGRAPHY.KEY,
+        iv,
+      ) as cryptoLib.CipherGCM,
+      iv,
+    };
+  }
 }
