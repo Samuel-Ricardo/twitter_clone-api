@@ -1,28 +1,27 @@
-import { IEncriptedIV } from '@Type/security/cryptography/iv/encrypted';
 import {
   CreateUserDTO,
   UpdateUserDTO,
   IDeleteuserDTO,
   SelectUserByIdDTO,
 } from '@User/DTO';
-import { User } from '@prisma/client';
+import { IUserDTO } from '@User/DTO/user.dto';
 
 export interface IUserCypher {
   hashPassword(password: string): Promise<string>;
   comparePassword(password: string, hashedPassword: string): Promise<boolean>;
 
-  encryptUser(user: User): IEncriptedIV;
-  decryptUser(user: IEncriptedIV): User;
+  encryptUser(user: IUserDTO): string;
+  decryptUser(user: string): IUserDTO;
 
-  encryptUpdateUserDTO(updateUserDTO: UpdateUserDTO): IEncriptedIV;
-  decryptUpdateUserDTO(updateUserDTO: IEncriptedIV): UpdateUserDTO;
+  encryptUpdateUserDTO(updateUserDTO: UpdateUserDTO): string;
+  decryptUpdateUserDTO(updateUserDTO: string): UpdateUserDTO;
 
-  encryptCreateUserDTO(user: CreateUserDTO): IEncriptedIV;
-  decryptCreateUserDTO(user: IEncriptedIV): CreateUserDTO;
+  encryptCreateUserDTO(user: CreateUserDTO): string;
+  decryptCreateUserDTO(user: string): CreateUserDTO;
 
-  ecnryptDeleteUserDTO(user: IDeleteuserDTO): IEncriptedIV;
-  decryptDeleteUserDTO(user: IEncriptedIV): IDeleteuserDTO;
+  ecnryptDeleteUserDTO(user: IDeleteuserDTO): string;
+  decryptDeleteUserDTO(user: string): IDeleteuserDTO;
 
-  encryptSelectUserByIdDTO(user: SelectUserByIdDTO): IEncriptedIV;
-  decryptSelectUserByIdDTO(user: IEncriptedIV): SelectUserByIdDTO;
+  encryptSelectUserByIdDTO(user: SelectUserByIdDTO): string;
+  decryptSelectUserByIdDTO(user: string): SelectUserByIdDTO;
 }
