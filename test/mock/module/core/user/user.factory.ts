@@ -12,6 +12,7 @@ import {
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
+import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
 
 export const UserMockFactory = {
   SERVICE: {
@@ -24,6 +25,16 @@ export const UserMockFactory = {
         UserMockModule.get<DeepMockProxy<UserService>>(
           UserMockRegistry.SERVICE.MOCK.DEFAULT,
         ),
+    },
+  },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        USER: () =>
+          UserMockModule.get<DeepMockProxy<EncryptUserBeforeSendPolicy>>(
+            UserMockRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+      },
     },
   },
   USE_CASE: {
