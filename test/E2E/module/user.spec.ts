@@ -4,27 +4,36 @@
 
 import { app } from '@/app';
 import { User } from '@User';
+import { IUserDTO } from '@User/DTO/user.dto';
+import { IUserCypher } from '@User/cypher/user.cypher';
+import { MODULES } from '@modules';
 import { CREATE_USER_DATA } from '@test/mock';
 import supertest from 'supertest';
 
 describe('[MODULE] | User', () => {
   let user: User;
+  let cypher: IUserCypher;
 
   beforeEach(async () => {
     if (user) user = (await supertest(app).get(`/users/${user.id}`)).body.user;
+
+    cypher = MODULES.CYPHER.USER();
   });
 
   it('[E2E] | Should: Create => [USER]', async () => {
     const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
-    const body: { user: User } = response.body;
+    const body: { user: string } = response.body;
+
+    const result: IUserDTO = cypher.decryptUser(body.user);
 
     expect(response.status).toBe(201);
-    expect(body.user).toHaveProperty('id');
-    expect(body.user.username).toBe(CREATE_USER_DATA.username);
-    expect(body.user.email).toBe(CREATE_USER_DATA.email);
-    expect(body.user.bio).toBeNull();
+    expect(body.user.length).toBeGreaterThanOrEqual(1);
+    expect(result).toHaveProperty('id');
+    expect(result.username).toBe(CREATE_USER_DATA.username);
+    expect(result.email).toBe(CREATE_USER_DATA.email);
+    expect(result.bio).toBeNull();
 
-    user = body.user;
+    user = result;
   });
 
   it('[E2E] | Should: Update => [USER]', async () => {
