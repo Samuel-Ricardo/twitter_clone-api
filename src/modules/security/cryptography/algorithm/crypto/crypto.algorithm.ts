@@ -74,4 +74,12 @@ export class Crypto implements ICryptographyIVAlgotihm {
   get initialVector() {
     return this.crypto.randomBytes(32);
   }
+
+  injectAuthTag(secret: string, authTag: Buffer) {
+    return Crypto.injectDataInSecret(
+      secret,
+      authTag.toString('hex'),
+      this._authBreakpoint,
+    );
+  }
 }
