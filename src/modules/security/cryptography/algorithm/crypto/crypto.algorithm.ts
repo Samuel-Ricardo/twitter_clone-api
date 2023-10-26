@@ -50,4 +50,24 @@ export class Crypto implements ICryptographyIVAlgotihm {
       iv,
     };
   }
+
+  protected getDecipher(encrypted: string) {
+    const iv = this.extractIV(encrypted);
+    const authTag = this.getAuthTag(encrypted);
+
+    const decipher = this.crypto.createDecipheriv(
+      ENV.SECURITY.CRYPTOGRAPHY.ALGORITHM,
+      ENV.SECURITY.CRYPTOGRAPHY.KEY,
+      iv,
+    ) as cryptoLib.DecipherGCM;
+
+    decipher.setAuthTag(authTag);
+
+    return {
+      decipher,
+      authTag,
+      iv,
+      secret: this.extractSecret(encrypted),
+    };
+  }
 }
