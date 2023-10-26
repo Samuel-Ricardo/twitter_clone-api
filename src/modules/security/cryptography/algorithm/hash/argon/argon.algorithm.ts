@@ -25,4 +25,11 @@ export class Argon2 implements IHashAlgorithm {
 
     return this.injectSalt(hashString.concat(this.breakpoint), salt);
   }
+
+  async compareHash(plain: string | Buffer, hash: string) {
+    return await this.argon.verify(this.extractHash(hash), plain, {
+      type: this.argon.argon2id,
+      salt: this.extractSalt(hash),
+    });
+  }
 }
