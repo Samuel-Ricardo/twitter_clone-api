@@ -16,6 +16,7 @@ import { ISelectUserByCredentialsDTO } from '@User/DTO/select_by_credentials.dto
 import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credentials.use-case';
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
+import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
 
 @injectable()
 export class UserService {
@@ -43,10 +44,13 @@ export class UserService {
 
     @inject(USER_MODULE.USE_CASE.SELECT.BY.EMAIL)
     private selectUserByEmail: SelectUserByEmailUseCase,
+
+    @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.USER)
+    private readonly encryptUser: EncryptUserBeforeSendPolicy,
   ) {}
 
   async create(data: CreateUserDTO) {
-    return await this.createUser.execute(data);
+    return this.encryptUser.execute(await this.createUser.execute(data));
   }
 
   async update(data: UpdateUserDTO) {
