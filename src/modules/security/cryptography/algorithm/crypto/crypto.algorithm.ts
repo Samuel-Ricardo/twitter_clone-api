@@ -16,4 +16,17 @@ export class Crypto implements ICryptographyIVAlgotihm {
     @inject(MODULE.CRYPTO)
     protected readonly crypto: typeof cryptoLib,
   ) {}
+
+  encryptIV(plain: string): string {
+    const { cipher, iv } = this.cipher;
+
+    let data = cipher.update(plain, 'utf8', 'hex');
+    data += cipher.final('hex');
+    data += this._breakpoint;
+
+    data = this.injectAuthTag(data, cipher.getAuthTag());
+    data = this.injectIV(data, iv);
+
+    return data;
+  }
 }
