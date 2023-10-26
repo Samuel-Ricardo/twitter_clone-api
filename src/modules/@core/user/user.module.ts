@@ -15,7 +15,8 @@ import { UserValidator } from './validator/user.validator';
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
 import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials.use-case';
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
-import { EncryptUserBeforeSend } from './policy/security/encrypt/user.policy';
+import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
+import { CYPHER_MODULE } from '../../cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -60,7 +61,7 @@ Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
 );
 
 Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USER).to(
-  EncryptUserBeforeSend,
+  EncryptUserBeforeSendPolicy,
 );
 
 Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
@@ -81,6 +82,6 @@ Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
 Module.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
 Module.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
 
-const UserModule = Container.merge(Module, RepositoryModule);
+const UserModule = Container.merge(Module, RepositoryModule, CYPHER_MODULE);
 
 export { UserModule };
