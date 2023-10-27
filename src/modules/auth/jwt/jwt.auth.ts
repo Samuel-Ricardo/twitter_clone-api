@@ -9,4 +9,8 @@ export class JWT implements IAuthorizer {
   protected readonly _secret = ENV.AUTH.TOKEN.SECRET;
 
   constructor(protected readonly _jwt: jsonwebtoken) {}
+
+  generateToken({ id }: IAuthorizationData) {
+    return this._jwt.sign(id, this._secret);
+  }
 }
