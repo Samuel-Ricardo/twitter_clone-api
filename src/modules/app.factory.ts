@@ -23,10 +23,12 @@ import { Express } from 'express';
 import { RoutesFactory as ROUTER } from './router/router.factory';
 
 import cors from 'cors';
+import { JWT_FACTORY } from './jwt/jwt.factory';
 
 export const MODULES = {
   ...PrismaFactory,
   ...CRYPTO_FACTORY,
+  ...JWT_FACTORY,
   ROUTER,
   USER,
   POST,
