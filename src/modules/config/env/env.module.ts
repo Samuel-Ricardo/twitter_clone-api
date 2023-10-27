@@ -10,6 +10,12 @@ export const ENV = {
   ENVIRONMENT: process.env.ENVIRONMENT || 'dev',
   PORT: process.env.PORT || 3000,
 
+  AUTH: {
+    TOKEN: {
+      SECRET: process.env.AUTH_TOKEN_SECRET || '',
+    },
+  },
+
   SECURITY: {
     CRYPTOGRAPHY: {
       ALGORITHM: process.env.SECURITY_CRYPTOGRAPHY_ALGORITHM || '',
