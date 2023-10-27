@@ -18,12 +18,12 @@ import { CRYPTO_FACTORY } from './crypto/crypto.factory';
 import { ARGON_FACTORY as ARGON } from './argon/argon.factory';
 import { SECURITY_FACTORY as SECURITY } from './security/security.factory';
 import { CYPHER_FACTORY as CYPHER } from './cypher/cypher.factory';
+import { JWT_FACTORY } from './jwt/jwt.factory';
+import { RoutesFactory as ROUTER } from './router/router.factory';
+import { AUTH_FACTORY as AUTH } from './auth/auth.factory';
 
 import { Express } from 'express';
-import { RoutesFactory as ROUTER } from './router/router.factory';
-
 import cors from 'cors';
-import { JWT_FACTORY } from './jwt/jwt.factory';
 
 export const MODULES = {
   ...PrismaFactory,
@@ -44,6 +44,7 @@ export const MODULES = {
   ARGON,
   SECURITY,
   CYPHER,
+  AUTH,
   APP: () => AppModule.get<Express>(MODULE.APP),
   BODY_PARSER: () => AppModule.get<any>(MODULE.BODY_PARSER),
   CORS: () => AppModule.get<typeof cors>(MODULE.CORS),
