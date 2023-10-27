@@ -1,5 +1,5 @@
-import { IAuthorizationData } from '@Type/core/auth/jwt/data';
+import { IIsUserAuthorizedDTO } from '@User/DTO/authorizer/user.dto';
 
 export interface IUserAuthorizer {
-  isAuthorized(data: IAuthorizationData): boolean;
+  isAuthorized(data: IIsUserAuthorizedDTO): boolean;
 }
