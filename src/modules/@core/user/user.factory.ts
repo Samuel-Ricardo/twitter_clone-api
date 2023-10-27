@@ -16,6 +16,7 @@ import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials
 import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
+import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -33,6 +34,14 @@ export const USER_MODULE = {
         USER: () =>
           UserModule.get<EncryptUserBeforeSendPolicy>(
             UserRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+      },
+    },
+    AUTHORIZATION: {
+      AUTHORIZE: {
+        ALL: () =>
+          UserModule.get<AuthorizeAllExistingUserPolicy>(
+            UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.ALL,
           ),
       },
     },
