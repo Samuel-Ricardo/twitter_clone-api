@@ -9,6 +9,7 @@ import { validateUpdateUserDTO } from './validator/user/update-validator.middlew
 import { validateDeleteUserDTO } from './validator/user/delete-validator.middleware';
 import { validateSelectUserByIdDTO } from './validator/user/select_by_id-validator.middleware';
 import { ReactiveMiddlewareModule } from './reactive/reactive.module';
+import { decryptCreateUserDTOMiddleware } from './security/cryptography/decrypt/user/create.middleware';
 
 const Module = new Container();
 
@@ -34,6 +35,10 @@ Module.bind(MiddlewareRegistry.VALIDATOR.USER.DELETE).toConstantValue(
 Module.bind(MiddlewareRegistry.VALIDATOR.USER.SELECT.BY.ID).toConstantValue(
   validateSelectUserByIdDTO,
 );
+
+Module.bind(
+  MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE,
+).toConstantValue(decryptCreateUserDTOMiddleware);
 
 export const MiddlewareModule = Container.merge(
   Module,
