@@ -1,4 +1,3 @@
-import { IEncriptedIV } from '@Type/security/cryptography/iv/encrypted';
 import { ICryptographer } from '../cryptography.contract';
 
 import { inject, injectable } from 'inversify';
@@ -23,11 +22,11 @@ export class Turing implements ICryptographer {
     return this.hashAlgorithm.compareHash(plain, hash);
   }
 
-  encryptIV(plain: string): IEncriptedIV | Promise<IEncriptedIV> {
+  encryptIV(plain: string): string {
     return this.crypto.encryptIV(plain);
   }
 
-  decryptIV(encrypted: IEncriptedIV): string | Promise<string> {
+  decryptIV(encrypted: string): string {
     return this.crypto.decryptIV(encrypted);
   }
 }
