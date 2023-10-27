@@ -39,4 +39,16 @@ export const MiddlewareFactory = {
       },
     },
   },
+  SECURITY: {
+    CRYPTOGRAPHY: {
+      USER: {
+        DECRYPT: {
+          CREATE: () =>
+            MiddlewareModule.get<RequestHandler>(
+              MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE,
+            ),
+        },
+      },
+    },
+  },
 };
