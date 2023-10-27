@@ -27,6 +27,9 @@ export const MiddlewareRegistry = {
           CREATE: Symbol(
             'Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.CREATE',
           ),
+          USER: Symbol.for(
+            'Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.USER',
+          ),
         },
         DECRYPT: {
           CREATE: Symbol(
