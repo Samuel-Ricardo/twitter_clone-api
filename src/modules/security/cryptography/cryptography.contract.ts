@@ -1,6 +1,9 @@
-import { IHashAlgorithm } from './algorithm/hash/hash.algorithm';
-import { ICryptographyIVAlgotihm } from './algorithm/cryptography.algorithm';
+export interface ICryptographer {
+  hash(plain: string): Promise<string>;
 
-export interface ICryptographer
-  extends ICryptographyIVAlgotihm,
-    IHashAlgorithm {}
+  compareHash(plain: string, hash: string): Promise<string>;
+
+  encryptIV(plain: string): string;
+
+  decryptIV(encrypted: string): string;
+}
