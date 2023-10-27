@@ -21,6 +21,9 @@ export const MiddlewareRegistry = {
     },
   },
   SECURITY: {
+    AUTHORIZATION: {
+      VERIFY: Symbol('Middleware.SECURITY.AUTHORIZATION'),
+    },
     CRYPTOGRAPHY: {
       USER: {
         ENCRYPT: {
