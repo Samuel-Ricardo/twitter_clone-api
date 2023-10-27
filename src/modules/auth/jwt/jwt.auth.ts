@@ -13,4 +13,8 @@ export class JWT implements IAuthorizer {
   generateToken({ id }: IAuthorizationData) {
     return this._jwt.sign(id, this._secret);
   }
+
+  validateToken(token: string) {
+    return this._jwt.verify(token, this._secret) as IAuthorizationData;
+  }
 }
