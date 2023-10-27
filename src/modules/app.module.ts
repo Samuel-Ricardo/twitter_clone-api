@@ -23,6 +23,7 @@ import { ARGON_MODULE } from './argon/argon.module';
 import { SECURITY_MODULE } from './security/security.module';
 import { CYPHER_MODULE } from './cypher/cypher.module';
 import { JWT_MODULE } from './jwt/jwt.module';
+import { AUTH_MODULE } from './auth/auth.module';
 
 const Module = new Container();
 
@@ -49,4 +50,5 @@ export const AppModule = Container.merge(
   SECURITY_MODULE,
   CYPHER_MODULE,
   JWT_MODULE,
+  AUTH_MODULE,
 );
