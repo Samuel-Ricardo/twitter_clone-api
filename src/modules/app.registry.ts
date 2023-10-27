@@ -18,6 +18,7 @@ import { ARGON_REGISTRY as ARGON } from './argon/argon.registry';
 import { SECURITY_REGISTRY as SECURITY } from './security/security.registry';
 import { CYPHER_REGISTRY as CYPHER } from './cypher/cypher.registry';
 import { JWT_REGISTRY } from './jwt/jwt.registry';
+import { AUTH_REGISTRY as AUTH } from './auth/auth.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
@@ -38,6 +39,7 @@ export const MODULE = {
   ARGON,
   SECURITY,
   CYPHER,
+  AUTH,
   APP: Symbol.for('app'),
   BODY_PARSER: Symbol.for('app.body-parser'),
   ROUTES: Symbol.for('app.routes'),
