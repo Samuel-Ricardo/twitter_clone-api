@@ -17,6 +17,7 @@ import { SelectUserByCredentialsUseCase } from './use-case/select_by_credentials
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
 import { CYPHER_MODULE } from '../../cypher/cypher.module';
+import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -60,10 +61,6 @@ Module.bind(UserRegistry.FOR_PRISMA).toFactory<User, [PrismaUser]>(
     ),
 );
 
-Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USER).to(
-  EncryptUserBeforeSendPolicy,
-);
-
 Module.bind(UserRegistry.USE_CASE.CREATE).to(CreateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.UPDATE).to(UpdateUserUseCase);
 Module.bind(UserRegistry.USE_CASE.DELETE).to(DeleteUserUseCase);
@@ -76,6 +73,13 @@ Module.bind(UserRegistry.USE_CASE.SELECT.BY.CREDENTIALS).to(
   SelectUserByCredentialsUseCase,
 );
 Module.bind(UserRegistry.USE_CASE.SELECT.BY.EMAIL).to(SelectUserByEmailUseCase);
+
+Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USER).to(
+  EncryptUserBeforeSendPolicy,
+);
+Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.ALL).to(
+  AuthorizeAllExistingUserPolicy,
+);
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
 
