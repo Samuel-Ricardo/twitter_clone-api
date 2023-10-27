@@ -13,6 +13,11 @@ export const UserRegistry = {
         USER: Symbol.for('EncryptUserBeforeSend'),
       },
     },
+    AUTHORIZATION: {
+      AUTHORIZE: {
+        ALL: Symbol.for('AuthorizeAllExistingUserPolicy'),
+      },
+    },
   },
   USE_CASE: {
     CREATE: Symbol.for('CreateUserUseCase'),
