@@ -17,11 +17,13 @@ import { CRYPTO_REGISTRY } from './crypto/crypto.registry';
 import { ARGON_REGISTRY as ARGON } from './argon/argon.registry';
 import { SECURITY_REGISTRY as SECURITY } from './security/security.registry';
 import { CYPHER_REGISTRY as CYPHER } from './cypher/cypher.registry';
+import { JWT_REGISTRY } from './jwt/jwt.registry';
 
 export const MODULE = {
   ...PrismaRegistry,
   ...RoutesRegistry,
   ...CRYPTO_REGISTRY,
+  ...JWT_REGISTRY,
   USER,
   POST,
   LIKE,
