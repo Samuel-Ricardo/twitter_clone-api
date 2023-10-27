@@ -1,4 +1,4 @@
-import { SECURITY_MODULE } from '@modules/security/security.module';
+import { SECURITY_MODULE } from '../security/security.module';
 import { Container } from 'inversify';
 import { UserCypher } from './user/user.cypher';
 
