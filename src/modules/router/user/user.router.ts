@@ -1,4 +1,3 @@
-import { IDeleteuserDTO } from '@User';
 import { MODULES } from '../../app.factory';
 import { Router } from 'express';
 
@@ -16,7 +15,7 @@ user_routes.get(prefix, async (req, res, next) => {
 
 user_routes.post(
   prefix,
-  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE(),
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.CREATE(),
   async (req, res, next) => {
     try {

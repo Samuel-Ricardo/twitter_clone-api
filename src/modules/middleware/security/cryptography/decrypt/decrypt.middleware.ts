@@ -7,7 +7,7 @@ export const decryptMiddleware: RequestHandler = (req, res, next) => {
   console.log({ body: req.body, params: req.params, cryptographer });
 
   if (req.body.encrypted)
-    req.body = cryptographer.decryptIV(req.body.encrypted);
+    req.body = JSON.parse(cryptographer.decryptIV(req.body.encrypted));
 
   Object.keys({ ...req.params }).forEach(
     (key) => (req.params[key] = cryptographer.decryptIV(req.params[key])),
