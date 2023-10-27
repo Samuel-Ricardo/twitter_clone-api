@@ -1,4 +1,9 @@
 export interface IHashAlgorithm {
-  hash(word: string): string | Promise<string>;
-  compareHash(word: string, hash: string): boolean | Promise<boolean>;
+  hash(plain: string): Promise<string>;
+  compareHash(plain: string, hash: string): Promise<boolean>;
+
+  injectSalt(hash: string, salt: Buffer): string;
+  extractSalt(hash: string): Buffer;
+
+  extractHash(plain: string): string;
 }
