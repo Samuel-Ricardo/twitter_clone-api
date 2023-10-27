@@ -22,7 +22,7 @@ export const MiddlewareRegistry = {
   },
   SECURITY: {
     AUTHORIZATION: {
-      VERIFY: Symbol('Middleware.SECURITY.AUTHORIZATION'),
+      USER: Symbol('Middleware.SECURITY.AUTHORIZATION.USER'),
     },
     CRYPTOGRAPHY: {
       USER: {
