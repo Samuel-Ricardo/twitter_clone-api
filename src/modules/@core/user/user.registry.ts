@@ -16,12 +16,16 @@ export const UserRegistry = {
     AUTHORIZATION: {
       AUTHORIZE: {
         ALL: Symbol.for('AuthorizeAllExistingUserPolicy'),
+        BY: {
+          CREDENTIALS: Symbol.for('AuthorizeUserByCredentialsPolicy'),
+        },
       },
     },
   },
   USE_CASE: {
     CREATE: Symbol.for('CreateUserUseCase'),
     UPDATE: Symbol.for('UpdateUserUseCase'),
+    AUTHORIZE: Symbol.for('AuthorizeUserUseCase'),
     SELECT: {
       BY_ID: Symbol.for('SelectUserByIdUseCase'),
       ALL: Symbol.for('SelectAllUsersUseCase'),
