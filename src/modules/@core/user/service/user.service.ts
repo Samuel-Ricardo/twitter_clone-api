@@ -78,9 +78,9 @@ export class UserService {
 
     const user = await this.authorizePolicy.execute(result.id);
 
-    return this.validateUserPassword.execute({
+    return (await this.validateUserPassword.execute({
       password: { expected: data.password, given: user.password },
-    })
+    }))
       ? user
       : null;
   }
