@@ -1,4 +1,3 @@
-import { CreateUserDTO } from '@User/DTO';
 import { IAuthorizeUserDTO } from '@User/DTO/authorizer/authorize.dto';
 import { IUserRepository } from '@User/user.repository';
 import { MODULE } from '@modules/app.registry';
