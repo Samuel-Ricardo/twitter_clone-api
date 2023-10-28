@@ -1,10 +1,10 @@
-import { SelectUserByIdUseCase } from '@User/use-case';
+import { SelectUserByIdUseCase } from '../use-case';
 import { MODULE } from '@modules/app.registry';
 import { IAuthorizer } from '@modules/auth/generic.auth';
 import { inject, injectable } from 'inversify';
 
-injectable();
-export abstract class AuthorizerAccess {
+@injectable()
+export class AuthorizerAccess {
   constructor(
     @inject(MODULE.AUTH.JWT)
     protected readonly authorizer: IAuthorizer,
