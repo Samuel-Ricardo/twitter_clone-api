@@ -1,5 +1,4 @@
 import { IIsUserAuthorizedDTO } from '@User/DTO/authorizer/user.dto';
-//import { AuthorizerAccess } from '../../authorizer/authorizer.access';
 import { inject, injectable } from 'inversify';
 import { MODULE } from '@modules/app.registry';
 import { IAuthorizer } from '@modules/auth/generic.auth';
