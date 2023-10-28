@@ -17,6 +17,8 @@ import { ValidateUserPasswordUseCase } from './use-case/validate_password.use-ca
 import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
 import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
+import { AuthorizeUserUseCase } from './use-case/authorize.use-case';
+import { HashPasswrodBeforeSavePolicy } from './policy/security/encrypt/password.policy';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -34,6 +36,10 @@ export const USER_MODULE = {
         USER: () =>
           UserModule.get<EncryptUserBeforeSendPolicy>(
             UserRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+        PASSWORD: () =>
+          UserModule.get<HashPasswrodBeforeSavePolicy>(
+            UserRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD,
           ),
       },
     },
@@ -53,6 +59,8 @@ export const USER_MODULE = {
       UserModule.get<UpdateUserUseCase>(UserRegistry.USE_CASE.UPDATE),
     DELETE: () =>
       UserModule.get<DeleteUserUseCase>(UserRegistry.USE_CASE.DELETE),
+    AUTHORIZE: () =>
+      UserModule.get<AuthorizeUserUseCase>(UserRegistry.USE_CASE.AUTHORIZE),
     SELECT: {
       ALL: () =>
         UserModule.get<SelectAllUsersUseCase>(UserRegistry.USE_CASE.SELECT.ALL),
