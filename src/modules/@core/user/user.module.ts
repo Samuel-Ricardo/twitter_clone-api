@@ -21,6 +21,7 @@ import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authoriza
 import { AUTH_MODULE } from '@modules/auth/auth.module';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from './policy/authorization/authorize/after/select/credentials.policy';
 import { AuthorizeUserUseCase } from './use-case/authorize.use-case';
+import { HashPasswrodBeforeSavePolicy } from './policy/security/encrypt/password.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -87,6 +88,9 @@ Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.ALL).to(
 );
 Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS).to(
   AuthorizeUserAfterSelectByCredentialsPolicy,
+);
+Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD).to(
+  HashPasswrodBeforeSavePolicy,
 );
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
