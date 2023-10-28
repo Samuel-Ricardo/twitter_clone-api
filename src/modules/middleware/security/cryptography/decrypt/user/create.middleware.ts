@@ -14,7 +14,5 @@ export const decryptCreateUserDTOMiddleware: RequestHandler = (
 
   const user = cypher.decryptCreateUserDTO(body.encrypted);
 
-  req.body = user;
-
   return next();
 };
