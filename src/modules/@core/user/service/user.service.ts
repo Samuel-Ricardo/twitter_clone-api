@@ -53,6 +53,7 @@ export class UserService {
     @inject(USER_MODULE.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS)
     private readonly authorizePolicy: AuthorizeUserAfterSelectByCredentialsPolicy,
 
+    @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.PASSWORD)
     private readonly hashPasswordBeforeSavePolicy: HashPasswrodBeforeSavePolicy,
   ) {}
 
@@ -60,6 +61,7 @@ export class UserService {
     data.password = await this.hashPasswordBeforeSavePolicy.execute(
       data.password,
     );
+
     return this.encryptUser.execute(await this.createUser.execute(data));
   }
 
