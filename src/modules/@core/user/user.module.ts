@@ -18,6 +18,8 @@ import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
 import { CYPHER_MODULE } from '../../cypher/cypher.module';
 import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
+import { AUTH_MODULE } from '@modules/auth/auth.module';
+import { AuthorizeUserAfterSelectByCredentialsPolicy } from './policy/authorization/authorize/after/select/credentials.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -80,12 +82,20 @@ Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USER).to(
 Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.ALL).to(
   AuthorizeAllExistingUserPolicy,
 );
+Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS).to(
+  AuthorizeUserAfterSelectByCredentialsPolicy,
+);
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
 
 Module.bind(UserRegistry.SERVICE.DEFAULT).to(UserService);
 Module.bind(UserRegistry.CONTROLLER.DEFAULT).to(UserController);
 
-const UserModule = Container.merge(Module, RepositoryModule, CYPHER_MODULE);
+const UserModule = Container.merge(
+  Module,
+  RepositoryModule,
+  CYPHER_MODULE,
+  AUTH_MODULE,
+);
 
 export { UserModule };
