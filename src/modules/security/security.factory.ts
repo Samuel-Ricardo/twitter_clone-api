@@ -1,4 +1,4 @@
-import { CRYPTO_FACTORY as CRYPTOGRAPHY } from '@modules/crypto/crypto.factory';
+import { CRYPTOGRAPHY_FACTORY as CRYPTOGRAPHY } from './cryptography/cryptography.factory';
 
 export const SECURITY_FACTORY = {
   CRYPTOGRAPHY,
