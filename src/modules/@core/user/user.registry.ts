@@ -11,6 +11,7 @@ export const UserRegistry = {
     SECURITY: {
       ENCRYPT: {
         USER: Symbol.for('EncryptUserBeforeSend'),
+        PASSWORD: Symbol.for('MODULE:USER.POLICY.SECURITY.ENCRYPT.PASSWORD'),
       },
     },
     AUTHORIZATION: {
