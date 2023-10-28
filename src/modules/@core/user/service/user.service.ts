@@ -17,6 +17,7 @@ import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credent
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
 import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
+import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
 
 @injectable()
 export class UserService {
@@ -47,6 +48,9 @@ export class UserService {
 
     @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.USER)
     private readonly encryptUser: EncryptUserBeforeSendPolicy,
+
+    @inject(USER_MODULE.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS)
+    private readonly authorizePolicy: AuthorizeUserAfterSelectByCredentialsPolicy,
   ) {}
 
   async create(data: CreateUserDTO) {
@@ -70,7 +74,9 @@ export class UserService {
   }
 
   async selectByCredentials(data: ISelectUserByCredentialsDTO) {
-    const user = await this.selectUserByCredentials.execute(data);
+    const result = await this.selectUserByCredentials.execute(data);
+
+    const user = await this.authorizePolicy.execute(result.id);
 
     return this.validateUserPassword.execute({
       password: { expected: data.password, given: user.password },
