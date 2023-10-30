@@ -1,7 +1,7 @@
 import { Container } from 'inversify';
 import { AUTH_JWT_REGISTRY } from './jwt.registry';
 import { JWT } from './jwt.auth';
-import { JWT_MODULE } from '@modules/jwt/jwt.module';
+import { JWT_MODULE } from '../../jwt/jwt.module';
 
 const MODULE = new Container({ autoBindInjectable: true });
 
