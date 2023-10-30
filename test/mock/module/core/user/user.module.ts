@@ -13,6 +13,9 @@ import { mockSelectUserByCredentialsUseCase } from './use-case/select_by_credent
 import { mockValidateUserPasswordUseCase } from './use-case/validate_password';
 import { mockSelectUserByEmailUseCase } from './use-case/select_by_email';
 import { mockEncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
+import { mockHashPasswordBeforeSavePolicy } from './policy/security/encrypt/password.policy';
+import { mockAuthorizeAllExistingUserPolicy } from './policy/security/authorization/authorization.policy';
+import { mockAuthorizeUserAfterSelectByCredentialsPolicy } from './policy/security/authorization/after/select/by/credentials.policy';
 
 export const UserMockModule = new Container({ autoBindInjectable: true });
 
@@ -51,6 +54,18 @@ UserMockModule.bind(UserMockRegistry.USE_CASE.VALIDATE.PASSWORD).toDynamicValue(
 UserMockModule.bind(
   UserMockRegistry.POLICY.SECURITY.ENCRYPT.USER,
 ).toDynamicValue(mockEncryptUserBeforeSendPolicy);
+
+UserMockModule.bind(
+  UserMockRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD,
+).toDynamicValue(mockHashPasswordBeforeSavePolicy);
+
+UserMockModule.bind(
+  UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.ALL,
+).toDynamicValue(mockAuthorizeAllExistingUserPolicy);
+
+UserMockModule.bind(
+  UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY.CREDENTIALS,
+).toDynamicValue(mockAuthorizeUserAfterSelectByCredentialsPolicy);
 
 UserMockModule.bind(UserMockRegistry.SERVICE.SIMULATE_DEFAULT).toDynamicValue(
   (context) => simulateUserService(context),
