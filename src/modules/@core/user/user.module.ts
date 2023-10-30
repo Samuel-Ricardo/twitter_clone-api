@@ -18,7 +18,7 @@ import { SelectUserByEmailUseCase } from './use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.policy';
 import { CYPHER_MODULE } from '../../cypher/cypher.module';
 import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
-import { AUTH_MODULE } from '@modules/auth/auth.module';
+import { AUTH_MODULE } from '../../auth/auth.module';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from './policy/authorization/authorize/after/select/credentials.policy';
 import { AuthorizeUserUseCase } from './use-case/authorize.use-case';
 import { HashPasswrodBeforeSavePolicy } from './policy/security/encrypt/password.policy';
