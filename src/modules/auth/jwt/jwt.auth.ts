@@ -19,6 +19,6 @@ export class JWT implements IAuthorizer {
   }
 
   validateToken(token: string) {
-    return this._jwt.verify(token, this._secret) as IAuthorizationData;
+    return this._jwt.verify(token, this._secret);
   }
 }
