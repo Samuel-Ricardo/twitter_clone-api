@@ -47,17 +47,17 @@ export const UserMockFactory = {
           UserMockModule.get<DeepMockProxy<AuthorizeAllExistingUserPolicy>>(
             UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.ALL,
           ),
-      },
-      AFTER: {
-        SELECT: {
-          BY: {
-            CRENDENTIALS: () =>
-              UserMockModule.get<
-                DeepMockProxy<AuthorizeUserAfterSelectByCredentialsPolicy>
-              >(
-                UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY
-                  .CREDENTIALS,
-              ),
+        AFTER: {
+          SELECT: {
+            BY: {
+              CRENDENTIALS: () =>
+                UserMockModule.get<
+                  DeepMockProxy<AuthorizeUserAfterSelectByCredentialsPolicy>
+                >(
+                  UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY
+                    .CREDENTIALS,
+                ),
+            },
           },
         },
       },

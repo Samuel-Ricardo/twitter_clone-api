@@ -21,8 +21,9 @@ import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credent
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
-import { IUserCypher } from '@User/cypher/user.cypher';
 import { UserCypher } from '@modules/cypher/user/user.cypher';
+import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
+import { HashPasswrodBeforeSavePolicy } from '@User/policy/security/encrypt/password.policy';
 
 describe('[SERVICE] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -38,6 +39,8 @@ describe('[SERVICE] | USER', () => {
   let validatePasword: DeepMockProxy<ValidateUserPasswordUseCase>;
   let deleteUser: DeepMockProxy<DeleteUserUseCase>;
   let encryptUserBeforeSendPolicy: DeepMockProxy<EncryptUserBeforeSendPolicy>;
+  let authorizeUserAfterSelectByCredentialsPolicy: DeepMockProxy<AuthorizeUserAfterSelectByCredentialsPolicy>;
+  let hashPasswrodBeforeSavePolicy: DeepMockProxy<HashPasswrodBeforeSavePolicy>;
 
   let cypher: DeepMockProxy<UserCypher>;
 
@@ -54,6 +57,10 @@ describe('[SERVICE] | USER', () => {
     deleteUser = MockFactory.USER.USE_CASE.DELETE();
     encryptUserBeforeSendPolicy =
       MockFactory.USER.POLICY.SECURITY.ENCRYPT.USER();
+    authorizeUserAfterSelectByCredentialsPolicy =
+      MockFactory.USER.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY.CRENDENTIALS();
+    hashPasswrodBeforeSavePolicy =
+      MockFactory.USER.POLICY.SECURITY.ENCRYPT.PASSWORD();
 
     service = new UserService(
       create,
@@ -65,6 +72,8 @@ describe('[SERVICE] | USER', () => {
       validatePasword,
       selectByEmail,
       encryptUserBeforeSendPolicy,
+      authorizeUserAfterSelectByCredentialsPolicy,
+      hashPasswrodBeforeSavePolicy,
     );
 
     // service = MockFactory.USER.SERVICE.SIMULATE_DEFAULT();
@@ -124,6 +133,10 @@ describe('[SERVICE] | USER', () => {
   it('should: select - by [credentials] => [USER]', async () => {
     selectByCredentials.execute.mockResolvedValue(VALID_USER);
     validatePasword.execute.mockReturnValue(true);
+    authorizeUserAfterSelectByCredentialsPolicy.execute.mockResolvedValue({
+      ...VALID_USER,
+      sessionToken: 'session_token',
+    });
 
     const user = await service.selectByCredentials({
       email: VALID_USER.email,
@@ -131,7 +144,10 @@ describe('[SERVICE] | USER', () => {
     });
 
     expect(user).toBeDefined();
-    expect(user).toStrictEqual(VALID_USER);
+    expect(user).toStrictEqual({
+      ...VALID_USER,
+      sessionToken: 'session_token',
+    });
 
     expect(selectByCredentials.execute).toHaveBeenCalledTimes(1);
     expect(selectByCredentials.execute).toHaveBeenCalledWith({
@@ -146,11 +162,21 @@ describe('[SERVICE] | USER', () => {
         given: VALID_USER.password,
       },
     });
+
+    expect(
+      authorizeUserAfterSelectByCredentialsPolicy.execute,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      authorizeUserAfterSelectByCredentialsPolicy.execute,
+    ).toHaveBeenCalledWith(VALID_USER.id);
+
+    expect(user?.sessionToken).toEqual('session_token');
   });
 
   it('should: create [USER]', async () => {
     create.execute.mockResolvedValue(VALID_USER);
     encryptUserBeforeSendPolicy.execute.mockReturnValue('encrpted_data');
+    hashPasswrodBeforeSavePolicy.execute.mockResolvedValue('hashed_password');
 
     const encrypted = await service.create(CREATE_USER_DATA);
 
@@ -164,6 +190,11 @@ describe('[SERVICE] | USER', () => {
     expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
     expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
       VALID_USER,
+    );
+
+    expect(hashPasswrodBeforeSavePolicy.execute).toHaveBeenCalledTimes(1);
+    expect(hashPasswrodBeforeSavePolicy.execute).toHaveBeenCalledWith(
+      VALID_USER.password,
     );
   });
 
