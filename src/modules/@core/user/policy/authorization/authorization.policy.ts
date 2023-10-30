@@ -1,6 +1,6 @@
 import { IIsUserAuthorizedDTO } from '@User/DTO/authorizer/user.dto';
 import { injectable } from 'inversify';
-import { AuthorizerAccess } from '@User/authorizer/authorizer.access';
+import { AuthorizerAccess } from '../../authorizer/authorizer.access';
 
 @injectable()
 export class AuthorizeAllExistingUserPolicy extends AuthorizerAccess {
