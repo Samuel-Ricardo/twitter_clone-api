@@ -14,6 +14,17 @@ export const UserMockRegistry = {
     SECURITY: {
       ENCRYPT: {
         USER: Symbol.for('EncryptUserBeforeSendPolicy'),
+        PASSWORD: Symbol.for('EncryptPasswordBeforeSendPolicy'),
+      },
+      AUTHORIZATION: {
+        ALL: Symbol.for('AuthorizationPolicy'),
+        AFTER: {
+          SELECT: {
+            BY: {
+              CREDENTIALS: Symbol.for('AuthorizationPolicy'),
+            },
+          },
+        },
       },
     },
   },
