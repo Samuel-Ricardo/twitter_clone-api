@@ -13,6 +13,9 @@ import { SelectUserByCredentialsUseCase } from '@User/use-case/select_by_credent
 import { ValidateUserPasswordUseCase } from '@User/use-case/validate_password.use-case';
 import { SelectUserByEmailUseCase } from '@User/use-case/select_by_email.use-case';
 import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
+import { HashPasswrodBeforeSavePolicy } from '@User/policy/security/encrypt/password.policy';
+import { AuthorizeAllExistingUserPolicy } from '@User/policy/authorization/authorization.policy';
+import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
 
 export const UserMockFactory = {
   SERVICE: {
@@ -34,6 +37,29 @@ export const UserMockFactory = {
           UserMockModule.get<DeepMockProxy<EncryptUserBeforeSendPolicy>>(
             UserMockRegistry.POLICY.SECURITY.ENCRYPT.USER,
           ),
+        PASSWORD: () =>
+          UserMockModule.get<DeepMockProxy<HashPasswrodBeforeSavePolicy>>(
+            UserMockRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD,
+          ),
+      },
+      AUTHORIZATION: {
+        ALL: () =>
+          UserMockModule.get<DeepMockProxy<AuthorizeAllExistingUserPolicy>>(
+            UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.ALL,
+          ),
+      },
+      AFTER: {
+        SELECT: {
+          BY: {
+            CRENDENTIALS: () =>
+              UserMockModule.get<
+                DeepMockProxy<AuthorizeUserAfterSelectByCredentialsPolicy>
+              >(
+                UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY
+                  .CREDENTIALS,
+              ),
+          },
+        },
       },
     },
   },
