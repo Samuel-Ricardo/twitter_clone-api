@@ -45,6 +45,7 @@ user_routes.get(`${prefix}/email/:email`, async (req, res, next) => {
 user_routes.patch(
   prefix,
 
+  MODULES.MIDDLEWARE.AUTHORIZATION.USER(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.UPDATE(),
 
   async (req, res, next) => {
@@ -59,6 +60,7 @@ user_routes.patch(
 user_routes.delete(
   `${prefix}/:id`,
 
+  MODULES.MIDDLEWARE.AUTHORIZATION.USER(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.DELETE(),
 
   async (req, res, next) => {
