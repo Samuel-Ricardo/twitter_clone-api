@@ -13,15 +13,6 @@ export interface IUserCypher {
   encryptUser(user: IUserDTO): string;
   decryptUser(user: string): IUserDTO;
 
-  encryptUpdateUserDTO(updateUserDTO: UpdateUserDTO): string;
-  decryptUpdateUserDTO(updateUserDTO: string): UpdateUserDTO;
-
-  encryptCreateUserDTO(user: CreateUserDTO): string;
-  decryptCreateUserDTO(user: string): CreateUserDTO;
-
-  ecnryptDeleteUserDTO(user: IDeleteuserDTO): string;
-  decryptDeleteUserDTO(user: string): IDeleteuserDTO;
-
-  encryptSelectUserByIdDTO(user: SelectUserByIdDTO): string;
-  decryptSelectUserByIdDTO(user: string): SelectUserByIdDTO;
+  encryptUsers(users: IUserDTO[]): string[];
+  decryptUsers(users: string[]): IUserDTO[];
 }
