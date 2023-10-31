@@ -4,6 +4,7 @@ import { injectable } from 'inversify';
 import { User as PrismaUser } from '@prisma/client';
 import { UpdateUserDTO } from './DTO';
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { IUserDTO } from './DTO/user.dto';
 
 @injectable()
 export class User {
@@ -89,6 +90,25 @@ export class User {
       user.coverImage,
       user.profileImage,
     );
+  }
+
+  toStruct(): IUserDTO {
+    return {
+      id: this.id,
+      name: this.name,
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      hasNotifications: this.hasNotifications,
+      sessionToken: this.sessionToken,
+      bio: this.bio,
+      emailVerified: this.emailVerified,
+      image: this.image,
+      coverImage: this.coverImage,
+      profileImage: this.profileImage,
+    };
   }
 
   static fromPrisma(user: PrismaUser) {
