@@ -7,6 +7,6 @@ export interface IUserCypher {
   encryptUser(user: IUserDTO): string;
   decryptUser(user: string): IUserDTO;
 
-  encryptUsers(users: IUserDTO[]): string[];
-  decryptUsers(users: string[]): IUserDTO[];
+  encryptUsers(users: IUserDTO[]): string;
+  decryptUsers(users: string): IUserDTO[];
 }
