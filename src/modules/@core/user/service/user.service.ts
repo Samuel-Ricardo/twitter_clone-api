@@ -49,7 +49,7 @@ export class UserService {
     private selectUserByEmail: SelectUserByEmailUseCase,
 
     @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.USER)
-    private readonly encryptUser: EncryptUserBeforeSendPolicy,
+    private readonly encryptUserPolicy: EncryptUserBeforeSendPolicy,
 
     @inject(USER_MODULE.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS)
     private readonly authorizePolicy: AuthorizeUserAfterSelectByCredentialsPolicy,
@@ -66,11 +66,11 @@ export class UserService {
       data.password,
     );
 
-    return this.encryptUser.execute(await this.createUser.execute(data));
+    return this.encryptUserPolicy.execute(await this.createUser.execute(data));
   }
 
   async update(data: UpdateUserDTO) {
-    return await this.updateUser.execute(data);
+    return this.encryptUserPolicy.execute(await this.updateUser.execute(data));
   }
 
   async delete(data: IDeleteuserDTO) {
@@ -84,7 +84,9 @@ export class UserService {
   }
 
   async selectById(data: SelectUserByIdDTO) {
-    return await this.selectUserById.execute(data);
+    return this.encryptUserPolicy.execute(
+      await this.selectUserById.execute(data),
+    );
   }
 
   async selectByCredentials(data: ISelectUserByCredentialsDTO) {
@@ -95,11 +97,13 @@ export class UserService {
     return (await this.validateUserPassword.execute({
       password: { expected: data.password, given: user.password },
     }))
-      ? user
+      ? this.encryptUserPolicy.execute(user)
       : null;
   }
 
   async selectByEmail(data: ISelectUserByEmailDTO) {
-    return await this.selectUserByEmail.execute(data);
+    return this.encryptUserPolicy.execute(
+      await this.selectUserByEmail.execute(data),
+    );
   }
 }
