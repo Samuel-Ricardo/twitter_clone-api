@@ -19,6 +19,7 @@ import { ISelectUserByEmailDTO } from '@User/DTO/select_by_email.dto';
 import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.policy';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
 import { HashPasswrodBeforeSavePolicy } from '@User/policy/security/encrypt/password.policy';
+import { EncryptUserListBeforeSendPolicy } from '../policy/security/encrypt/users.policy';
 
 @injectable()
 export class UserService {
@@ -55,6 +56,9 @@ export class UserService {
 
     @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.PASSWORD)
     private readonly hashPasswordBeforeSavePolicy: HashPasswrodBeforeSavePolicy,
+
+    @inject(USER_MODULE.POLICY.SECURITY.ENCRYPT.USERS)
+    private readonly encryptUserListBeforeSendPolicy: EncryptUserListBeforeSendPolicy,
   ) {}
 
   async create(data: CreateUserDTO) {
@@ -74,7 +78,9 @@ export class UserService {
   }
 
   async selectAll() {
-    return await this.selectAllUser.execute();
+    return this.encryptUserListBeforeSendPolicy.execute(
+      await this.selectAllUser.execute(),
+    );
   }
 
   async selectById(data: SelectUserByIdDTO) {
