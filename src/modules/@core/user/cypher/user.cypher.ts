@@ -1,9 +1,3 @@
-import {
-  CreateUserDTO,
-  UpdateUserDTO,
-  IDeleteuserDTO,
-  SelectUserByIdDTO,
-} from '@User/DTO';
 import { IUserDTO } from '@User/DTO/user.dto';
 
 export interface IUserCypher {
