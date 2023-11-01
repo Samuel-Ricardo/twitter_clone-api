@@ -25,23 +25,13 @@ export const MiddlewareRegistry = {
       USER: Symbol('Middleware.SECURITY.AUTHORIZATION.USER'),
     },
     CRYPTOGRAPHY: {
-      USER: {
-        ENCRYPT: {
-          CREATE: Symbol(
-            'Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.CREATE',
-          ),
-          USER: Symbol.for(
-            'Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.USER',
-          ),
-        },
-        DECRYPT: {
-          CREATE: Symbol(
-            'Middleware.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE',
-          ),
-          DATA: Symbol.for(
-            'Middleware.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA',
-          ),
-        },
+      ENCRYPT: {
+        CREATE: Symbol('Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.CREATE'),
+        USER: Symbol.for('Middleware.SECURITY.CRYPTOGRAPHY.USER.ENCRYPT.USER'),
+      },
+      DECRYPT: {
+        CREATE: Symbol('Middleware.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE'),
+        DATA: Symbol.for('Middleware.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA'),
       },
     },
   },
