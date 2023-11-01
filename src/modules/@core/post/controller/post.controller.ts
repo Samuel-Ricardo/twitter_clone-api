@@ -31,7 +31,8 @@ export class PostController {
 
   async listAll() {
     const posts = await this.service.listAll();
-    return { posts: posts.map((post) => post.toStruct()) };
+    //    return { posts: posts.map((post) => post.toStruct()) };
+    return { posts };
   }
 
   async listUserPosts(author: IFindPostByAuthorIdDTO) {

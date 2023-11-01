@@ -5,6 +5,8 @@ import {
   IFindPostByIdDTO,
   IFindPostByAuthorIdDTO,
 } from '@Post/DTO';
+import { EncryptPostBeforeSendPolicy } from '@Post/policy/security/encrypt/before/post.policy';
+import { EncryptPostListBeforeSendPolicy } from '@Post/policy/security/encrypt/before/posts.policy';
 import {
   CreatePostUseCase,
   DeletePostUseCase,
@@ -31,6 +33,10 @@ export class PostService {
     private readonly detailPosts: DetailPostsUseCase,
     @inject(MODULE.POST.USE_CASE.FIND.BY.AUTHOR)
     private readonly listUserPosts: ListUserPostsUseCase,
+    @inject(MODULE.POST.POLICY.SECURITY.ENCRYPT.BEFORE.POST)
+    private readonly encrypBeforeSendPolicy: EncryptPostBeforeSendPolicy,
+    @inject(MODULE.POST.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS)
+    private readonly encryptListBeforeSendPolicy: EncryptPostListBeforeSendPolicy,
   ) {}
 
   async create(data: ICreatePostDTO) {
@@ -46,7 +52,9 @@ export class PostService {
   }
 
   async listAll() {
-    return await this.listPosts.execute();
+    return this.encryptListBeforeSendPolicy.execute(
+      (await this.listPosts.execute()).map((p) => p.toStruct()),
+    );
   }
 
   async detail(data: IFindPostByIdDTO) {
