@@ -1,4 +1,4 @@
-import { UserCypherAccess } from '@User/cypher/cypher.access';
+import { UserCypherAccess } from '../../../cypher/cypher.access';
 import { User } from '../../../user.entity';
 import { injectable } from 'inversify';
 
