@@ -16,6 +16,7 @@ import { mockEncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.
 import { mockHashPasswordBeforeSavePolicy } from './policy/security/encrypt/password.policy';
 import { mockAuthorizeAllExistingUserPolicy } from './policy/security/authorization/authorization.policy';
 import { mockAuthorizeUserAfterSelectByCredentialsPolicy } from './policy/security/authorization/after/select/by/credentials.policy';
+import { mockEncryptUserListBeforeSendPolicy } from './policy/security/encrypt/users.policy';
 
 export const UserMockModule = new Container({ autoBindInjectable: true });
 
@@ -66,6 +67,9 @@ UserMockModule.bind(
 UserMockModule.bind(
   UserMockRegistry.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY.CREDENTIALS,
 ).toDynamicValue(mockAuthorizeUserAfterSelectByCredentialsPolicy);
+
+UserMockModule.bind(UserMockRegistry.POLICY.SECURITY.ENCRYPT.USERS)
+  .toDynamicValue(mockEncryptUserListBeforeSendPolicy)
 
 UserMockModule.bind(UserMockRegistry.SERVICE.SIMULATE_DEFAULT).toDynamicValue(
   (context) => simulateUserService(context),
