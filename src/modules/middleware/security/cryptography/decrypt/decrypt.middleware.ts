@@ -7,9 +7,9 @@ export const decryptMiddleware: RequestHandler = async (req, res, next) => {
   if (req.body.encrypted)
     req.body = JSON.parse(cryptographer.decryptIV(req.body.encrypted));
 
-  Object.keys({ ...req.params }).forEach(
-    (key) => (req.params[key] = cryptographer.decryptIV(req.params[key])),
-  );
+  Object.keys({ ...req.params }).forEach((key) => {
+    req.params[key] = cryptographer.decryptIV(req.params[key]);
+  });
 
   return next();
 };
