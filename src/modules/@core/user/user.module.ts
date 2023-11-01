@@ -22,6 +22,7 @@ import { AUTH_MODULE } from '../../auth/auth.module';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from './policy/authorization/authorize/after/select/credentials.policy';
 import { AuthorizeUserUseCase } from './use-case/authorize.use-case';
 import { HashPasswrodBeforeSavePolicy } from './policy/security/encrypt/password.policy';
+import { EncryptUserListBeforeSendPolicy } from './policy/security/encrypt/users.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -91,6 +92,10 @@ Module.bind(UserRegistry.POLICY.AUTHORIZATION.AUTHORIZE.BY.CREDENTIALS).to(
 );
 Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD).to(
   HashPasswrodBeforeSavePolicy,
+);
+
+Module.bind(UserRegistry.POLICY.SECURITY.ENCRYPT.USERS).to(
+  EncryptUserListBeforeSendPolicy,
 );
 
 Module.bind(UserRegistry.VALIDATOR).to(UserValidator);
