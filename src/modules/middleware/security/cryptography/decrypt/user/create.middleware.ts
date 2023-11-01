@@ -6,13 +6,16 @@ export const decryptCreateUserDTOMiddleware: RequestHandler = (
   res,
   next,
 ) => {
-  const cypher = MODULES.CYPHER.USER();
+  //const cypher = MODULES.CYPHER.USER();
+
+  const turing = MODULES.SECURITY.CRYPTOGRAPHY.TURING();
 
   const body = req.body as { encrypted: string };
 
   if (!body.encrypted) return next(); //not encrypted or bad implemented
 
-  const user = cypher.decryptCreateUserDTO(body.encrypted);
+  //const user = cypher.decryptCreateUserDTO(body.encrypted);
+  const user = turing.decryptIV(body.encrypted);
 
   return next();
 };
