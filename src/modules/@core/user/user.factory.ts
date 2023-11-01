@@ -19,6 +19,7 @@ import { EncryptUserBeforeSendPolicy } from './policy/security/encrypt/user.poli
 import { AuthorizeAllExistingUserPolicy } from './policy/authorization/authorization.policy';
 import { AuthorizeUserUseCase } from './use-case/authorize.use-case';
 import { HashPasswrodBeforeSavePolicy } from './policy/security/encrypt/password.policy';
+import { EncryptUserListBeforeSendPolicy } from './policy/security/encrypt/users.policy';
 
 export const USER_MODULE = {
   DEFAULT: () =>
@@ -36,6 +37,10 @@ export const USER_MODULE = {
         USER: () =>
           UserModule.get<EncryptUserBeforeSendPolicy>(
             UserRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+        USERS: () =>
+          UserModule.get<EncryptUserListBeforeSendPolicy>(
+            UserRegistry.POLICY.SECURITY.ENCRYPT.USERS,
           ),
         PASSWORD: () =>
           UserModule.get<HashPasswrodBeforeSavePolicy>(
