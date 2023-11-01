@@ -10,4 +10,8 @@ export class PostCypher implements IPostCypher {
     @inject(MODULE.SECURITY.CRYPTOGRAPHY.TURING)
     protected readonly cypher: ICryptographer,
   ) {}
+
+  encryptPost(post: IPostDTO) {
+    return this.cypher.encryptIV(JSON.stringify(post));
+  }
 }
