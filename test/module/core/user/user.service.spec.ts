@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { MODULES } from '@modules';
+import { MODULES, User } from '@modules';
 
 import {
   CreateUserUseCase,
@@ -11,6 +11,7 @@ import {
 } from '@User/use-case';
 import { UserService } from '@User/service';
 import {
+  AUTHORIZED_USER,
   CREATE_USER_DATA,
   MockFactory,
   VALID_USER,
@@ -24,6 +25,7 @@ import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.
 import { UserCypher } from '@modules/cypher/user/user.cypher';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
 import { HashPasswrodBeforeSavePolicy } from '@User/policy/security/encrypt/password.policy';
+import { EncryptUserListBeforeSendPolicy } from '@User/policy/security/encrypt/users.policy';
 
 describe('[SERVICE] | USER', () => {
   MODULES.USER.USE_CASE;
@@ -41,6 +43,7 @@ describe('[SERVICE] | USER', () => {
   let encryptUserBeforeSendPolicy: DeepMockProxy<EncryptUserBeforeSendPolicy>;
   let authorizeUserAfterSelectByCredentialsPolicy: DeepMockProxy<AuthorizeUserAfterSelectByCredentialsPolicy>;
   let hashPasswrodBeforeSavePolicy: DeepMockProxy<HashPasswrodBeforeSavePolicy>;
+  let encryptUserListBeforeSendPolicy: DeepMockProxy<EncryptUserListBeforeSendPolicy>;
 
   let cypher: DeepMockProxy<UserCypher>;
 
@@ -61,6 +64,8 @@ describe('[SERVICE] | USER', () => {
       MockFactory.USER.POLICY.SECURITY.AUTHORIZATION.AFTER.SELECT.BY.CRENDENTIALS();
     hashPasswrodBeforeSavePolicy =
       MockFactory.USER.POLICY.SECURITY.ENCRYPT.PASSWORD();
+    encryptUserListBeforeSendPolicy =
+      MockFactory.USER.POLICY.SECURITY.ENCRYPT.USERS();
 
     service = new UserService(
       create,
@@ -74,6 +79,7 @@ describe('[SERVICE] | USER', () => {
       encryptUserBeforeSendPolicy,
       authorizeUserAfterSelectByCredentialsPolicy,
       hashPasswrodBeforeSavePolicy,
+      encryptUserListBeforeSendPolicy,
     );
 
     // service = MockFactory.USER.SERVICE.SIMULATE_DEFAULT();
@@ -92,51 +98,73 @@ describe('[SERVICE] | USER', () => {
 
   it('should: select - all [USER]', async () => {
     selectAll.execute.mockResolvedValue([VALID_USER]);
+    encryptUserListBeforeSendPolicy.execute.mockReturnValue('encrypted_user');
 
     const users = await service.selectAll();
 
     expect(users).toBeDefined();
-    expect(users).toEqual([VALID_USER]);
-    expect(users[0]).toStrictEqual(VALID_USER);
+    //    expect(users).toEqual([VALID_USER]);
+    //   expect(users[0]).toStrictEqual(VALID_USER);
+    expect(users).toStrictEqual('encrypted_user');
 
     expect(selectAll.execute).toHaveBeenCalledTimes(1);
     expect(selectAll.execute).toHaveBeenCalledWith();
+
+    expect(encryptUserListBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserListBeforeSendPolicy.execute).toHaveBeenCalledWith([
+      VALID_USER,
+    ]);
   });
 
   it('should: select - by id [USER]', async () => {
     selectById.execute.mockResolvedValue(VALID_USER);
+    encryptUserBeforeSendPolicy.execute.mockReturnValue('encrypted_user');
 
     const user = await service.selectById({ id: VALID_USER.id });
 
     expect(user).toBeDefined();
-    expect(user).toStrictEqual(VALID_USER);
+    //  expect(user).toStrictEqual(VALID_USER);
+    expect(user).toStrictEqual('encrypted_user');
+
     expect(selectById.execute).toHaveBeenCalledTimes(1);
     expect(selectById.execute).toHaveBeenCalledWith({ id: VALID_USER.id });
+
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
+      VALID_USER,
+    );
   });
 
   it('should: select - by email [USER]', async () => {
     selectByEmail.execute.mockResolvedValue(VALID_USER);
+    encryptUserBeforeSendPolicy.execute.mockReturnValue('encrypted_user');
 
     const user = await service.selectByEmail({
       email: VALID_USER.email,
     });
 
     expect(user).toBeDefined();
-    expect(user).toStrictEqual(VALID_USER);
+    //    expect(user).toStrictEqual(VALID_USER);
+    expect(user).toStrictEqual('encrypted_user');
 
     expect(selectByEmail.execute).toHaveBeenCalledTimes(1);
     expect(selectByEmail.execute).toHaveBeenCalledWith({
       email: VALID_USER.email,
     });
+
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
+      VALID_USER,
+    );
   });
 
   it('should: select - by [credentials] => [USER]', async () => {
     selectByCredentials.execute.mockResolvedValue(VALID_USER);
     validatePasword.execute.mockReturnValue(true);
-    authorizeUserAfterSelectByCredentialsPolicy.execute.mockResolvedValue({
-      ...VALID_USER,
-      sessionToken: 'session_token',
-    });
+    authorizeUserAfterSelectByCredentialsPolicy.execute.mockResolvedValue(
+      AUTHORIZED_USER,
+    );
+    encryptUserBeforeSendPolicy.execute.mockReturnValue('session_token');
 
     const user = await service.selectByCredentials({
       email: VALID_USER.email,
@@ -144,10 +172,13 @@ describe('[SERVICE] | USER', () => {
     });
 
     expect(user).toBeDefined();
+    /*
     expect(user).toStrictEqual({
       ...VALID_USER,
       sessionToken: 'session_token',
     });
+*/
+    expect(user).toEqual('session_token');
 
     expect(selectByCredentials.execute).toHaveBeenCalledTimes(1);
     expect(selectByCredentials.execute).toHaveBeenCalledWith({
@@ -159,7 +190,7 @@ describe('[SERVICE] | USER', () => {
     expect(validatePasword.execute).toHaveBeenCalledWith({
       password: {
         expected: VALID_USER.password,
-        given: VALID_USER.password,
+        given: 'hashed_password',
       },
     });
 
@@ -170,7 +201,12 @@ describe('[SERVICE] | USER', () => {
       authorizeUserAfterSelectByCredentialsPolicy.execute,
     ).toHaveBeenCalledWith(VALID_USER.id);
 
-    expect(user?.sessionToken).toEqual('session_token');
+    //    expect(user?.sessionToken).toEqual('session_token');
+
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
+      AUTHORIZED_USER,
+    );
   });
 
   it('should: create [USER]', async () => {
@@ -199,10 +235,10 @@ describe('[SERVICE] | USER', () => {
   });
 
   it('should: update [USER]', async () => {
-    const UPDATED_USER = {
-      ...VALID_USER,
+    const UPDATED_USER = User.create({
+      ...VALID_USER_DATA,
       name: 'updated name',
-    };
+    });
 
     const UPDATED_USER_DATA = {
       ...VALID_USER_DATA,
@@ -211,11 +247,19 @@ describe('[SERVICE] | USER', () => {
 
     update.execute.mockResolvedValue(UPDATED_USER);
 
+    encryptUserBeforeSendPolicy.execute.mockReturnValue('encrpted_data');
+
     const user = await service.update(UPDATED_USER_DATA);
 
     expect(user).toBeDefined();
-    expect(user).toStrictEqual(UPDATED_USER);
+    //    expect(user).toStrictEqual(UPDATED_USER);
+
     expect(update.execute).toHaveBeenCalledTimes(1);
     expect(update.execute).toHaveBeenCalledWith(UPDATED_USER_DATA);
+
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledTimes(1);
+    expect(encryptUserBeforeSendPolicy.execute).toHaveBeenCalledWith(
+      UPDATED_USER,
+    );
   });
 });
