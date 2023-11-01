@@ -47,17 +47,15 @@ export const MiddlewareFactory = {
   },
   SECURITY: {
     CRYPTOGRAPHY: {
-      USER: {
-        DECRYPT: {
-          CREATE: () =>
-            MiddlewareModule.get<RequestHandler>(
-              MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE,
-            ),
-          DATA: () =>
-            MiddlewareModule.get<RequestHandler>(
-              MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA,
-            ),
-        },
+      DECRYPT: {
+        CREATE: () =>
+          MiddlewareModule.get<RequestHandler>(
+            MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.CREATE,
+          ),
+        DATA: () =>
+          MiddlewareModule.get<RequestHandler>(
+            MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.DATA,
+          ),
       },
     },
   },
