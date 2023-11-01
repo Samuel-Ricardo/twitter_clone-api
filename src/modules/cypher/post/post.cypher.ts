@@ -14,4 +14,8 @@ export class PostCypher implements IPostCypher {
   encryptPost(post: IPostDTO) {
     return this.cypher.encryptIV(JSON.stringify(post));
   }
+
+  decryptPost(post: string) {
+    return JSON.parse(this.cypher.decryptIV(post));
+  }
 }
