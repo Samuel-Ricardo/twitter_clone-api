@@ -16,6 +16,7 @@ import { EncryptUserBeforeSendPolicy } from '@User/policy/security/encrypt/user.
 import { HashPasswrodBeforeSavePolicy } from '@User/policy/security/encrypt/password.policy';
 import { AuthorizeAllExistingUserPolicy } from '@User/policy/authorization/authorization.policy';
 import { AuthorizeUserAfterSelectByCredentialsPolicy } from '@User/policy/authorization/authorize/after/select/credentials.policy';
+import { EncryptUserListBeforeSendPolicy } from '@User/policy/security/encrypt/users.policy';
 
 export const UserMockFactory = {
   SERVICE: {
@@ -36,6 +37,10 @@ export const UserMockFactory = {
         USER: () =>
           UserMockModule.get<DeepMockProxy<EncryptUserBeforeSendPolicy>>(
             UserMockRegistry.POLICY.SECURITY.ENCRYPT.USER,
+          ),
+        USERS: () =>
+          UserMockModule.get<DeepMockProxy<EncryptUserListBeforeSendPolicy>>(
+            UserMockRegistry.POLICY.SECURITY.ENCRYPT.USERS,
           ),
         PASSWORD: () =>
           UserMockModule.get<DeepMockProxy<HashPasswrodBeforeSavePolicy>>(
