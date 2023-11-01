@@ -10,6 +10,9 @@ import { DetailPostsUseCase } from './use-case/post_details.use-case';
 import { ListUserPostsUseCase } from './use-case/list_user_posts';
 import { PostService } from './service/post.service';
 import { PostController } from './controller/post.controller';
+import { EncryptPostBeforeSendPolicy } from './policy/security/encrypt/before/post.policy';
+import { EncryptPostListBeforeSendPolicy } from './policy/security/encrypt/before/posts.policy';
+import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -20,7 +23,18 @@ Module.bind(PostRegistry.USE_CASE.FIND.ALL).to(ListPostsUseCase);
 Module.bind(PostRegistry.USE_CASE.FIND.BY.AUTHOR).to(ListUserPostsUseCase);
 Module.bind(PostRegistry.USE_CASE.FIND.BY.ID).to(DetailPostsUseCase);
 
+Module.bind(PostRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POST).to(
+  EncryptPostBeforeSendPolicy,
+);
+Module.bind(PostRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS).to(
+  EncryptPostListBeforeSendPolicy,
+);
+
 Module.bind(PostRegistry.SERVICE.DEFAULT).to(PostService);
 Module.bind(PostRegistry.CONTROLLER.DEFAULT).to(PostController);
 
-export const PostModule = Container.merge(Module, RepositoryModule);
+export const PostModule = Container.merge(
+  Module,
+  RepositoryModule,
+  CYPHER_MODULE,
+);
