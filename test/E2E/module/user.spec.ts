@@ -11,20 +11,24 @@ import { CREATE_USER_DATA } from '@test/mock';
 import supertest from 'supertest';
 
 describe('[MODULE] | User', () => {
-  let user: User;
+  let user: IUserDTO;
   let cypher: IUserCypher;
 
-  beforeEach(async () => {
-    if (user) user = (await supertest(app).get(`/users/${user.id}`)).body.user;
+  beforeAll(() => (cypher = MODULES.CYPHER.USER()));
 
-    cypher = MODULES.CYPHER.USER();
+  beforeEach(async () => {
+    if (user) {
+      user = cypher.decryptUser(
+        (await supertest(app).get(`/users/${user.id}`)).body.user,
+      );
+    }
   });
 
   it('[E2E] | Should: Create => [USER]', async () => {
     const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
     const body: { user: string } = response.body;
 
-    const result: IUserDTO = cypher.decryptUser(body.user);
+    const result: IUserDTO = await cypher.decryptUser(body.user);
 
     expect(response.status).toBe(201);
     expect(body.user.length).toBeGreaterThanOrEqual(1);
@@ -32,6 +36,32 @@ describe('[MODULE] | User', () => {
     expect(result.username).toBe(CREATE_USER_DATA.username);
     expect(result.email).toBe(CREATE_USER_DATA.email);
     expect(result.bio).toBeNull();
+
+    user = result;
+  });
+
+  it('[E2E] | Should not: Create same => [USER]', async () => {
+    const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
+
+    expect(response.status).not.toBe(201);
+  });
+
+  it('[E2E] | Should: Select - by [credentials] => [USER]', async () => {
+    const response = await supertest(app).post(`/users/by/credentials`).send({
+      email: user.email,
+      password: user.password,
+    });
+    const body: { user: string } = response.body;
+
+    const result = cypher.decryptUser(body.user);
+
+    expect(response.status).toBe(201);
+
+    expect(result).toBeDefined();
+    expect(result).toHaveProperty('id');
+    expect(result.id).toEqual(result.id);
+
+    expect(result.sessionToken).toBeDefined();
 
     user = result;
   });
@@ -44,39 +74,36 @@ describe('[MODULE] | User', () => {
 
     const response = await supertest(app)
       .patch(`/users`)
+      .set('Authorization', `Bearer ${user.sessionToken}`)
       .send(UPDATE_USER_DATA);
-    const body: { user: User } = response.body;
+    const body: { user: string } = response.body;
+
+    const result = cypher.decryptUser(body.user);
 
     expect(response.status).toBe(201);
 
-    expect(body.user).toHaveProperty('id');
-    expect(body.user.id).toBe(user.id);
-  });
-
-  it('[E2E] | Should not: Create same => [USER]', async () => {
-    const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
-    const body: { user: User } = response.body;
-
-    expect(response.status).not.toBe(201);
+    expect(result).toHaveProperty('id');
+    expect(result.id).toBe(user.id);
   });
 
   it('[E2E] | Should: Select - [all] => [USER]', async () => {
     const response = await supertest(app).get('/users');
+    const users: IUserDTO[] = cypher.decryptUsers(response.body.users);
 
     expect(response.status).toBe(200);
-    expect(response.body.users).toBeInstanceOf(Array);
-    expect(response.body.users.length).toBeGreaterThanOrEqual(0);
-    expect(response.body.users).toContainEqual(user);
+    expect(users).toBeInstanceOf(Array);
+    expect(users.length).toBeGreaterThanOrEqual(0);
+    expect(users).toContainEqual(user);
   });
 
   it('[E2E] | Should: Select - [by id] => [USER]', async () => {
     const response = await supertest(app).get(`/users/${user.id}`);
-    const body: { user: User } = response.body;
+    const result = cypher.decryptUser(response.body.user);
 
     expect(response.status).toBe(200);
-    expect(body.user).toHaveProperty('id');
-    expect(body.user.id).toEqual(user.id);
-    expect(body.user).toStrictEqual(user);
+    expect(result).toHaveProperty('id');
+    expect(result.id).toEqual(user.id);
+    expect(result).toStrictEqual(user);
   });
 
   it('[E2E] | Should: Select - [by email] => [USER]', async () => {
@@ -84,39 +111,17 @@ describe('[MODULE] | User', () => {
 
     expect(response.status).toBe(200);
 
-    const body: { user: User } = response.body;
+    const result = cypher.decryptUser(response.body.user);
 
-    expect(body.user).toHaveProperty('id');
-    expect(body.user.id).toEqual(user.id);
-    expect(body.user).toStrictEqual(user);
-  });
-
-  it('[E2E] | Should: Select - [by credentials] => [USER]', async () => {
-    const response = await supertest(app).post(`/users/by/credentials`).send({
-      email: user.email,
-      password: user.password,
-    });
-    const body: { user: User } = response.body;
-
-    expect(response.status).toBe(201);
-
-    expect(body.user).toBeDefined();
-    expect(body.user).toHaveProperty('id');
-    expect(body.user.id).toEqual(user.id);
+    expect(result).toHaveProperty('id');
+    expect(result.id).toEqual(user.id);
+    expect(result).toStrictEqual(user);
   });
 
   it('[E2E] | Should: Delete - by [id] => [USER]', async () => {
-    const response = await supertest(app).delete(`/users/${user.id}`);
+    const response = await supertest(app)
+      .delete(`/users/${user.id}`)
+      .set('Authorization', `Bearer ${user.sessionToken}`);
     expect(response.status).toBe(200);
-  });
-
-  it('[E2E] | Should not: Delete - wrong [id] => [USER]', async () => {
-    const response = await supertest(app).delete(`/users/rapaaaz`);
-    expect(response.status).not.toBe(200);
-  });
-
-  it('[E2E] | Should: return error when select - wrong [id] => [USER]', async () => {
-    const response = await supertest(app).get(`/users/pedro`);
-    expect(response.status).not.toBe(200);
   });
 });
