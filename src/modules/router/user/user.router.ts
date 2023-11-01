@@ -15,7 +15,6 @@ user_routes.get(prefix, async (req, res, next) => {
 
 user_routes.post(
   prefix,
-  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.CREATE(),
   async (req, res, next) => {
     try {
