@@ -1,9 +1,3 @@
-import {
-  CreateUserDTO,
-  IDeleteuserDTO,
-  SelectUserByIdDTO,
-  UpdateUserDTO,
-} from '@User';
 import { IUserDTO } from '@User/DTO/user.dto';
 import { IUserCypher } from '@User/cypher/user.cypher';
 import { MODULE } from '@modules/app.registry';
