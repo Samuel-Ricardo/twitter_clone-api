@@ -24,6 +24,14 @@ export const VALID_USER_DATA: UpdateUserDTO = {
 
 export const VALID_USER = User.create(VALID_USER_DATA);
 
+export const AUTHORIZED_USER_DATA = {
+  ...VALID_USER_DATA,
+  password: 'hashed_password',
+  sessionToken: 'session_token',
+};
+
+export const AUTHORIZED_USER = User.create(AUTHORIZED_USER_DATA);
+
 export const generateValidUser = () =>
   User.create({
     id: randomID(),
