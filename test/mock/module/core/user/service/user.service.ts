@@ -19,6 +19,7 @@ export const simulateUserService = (context: interfaces.Context) =>
         .CREDENTIALS,
     ),
     context.container.get(UserMockRegistry.POLICY.SECURITY.ENCRYPT.PASSWORD),
+    context.container.get(UserMockRegistry.POLICY.SECURITY.ENCRYPT.USERS),
   );
 
 export const mockUserService = () => mockDeep<UserService>();
