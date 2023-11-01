@@ -39,11 +39,11 @@ Module.bind(MiddlewareRegistry.VALIDATOR.USER.SELECT.BY.ID).toConstantValue(
 );
 
 Module.bind(
-  MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.CREATE,
+  MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.CREATE,
 ).toConstantValue(decryptCreateUserDTOMiddleware);
 
 Module.bind(
-  MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.USER.DECRYPT.DATA,
+  MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.DATA,
 ).toConstantValue(decryptMiddleware);
 
 Module.bind(MiddlewareRegistry.SECURITY.AUTHORIZATION.USER).toConstantValue(
