@@ -1,5 +1,5 @@
 import { ISimulatePostService } from '@test/@types';
-import { MockFactory, VALID_USER } from '@test/mock';
+import { ENCRYPTED, MockFactory, VALID_USER } from '@test/mock';
 import {
   CREATE_POST_DATA,
   UPDATE_POST_DATA,
@@ -28,12 +28,23 @@ describe('[SERVICE] | POST', () => {
 
   it('[UNIT] | Should: create => [POST]', async () => {
     module.create.execute.mockResolvedValue(VALID_POST);
+    module.policy.security.encrypt.before.post.execute.mockReturnValue(
+      ENCRYPTED,
+    );
 
     const result = await module.service.create(CREATE_POST_DATA);
 
-    expect(result).toEqual(VALID_POST);
+    expect(result).toEqual(ENCRYPTED);
+
     expect(module.create.execute).toBeCalledTimes(1);
     expect(module.create.execute).toHaveBeenCalledWith(CREATE_POST_DATA);
+
+    expect(module.policy.security.encrypt.before.post.execute).toBeCalledTimes(
+      1,
+    );
+    expect(
+      module.policy.security.encrypt.before.post.execute,
+    ).toHaveBeenCalledWith(VALID_POST);
   });
 
   it('[UNIT] | Should: update => [POST]', async () => {
