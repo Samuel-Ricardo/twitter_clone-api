@@ -2,14 +2,26 @@ import { MODULES } from '@modules/app.factory';
 import { RequestHandler } from 'express';
 
 export const decryptMiddleware: RequestHandler = async (req, res, next) => {
-  const cryptographer = MODULES.SECURITY.CRYPTOGRAPHY.TURING();
+  try {
+    const cryptographer = MODULES.SECURITY.CRYPTOGRAPHY.TURING();
 
-  if (req.body.encrypted)
-    req.body = JSON.parse(cryptographer.decryptIV(req.body.encrypted));
+    const { encrypted } = req.body;
 
-  Object.keys({ ...req.params }).forEach((key) => {
-    req.params[key] = cryptographer.decryptIV(req.params[key]);
-  });
+    if (req.body.encrypted)
+      req.body = JSON.parse(cryptographer.decryptIV(req.body.encrypted));
 
-  return next();
+    Object.keys({ ...req.params }).forEach((key) => {
+      req.params[key] = cryptographer.decryptIV(req.params[key]);
+    });
+
+    req.body.encrypted &&
+      console.log({
+        encrypted,
+        decrypted: JSON.parse(cryptographer.decryptIV(encrypted)),
+      });
+
+    return next();
+  } catch (e) {
+    return next();
+  }
 };
