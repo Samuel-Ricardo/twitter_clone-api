@@ -13,6 +13,8 @@ import { ISimulatePostService } from '@test/@types/simulate/post.service';
 import { ISimulatePostController } from '@test/@types/simulate';
 import { PostMockRegistry } from './post.registry';
 import { PostMockModule } from './post.module';
+import { EncryptPostBeforeSendPolicy } from '@Post/policy/security/encrypt/before/post.policy';
+import { EncryptPostListBeforeSendPolicy } from '@Post/policy/security/encrypt/before/posts.policy';
 
 export const PostMockFactory = {
   SERVICE: {
@@ -37,6 +39,22 @@ export const PostMockFactory = {
         PostMockModule.get<ISimulatePostController>(
           PostMockRegistry.CONTROLLER.DEFAULT.SIMULATE,
         ),
+    },
+  },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          POST: () =>
+            PostMockModule.get<DeepMockProxy<EncryptPostBeforeSendPolicy>>(
+              PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POST,
+            ),
+          POSTS: () =>
+            PostMockModule.get<DeepMockProxy<EncryptPostListBeforeSendPolicy>>(
+              PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS,
+            ),
+        },
+      },
     },
   },
   USE_CASE: {
