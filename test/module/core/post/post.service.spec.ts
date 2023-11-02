@@ -1,5 +1,5 @@
 import { ISimulatePostService } from '@test/@types';
-import { ENCRYPTED, MockFactory, VALID_USER } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory, VALID_USER } from '@test/mock';
 import {
   CREATE_POST_DATA,
   UPDATE_POST_DATA,
@@ -19,12 +19,12 @@ describe('[SERVICE] | POST', () => {
   it('[UNIT] | Should: list [all] => [POST]', async () => {
     module.list.execute.mockResolvedValue([VALID_POST]);
     module.policy.security.encrypt.before.posts.execute.mockReturnValue(
-      ENCRYPTED,
+      ENCRYPTED_DATA,
     );
 
     const result = await module.service.listAll();
 
-    expect(result).toEqual(ENCRYPTED);
+    expect(result).toEqual(ENCRYPTED_DATA);
 
     expect(module.list.execute).toBeCalledTimes(1);
     expect(module.list.execute).toHaveBeenCalledWith();
@@ -40,12 +40,12 @@ describe('[SERVICE] | POST', () => {
   it('[UNIT] | Should: create => [POST]', async () => {
     module.create.execute.mockResolvedValue(VALID_POST);
     module.policy.security.encrypt.before.post.execute.mockReturnValue(
-      ENCRYPTED,
+      ENCRYPTED_DATA,
     );
 
     const result = await module.service.create(CREATE_POST_DATA);
 
-    expect(result).toEqual(ENCRYPTED);
+    expect(result).toEqual(ENCRYPTED_DATA);
 
     expect(module.create.execute).toBeCalledTimes(1);
     expect(module.create.execute).toHaveBeenCalledWith(CREATE_POST_DATA);
@@ -61,12 +61,12 @@ describe('[SERVICE] | POST', () => {
   it('[UNIT] | Should: update => [POST]', async () => {
     module.update.execute.mockResolvedValue(VALID_UPDATED_POST);
     module.policy.security.encrypt.before.post.execute.mockReturnValue(
-      ENCRYPTED,
+      ENCRYPTED_DATA,
     );
 
     const result = await module.service.update(UPDATE_POST_DATA);
 
-    expect(result).toEqual(ENCRYPTED);
+    expect(result).toEqual(ENCRYPTED_DATA);
 
     expect(module.update.execute).toBeCalledTimes(1);
     expect(module.update.execute).toHaveBeenCalledWith(UPDATE_POST_DATA);
@@ -98,12 +98,12 @@ describe('[SERVICE] | POST', () => {
   it('[UNIT] | Should: detail => [POST]', async () => {
     module.detail.execute.mockResolvedValue(VALID_POST);
     module.policy.security.encrypt.before.post.execute.mockReturnValue(
-      ENCRYPTED,
+      ENCRYPTED_DATA,
     );
 
     const result = await module.service.detail({ id: VALID_POST.id });
 
-    expect(result).toEqual(ENCRYPTED);
+    expect(result).toEqual(ENCRYPTED_DATA);
 
     expect(module.detail.execute).toBeCalledTimes(1);
     expect(module.detail.execute).toHaveBeenCalledWith({ id: VALID_POST.id });
@@ -119,14 +119,14 @@ describe('[SERVICE] | POST', () => {
   it('[UNIT] | Should: list [user] posts => [POST]', async () => {
     module.listUserPosts.execute.mockResolvedValue([VALID_POST]);
     module.policy.security.encrypt.before.posts.execute.mockReturnValue(
-      ENCRYPTED,
+      ENCRYPTED_DATA,
     );
 
     const result = await module.service.listPostsFromUser({
       id: VALID_POST.authorId,
     });
 
-    expect(result).toEqual(ENCRYPTED);
+    expect(result).toEqual(ENCRYPTED_DATA);
 
     expect(module.listUserPosts.execute).toBeCalledTimes(1);
     expect(module.listUserPosts.execute).toHaveBeenCalledWith({
