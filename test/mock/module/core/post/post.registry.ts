@@ -11,6 +11,16 @@ export const PostMockRegistry = {
       SIMULATE: Symbol('POST.CONTROLLER.SIMULATE'),
     },
   },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          POST: Symbol.for('POST.POLICY.SECURITY.ENCRYPT.BEFORE.POST'),
+          POSTS: Symbol.for('POST.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS'),
+        },
+      },
+    },
+  },
   USE_CASE: {
     CREATE: Symbol('POST.USE_CASE.CREATE'),
     UPDATE: Symbol('POST.USE_CASE.UPDATE'),
