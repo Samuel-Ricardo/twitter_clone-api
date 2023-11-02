@@ -17,12 +17,11 @@ export class PostController {
   ) {}
 
   async create(post: ICreatePostDTO) {
-    return { post: (await this.service.create(post)).toStruct() };
+    return { post: await this.service.create(post) };
   }
 
   async update(post: IUpdatePostDTO) {
-    const result = await this.service.update(post);
-    return { post: result.toStruct() };
+    return { post: await this.service.update(post) };
   }
 
   async delete(post: IDeletePostDTO) {
@@ -36,14 +35,10 @@ export class PostController {
   }
 
   async listUserPosts(author: IFindPostByAuthorIdDTO) {
-    return {
-      posts: (await this.service.listPostsFromUser(author)).map((post) =>
-        post.toStruct(),
-      ),
-    };
+    return { posts: await this.service.listPostsFromUser(author) };
   }
 
   async details(post: IFindPostByIdDTO) {
-    return { post: (await this.service.detail(post)).toStruct() };
+    return { post: await this.service.detail(post) };
   }
 }
