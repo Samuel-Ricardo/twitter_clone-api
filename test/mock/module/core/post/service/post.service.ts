@@ -36,6 +36,19 @@ export const simulatePostService = ({
     PostMockRegistry.USE_CASE.FIND.BY.AUTHOR,
   );
 
+  const security = {
+    encrypt: {
+      before: {
+        post: container.get<any>(
+          PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POST,
+        ),
+        posts: container.get<any>(
+          PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS,
+        ),
+      },
+    },
+  };
+
   const service = new PostService(
     create,
     update,
@@ -43,7 +56,18 @@ export const simulatePostService = ({
     list,
     detail,
     listUserPosts,
+    security.encrypt.before.post,
+    security.encrypt.before.posts,
   );
 
-  return { service, create, update, deletePost, list, detail, listUserPosts };
+  return {
+    service,
+    create,
+    update,
+    deletePost,
+    list,
+    detail,
+    listUserPosts,
+    policy: { security },
+  };
 };
