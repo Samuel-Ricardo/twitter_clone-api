@@ -1,3 +1,5 @@
+import { EncryptPostBeforeSendPolicy } from '@Post/policy/security/encrypt/before/post.policy';
+import { EncryptPostListBeforeSendPolicy } from '@Post/policy/security/encrypt/before/posts.policy';
 import { PostService } from '@Post/service/post.service';
 import {
   CreatePostUseCase,
@@ -17,4 +19,14 @@ export interface ISimulatePostService {
   listUserPosts: DeepMockProxy<ListUserPostsUseCase>;
   list: DeepMockProxy<ListPostsUseCase>;
   detail: DeepMockProxy<DetailPostsUseCase>;
+  policy: {
+    security: {
+      encrypt: {
+        before: {
+          post: DeepMockProxy<EncryptPostBeforeSendPolicy>;
+          posts: DeepMockProxy<EncryptPostListBeforeSendPolicy>;
+        };
+      };
+    };
+  };
 }
