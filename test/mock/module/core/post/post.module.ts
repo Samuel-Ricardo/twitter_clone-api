@@ -13,6 +13,8 @@ import {
   mockPostController,
   simulatePostController,
 } from './controller/post.controller';
+import { mockEncryptPostBeforeSendPolicy } from './policy/security/encrypt/before/post.policy';
+import { mockEncryptPostListBeforeSendPolicy } from './policy/security/encrypt/before/posts.policy';
 
 export const PostMockModule = new Container({ autoBindInjectable: true });
 
@@ -34,6 +36,14 @@ PostMockModule.bind(PostMockRegistry.USE_CASE.FIND.BY.ID).toDynamicValue(
 PostMockModule.bind(PostMockRegistry.USE_CASE.FIND.BY.AUTHOR).toDynamicValue(
   mockListUserPostsUseCase,
 );
+
+PostMockModule.bind(
+  PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POST,
+).toDynamicValue(mockEncryptPostBeforeSendPolicy);
+
+PostMockModule.bind(
+  PostMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.POSTS,
+).toDynamicValue(mockEncryptPostListBeforeSendPolicy);
 
 PostMockModule.bind(PostMockRegistry.SERVICE.DEFAULT.MOCK).toDynamicValue(
   mockPostService,
