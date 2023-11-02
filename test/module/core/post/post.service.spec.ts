@@ -18,12 +18,23 @@ describe('[SERVICE] | POST', () => {
 
   it('[UNIT] | Should: list [all] => [POST]', async () => {
     module.list.execute.mockResolvedValue([VALID_POST]);
+    module.policy.security.encrypt.before.posts.execute.mockReturnValue(
+      ENCRYPTED,
+    );
 
     const result = await module.service.listAll();
 
-    expect(result).toEqual([VALID_POST]);
+    expect(result).toEqual(ENCRYPTED);
+
     expect(module.list.execute).toBeCalledTimes(1);
     expect(module.list.execute).toHaveBeenCalledWith();
+
+    expect(module.policy.security.encrypt.before.posts.execute).toBeCalledTimes(
+      1,
+    );
+    expect(
+      module.policy.security.encrypt.before.posts.execute,
+    ).toHaveBeenCalledWith([VALID_POST]);
   });
 
   it('[UNIT] | Should: create => [POST]', async () => {
