@@ -60,15 +60,28 @@ describe('[SERVICE] | POST', () => {
 
   it('[UNIT] | Should: update => [POST]', async () => {
     module.update.execute.mockResolvedValue(VALID_UPDATED_POST);
+    module.policy.security.encrypt.before.post.execute.mockReturnValue(
+      ENCRYPTED,
+    );
 
     const result = await module.service.update(UPDATE_POST_DATA);
 
-    expect(result).toEqual(VALID_UPDATED_POST);
+    expect(result).toEqual(ENCRYPTED);
+
     expect(module.update.execute).toBeCalledTimes(1);
     expect(module.update.execute).toHaveBeenCalledWith(UPDATE_POST_DATA);
 
-    expect(result.id).toEqual(VALID_POST.id);
-    expect(result.body).not.toEqual(VALID_POST.body);
+    //    expect(result.id).toEqual(VALID_POST.id);
+    //    expect(result.body).not.toEqual(VALID_POST.body);
+    expect(module.policy.security.encrypt.before.post.execute).toBeCalledTimes(
+      1,
+    );
+    expect(
+      module.policy.security.encrypt.before.post.execute,
+    ).not.toHaveBeenCalledWith(VALID_POST);
+    expect(
+      module.policy.security.encrypt.before.post.execute,
+    ).toHaveBeenCalledWith(VALID_UPDATED_POST);
   });
 
   it('[UNIT] | Should: delete => [POST]', async () => {
@@ -84,12 +97,23 @@ describe('[SERVICE] | POST', () => {
 
   it('[UNIT] | Should: detail => [POST]', async () => {
     module.detail.execute.mockResolvedValue(VALID_POST);
+    module.policy.security.encrypt.before.post.execute.mockReturnValue(
+      ENCRYPTED,
+    );
 
     const result = await module.service.detail({ id: VALID_POST.id });
 
-    expect(result).toEqual(VALID_POST);
+    expect(result).toEqual(ENCRYPTED);
+
     expect(module.detail.execute).toBeCalledTimes(1);
     expect(module.detail.execute).toHaveBeenCalledWith({ id: VALID_POST.id });
+
+    expect(module.policy.security.encrypt.before.post.execute).toBeCalledTimes(
+      1,
+    );
+    expect(
+      module.policy.security.encrypt.before.post.execute,
+    ).toHaveBeenCalledWith(VALID_POST);
   });
 
   it('[UNIT] | Should: list [user] posts => [POST]', async () => {
