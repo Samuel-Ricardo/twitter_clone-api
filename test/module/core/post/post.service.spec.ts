@@ -118,16 +118,28 @@ describe('[SERVICE] | POST', () => {
 
   it('[UNIT] | Should: list [user] posts => [POST]', async () => {
     module.listUserPosts.execute.mockResolvedValue([VALID_POST]);
+    module.policy.security.encrypt.before.posts.execute.mockReturnValue(
+      ENCRYPTED,
+    );
 
     const result = await module.service.listPostsFromUser({
       id: VALID_POST.authorId,
     });
 
-    expect(result).toEqual([VALID_POST]);
+    expect(result).toEqual(ENCRYPTED);
+
     expect(module.listUserPosts.execute).toBeCalledTimes(1);
     expect(module.listUserPosts.execute).toHaveBeenCalledWith({
       id: VALID_POST.authorId,
     });
-    expect(result[0].authorId).toEqual(VALID_USER.id);
+
+    //expect(result[0].authorId).toEqual(VALID_USER.id);
+
+    expect(module.policy.security.encrypt.before.posts.execute).toBeCalledTimes(
+      1,
+    );
+    expect(
+      module.policy.security.encrypt.before.posts.execute,
+    ).toHaveBeenCalledWith([VALID_POST]);
   });
 });
