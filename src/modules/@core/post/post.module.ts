@@ -12,7 +12,7 @@ import { PostService } from './service/post.service';
 import { PostController } from './controller/post.controller';
 import { EncryptPostBeforeSendPolicy } from './policy/security/encrypt/before/post.policy';
 import { EncryptPostListBeforeSendPolicy } from './policy/security/encrypt/before/posts.policy';
-import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
+import { CYPHER_MODULE } from '../../cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
