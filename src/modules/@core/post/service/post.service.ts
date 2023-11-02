@@ -40,11 +40,13 @@ export class PostService {
   ) {}
 
   async create(data: ICreatePostDTO) {
-    return await this.createPost.execute(data);
+    const post = await this.createPost.execute(data);
+    return this.encrypBeforeSendPolicy.execute(post);
   }
 
   async update(data: IUpdatePostDTO) {
-    return await this.updatePost.execute(data);
+    const post = await this.updatePost.execute(data);
+    return this.encrypBeforeSendPolicy.execute(post);
   }
 
   async delete(data: IDeletePostDTO) {
@@ -53,15 +55,18 @@ export class PostService {
 
   async listAll() {
     return this.encryptListBeforeSendPolicy.execute(
-      (await this.listPosts.execute()).map((p) => p.toStruct()),
+      await this.listPosts.execute(),
     );
   }
 
   async detail(data: IFindPostByIdDTO) {
-    return await this.detailPosts.execute(data);
+    return this.encrypBeforeSendPolicy.execute(
+      await this.detailPosts.execute(data),
+    );
   }
 
   async listPostsFromUser(data: IFindPostByAuthorIdDTO) {
-    return await this.listUserPosts.execute(data);
+    const posts = await this.listUserPosts.execute(data);
+    return this.encryptListBeforeSendPolicy.execute(posts);
   }
 }
