@@ -33,13 +33,19 @@ user_routes.post(`${prefix}/by/credentials`, async (req, res, next) => {
   }
 });
 
-user_routes.get(`${prefix}/email/:email`, async (req, res, next) => {
-  try {
-    res.status(200).json(await USER.selectByEmail({ email: req.params.email }));
-  } catch (e) {
-    next(e);
-  }
-});
+user_routes.get(
+  `${prefix}/email/:email`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
+  async (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(await USER.selectByEmail({ email: req.params.email }));
+    } catch (e) {
+      next(e);
+    }
+  },
+);
 
 user_routes.patch(
   prefix,
@@ -60,6 +66,7 @@ user_routes.delete(
   `${prefix}/:id`,
 
   MODULES.MIDDLEWARE.AUTHORIZATION.USER(),
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.DELETE(),
 
   async (req, res, next) => {
@@ -74,6 +81,7 @@ user_routes.delete(
 user_routes.get(
   `${prefix}/:id`,
 
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   MODULES.MIDDLEWARE.VALIDATOR.USER.SELECT.BY.ID(),
 
   async (req, res, next) => {
