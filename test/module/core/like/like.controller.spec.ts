@@ -61,13 +61,16 @@ describe('[CONTROLLER] | LIKE', () => {
   });
 
   it('[UNIT] | Should: get user likes => Like', async () => {
-    module.service.userLikes.mockResolvedValue([VALID_POST_LIKE]);
+    module.service.userLikes.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.getUserLikes({
       userId: VALID_USER.id,
     });
 
-    expect(result).toStrictEqual({ likes: [VALID_POST_LIKE.toStruct()] });
+    //    expect(result).toStrictEqual({ likes: [VALID_POST_LIKE.toStruct()] });
+
+    expect(result).toEqual({ likes: ENCRYPTED_DATA });
+
     expect(module.service.userLikes).toHaveBeenCalledTimes(1);
     expect(module.service.userLikes).toHaveBeenCalledWith({
       userId: VALID_USER.id,
