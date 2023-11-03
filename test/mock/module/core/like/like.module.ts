@@ -10,6 +10,8 @@ import {
 import { mockLikeService, simulateLikeService } from './service/like.service';
 import { mockLikeController, simulateLikeController } from './controller';
 import { mockEmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
+import { mockEncryptLikeBeforeSendPolicy } from './policy/security/encrypt/before/like.policy';
+import { mockEncryptLikeListBeforeSendPolicy } from './policy/security/encrypt/before/likes.policy';
 
 export const MockLikeModule = new Container({ autoBindInjectable: true });
 
@@ -31,6 +33,14 @@ MockLikeModule.bind(MockLikeRegistry.USE_CASE.GET.BY.COMMENT).toDynamicValue(
 MockLikeModule.bind(MockLikeRegistry.USE_CASE.EVENTS.CREATE).toDynamicValue(
   mockEmitCreateLikeEventUseCase,
 );
+
+MockLikeModule.bind(
+  MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKE,
+).toDynamicValue(mockEncryptLikeBeforeSendPolicy);
+
+MockLikeModule.bind(
+  MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKES,
+).toDynamicValue(mockEncryptLikeListBeforeSendPolicy);
 
 MockLikeModule.bind(MockLikeRegistry.SERVICE).toDynamicValue(mockLikeService);
 MockLikeModule.bind(MockLikeRegistry.SERVICE_DEV).toDynamicValue(
