@@ -11,6 +11,8 @@ import { DeepMockProxy, mockDeep } from 'jest-mock-extended';
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { MockLikeRegistry } from '../like.registry';
 import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
+import { EncryptLikeBeforeSendPolicy } from '@Like/policy/security/encrypt/before/like.policy';
+import { EncryptLikeListBeforeSendPolicy } from '@Like/policy/security/encrypt/before/likes.policy';
 
 export const mockLikeService = () => mockDeep<LikeService>();
 
@@ -37,6 +39,21 @@ export const simulateLikeService = ({
     DeepMockProxy<EmitCreateLikeEventUseCase>
   >(MockLikeRegistry.USE_CASE.EVENTS.CREATE);
 
+  const policy = {
+    security: {
+      encrypt: {
+        before: {
+          like: container.get<DeepMockProxy<EncryptLikeBeforeSendPolicy>>(
+            MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKE,
+          ),
+          likes: container.get<DeepMockProxy<EncryptLikeListBeforeSendPolicy>>(
+            MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKES,
+          ),
+        },
+      },
+    },
+  };
+
   const service = new LikeService(
     create,
     deleteLike,
@@ -44,6 +61,8 @@ export const simulateLikeService = ({
     getUserLikes,
     getCommentLikes,
     emitCreateLike,
+    policy.security.encrypt.before.like,
+    policy.security.encrypt.before.likes,
   );
 
   return {
@@ -55,6 +74,7 @@ export const simulateLikeService = ({
       getCommentLikes,
       emitCreateLike,
     },
+    policy,
     service,
   };
 };
