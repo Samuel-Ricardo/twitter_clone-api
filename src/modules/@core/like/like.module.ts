@@ -10,6 +10,7 @@ import { LikeController } from './controller/like.controller';
 import { RepositoryModule } from '../../repository/repository.module';
 import { EventsModule } from '../../event/event.module';
 import { EmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
+import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -17,6 +18,7 @@ export const LikeModule = Container.merge(
   Module,
   RepositoryModule,
   EventsModule,
+  CYPHER_MODULE,
 );
 
 LikeModule.bind(LikeRegistry.USE_CASE.EVENTS.CREATE).to(
