@@ -25,3 +25,21 @@ export const decryptMiddleware: RequestHandler = async (req, res, next) => {
     return next();
   }
 };
+
+export const decryptParamsMiddleware: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    Object.keys({ ...req.params }).forEach((key) => {
+      req.params[key] = MODULES.SECURITY.CRYPTOGRAPHY.TURING().decryptIV(
+        req.params[key],
+      );
+    });
+
+    return next();
+  } catch (e) {
+    return next();
+  }
+};
