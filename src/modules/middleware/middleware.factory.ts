@@ -56,6 +56,10 @@ export const MiddlewareFactory = {
           MiddlewareModule.get<RequestHandler>(
             MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.DATA,
           ),
+        PARAMS: () =>
+          MiddlewareModule.get<RequestHandler>(
+            MiddlewareRegistry.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS,
+          ),
       },
     },
   },
