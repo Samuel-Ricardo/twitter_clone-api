@@ -39,12 +39,15 @@ describe('[MODULE] | LIKE', () => {
     const response = await supertest(app).get(
       `${like.prefix}/post/${VALID_POST.id}`,
     );
-    const body = response.body;
+
+    const body = { likes: await cypher.decryptLikes(response.body.likes) };
 
     expect(response.status).toBe(200);
+
     expect(body.likes).toBeDefined();
     expect(body.likes).toBeInstanceOf(Array);
     expect(body.likes.length).toBeGreaterThanOrEqual(1);
+
     expect(body.likes[0]).toHaveProperty('id');
     expect(body.likes[0].likedId).toEqual(VALID_POST.id);
   });
