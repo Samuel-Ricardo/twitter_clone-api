@@ -8,7 +8,7 @@ import { CREATE_POST_LIKE_DATA } from '@test/mock/data/like';
 import supertest from 'supertest';
 import { ILikeDTO } from '@Like';
 import { VALID_POST } from '@test/mock/data/post';
-import { VALID_USER } from '@test/mock';
+import { ENCRYPTED, VALID_USER } from '@test/mock';
 import { ILikeCypher } from '@Like/cypher/like.cypher';
 import { MODULES } from '@modules';
 
@@ -67,7 +67,9 @@ describe('[MODULE] | LIKE', () => {
   });
 
   it('[E2E] | Should: delete => [Like]', async () => {
-    const response = await supertest(app).delete(`${like.prefix}/${liked.id}`);
+    const response = await supertest(app).delete(
+      `${like.prefix}/${ENCRYPTED(liked.id)}`,
+    );
 
     expect(response.status).toBe(204);
   });
