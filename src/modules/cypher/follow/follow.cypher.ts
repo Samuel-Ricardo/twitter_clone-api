@@ -16,4 +16,8 @@ export class FollowCypher extends CryptographerAccess implements IFollowCypher {
   decryptFollow(follow: string): IFollowDTO {
     return JSON.parse(this.cryptographer.decryptIV(follow));
   }
+
+  decryptFollowers(followers: string): IFollowDTO[] {
+    return JSON.parse(this.cryptographer.decryptIV(followers));
+  }
 }
