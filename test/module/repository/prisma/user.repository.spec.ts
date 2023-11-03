@@ -1,3 +1,7 @@
+/*
+ * @jest-environment ./test/environment
+ */
+
 import 'reflect-metadata';
 import { User as PrismaUser } from '@prisma/client';
 import { MODULES, PrismaUserRepository } from '@modules';
