@@ -25,6 +25,7 @@ router.post(
 
 router.delete(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(DeleteNotificationSchema),
   async (req, res, next) => {
     try {
@@ -39,6 +40,7 @@ router.delete(
 
 router.get(
   `${prefix}/user/:userId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetNotificationByUserSchema),
   async (req, res, next) => {
     try {

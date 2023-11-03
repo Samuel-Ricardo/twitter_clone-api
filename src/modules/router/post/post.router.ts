@@ -32,6 +32,7 @@ router.post(prefix, validate(CreatePostSchema), async (req, res, next) => {
 
 router.get(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(FindPostByIdSchema),
   async (req, res, next) => {
     try {
@@ -52,6 +53,7 @@ router.patch(prefix, validate(UpdatePostSchema), async (req, res, next) => {
 
 router.delete(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(DeletePostSchema),
   async (req, res, next) => {
     try {
@@ -64,6 +66,7 @@ router.delete(
 
 router.get(
   `${prefix}/author/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(FindPostByAuthorIdSchema),
   async (req, res, next) => {
     try {
