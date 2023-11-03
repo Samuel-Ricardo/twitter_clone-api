@@ -6,6 +6,16 @@ export const LikeRegistry = {
   CONTROLLER: {
     DEFAULT: Symbol.for('LIKE.CONTROLLER.DEFAULT'),
   },
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          LIKE: Symbol.for('LIKE.POLICY.SECURITY.ENCRYPT.BEFORE.LIKE'),
+          LIKES: Symbol.for('LIKE.POLICY.SECURITY.ENCRYPT.BEFORE.LIKES'),
+        },
+      },
+    },
+  },
   USE_CASE: {
     EVENTS: {
       CREATE: Symbol.for('LIKE.USE_CASE.EVENTS.CREATE'),
