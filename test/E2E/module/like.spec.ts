@@ -9,17 +9,24 @@ import supertest from 'supertest';
 import { ILikeDTO } from '@Like';
 import { VALID_POST } from '@test/mock/data/post';
 import { VALID_USER } from '@test/mock';
+import { ILikeCypher } from '@Like/cypher/like.cypher';
+import { MODULES } from '@modules';
 
 describe('[MODULE] | LIKE', () => {
   let liked: ILikeDTO;
+  let cypher: ILikeCypher;
+
+  beforeAll(() => (cypher = MODULES.CYPHER.LIKE()));
 
   it('[E2E] | Should: create => [Like]', async () => {
     const response = await supertest(app)
       .post(like.prefix)
       .send(CREATE_POST_LIKE_DATA);
-    const body = await response.body;
+
+    const body = { like: await cypher.decryptLike(response.body.like) };
 
     expect(response.status).toBe(201);
+
     expect(body.like).toBeDefined();
     expect(body.like).toHaveProperty('id');
     expect(body.like.userId).toEqual(CREATE_POST_LIKE_DATA.userId);
