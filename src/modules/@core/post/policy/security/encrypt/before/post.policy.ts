@@ -1,5 +1,5 @@
 import { IPostDTO } from '@Post/DTO';
-import { PostCypherAccess } from '@Post/cypher/cypher.access';
+import { PostCypherAccess } from '../../../../cypher/cypher.access';
 import { Post } from '@Post/entity';
 
 export class EncryptPostBeforeSendPolicy extends PostCypherAccess {
