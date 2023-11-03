@@ -23,6 +23,7 @@ router.post(prefix, validate(CreateCommentSchema), async (req, res, next) => {
 
 router.get(
   `${prefix}/post/:postId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetCommentByPostSchema),
   async (req, res, next) => {
     try {
@@ -39,6 +40,7 @@ router.get(
 
 router.get(
   `${prefix}/author/:authorId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetUserCommentsSchema),
   async (req, res, next) => {
     try {
@@ -67,6 +69,7 @@ router.patch(
 
 router.delete(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(DeleteCommentSchema),
   async (req, res, next) => {
     try {
@@ -77,12 +80,16 @@ router.delete(
   },
 );
 
-router.get(`${prefix}/:id`, async (req, res, next) => {
-  try {
-    res.status(200).json(await comment_module.getById({ id: req.params.id }));
-  } catch (error) {
-    next(error);
-  }
-});
+router.get(
+  `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
+  async (req, res, next) => {
+    try {
+      res.status(200).json(await comment_module.getById({ id: req.params.id }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 export const comment = { router, prefix };
