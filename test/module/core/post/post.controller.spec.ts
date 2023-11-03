@@ -1,10 +1,9 @@
 import { ISimulatePostController } from '@test/@types';
-import { ENCRYPTED_DATA, MockFactory, VALID_USER } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory } from '@test/mock';
 import {
   CREATE_POST_DATA,
   UPDATE_POST_DATA,
   VALID_POST,
-  VALID_UPDATED_POST,
 } from '../../../mock/data/post';
 
 describe('[CONTROLLER] | POST', () => {
@@ -24,7 +23,7 @@ describe('[CONTROLLER] | POST', () => {
     const result = await module.controller.listAll();
 
     //    expect(result).toEqual({ posts: [VALID_POST.toStruct()] });
-    expect(result).toEqual(ENCRYPTED_DATA);
+    expect(result).toEqual({ posts: ENCRYPTED_DATA });
 
     expect(module.service.listAll).toHaveBeenCalledTimes(1);
     expect(module.service.listAll).toHaveBeenCalledWith();
@@ -37,7 +36,7 @@ describe('[CONTROLLER] | POST', () => {
 
     //expect(result).toEqual({ post: VALID_POST.toStruct() });
 
-    expect(result).toEqual(ENCRYPTED_DATA);
+    expect(result).toEqual({ post: ENCRYPTED_DATA });
 
     expect(module.service.create).toHaveBeenCalledTimes(1);
     expect(module.service.create).toHaveBeenCalledWith(CREATE_POST_DATA);
@@ -49,7 +48,7 @@ describe('[CONTROLLER] | POST', () => {
     const result = await module.controller.update(UPDATE_POST_DATA);
 
     // expect(result).toEqual({ post: VALID_UPDATED_POST.toStruct() });
-    expect(result).toEqual(ENCRYPTED_DATA);
+    expect(result).toEqual({ post: ENCRYPTED_DATA });
 
     expect(module.service.update).toHaveBeenCalledTimes(1);
     expect(module.service.update).toHaveBeenCalledWith(UPDATE_POST_DATA);
@@ -72,7 +71,7 @@ describe('[CONTROLLER] | POST', () => {
     const result = await module.controller.details({ id: VALID_POST.id });
 
     // expect(result).toEqual({ post: VALID_POST.toStruct() });
-    expect(result).toEqual(ENCRYPTED_DATA);
+    expect(result).toEqual({ post: ENCRYPTED_DATA });
 
     expect(module.service.detail).toHaveBeenCalledTimes(1);
     expect(module.service.detail).toHaveBeenCalledWith({ id: VALID_POST.id });
@@ -87,7 +86,7 @@ describe('[CONTROLLER] | POST', () => {
 
     // expect(result).toEqual({ posts: [VALID_POST.toStruct()] });
 
-    expect(result).toEqual(ENCRYPTED_DATA);
+    expect(result).toEqual({ posts: ENCRYPTED_DATA });
 
     expect(module.service.listPostsFromUser).toHaveBeenCalledTimes(1);
     expect(module.service.listPostsFromUser).toHaveBeenCalledWith({
