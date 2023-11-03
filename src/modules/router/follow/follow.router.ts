@@ -23,6 +23,7 @@ router.post(prefix, validate(CreateFollowSchema), async (req, res, next) => {
 
 router.delete(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(DeleteFollowSchema),
   async (req, res, next) => {
     try {
@@ -35,6 +36,7 @@ router.delete(
 
 router.get(
   `${prefix}/count/followers/:followingId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(CountFollowersSchema),
   async (req, res, next) => {
     try {
@@ -51,6 +53,7 @@ router.get(
 
 router.get(
   `${prefix}/count/following/:followerId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(CountFollowingsSchema),
   async (req, res, next) => {
     try {
@@ -67,6 +70,7 @@ router.get(
 
 router.get(
   `${prefix}/:followingId/followers`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetFollowersSchema),
   async (req, res, next) => {
     try {
@@ -83,6 +87,7 @@ router.get(
 
 router.get(
   `${prefix}/:followerId/following`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetFollowingsSchema),
   async (req, res, next) => {
     try {
