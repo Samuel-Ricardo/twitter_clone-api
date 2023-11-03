@@ -16,7 +16,7 @@ export class LikeController {
 
   async save(data: ICreateLikeDTO) {
     const result = await this.service.like(data);
-    return { like: result.toStruct() };
+    return { like: result };
   }
 
   async dislike(data: IDeleteLikeDTO) {
@@ -25,19 +25,22 @@ export class LikeController {
 
   async getPostLikes(data: IGetLikesOfPostDTO) {
     const result = await this.service.postLikes(data);
-    return { likes: result.map((like) => like.toStruct()) };
+    //    return { likes: result.map((like) => like.toStruct()) };
+    return { likes: result };
   }
 
   async getUserLikes(data: IGetLikesOfUserDTO) {
     const result = await this.service.userLikes(data);
-    return { likes: result.map((like) => like.toStruct()) };
+    // return { likes: result.map((like) => like.toStruct()) };
+    return { likes: result };
   }
 
   async getCommentLikes(data: IGetLikesOfCommentDTO) {
-    return {
-      likes: (await this.service.commentLikes(data)).map((like) =>
-        like.toStruct(),
-      ),
-    };
+    // return {
+    //   likes: (await this.service.commentLikes(data)).map((like) =>
+    //     like.toStruct(),
+    //   ),
+    // };
+    return { likes: await this.service.commentLikes(data) };
   }
 }
