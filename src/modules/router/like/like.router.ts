@@ -3,7 +3,6 @@ import {
   DeleteLikeSchema,
   GetLikesOfPostSchema,
   GetLikesOfUserSchema,
-  GetLikesOfCommentSchema,
 } from '@Like';
 import { MODULES } from '../../app.factory';
 import { validate } from '../../middleware/validator';
@@ -23,6 +22,7 @@ router.post(prefix, validate(CreateLikeSchema), async (req, res, next) => {
 
 router.delete(
   `${prefix}/:id`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(DeleteLikeSchema),
   async (req, res, next) => {
     try {
@@ -35,6 +35,7 @@ router.delete(
 
 router.get(
   `${prefix}/post/:likedId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetLikesOfPostSchema),
   async (req, res, next) => {
     try {
@@ -49,6 +50,7 @@ router.get(
 
 router.get(
   `${prefix}/user/:userId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
   validate(GetLikesOfUserSchema),
   async (req, res, next) => {
     try {
@@ -61,14 +63,18 @@ router.get(
   },
 );
 
-router.get(`${prefix}/comment/:likedId`, async (req, res, next) => {
-  try {
-    res
-      .status(200)
-      .json(await Like.getCommentLikes({ likedId: req.params.likedId }));
-  } catch (error) {
-    next(error);
-  }
-});
+router.get(
+  `${prefix}/comment/:likedId`,
+  MODULES.MIDDLEWARE.SECURITY.CRYPTOGRAPHY.DECRYPT.PARAMS(),
+  async (req, res, next) => {
+    try {
+      res
+        .status(200)
+        .json(await Like.getCommentLikes({ likedId: req.params.likedId }));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 export const like = { router, prefix };
