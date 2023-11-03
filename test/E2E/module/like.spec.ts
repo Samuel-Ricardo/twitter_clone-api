@@ -56,7 +56,7 @@ describe('[MODULE] | LIKE', () => {
     const response = await supertest(app).get(
       `${like.prefix}/user/${VALID_USER.id}`,
     );
-    const body = response.body;
+    const body = { likes: await cypher.decryptLikes(response.body.likes) };
 
     expect(response.status).toBe(200);
     expect(body.likes).toBeDefined();
