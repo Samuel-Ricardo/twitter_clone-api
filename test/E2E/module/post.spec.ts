@@ -6,62 +6,63 @@ import { app } from '@/app';
 import { post } from '../../../src/modules/router/post/post.router';
 import { Post } from '../../../src/modules/@core/post/entity/post.entity';
 import supertest from 'supertest';
-import {
-  CREATE_POST_DATA,
-  UPDATE_POST_DATA,
-  VALID_POST,
-  VALID_USER,
-} from '@test/mock/data/post';
-import { response } from 'express';
-import { IUpdatePostDTO } from '@Post';
+import { CREATE_POST_DATA, VALID_POST, VALID_USER } from '@test/mock/data/post';
+import { IPostDTO, IUpdatePostDTO } from '@Post';
+import { IPostCypher } from '@Post/cypher/post.cypher';
+import { MODULES } from '@modules';
 
 describe('[MODULE] | Post', () => {
   let posted: any;
+  let cypher: IPostCypher;
+
+  beforeAll(() => (cypher = MODULES.CYPHER.POST()));
 
   it('[E2E] | Should: Create => [POST]', async () => {
     const response = await supertest(app)
       .post(post.prefix)
       .send(CREATE_POST_DATA);
-    const body: { post: any } = response.body;
+
+    const result = await cypher.decryptPost(response.body.post);
 
     expect(response.status).toBe(201);
-    expect(body.post).toHaveProperty('id');
-    expect(body.post.authorId).toBe(CREATE_POST_DATA.authorId);
-    expect(body.post.body).toBe(CREATE_POST_DATA.body);
+    expect(result).toHaveProperty('id');
+    expect(result.authorId).toBe(CREATE_POST_DATA.authorId);
+    expect(result.body).toBe(CREATE_POST_DATA.body);
 
-    posted = body.post;
+    posted = result;
   });
 
   it('[E2E] | Should: list [all] => [POST]', async () => {
     const response = await supertest(app).get(post.prefix);
-    const body: { posts: Post[] } = response.body;
+    const result = cypher.decryptPosts(response.body.posts);
 
     expect(response.status).toBe(200);
 
-    expect(body.posts).toBeInstanceOf(Array);
-    expect(body.posts).toHaveLength(1);
+    expect(result).toBeInstanceOf(Array);
+    expect(result).toHaveLength(1);
+    expect(result).toContainEqual(posted);
   });
 
   it('[E2E] | Should: create and list [by author] => [POST]', async () => {
     const response = await supertest(app).get(
       post.prefix + '/author/' + VALID_USER.id,
     );
-    const body: { posts: any[] } = response.body;
+    const result = cypher.decryptPosts(response.body.posts);
 
     expect(response.status).toBe(200);
-    expect(body.posts).toBeInstanceOf(Array);
-    expect(body.posts.length).toBeGreaterThanOrEqual(1);
-    expect(body.posts[0].authorId).toBe(VALID_POST.authorId);
-    expect(body.posts[0].authorId).toBe(VALID_USER.id);
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBeGreaterThanOrEqual(1);
+    expect(result[0].authorId).toBe(VALID_POST.authorId);
+    expect(result[0].authorId).toBe(VALID_USER.id);
   });
 
   it('[E2E] | Should: detail => [POST]', async () => {
     const response = await supertest(app).get(post.prefix + '/' + posted.id);
-    const body: { post: any } = response.body;
+    const result = cypher.decryptPost(response.body.post);
 
     expect(response.status).toBe(200);
-    expect(body.post).toHaveProperty('id');
-    expect(body.post.id).toBe(posted.id);
+    expect(result).toHaveProperty('id');
+    expect(result.id).toBe(posted.id);
   });
 
   it('[E2E] | Should: update => [POST]', async () => {
@@ -71,7 +72,9 @@ describe('[MODULE] | Post', () => {
     };
 
     const response = await supertest(app).patch(post.prefix).send(UPDATE_DATA);
-    const body: { post: any } = response.body;
+    const body: { post: IPostDTO } = {
+      post: cypher.decryptPost(response.body.post),
+    };
 
     expect(response.status).toBe(201);
     expect(body.post).toBeDefined();
