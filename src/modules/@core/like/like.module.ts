@@ -11,6 +11,8 @@ import { RepositoryModule } from '../../repository/repository.module';
 import { EventsModule } from '../../event/event.module';
 import { EmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
 import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
+import { EncryptLikeBeforeSendPolicy } from './policy/security/encrypt/before/like.policy';
+import { EncryptLikeListBeforeSendPolicy } from './policy/security/encrypt/before/likes.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -30,6 +32,13 @@ LikeModule.bind(LikeRegistry.USE_CASE.GET.BY.POST).to(GetPostLikesUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.GET.BY.USER).to(GetUserLikesUseCase);
 LikeModule.bind(LikeRegistry.USE_CASE.GET.BY.COMMENT).to(
   GetCommentLikesUseCase,
+);
+
+LikeModule.bind(LikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKE).to(
+  EncryptLikeBeforeSendPolicy,
+);
+LikeModule.bind(LikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKES).to(
+  EncryptLikeListBeforeSendPolicy,
 );
 
 LikeModule.bind(LikeRegistry.SERVICE.DEFAULT).to(LikeService);
