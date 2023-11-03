@@ -14,4 +14,8 @@ export class LikeCypher implements ILikeCypher {
   encryptLike(like: ILikeDTO): string {
     return this.cypher.encryptIV(JSON.stringify(like));
   }
+
+  decryptLike(like: string): ILikeDTO {
+    return JSON.parse(this.cypher.decryptIV(like));
+  }
 }
