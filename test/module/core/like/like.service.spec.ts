@@ -1,5 +1,5 @@
 import { ISimulateLikeService } from '@test/@types/simulate/like';
-import { MockFactory, VALID_USER } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory, VALID_USER } from '@test/mock';
 import { VALID_POST_LIKE, VALID_POST_LIKE_DATA } from '@test/mock/data/like';
 import { VALID_POST, VALID_POST_DATA } from '@test/mock/data/post';
 
@@ -14,23 +14,35 @@ describe('[SERVICE] | LIKE', () => {
     expect(module).toBeDefined();
     expect(module.service).toBeDefined();
     expect(module.use_case).toBeDefined();
+    expect(module.policy).toBeDefined();
   });
 
   it('[UNIT] | Should: create => [Like] && Emit: event [create]', async () => {
     module.use_case.create.execute.mockResolvedValue(VALID_POST_LIKE);
     module.use_case.emitCreateLike.execute.mockResolvedValue({} as never);
+    module.policy.security.encrypt.before.like.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.like(VALID_POST_LIKE_DATA);
 
-    expect(result).toEqual(VALID_POST_LIKE);
+    expect(result).toEqual(ENCRYPTED_DATA);
     expect(module.use_case.create.execute).toHaveBeenCalledTimes(1);
     expect(module.use_case.create.execute).toHaveBeenCalledWith(
       VALID_POST_LIKE_DATA,
     );
+
     expect(module.use_case.emitCreateLike.execute).toHaveBeenCalledTimes(1);
     expect(module.use_case.emitCreateLike.execute).toHaveBeenCalledWith(
       VALID_POST_LIKE.toStruct(),
     );
+
+    expect(
+      module.policy.security.encrypt.before.like.execute,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.like.execute,
+    ).toHaveBeenCalledWith(VALID_POST_LIKE);
   });
 
   it('[UNIT] | Should: delete => Like', async () => {
