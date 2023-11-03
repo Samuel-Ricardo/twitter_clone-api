@@ -42,7 +42,7 @@ describe('[CONTROLLER] | LIKE', () => {
   });
 
   it('[UNIT] | Should: get post likes => Like', async () => {
-    module.service.postLikes.mockResolvedValue([VALID_POST_LIKE]);
+    module.service.postLikes.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.getPostLikes({
       likedId: VALID_POST.id,
@@ -50,8 +50,10 @@ describe('[CONTROLLER] | LIKE', () => {
 
     expect(result).toBeDefined();
     expect(result.likes).toBeDefined();
-    expect(result.likes.length).toBe(1);
-    expect(result.likes[0]).toStrictEqual(VALID_POST_LIKE.toStruct());
+    //    expect(result.likes.length).toBe(1);
+    //    expect(result.likes[0]).toStrictEqual(VALID_POST_LIKE.toStruct());
+    expect(result.likes).toStrictEqual(ENCRYPTED_DATA);
+
     expect(module.service.postLikes).toHaveBeenCalledTimes(1);
     expect(module.service.postLikes).toHaveBeenCalledWith({
       likedId: VALID_POST.id,
