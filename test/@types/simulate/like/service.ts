@@ -8,6 +8,8 @@ import {
   EmitCreateLikeEventUseCase,
 } from '../../../../src/modules/@core/like';
 import { DeepMockProxy } from 'jest-mock-extended';
+import { EncryptLikeBeforeSendPolicy } from '../../../../src/modules/@core/like/policy/security/encrypt/before/like.policy';
+import { EncryptLikeListBeforeSendPolicy } from '../../../../src/modules/@core/like/policy/security/encrypt/before/likes.policy';
 
 export interface ISimulateLikeService {
   use_case: {
@@ -17,6 +19,16 @@ export interface ISimulateLikeService {
     getUserLikes: DeepMockProxy<GetUserLikesUseCase>;
     getCommentLikes: DeepMockProxy<GetCommentLikesUseCase>;
     emitCreateLike: DeepMockProxy<EmitCreateLikeEventUseCase>;
+  };
+  policy: {
+    security: {
+      encrypt: {
+        before: {
+          like: DeepMockProxy<EncryptLikeBeforeSendPolicy>;
+          likes: DeepMockProxy<EncryptLikeListBeforeSendPolicy>;
+        };
+      };
+    };
   };
   service: LikeService;
 }
