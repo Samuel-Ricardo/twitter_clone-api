@@ -3,11 +3,10 @@
  */
 
 import { app } from '@/app';
-import { User } from '@User';
 import { IUserDTO } from '@User/DTO/user.dto';
 import { IUserCypher } from '@User/cypher/user.cypher';
 import { MODULES } from '@modules';
-import { CREATE_USER_DATA } from '@test/mock';
+import { CREATE_USER_DATA, ENCRYPTED, JENCRYPTED } from '@test/mock';
 import supertest from 'supertest';
 
 describe('[MODULE] | User', () => {
@@ -25,7 +24,9 @@ describe('[MODULE] | User', () => {
   });
 
   it('[E2E] | Should: Create => [USER]', async () => {
-    const response = await supertest(app).post('/users').send(CREATE_USER_DATA);
+    const response = await supertest(app)
+      .post('/users')
+      .send({ encrypted: JENCRYPTED(CREATE_USER_DATA) });
     const body: { user: string } = response.body;
 
     const result: IUserDTO = await cypher.decryptUser(body.user);
@@ -97,7 +98,7 @@ describe('[MODULE] | User', () => {
   });
 
   it('[E2E] | Should: Select - [by id] => [USER]', async () => {
-    const response = await supertest(app).get(`/users/${user.id}`);
+    const response = await supertest(app).get(`/users/${ENCRYPTED(user.id)}`);
     const result = cypher.decryptUser(response.body.user);
 
     expect(response.status).toBe(200);
@@ -107,7 +108,9 @@ describe('[MODULE] | User', () => {
   });
 
   it('[E2E] | Should: Select - [by email] => [USER]', async () => {
-    const response = await supertest(app).get(`/users/email/${user.email}`);
+    const response = await supertest(app).get(
+      `/users/email/${ENCRYPTED(user.email)}`,
+    );
 
     expect(response.status).toBe(200);
 
