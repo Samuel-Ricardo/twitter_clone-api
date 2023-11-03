@@ -13,6 +13,8 @@ import { MockLikeRegistry } from './like.registry';
 import { ISimulateLikeService } from '@test/@types/simulate/like';
 import { ISimulateLikeController } from '@test/@types/simulate/like/controller';
 import { EmitCreateLikeEventUseCase } from '@Like/use-case/events/create.use-case';
+import { EncryptLikeBeforeSendPolicy } from '@Like/policy/security/encrypt/before/like.policy';
+import { EncryptLikeListBeforeSendPolicy } from '@Like/policy/security/encrypt/before/likes.policy';
 
 export const MockLikeFactory = {
   SERVICE: () =>
@@ -27,6 +29,22 @@ export const MockLikeFactory = {
     MockLikeModule.get<ISimulateLikeController>(
       MockLikeRegistry.CONTROLLER_DEV,
     ),
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          LIKE: () =>
+            MockLikeModule.get<DeepMockProxy<EncryptLikeBeforeSendPolicy>>(
+              MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKE,
+            ),
+          LIKES: () =>
+            MockLikeModule.get<DeepMockProxy<EncryptLikeListBeforeSendPolicy>>(
+              MockLikeRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.LIKES,
+            ),
+        },
+      },
+    },
+  },
   USE_CASE: {
     EVENTS: {
       CREATE: () =>
