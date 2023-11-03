@@ -82,13 +82,24 @@ describe('[SERVICE] | LIKE', () => {
 
   it('[UNIT] | Should: get user likes => Like', async () => {
     module.use_case.getUserLikes.execute.mockResolvedValue([VALID_POST_LIKE]);
+    module.policy.security.encrypt.before.likes.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.userLikes({ userId: VALID_USER.id });
 
-    expect(result).toEqual([VALID_POST_LIKE]);
+    expect(result).toEqual(ENCRYPTED_DATA);
+
     expect(module.use_case.getUserLikes.execute).toHaveBeenCalledTimes(1);
     expect(module.use_case.getUserLikes.execute).toHaveBeenCalledWith({
       userId: VALID_USER.id,
     });
+
+    expect(
+      module.policy.security.encrypt.before.likes.execute,
+    ).toHaveBeenCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.likes.execute,
+    ).toHaveBeenCalledWith([VALID_POST_LIKE]);
   });
 });
