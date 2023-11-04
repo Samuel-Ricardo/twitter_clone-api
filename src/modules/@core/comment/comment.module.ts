@@ -11,6 +11,8 @@ import { RepositoryModule } from '../../repository/repository.module';
 import { CommentService } from './service/comment.service';
 import { CommentController } from './controller';
 import { GetCommentByIdUseCase } from './use-case/get_by_id.use-case';
+import { EncryptCommentListBeforeSendPolicy } from './policy/security/encrypt/before/comments.policy';
+import { EncryptCommentBeforeSendPolicy } from './policy/security/encrypt/before/comment.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -27,6 +29,13 @@ CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.AUTHOR).to(
 );
 CommentModule.bind(CommentRegistry.USE_CASE.GET.BY.ID).to(
   GetCommentByIdUseCase,
+);
+
+CommentModule.bind(CommentRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENT).to(
+  EncryptCommentBeforeSendPolicy,
+);
+CommentModule.bind(CommentRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENTS).to(
+  EncryptCommentListBeforeSendPolicy,
 );
 
 CommentModule.bind(CommentRegistry.SERVICE).to(CommentService);
