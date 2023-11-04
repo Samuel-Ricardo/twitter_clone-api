@@ -1,7 +1,7 @@
 // import { Follow } from '../../../../src/modules/@core/follow';
 // import { FollowService } from '../../../../src/modules/@core/follow/service';
 import { ISimulateFollowService } from '@test/@types/simulate/follow/service';
-import { MockFactory } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory } from '@test/mock';
 import {
   CREATE_FOLLOW_DATA,
   USER_FOLLOWED,
@@ -20,18 +20,28 @@ describe('[SERVICE] | FOLLOW ', () => {
     expect(module).toBeDefined();
     // expect(module.service).toBeInstanceOf(FollowService);
     expect(module.use_case).toBeDefined();
+    expect(module.policy).toBeDefined();
   });
 
   it('[UNIT] | Should: be able to => [FOLLOW]', async () => {
     module.use_case.create.execute.mockResolvedValue(VALID_FOLLOW);
+    module.policy.security.encrypt.before.follow.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.follow(CREATE_FOLLOW_DATA);
 
-    // expect(result).toBeInstanceOf(Follow);
-    expect(result).toStrictEqual(VALID_FOLLOW);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
 
     expect(module.use_case.create.execute).toBeCalledTimes(1);
     expect(module.use_case.create.execute).toBeCalledWith(CREATE_FOLLOW_DATA);
+
+    expect(
+      module.policy.security.encrypt.before.follow.execute,
+    ).toBeCalledTimes(1);
+    expect(module.policy.security.encrypt.before.follow.execute).toBeCalledWith(
+      VALID_FOLLOW,
+    );
   });
 
   it('[UNIT] | Should: be able to => [UNFOLLOW]', async () => {
