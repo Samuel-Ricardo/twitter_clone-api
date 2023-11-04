@@ -16,6 +16,8 @@ import {
 } from '../DTO';
 import { GetCommentByIdUseCase } from '../use-case/get_by_id.use-case';
 import { IGetCommentByIdDTO } from '../DTO/get_by_id.dto';
+import { EncryptCommentBeforeSendPolicy } from '../policy/security/encrypt/before/comment.policy';
+import { EncryptCommentListBeforeSendPolicy } from '../policy/security/encrypt/before/comments.policy';
 
 @injectable()
 export class CommentService {
@@ -32,18 +34,28 @@ export class CommentService {
     private readonly getUserCommnets: GetUserCommnetsUseCase,
     @inject(MODULE.COMMENT.USE_CASE.GET.BY.ID)
     private readonly getCommentById: GetCommentByIdUseCase,
+    @inject(MODULE.COMMENT.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENT)
+    private readonly encryptBeforeSendPolicy: EncryptCommentBeforeSendPolicy,
+    @inject(MODULE.COMMENT.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENTS)
+    private readonly encryptListBeforeSendPolicy: EncryptCommentListBeforeSendPolicy,
   ) {}
 
   async comment(data: ICreateCommentDTO) {
-    return await this.create.execute(data);
+    return this.encryptBeforeSendPolicy.execute(
+      await this.create.execute(data),
+    );
   }
 
   async getById(comment: IGetCommentByIdDTO) {
-    return await this.getCommentById.execute(comment);
+    return this.encryptBeforeSendPolicy.execute(
+      await this.getCommentById.execute(comment),
+    );
   }
 
   async updateComment(data: IUpdateCommentDTO) {
-    return await this.update.execute(data);
+    return this.encryptBeforeSendPolicy.execute(
+      await this.update.execute(data),
+    );
   }
 
   async delete(comment: IDeleteCommentDTO) {
@@ -51,10 +63,14 @@ export class CommentService {
   }
 
   async listPostComments(comment: IGetPostCommentsDTO) {
-    return await this.getPostComments.execute(comment);
+    return this.encryptListBeforeSendPolicy.execute(
+      await this.getPostComments.execute(comment),
+    );
   }
 
   async listUserCommnets(comment: IGetUserCommentsDTO) {
-    return await this.getUserCommnets.execute(comment);
+    return this.encryptListBeforeSendPolicy.execute(
+      await this.getUserCommnets.execute(comment),
+    );
   }
 }
