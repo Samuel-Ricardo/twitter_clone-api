@@ -1,6 +1,8 @@
 import { FollowController } from './controller';
 import { FollowModule } from './follow.module';
 import { FollowRegistry } from './follow.registry';
+import { EncryptFollowBeforeSendPolicy } from './policy/security/encrypt/before/follow.policy';
+import { EncryptFollowListBeforeSendPolicy } from './policy/security/encrypt/before/followers.policy';
 import { FollowService } from './service';
 import {
   CountFollowersUseCase,
@@ -16,6 +18,22 @@ export const FollowFactory = {
   SERVICE: () => FollowModule.get<FollowService>(FollowRegistry.SERVICE),
   CONTROLLER: () =>
     FollowModule.get<FollowController>(FollowRegistry.CONTROLLER),
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          FOLLOW: () =>
+            FollowModule.get<EncryptFollowBeforeSendPolicy>(
+              FollowRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW,
+            ),
+          FOLLOWERS: () =>
+            FollowModule.get<EncryptFollowListBeforeSendPolicy>(
+              FollowRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS,
+            ),
+        },
+      },
+    },
+  },
   USE_CASE: {
     CREATE: () =>
       FollowModule.get<CreateFollowUseCase>(FollowRegistry.USE_CASE.CREATE),
