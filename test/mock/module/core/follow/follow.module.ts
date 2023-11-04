@@ -10,6 +10,9 @@ import {
 } from './use-case';
 import { mockFollowService, simulateFollowService } from './service';
 import { mockFollowController, simulateFollowController } from './controller';
+import { mockEncryptFollowBeforeSendPolicy } from './policy/security/encrypt/before/follow.policy';
+import { mockEncryptFollowListBeforeSendPolicy } from './policy/security/encrypt/before/followers.policy';
+import { mockFollowPolicy } from './policy/follow.policy';
 
 export const FollowMockModule = new Container({ autoBindInjectable: true });
 
@@ -31,6 +34,17 @@ FollowMockModule.bind(FollowMockRegistry.USE_CASE.GET.FOLLOWERS).toDynamicValue(
 FollowMockModule.bind(FollowMockRegistry.USE_CASE.GET.FOLLOWING).toDynamicValue(
   mockGetFollowingUseCase,
 );
+
+FollowMockModule.bind(FollowMockRegistry.POLICY.FOLLOW).toDynamicValue(
+  mockFollowPolicy,
+);
+FollowMockModule.bind(
+  FollowMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW,
+).toDynamicValue(mockEncryptFollowBeforeSendPolicy);
+FollowMockModule.bind(
+  FollowMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS,
+).toDynamicValue(mockEncryptFollowListBeforeSendPolicy);
+
 FollowMockModule.bind(FollowMockRegistry.SERVICE).toDynamicValue(
   mockFollowService,
 );
