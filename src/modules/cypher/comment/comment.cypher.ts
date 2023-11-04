@@ -1,17 +1,18 @@
 import { injectable } from 'inversify';
 import { ICommentCypher } from '../../@core/comment/cypher/comment.cypher';
 import { CryptographerAccess } from '../cypher.access';
+import { ICommentDTO } from '../../@core/comment/DTO/comment.dto';
 
 @injectable()
 export class CommentCypher
   extends CryptographerAccess
   implements ICommentCypher
 {
-  encryptComment(comment: any): string {
-    throw new Error('Method not implemented.');
+  encryptComment(comment: ICommentDTO): string {
+    return this.cryptographer.encryptIV(JSON.stringify(comment));
   }
 
-  encryptComments(comments: any): string {
+  encryptComments(comments: ICommentDTO[]): string {
     throw new Error('Method not implemented.');
   }
 
