@@ -38,6 +38,22 @@ export const simulateFollowService = ({
     MOCK_MODULE.FOLLOW.USE_CASE.GET.FOLLOWING,
   );
 
+  const policy = {
+    follow: container.get<any>(MOCK_MODULE.FOLLOW.POLICY.FOLLOW),
+    security: {
+      encrypt: {
+        before: {
+          follow: container.get<any>(
+            MOCK_MODULE.FOLLOW.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW,
+          ),
+          followers: container.get<any>(
+            MOCK_MODULE.FOLLOW.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS,
+          ),
+        },
+      },
+    },
+  };
+
   const service = new FollowService(
     create,
     unfollow,
@@ -45,10 +61,13 @@ export const simulateFollowService = ({
     get_following,
     count_following,
     count_followers,
+    policy.security.encrypt.before.follow,
+    policy.security.encrypt.before.followers,
   );
 
   return {
     service,
+    policy,
     use_case: {
       create,
       unfollow,
