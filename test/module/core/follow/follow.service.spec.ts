@@ -110,7 +110,7 @@ describe('[SERVICE] | FOLLOW ', () => {
     ).toBeCalledTimes(1);
     expect(
       module.policy.security.encrypt.before.followers.execute,
-    ).toBeCalledWith(VALID_FOLLOW);
+    ).toBeCalledWith([VALID_FOLLOW]);
   });
 
   it('[UNIT] | Should: get => [FOLLOWING]', async () => {
@@ -136,6 +136,6 @@ describe('[SERVICE] | FOLLOW ', () => {
     ).toBeCalledTimes(1);
     expect(
       module.policy.security.encrypt.before.followers.execute,
-    ).toBeCalledWith(VALID_FOLLOW);
+    ).toBeCalledWith([VALID_FOLLOW]);
   });
 });
