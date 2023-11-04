@@ -13,7 +13,7 @@ export class CommentCypher
   }
 
   encryptComments(comments: ICommentDTO[]): string {
-    throw new Error('Method not implemented.');
+    return this.cryptographer.encryptIV(JSON.stringify(comments));
   }
 
   decryptComment(comment: string): any {
