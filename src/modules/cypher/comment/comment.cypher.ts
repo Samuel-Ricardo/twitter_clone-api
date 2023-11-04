@@ -20,7 +20,7 @@ export class CommentCypher
     return JSON.parse(this.cryptographer.decryptIV(comment));
   }
 
-  decryptComments(comments: string): any {
-    throw new Error('Method not implemented.');
+  decryptComments(comments: string): ICommentDTO[] {
+    return JSON.parse(this.cryptographer.decryptIV(comments));
   }
 }
