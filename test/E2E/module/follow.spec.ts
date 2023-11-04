@@ -80,7 +80,9 @@ describe('[MODULE] | Follow', () => {
 
     expect(response.status).toBe(200);
 
-    const body = response.body;
+    const body = {
+      following: cypher.decryptFollowers(response.body.following),
+    };
 
     expect(body).toHaveProperty('following');
     expect(body.following.length).toBeGreaterThanOrEqual(0);
