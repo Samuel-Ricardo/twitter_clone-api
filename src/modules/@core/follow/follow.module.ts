@@ -11,6 +11,8 @@ import {
 import { PrismaRepositoryModule } from '../../repository/prisma/prisma-repository.module';
 import { FollowService } from './service';
 import { FollowController } from './controller';
+import { EncryptFollowBeforeSendPolicy } from './policy/security/encrypt/before/follow.policy';
+import { EncryptFollowListBeforeSendPolicy } from './policy/security/encrypt/before/followers.policy';
 
 const Module = new Container({ autoBindInjectable: true });
 
@@ -29,6 +31,13 @@ FollowModule.bind(FollowRegistry.USE_CASE.GET.FOLLOWERS).to(
 );
 FollowModule.bind(FollowRegistry.USE_CASE.GET.FOLLOWINGS).to(
   GetFollowingsUseCase,
+);
+
+FollowModule.bind(FollowRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW).to(
+  EncryptFollowBeforeSendPolicy,
+);
+FollowModule.bind(FollowRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS).to(
+  EncryptFollowListBeforeSendPolicy,
 );
 
 FollowModule.bind(FollowRegistry.SERVICE).to(FollowService);
