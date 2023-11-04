@@ -1,6 +1,6 @@
 import { FollowController } from '../../../../src/modules/@core/follow/controller';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
-import { MockFactory } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory } from '@test/mock';
 import {
   CREATE_FOLLOW_DATA,
   USER_FOLLOWED,
@@ -22,11 +22,11 @@ describe('[CONTROLLER] | FOLLOW ', () => {
   });
 
   it('[UNIT] | Should: be able to => [FOLLOW]', async () => {
-    module.service.follow.mockResolvedValue(VALID_FOLLOW);
+    module.service.follow.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.follow(CREATE_FOLLOW_DATA);
 
-    expect(result).toStrictEqual({ follow: VALID_FOLLOW.toStruct() });
+    expect(result).toStrictEqual({ follow: ENCRYPTED_DATA });
 
     expect(module.service.follow).toHaveBeenCalledTimes(1);
     expect(module.service.follow).toHaveBeenCalledWith(CREATE_FOLLOW_DATA);
@@ -46,14 +46,15 @@ describe('[CONTROLLER] | FOLLOW ', () => {
   });
 
   it('[UNIT] | Should: be able to [GET] => [FOLLOWERS]', async () => {
-    module.service.getFollowers.mockResolvedValue([VALID_FOLLOW]);
+    module.service.getFollowers.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.getFollowers({
       followingId: USER_FOLLOWED.id,
     });
 
     expect(result).toStrictEqual({
-      followers: [VALID_FOLLOW.toStruct()],
+      //      followers: [VALID_FOLLOW.toStruct()],
+      followers: ENCRYPTED_DATA,
     });
 
     expect(module.service.getFollowers).toHaveBeenCalledTimes(1);
@@ -63,14 +64,15 @@ describe('[CONTROLLER] | FOLLOW ', () => {
   });
 
   it('[UNIT] | Should: be able to [GET] => [FOLLOWING]', async () => {
-    module.service.getFollowings.mockResolvedValue([VALID_FOLLOW]);
+    module.service.getFollowings.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.getFollowing({
       followerId: USER_FOLLOWER.id,
     });
 
     expect(result).toStrictEqual({
-      following: [VALID_FOLLOW.toStruct()],
+      //      following: [VALID_FOLLOW.toStruct()],
+      following: ENCRYPTED_DATA,
     });
 
     expect(module.service.getFollowings).toHaveBeenCalledTimes(1);
