@@ -16,8 +16,8 @@ export class CommentCypher
     return this.cryptographer.encryptIV(JSON.stringify(comments));
   }
 
-  decryptComment(comment: string): any {
-    throw new Error('Method not implemented.');
+  decryptComment(comment: string): ICommentDTO {
+    return JSON.parse(this.cryptographer.decryptIV(comment));
   }
 
   decryptComments(comments: string): any {
