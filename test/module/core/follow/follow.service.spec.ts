@@ -97,7 +97,8 @@ describe('[SERVICE] | FOLLOW ', () => {
       followingId: USER_FOLLOWED.id,
     });
 
-    expect(result).toStrictEqual([VALID_FOLLOW]);
+    //    expect(result).toStrictEqual([VALID_FOLLOW]);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
 
     expect(module.use_case.get_followers.execute).toBeCalledTimes(1);
     expect(module.use_case.get_followers.execute).toBeCalledWith({
@@ -122,7 +123,8 @@ describe('[SERVICE] | FOLLOW ', () => {
       followerId: USER_FOLLOWER.id,
     });
 
-    expect(result).toStrictEqual([VALID_FOLLOW]);
+    //    expect(result).toStrictEqual([VALID_FOLLOW]);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
 
     expect(module.use_case.get_following.execute).toBeCalledTimes(1);
     expect(module.use_case.get_following.execute).toBeCalledWith({
