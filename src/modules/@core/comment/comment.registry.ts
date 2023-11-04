@@ -1,6 +1,18 @@
 export const CommentRegistry = {
   SERVICE: Symbol.for('COMMENT.SERVICE'),
   CONTROLLER: Symbol.for('COMMENT.CONTROLLER'),
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          COMMENT: Symbol.for('COMMENT.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENT'),
+          COMMENTS: Symbol.for(
+            'COMMENT.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENTS',
+          ),
+        },
+      },
+    },
+  },
   USE_CASE: {
     CREATE: Symbol.for('COMMENT.USE_CASE.CREATE'),
     UPDATE: Symbol.for('COMMENT.USE_CASE.UPDATE'),
