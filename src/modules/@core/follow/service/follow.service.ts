@@ -16,6 +16,8 @@ import {
   IGetFollowersDTO,
   IGetFollowingsDTO,
 } from '../DTO';
+import { EncryptFollowBeforeSendPolicy } from '../policy/security/encrypt/before/follow.policy';
+import { EncryptFollowListBeforeSendPolicy } from '../policy/security/encrypt/before/followers.policy';
 
 @injectable()
 export class FollowService {
@@ -32,10 +34,16 @@ export class FollowService {
     private readonly countFollowingsUseCase: CountFollowingsUseCase,
     @inject(MODULE.FOLLOW.USE_CASE.COUNT.FOLLOWERS)
     private readonly countFollowersUseCase: CountFollowersUseCase,
+    @inject(MODULE.FOLLOW.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW)
+    private readonly encryptBeforeSendPolicy: EncryptFollowBeforeSendPolicy,
+    @inject(MODULE.FOLLOW.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS)
+    private readonly encryptListBeforeSendPolicy: EncryptFollowListBeforeSendPolicy,
   ) {}
 
   async follow(data: ICreateFollowDTO) {
-    return await this.create.execute(data);
+    return this.encryptBeforeSendPolicy.execute(
+      await this.create.execute(data),
+    );
   }
 
   async unfollow(data: IDeleteFollowDTO) {
@@ -43,11 +51,15 @@ export class FollowService {
   }
 
   async getFollowers(data: IGetFollowersDTO) {
-    return await this.getFollowersUseCase.execute(data);
+    return this.encryptListBeforeSendPolicy.execute(
+      await this.getFollowersUseCase.execute(data),
+    );
   }
 
   async getFollowings(data: IGetFollowingsDTO) {
-    return await this.getFollowingsUseCase.execute(data);
+    return this.encryptListBeforeSendPolicy.execute(
+      await this.getFollowingsUseCase.execute(data),
+    );
   }
 
   async countFollowings(data: ICountFollowingsDTO) {
