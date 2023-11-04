@@ -89,6 +89,9 @@ describe('[SERVICE] | FOLLOW ', () => {
 
   it('[UNIT] | Should: get => [FOLLOWERS]', async () => {
     module.use_case.get_followers.execute.mockResolvedValue([VALID_FOLLOW]);
+    module.policy.security.encrypt.before.followers.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.getFollowers({
       followingId: USER_FOLLOWED.id,
@@ -100,6 +103,13 @@ describe('[SERVICE] | FOLLOW ', () => {
     expect(module.use_case.get_followers.execute).toBeCalledWith({
       followingId: USER_FOLLOWED.id,
     });
+
+    expect(
+      module.policy.security.encrypt.before.followers.execute,
+    ).toBeCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.followers.execute,
+    ).toBeCalledWith(VALID_FOLLOW);
   });
 
   it('[UNIT] | Should: get => [FOLLOWING]', async () => {
