@@ -65,7 +65,7 @@ describe('[MODULE] | Follow', () => {
 
     expect(resonse.status).toBe(200);
 
-    const body: { followers: IFollowDTO[] } = resonse.body;
+    const body = { followers: cypher.decryptFollowers(resonse.body.followers) };
 
     expect(body).toHaveProperty('followers');
     expect(body.followers.length).toBeGreaterThanOrEqual(0);
