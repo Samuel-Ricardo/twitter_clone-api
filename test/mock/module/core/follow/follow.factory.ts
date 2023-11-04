@@ -13,6 +13,9 @@ import { FollowService } from '../../../../../src/modules/@core/follow/service';
 import { FollowController } from '../../../../../src/modules/@core/follow/controller';
 import { ISimulateFollowService } from '@test/@types/simulate/follow/service';
 import { ISimulateFollowController } from '@test/@types/simulate/follow/controller';
+import { EncryptFollowBeforeSendPolicy } from '@Core/follow/policy/security/encrypt/before/follow.policy';
+import { EncryptFollowListBeforeSendPolicy } from '@Core/follow/policy/security/encrypt/before/followers.policy';
+import { FollowPolicy } from '@Core/follow/policy/follow.policy';
 
 export const FollowMockFactory = {
   SERVICE: () =>
@@ -31,6 +34,26 @@ export const FollowMockFactory = {
     FollowMockModule.get<ISimulateFollowController>(
       FollowMockRegistry.CONTROLLER_DEV,
     ),
+  POLICY: {
+    FOLLOW: () =>
+      FollowMockModule.get<DeepMockProxy<FollowPolicy>>(
+        FollowMockRegistry.POLICY.FOLLOW,
+      ),
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          FOLLOW: () =>
+            FollowMockModule.get<DeepMockProxy<EncryptFollowBeforeSendPolicy>>(
+              FollowMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOW,
+            ),
+          FOLLOWERS: () =>
+            FollowMockModule.get<
+              DeepMockProxy<EncryptFollowListBeforeSendPolicy>
+            >(FollowMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.FOLLOWERS),
+        },
+      },
+    },
+  },
   USE_CASE: {
     CREATE: () =>
       FollowMockModule.get<DeepMockProxy<CreateFollowUseCase>>(
