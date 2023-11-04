@@ -13,10 +13,15 @@ import { FollowService } from './service';
 import { FollowController } from './controller';
 import { EncryptFollowBeforeSendPolicy } from './policy/security/encrypt/before/follow.policy';
 import { EncryptFollowListBeforeSendPolicy } from './policy/security/encrypt/before/followers.policy';
+import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
-export const FollowModule = Container.merge(Module, PrismaRepositoryModule);
+export const FollowModule = Container.merge(
+  Module,
+  PrismaRepositoryModule,
+  CYPHER_MODULE,
+);
 
 FollowModule.bind(FollowRegistry.USE_CASE.CREATE).to(CreateFollowUseCase);
 FollowModule.bind(FollowRegistry.USE_CASE.DELETE).to(UnFollowUseCase);
