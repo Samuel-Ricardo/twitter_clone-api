@@ -18,7 +18,8 @@ export class FollowController {
   ) {}
 
   async follow(data: ICreateFollowDTO) {
-    return { follow: (await this.service.follow(data)).toStruct() };
+    //    return { follow: (await this.service.follow(data)).toStruct() };
+    return { follow: await this.service.follow(data) };
   }
 
   async unfollow(data: IDeleteFollowDTO) {
@@ -26,16 +27,18 @@ export class FollowController {
   }
 
   async getFollowers(data: IGetFollowersDTO) {
-    return {
-      followers: (await this.service.getFollowers(data)).map((follower) =>
-        follower.toStruct(),
-      ),
-    };
+    // return {
+    //   followers: (await this.service.getFollowers(data)).map((follower) =>
+    //     follower.toStruct(),
+    //   ),
+    // };
+    return { followers: await this.service.getFollowers(data) };
   }
 
   async getFollowing(data: IGetFollowingsDTO) {
     const following = await this.service.getFollowings(data);
-    return { following: following.map((following) => following.toStruct()) };
+    //    return { following: following.map((following) => following.toStruct()) }/
+    return { following };
   }
 
   async countFollowers(data: ICountFollowersDTO) {
