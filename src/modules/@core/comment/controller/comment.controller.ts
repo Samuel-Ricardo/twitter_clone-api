@@ -18,12 +18,12 @@ export class CommentController {
   ) {}
 
   async create(data: ICreateCommentDTO) {
-    const comment = (await this.service.comment(data)).toStruct();
+    const comment = await this.service.comment(data);
     return { comment };
   }
 
   async udpate(data: IUpdateCommentDTO) {
-    return { comment: (await this.service.updateComment(data)).toStruct() };
+    return { comment: await this.service.updateComment(data) };
   }
 
   async delete(comment: IDeleteCommentDTO) {
@@ -31,19 +31,21 @@ export class CommentController {
   }
 
   async getById(data: IGetCommentByIdDTO) {
-    return { comment: (await this.service.getById(data)).toStruct() };
+    return { comment: await this.service.getById(data) };
   }
 
   async getPostComments(post: IGetPostCommentsDTO) {
-    return {
-      comments: (await this.service.listPostComments(post)).map((c) =>
-        c.toStruct(),
-      ),
-    };
+    // return {
+    //   comments: (await this.service.listPostComments(post)).map((c) =>
+    //     c.toStruct(),
+    //   ),
+    // };
+    return { comments: await this.service.listPostComments(post) };
   }
 
   async getUserComments(user: IGetUserCommentsDTO) {
     const comments = await this.service.listUserCommnets(user);
-    return { comments: comments.map((c) => c.toStruct()) };
+    // return { comments: comments.map((c) => c.toStruct()) };
+    return { comments };
   }
 }
