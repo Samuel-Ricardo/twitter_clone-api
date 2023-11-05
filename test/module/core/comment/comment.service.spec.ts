@@ -1,5 +1,5 @@
 import { ISimulateCommentService } from '@test/@types/simulate/comment';
-import { MockFactory } from '@test/mock';
+import { ENCRYPTED_DATA, MockFactory } from '@test/mock';
 import {
   UPDATE_POST_COMMENT,
   UPDATE_POST_COMMENT_DATA,
@@ -20,18 +20,30 @@ describe('[SERVICE] | COMMENT', () => {
     expect(module).toBeDefined();
     expect(module.service).toBeDefined();
     expect(module.use_case).toBeDefined();
+    expect(module.policy).toBeDefined();
   });
 
   it('[UNIT] | Should: create => [COMMENT]', async () => {
     module.use_case.create.execute.mockResolvedValue(VALID_POST_COMMENT);
+    module.policy.security.encrypt.before.comment.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.comment(VALID_POST_COMMENT_DATA);
 
-    expect(result).toStrictEqual(VALID_POST_COMMENT);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
+
     expect(module.use_case.create.execute).toBeCalledTimes(1);
     expect(module.use_case.create.execute).toBeCalledWith(
       VALID_POST_COMMENT_DATA,
     );
+
+    expect(
+      module.policy.security.encrypt.before.comment.execute,
+    ).toBeCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.comment.execute,
+    ).toBeCalledWith(VALID_POST_COMMENT);
   });
 
   it('[UNIT] | Should: update => [COMMENT]', async () => {
