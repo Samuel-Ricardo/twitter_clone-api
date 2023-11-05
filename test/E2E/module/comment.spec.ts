@@ -76,7 +76,7 @@ describe('[MODULE] | COMMENT', () => {
       body: UPDATE_POST_COMMENT_DATA.body,
     });
 
-    const body = response.body;
+    const body = { comment: cypher.decryptComment(response.body.comment) };
 
     expect(response.status).toBe(200);
     expect(body.comment.id).toEqual(commented.id);
