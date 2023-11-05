@@ -13,10 +13,15 @@ import { CommentController } from './controller';
 import { GetCommentByIdUseCase } from './use-case/get_by_id.use-case';
 import { EncryptCommentListBeforeSendPolicy } from './policy/security/encrypt/before/comments.policy';
 import { EncryptCommentBeforeSendPolicy } from './policy/security/encrypt/before/comment.policy';
+import { CYPHER_MODULE } from '../../cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
-export const CommentModule = Container.merge(Module, RepositoryModule);
+export const CommentModule = Container.merge(
+  Module,
+  RepositoryModule,
+  CYPHER_MODULE,
+);
 
 CommentModule.bind(CommentRegistry.USE_CASE.CREATE).to(CreateCommentUseCase);
 CommentModule.bind(CommentRegistry.USE_CASE.DELETE).to(DeleteCommentUseCase);
