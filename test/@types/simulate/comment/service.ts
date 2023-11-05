@@ -9,6 +9,7 @@ import {
 } from '../../../../src/modules/@core/comment/use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
 import { EncryptCommentListBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comments.policy';
+import { GetCommentByIdUseCase } from '@Core/comment/use-case/get_by_id.use-case';
 
 export interface ISimulateCommentService {
   service: CommentService;
@@ -28,5 +29,6 @@ export interface ISimulateCommentService {
     deleteComment: DeepMockProxy<DeleteCommentUseCase>;
     get_post_comments: DeepMockProxy<GetPostCommentUseCase>;
     get_user_comments: DeepMockProxy<GetUserCommnetsUseCase>;
+    get_by_id: DeepMockProxy<GetCommentByIdUseCase>;
   };
 }
