@@ -93,16 +93,27 @@ describe('[SERVICE] | COMMENT', () => {
     module.use_case.get_post_comments.execute.mockResolvedValue([
       VALID_POST_COMMENT,
     ]);
+    module.policy.security.encrypt.before.comments.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.listPostComments({
       postId: VALID_POST.id,
     });
 
-    expect(result).toStrictEqual([VALID_POST_COMMENT]);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
+
     expect(module.use_case.get_post_comments.execute).toBeCalledTimes(1);
     expect(module.use_case.get_post_comments.execute).toBeCalledWith({
       postId: VALID_POST.id,
     });
+
+    expect(
+      module.policy.security.encrypt.before.comments.execute,
+    ).toBeCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.comments.execute,
+    ).toBeCalledWith([VALID_POST_COMMENT]);
   });
 
   it('[UNIT] | Should: get by [USER] => [COMMENT]', async () => {
