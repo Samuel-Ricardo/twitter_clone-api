@@ -65,13 +65,16 @@ describe('[CONTROLLER] | COMMENT', () => {
   });
 
   it('[UNIT] | Should: get by [POST] => [COMMENT]', async () => {
-    module.service.listPostComments.mockResolvedValue([VALID_POST_COMMENT]);
+    module.service.listPostComments.mockResolvedValue(ENCRYPTED_DATA);
 
     const result = await module.controller.getPostComments({
       postId: VALID_POST_COMMENT.postId,
     });
 
-    expect(result).toStrictEqual({ comments: [VALID_POST_COMMENT.toStruct()] });
+    //    expect(result).toStrictEqual({comments: [VALID_POST_COMMENT.toStruct()]});
+
+    expect(result).toStrictEqual({ comments: ENCRYPTED_DATA });
+
     expect(module.service.listPostComments).toHaveBeenCalledTimes(1);
     expect(module.service.listPostComments).toHaveBeenCalledWith({
       postId: VALID_POST_COMMENT.postId,
