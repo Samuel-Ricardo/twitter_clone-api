@@ -14,6 +14,7 @@ import { ISimulateCommentService } from '@test/@types/simulate/comment';
 import { ISimulateController } from '@test/@types/simulate/controller';
 import { EncryptCommentBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comment.policy';
 import { EncryptCommentListBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comments.policy';
+import { GetCommentByIdUseCase } from '@Core/comment/use-case/get_by_id.use-case';
 
 export const CommentMockFactory = {
   CONTROLLER: () =>
@@ -70,6 +71,10 @@ export const CommentMockFactory = {
         AUTHOR: () =>
           CommentMockModule.get<DeepMockProxy<GetPostCommentUseCase>>(
             CommentMockRegistry.USE_CASE.GET.BY.AUTHOR,
+          ),
+        ID: () =>
+          CommentMockModule.get<DeepMockProxy<GetCommentByIdUseCase>>(
+            CommentMockRegistry.USE_CASE.GET.BY.ID,
           ),
       },
     },
