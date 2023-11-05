@@ -1,3 +1,4 @@
+import { EncryptCommentBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comment.policy';
 import { CommentService } from '../../../../src/modules/@core/comment/service';
 import {
   CreateCommentUseCase,
@@ -7,9 +8,20 @@ import {
   UpdateCommentUseCase,
 } from '../../../../src/modules/@core/comment/use-case';
 import { DeepMockProxy } from 'jest-mock-extended';
+import { EncryptCommentListBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comments.policy';
 
 export interface ISimulateCommentService {
   service: CommentService;
+  policy: {
+    security: {
+      encrypt: {
+        before: {
+          comment: DeepMockProxy<EncryptCommentBeforeSendPolicy>;
+          comments: DeepMockProxy<EncryptCommentListBeforeSendPolicy>;
+        };
+      };
+    };
+  };
   use_case: {
     create: DeepMockProxy<CreateCommentUseCase>;
     update: DeepMockProxy<UpdateCommentUseCase>;
