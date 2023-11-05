@@ -120,16 +120,26 @@ describe('[SERVICE] | COMMENT', () => {
     module.use_case.get_user_comments.execute.mockResolvedValue([
       VALID_POST_COMMENT,
     ]);
+    module.policy.security.encrypt.before.comments.execute.mockReturnValue(
+      ENCRYPTED_DATA,
+    );
 
     const result = await module.service.listUserCommnets({
       authorId: VALID_USER.id,
     });
 
-    expect(result).toStrictEqual([VALID_POST_COMMENT]);
+    expect(result).toStrictEqual(ENCRYPTED_DATA);
 
     expect(module.use_case.get_user_comments.execute).toBeCalledTimes(1);
     expect(module.use_case.get_user_comments.execute).toBeCalledWith({
       authorId: VALID_USER.id,
     });
+
+    expect(
+      module.policy.security.encrypt.before.comments.execute,
+    ).toBeCalledTimes(1);
+    expect(
+      module.policy.security.encrypt.before.comments.execute,
+    ).toBeCalledWith([VALID_POST_COMMENT]);
   });
 });
