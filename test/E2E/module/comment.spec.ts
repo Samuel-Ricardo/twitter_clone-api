@@ -57,7 +57,7 @@ describe('[MODULE] | COMMENT', () => {
     const response = await supertest(app).get(
       `${comment.prefix}/author/${VALID_POST_COMMENT.authorId}`,
     );
-    const body = response.body;
+    const body = { comments: cypher.decryptComments(response.body.comments) };
 
     expect(response.status).toBe(200);
     expect(body.comments).toBeDefined();
