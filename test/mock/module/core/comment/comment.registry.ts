@@ -21,6 +21,7 @@ export const CommentMockRegistry = {
       BY: {
         POST: Symbol.for('MOCK:>COMMENT.USE_CASE.GET.BY.POST'),
         AUTHOR: Symbol.for('MOCK:>COMMENT.USE_CASE.GET.BY.AUTHOR'),
+        ID: Symbol.for('MOCK:>COMMENT.USE_CASE.GET.BY.ID'),
       },
     },
   },
