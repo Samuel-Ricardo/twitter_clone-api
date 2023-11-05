@@ -3,7 +3,7 @@
  */
 
 import supertest from 'supertest';
-import { Comment, MODULES } from '../../../src/modules';
+import { Comment, ICommentDTO, MODULES } from '../../../src/modules';
 import { app } from '@/app';
 import {
   CREATE_POST_COMMENT_DATA,
@@ -14,7 +14,7 @@ import { comment } from '../../../src/modules/router/comment';
 import { ICommentCypher } from '@Core/comment/cypher/comment.cypher';
 
 describe('[MODULE] | COMMENT', () => {
-  let commented: Comment;
+  let commented: ICommentDTO;
   let cypher: ICommentCypher;
 
   beforeEach(() => (cypher = MODULES.CYPHER.COMMENT()));
@@ -40,7 +40,7 @@ describe('[MODULE] | COMMENT', () => {
     const response = await supertest(app).get(
       `${comment.prefix}/post/${VALID_POST_COMMENT.postId}`,
     );
-    const body = response.body;
+    const body = { comments: cypher.decryptComments(response.body.comments) };
 
     expect(response.status).toBe(200);
     expect(body.comments).toBeDefined();
