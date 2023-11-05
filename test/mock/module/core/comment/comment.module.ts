@@ -11,6 +11,7 @@ import { mockCommentService, simulateCommentService } from './service';
 import { mockCommentController, simulateCommentController } from './controller';
 import { mockEncryptCommentBeforeSendPolicy } from './policy/security/encrypt/before/comment.policy';
 import { mockEncryptCommentListBeforeSendPolicy } from './policy/security/encrypt/before/comments.policy';
+import { mockGetCommentByIDUseCase } from './use-case/get_by_id.use-case';
 
 export const CommentMockModule = new Container({ autoBindInjectable: true });
 
@@ -29,6 +30,10 @@ CommentMockModule.bind(CommentMockRegistry.USE_CASE.GET.BY.POST).toDynamicValue(
 CommentMockModule.bind(
   CommentMockRegistry.USE_CASE.GET.BY.AUTHOR,
 ).toDynamicValue(mockGetUserCommentsUseCase);
+
+CommentMockModule.bind(CommentMockRegistry.USE_CASE.GET.BY.ID).toDynamicValue(
+  mockGetCommentByIDUseCase,
+);
 
 CommentMockModule.bind(
   CommentMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENT,
