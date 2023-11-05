@@ -12,6 +12,8 @@ import { CommentService } from '../../../../../src/modules/@core/comment/service
 import { CommentController } from '../../../../../src/modules/@core/comment/controller';
 import { ISimulateCommentService } from '@test/@types/simulate/comment';
 import { ISimulateController } from '@test/@types/simulate/controller';
+import { EncryptCommentBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comment.policy';
+import { EncryptCommentListBeforeSendPolicy } from '@Core/comment/policy/security/encrypt/before/comments.policy';
 
 export const CommentMockFactory = {
   CONTROLLER: () =>
@@ -30,6 +32,22 @@ export const CommentMockFactory = {
     CommentMockModule.get<ISimulateCommentService>(
       CommentMockRegistry.SERVICE_DEV,
     ),
+  POLICY: {
+    SECURITY: {
+      ENCRYPT: {
+        BEFORE: {
+          COMMENT: () =>
+            CommentMockModule.get<
+              DeepMockProxy<EncryptCommentBeforeSendPolicy>
+            >(CommentMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENT),
+          COMMENTS: () =>
+            CommentMockModule.get<
+              DeepMockProxy<EncryptCommentListBeforeSendPolicy>
+            >(CommentMockRegistry.POLICY.SECURITY.ENCRYPT.BEFORE.COMMENTS),
+        },
+      },
+    },
+  },
   USE_CASE: {
     CREATE: () =>
       CommentMockModule.get<DeepMockProxy<CreateCommentUseCase>>(
