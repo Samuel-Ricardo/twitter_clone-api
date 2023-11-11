@@ -1,5 +1,9 @@
 import { MODULES } from '../../../app.factory';
 
+export const decryptArgs = (args: any[]) => {
+  return args.map((item) => decryptArg(item));
+};
+
 export const decryptArg = (arg: { encrypted?: string }) => {
   return arg.encrypted
     ? JSON.parse(
