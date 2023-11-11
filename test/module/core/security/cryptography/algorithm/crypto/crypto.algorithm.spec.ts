@@ -4,6 +4,7 @@ import { Crypto } from '../../../../../../../src/modules/security/cryptography/a
 import {
   AUTH_TAG,
   CIPHERIV,
+  DECIPHERIV,
   INITIAL_VECTOR,
   SIMULATE_ENCRYPT,
 } from '@test/mock/data/cypher/crypto';
@@ -18,5 +19,26 @@ describe('[CRYPTOGRAPHY] | ALGORITHM => [CRYPTO]', () => {
 
     expect(module.engine).toBeDefined();
     expect(module.crypto).toBeInstanceOf(Crypto);
+  });
+
+  it('[UNIT] | Should: be able to => [ENCRYPT]', async () => {
+    const cipheriv = CIPHERIV;
+    const tag = AUTH_TAG;
+    const iv = () => INITIAL_VECTOR;
+
+    cipheriv.update.mockReturnValue('secret');
+    cipheriv.final.mockReturnValue('');
+
+    cipheriv.getAuthTag.mockReturnValue(tag);
+
+    module.engine.randomBytes.mockImplementation(iv);
+    module.engine.createCipheriv.mockReturnValue(cipheriv);
+
+    const encrypted = module.crypto.encryptIV('data');
+
+    const expected = SIMULATE_ENCRYPT('secret');
+
+    expect(encrypted).not.toBe('data');
+    expect(encrypted).toBe(expected);
   });
 });
