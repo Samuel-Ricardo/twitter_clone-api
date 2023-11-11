@@ -18,6 +18,10 @@ import {
 import { IAppEvents } from '../../../../event/app';
 import { SetVisualizedSchema } from '../../../../@core/notification/validator/set_visualized.validator';
 import { INotificationEvents } from '../../../../@core/notification/events';
+import {
+  decryptArg,
+  encryptResponse,
+} from '../../../../middleware/reactive/cypher/cypher.middleware';
 
 @injectable()
 export class NotificationSocket implements IReactiveNotification<Socket> {
@@ -66,6 +70,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       EVENTS.NOTIFICATION.NEW,
       async (notification: ICreateNotificationDTO) => {
         try {
+          notification = decryptArg(notification as any);
           CreateNotificationSchema.parse(notification);
           this.notification.create(notification);
         } catch (error: any) {
@@ -80,6 +85,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       EVENTS.NOTIFICATION.VISUALIZE,
       async (notification: ISetNotificationVisualizedDTO) => {
         try {
+          notification = decryptArg(notification as any);
           SetVisualizedSchema.parse(notification);
 
           const result = await this.notification.visualize(notification);
@@ -103,6 +109,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
       EVENTS.NOTIFICATION.DELETE,
       async (notification: IDeleteNotificationDTO) => {
         try {
+          notification = decryptArg(notification as any);
           DeleteNotificationSchema.parse(notification);
 
           const result = await this.notification.delete(notification);
@@ -119,6 +126,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     notification: IDeleteNotificationDTO,
     socket?: Socket,
   ) {
+    notification = encryptResponse(notification) as any;
     socket
       ? socket?.to(this.room).emit(EVENTS.NOTIFICATION.DELETED, notification)
       : this.socket.io
@@ -130,6 +138,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     notification: INotificationDTO,
     socket?: Socket,
   ) {
+    notification = encryptResponse(notification) as any;
     socket
       ? socket.to(this.room).emit(EVENTS.NOTIFICATION.CREATED, notification)
       : this.socket.io
@@ -141,6 +150,7 @@ export class NotificationSocket implements IReactiveNotification<Socket> {
     notification: ISetNotificationVisualizedDTO,
     socket?: Socket,
   ) {
+    notification = encryptResponse(notification) as any;
     socket
       ? socket.to(this.room).emit(EVENTS.NOTIFICATION.VISUALIZED, notification)
       : this.socket.io
