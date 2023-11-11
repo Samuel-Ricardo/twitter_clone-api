@@ -5,7 +5,7 @@ export const decryptMiddleware: RequestHandler = async (req, res, next) => {
   try {
     const cryptographer = MODULES.SECURITY.CRYPTOGRAPHY.TURING();
 
-    const { encrypted } = req.body;
+    const encrypted = req.body.encrypted;
 
     if (req.body.encrypted)
       req.body = JSON.parse(cryptographer.decryptIV(req.body.encrypted));
@@ -14,7 +14,7 @@ export const decryptMiddleware: RequestHandler = async (req, res, next) => {
       req.params[key] = cryptographer.decryptIV(req.params[key]);
     });
 
-    req.body.encrypted &&
+    encrypted &&
       console.log({
         encrypted,
         decrypted: JSON.parse(cryptographer.decryptIV(encrypted)),
