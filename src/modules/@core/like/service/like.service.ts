@@ -11,8 +11,8 @@ import { IGetLikesOfPostDTO } from '../DTO/get_by_post.dto';
 import { IGetLikesOfUserDTO } from '../DTO/get_by_user.dto';
 import { IGetLikesOfCommentDTO } from '../DTO/get_by_comment.dto';
 import { MODULE } from '@modules/app.registry';
-import { EncryptLikeBeforeSendPolicy } from '@Like/policy/security/encrypt/before/like.policy';
-import { EncryptLikeListBeforeSendPolicy } from '@Like/policy/security/encrypt/before/likes.policy';
+import { EncryptLikeBeforeSendPolicy } from '../policy/security/encrypt/before/like.policy';
+import { EncryptLikeListBeforeSendPolicy } from '../policy/security/encrypt/before/likes.policy';
 
 @injectable()
 export class LikeService {
