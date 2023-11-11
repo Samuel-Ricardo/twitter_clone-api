@@ -1,4 +1,4 @@
-import { IFollowDTO } from '@Core/follow/DTO';
+import { IFollowDTO } from '../../../../DTO/follow.dto';
 import { FollowCypherAccess } from '../../../../cypher/cypher.access';
 import { injectable } from 'inversify';
 import { Follow } from '../../../../entity/follow.entity';
