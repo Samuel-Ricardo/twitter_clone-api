@@ -8,3 +8,4 @@ export const IV_BREAKPOINT = ENV.SECURITY.CRYPTOGRAPHY.IV.BREAKPOINT;
 
 export const CIPHERIV = mockDeep<CipherGCM>();
 export const DECIPHER = mockDeep<DecipherGCM>();
+export const AUTH_TAG = Buffer.from('auth_tag', 'utf8');
