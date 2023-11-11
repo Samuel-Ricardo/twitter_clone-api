@@ -5,5 +5,5 @@ export interface IFollowCypher {
   encryptFollowers(followers: IFollowDTO[]): string;
 
   decryptFollow(follow: string): IFollowDTO;
-  decryptFollowers(followers: string[]): IFollowDTO[];
+  decryptFollowers(followers: string): IFollowDTO[];
 }
