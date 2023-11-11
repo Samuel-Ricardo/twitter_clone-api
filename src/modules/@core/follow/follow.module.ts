@@ -13,7 +13,7 @@ import { FollowService } from './service';
 import { FollowController } from './controller';
 import { EncryptFollowBeforeSendPolicy } from './policy/security/encrypt/before/follow.policy';
 import { EncryptFollowListBeforeSendPolicy } from './policy/security/encrypt/before/followers.policy';
-import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
+import { CYPHER_MODULE } from '../../cypher/cypher.module';
 
 const Module = new Container({ autoBindInjectable: true });
 
