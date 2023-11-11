@@ -7,3 +7,4 @@ export const AUTH_BREAKPOINT = ENV.SECURITY.CRYPTOGRAPHY.AUTH.BREAKPOINT;
 export const IV_BREAKPOINT = ENV.SECURITY.CRYPTOGRAPHY.IV.BREAKPOINT;
 
 export const CIPHERIV = mockDeep<CipherGCM>();
+export const DECIPHER = mockDeep<DecipherGCM>();
