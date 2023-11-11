@@ -41,4 +41,18 @@ describe('[CRYPTOGRAPHY] | ALGORITHM => [CRYPTO]', () => {
     expect(encrypted).not.toBe('data');
     expect(encrypted).toBe(expected);
   });
+
+  it('[UNIT] | Should: be able to => [DECRYPT]', async () => {
+    const encrypted = SIMULATE_ENCRYPT('secret');
+
+    DECIPHERIV.update.mockReturnValue('data');
+    DECIPHERIV.final.mockReturnValue('');
+
+    module.engine.createDecipheriv.mockReturnValue(DECIPHERIV);
+
+    const decrypted = module.crypto.decryptIV(encrypted);
+
+    expect(decrypted).not.toBe(encrypted);
+    expect(decrypted).toBe('data');
+  });
 });
