@@ -1,0 +1,10 @@
+export const ALGORITHM_MODULE_MOCK = {
+  HASH: {
+    ARGON: {
+      2: Symbol.for('MOCK::MODULE:SECURITY:CRYPTOGRAPHY:ALGORITHM:ARGON2'),
+    },
+  },
+  IV: {
+    CRYPTO: Symbol.for('MOCK::MODULE:SECURITY:CRYPTOGRAPHY:ALGORITHM:CRYPTO'),
+  },
+};
