@@ -1,6 +1,6 @@
-import { ILikeDTO } from '@Like/DTO';
-import { LikeCypherAccess } from '@Like/cypher/cypher.access';
-import { Like } from '@Like/entity';
+import { ILikeDTO } from '../../../../DTO';
+import { LikeCypherAccess } from '../../../../cypher/cypher.access';
+import { Like } from '../../../../entity';
 import { injectable } from 'inversify';
 
 @injectable()
