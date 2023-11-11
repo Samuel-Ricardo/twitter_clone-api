@@ -23,6 +23,8 @@ import {
 import { CreateNotificationSchema } from '../../../src/modules/@core/notification/validator';
 import { SetVisualizedSchema } from '../../../src/modules/@core/notification/validator/set_visualized.validator';
 import { MODULES } from '@modules';
+import { ICryptographer } from '@modules/security/cryptography/cryptography.contract';
+import { decrypt } from 'dotenv';
 
 describe('[MODULE] | NOTIFICATION', () => {
   const module: {
@@ -38,13 +40,15 @@ describe('[MODULE] | NOTIFICATION', () => {
       app?: IAppEvents;
       notification?: INotificationEvents;
     };
-  } = { port: 8576, server: {}, client: {}, events: {} };
+    cypher: ICryptographer;
+  } = { port: 8576, server: {}, client: {}, events: {}, cypher: {} as any };
 
   const { CONNECTION, CONNECT, NOTIFICATION } = EVENT;
 
   beforeAll((done) => {
     module.events.app = MODULES.EVENTS.NODE.APP();
     module.events.notification = MODULES.EVENTS.NODE.NOTIFICATION();
+    module.cypher = MODULES.SECURITY.CRYPTOGRAPHY.TURING();
 
     server.listen(module.port, () => {
       module.client.socket = Client(`http://localhost:${module.port}`);
@@ -62,6 +66,14 @@ describe('[MODULE] | NOTIFICATION', () => {
     module.client.socket?.close();
     done();
   });
+
+  function decrypt(data: string) {
+    return JSON.parse(module.cypher.decryptIV(data));
+  }
+
+  function encrypt(data: any) {
+    return { encrypted: module.cypher.encryptIV(JSON.stringify(data)) };
+  }
 
   it('[E2E] | should: create => [NOTIFICATION]', async () => {
     const response = await supertest(app)
@@ -110,6 +122,10 @@ describe('[MODULE] | NOTIFICATION', () => {
       NOTIFICATION.NEW,
       (data: ICreateNotificationDTO) => {
         expect(data).toBeDefined();
+
+        expect((data as any).encrypted).toBeDefined();
+        data = decrypt((data as any).encrypted);
+
         expect(CreateNotificationSchema.parse(data)).toBeDefined();
       },
     );
@@ -131,6 +147,7 @@ describe('[MODULE] | NOTIFICATION', () => {
     module.client.socket?.on(
       NOTIFICATION.CREATED,
       (notification: INotificationDTO) => {
+        notification = decrypt((notification as any).encrypted);
         expect(notification).toBeDefined();
         expect(notification).toHaveProperty('id');
         expect(notification.body).toEqual(VALID_POST_NOTIFICATION_DATA.body);
@@ -145,7 +162,10 @@ describe('[MODULE] | NOTIFICATION', () => {
       },
     );
 
-    module.client.socket?.emit(NOTIFICATION.NEW, VALID_POST_NOTIFICATION_DATA);
+    module.client.socket?.emit(
+      NOTIFICATION.NEW,
+      encrypt(VALID_POST_NOTIFICATION_DATA),
+    );
   });
 
   it('[E2E] | Should: visualize => [NOTIFICATION]', (done) => {
