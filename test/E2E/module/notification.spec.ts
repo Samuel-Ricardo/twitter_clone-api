@@ -175,6 +175,10 @@ describe('[MODULE] | NOTIFICATION', () => {
       NOTIFICATION.VISUALIZE,
       (data: ISetNotificationVisualizedDTO) => {
         expect(data).toBeDefined();
+
+        expect((data as any).encrypted).toBeDefined();
+        data = decrypt((data as any).encrypted);
+
         expect(SetVisualizedSchema.parse(data)).toBeDefined();
       },
     );
@@ -190,6 +194,7 @@ describe('[MODULE] | NOTIFICATION', () => {
     module.client.socket?.on(
       NOTIFICATION.VISUALIZED,
       (notification: ISetNotificationVisualizedDTO) => {
+        notification = decrypt((notification as any).encrypted);
         expect(notification).toBeDefined();
         expect(notification).toHaveProperty('id');
         expect(notification.visualizedAt).toBeDefined();
@@ -198,9 +203,12 @@ describe('[MODULE] | NOTIFICATION', () => {
       },
     );
 
-    module.client.socket?.emit(NOTIFICATION.VISUALIZE, {
-      id: module.notification?.id,
-      visualizedAt,
-    });
+    module.client.socket?.emit(
+      NOTIFICATION.VISUALIZE,
+      encrypt({
+        id: module.notification?.id,
+        visualizedAt,
+      }),
+    );
   });
 });
