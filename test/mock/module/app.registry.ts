@@ -7,6 +7,7 @@ import { FollowMockRegistry as FOLLOW } from './core/follow';
 import { CommentMockRegistry as COMMENT } from './core/comment';
 import { NotificationMockRegistry as NOTIFICATION } from './core/notification';
 import { CYPHER_REGISTRY_MOCK as CYPHER } from './cypher/cypher.module';
+import { SECURITY_REGISTRY_MOCK as SECURITY } from './security/security.registry';
 
 export const MOCK_MODULE = {
   ...PrismaMockResgistry,
@@ -18,4 +19,5 @@ export const MOCK_MODULE = {
   COMMENT,
   NOTIFICATION,
   CYPHER,
+  SECURITY,
 };
