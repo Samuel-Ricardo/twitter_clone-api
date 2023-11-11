@@ -10,7 +10,7 @@ import { LikeController } from './controller/like.controller';
 import { RepositoryModule } from '../../repository/repository.module';
 import { EventsModule } from '../../event/event.module';
 import { EmitCreateLikeEventUseCase } from './use-case/events/create.use-case';
-import { CYPHER_MODULE } from '@modules/cypher/cypher.module';
+import { CYPHER_MODULE } from '../../cypher/cypher.module';
 import { EncryptLikeBeforeSendPolicy } from './policy/security/encrypt/before/like.policy';
 import { EncryptLikeListBeforeSendPolicy } from './policy/security/encrypt/before/likes.policy';
 
