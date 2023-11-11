@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { IFollowCypher } from './follow.cypher';
-import { MODULE } from '@modules/app.registry';
+import { MODULE } from '../../../app.registry';
 
 @injectable()
 export abstract class FollowCypherAccess {
