@@ -3,6 +3,7 @@ import { SocketIO } from '../../../reactive/socket_io/socket';
 import { inject, injectable } from 'inversify';
 import { EVENTS } from '../../../reactive/reactive.config';
 import { Socket } from 'socket.io';
+import { decryptArgs } from '../cypher/cypher.middleware';
 
 @injectable()
 export class ReactiveLoggerMiddleware {
@@ -29,6 +30,7 @@ export class ReactiveLoggerMiddleware {
 
   async subscribeLogs(socket: Socket) {
     socket.onAny((event, ...args) => {
+      args = decryptArgs(args);
       logger.info(
         { context: 'WEBSOCKET', message: 'Event received' },
         { id: socket.id, event, args },
@@ -36,6 +38,7 @@ export class ReactiveLoggerMiddleware {
     });
 
     socket.onAnyOutgoing((event, ...args) => {
+      args = decryptArgs(args);
       logger.info(
         { context: 'WEBSOCKET', message: 'Event sent' },
         { id: socket.id, event, args },
