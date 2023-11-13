@@ -29,4 +29,16 @@ describe('[CRYPTOGRAPHY] | [HASH] | ALGORITHM => [ARGON]', () => {
 
     expect(module.engine.hash).toBeCalledTimes(1);
   });
+
+  it('[UNIT] | Should: be able to => [COMPARE]', async () => {
+    module.engine.verify.mockResolvedValue(true);
+
+    const result = await module.argon.compareHash(
+      'data',
+      'hash' + HASH_BREAKPOINT + SALT_BREAKPOINT + 'salt' + SALT_BREAKPOINT,
+    );
+
+    expect(result).toBe(true);
+    expect(module.engine.verify).toBeCalledTimes(1);
+  });
 });
