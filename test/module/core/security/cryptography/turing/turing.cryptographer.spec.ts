@@ -47,4 +47,18 @@ describe('[CRYPTOGRAPHY] | CRYPTOGRAPHER => [TURING]', () => {
     expect(module.hashAlgorithm.hash).toHaveBeenCalledTimes(1);
     expect(module.hashAlgorithm.hash).toHaveBeenCalledWith('DATA');
   });
+
+  it('[UNIT] | Should: be able to => [COMPARE] ', async () => {
+    module.hashAlgorithm.compareHash.mockResolvedValue(true);
+
+    const result = await module.turing.compareHash('DATA', 'HASH');
+
+    expect(result).toBe(true);
+
+    expect(module.hashAlgorithm.compareHash).toHaveBeenCalledTimes(1);
+    expect(module.hashAlgorithm.compareHash).toHaveBeenCalledWith(
+      'DATA',
+      'HASH',
+    );
+  });
 });
