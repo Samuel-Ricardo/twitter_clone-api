@@ -12,14 +12,14 @@ export const ALGORITHM_FACTORY_MOCK = {
       ARGON: {
         2: () =>
           ALGORITHM_MODULE_MOCK.get<ISimulateArgonAlgorithm>(
-            ALGORITHM_REGISTRY_MOCK.HASH.ARGON[2],
+            ALGORITHM_REGISTRY_MOCK.SIMULATE.HASH.ARGON[2],
           ),
       },
     },
     IV: {
       CRYPTO: () =>
         ALGORITHM_MODULE_MOCK.get<ISimulateCryptoAlgorithm>(
-          ALGORITHM_REGISTRY_MOCK.IV.CRYPTO,
+          ALGORITHM_REGISTRY_MOCK.SIMULATE.IV.CRYPTO,
         ),
     },
   },
