@@ -14,4 +14,15 @@ describe('[CRYPTOGRAPHY] | CRYPTOGRAPHER => [TURING]', () => {
     expect(module.cryptoAlgorithm).toBeDefined();
     expect(module.hashAlgorithm).toBeDefined();
   });
+
+  it('[UNIT] | Should: be able to => [ENCRYPT] ', () => {
+    module.cryptoAlgorithm.encryptIV.mockReturnValue('ENCRYPTED');
+
+    const result = module.turing.encryptIV('DATA');
+
+    expect(result).toBe('ENCRYPTED');
+
+    expect(module.cryptoAlgorithm.encryptIV).toHaveBeenCalledTimes(1);
+    expect(module.cryptoAlgorithm.encryptIV).toHaveBeenCalledWith('DATA');
+  });
 });
