@@ -25,4 +25,15 @@ describe('[CRYPTOGRAPHY] | CRYPTOGRAPHER => [TURING]', () => {
     expect(module.cryptoAlgorithm.encryptIV).toHaveBeenCalledTimes(1);
     expect(module.cryptoAlgorithm.encryptIV).toHaveBeenCalledWith('DATA');
   });
+
+  it('[UNIT] | Should: be able to => [DECRYPT] ', () => {
+    module.cryptoAlgorithm.decryptIV.mockReturnValue('DATA');
+
+    const result = module.turing.decryptIV('ENCRYPTED');
+
+    expect(result).toBe('DATA');
+
+    expect(module.cryptoAlgorithm.decryptIV).toHaveBeenCalledTimes(1);
+    expect(module.cryptoAlgorithm.decryptIV).toHaveBeenCalledWith('ENCRYPTED');
+  });
 });
