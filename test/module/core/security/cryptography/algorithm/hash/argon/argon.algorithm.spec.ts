@@ -26,5 +26,7 @@ describe('[CRYPTOGRAPHY] | [HASH] | ALGORITHM => [ARGON]', () => {
         `hash${HASH_BREAKPOINT}${SALT_BREAKPOINT}\\w+.*${SALT_BREAKPOINT}`,
       ),
     );
+
+    expect(module.engine.hash).toBeCalledTimes(1);
   });
 });
