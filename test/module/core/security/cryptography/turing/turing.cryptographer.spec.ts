@@ -26,7 +26,7 @@ describe('[CRYPTOGRAPHY] | CRYPTOGRAPHER => [TURING]', () => {
     expect(module.cryptoAlgorithm.encryptIV).toHaveBeenCalledWith('DATA');
   });
 
-  it('[UNIT] | Should: be able to => [DECRYPT] ', () => {
+  it('[UNIT] | Should: be able to => [DECRYPT] ', async () => {
     module.cryptoAlgorithm.decryptIV.mockReturnValue('DATA');
 
     const result = module.turing.decryptIV('ENCRYPTED');
@@ -35,5 +35,16 @@ describe('[CRYPTOGRAPHY] | CRYPTOGRAPHER => [TURING]', () => {
 
     expect(module.cryptoAlgorithm.decryptIV).toHaveBeenCalledTimes(1);
     expect(module.cryptoAlgorithm.decryptIV).toHaveBeenCalledWith('ENCRYPTED');
+  });
+
+  it('[UNIT] | Should: be able to => [HASH] ', async () => {
+    module.hashAlgorithm.hash.mockResolvedValue('HASH');
+
+    const result = await module.turing.hash('DATA');
+
+    expect(result).toBe('HASH');
+
+    expect(module.hashAlgorithm.hash).toHaveBeenCalledTimes(1);
+    expect(module.hashAlgorithm.hash).toHaveBeenCalledWith('DATA');
   });
 });
