@@ -219,6 +219,30 @@
 
 <br>
 
+### 📬 | Notifications
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_notfications.png"/> </a>
+
+<br>
+
+<p>
+  Here you can see all notifications relevant to you due to our reactive notifications system.
+</p>
+
+<p>
+  Our notification system works in real time, identifies when an event occurs and notifies anyone who is interested.
+</p>
+
+<p>
+  The bell icon reacts based on notifications. You can view notifications by clicking on them and if possible you will be redirected to the notification context, you can delete it, and when all notifications are viewed the bell icon will be updated automatically 
+</p>
+
+<p>
+  If you follow someone, you can be notified when they post a new tweet.
+</p>
+
+<br>
+
 
 
 <h2 id="run-project"> 
