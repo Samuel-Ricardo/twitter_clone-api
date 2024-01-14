@@ -199,6 +199,26 @@
 
 <br>
 
+### ☕ | Profile
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_profile.png"/> </a>
+
+<br>
+
+<p>
+  Here you can see users profile, latest tweets and data like followers and following, name, bio and much more.
+</p>
+
+<p>
+  Here you can get to know users better and decide whether to follow or unfollow them.
+</p>
+
+<p>
+  On your profile, you can edit to make this space yours and update your data such as name, avatar or background.  
+</p>
+
+<br>
+
 
 
 <h2 id="run-project"> 
