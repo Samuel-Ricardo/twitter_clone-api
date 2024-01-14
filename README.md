@@ -135,7 +135,7 @@
 
 ### 🏡 | Home
 
-> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_posts.png"/> </a>
+> <a href="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/video_demo/"> <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/demo_posts.png"/> </a>
 
 <br>
 
@@ -185,7 +185,7 @@
 
 ### 🕊️ | Detailed Post
 
-> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_post.png"/> </a>
+> <a href="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/video_demo/"> <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/demo_post.png"/> </a>
 
 <br>
 
@@ -201,7 +201,7 @@
 
 ### ☕ | Profile
 
-> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_profile.png"/> </a>
+> <a href="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/video_demo/"> <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/demo_profile.png"/> </a>
 
 <br>
 
@@ -221,7 +221,7 @@
 
 ### 📬 | Notifications
 
-> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_notfications.png"/> </a>
+> <a href="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/video_demo/"> <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/demo_notfications.png"/> </a>
 
 <br>
 
@@ -245,7 +245,7 @@
 
 ### 🛂 | Authentication
 
-> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_login.png"/> </a>
+> <a href="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/video_demo/"> <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/demo_login.png"/> </a>
 
 <br>
 
