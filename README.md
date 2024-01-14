@@ -133,6 +133,25 @@
 <br>
 <br>
 
+### 🏡 | Home
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_posts.png"/> </a>
+
+<br>
+
+<p>
+  On home page you find the newest posts, you can interact with them and click on a post to see more details and the comments. if you are the author, you can delete post.
+</p>
+
+<p>
+  You can create a post on "What are you thinking?" box, images are optional and all images are optimized to better performance. This section have data validations to prevent erros.
+</p>
+
+<p>
+  On right side have a list of users that you may like to meet.
+</p>
+
+✅ | This site is completly responsive, you can use it on any device and screen size :D
 
 
 
