@@ -255,6 +255,11 @@
 
 <br>
 
+🔭 | Site Repository: [[twitter_clone](https://github.com/Samuel-Ricardo/twitter_clone/tree/main)] <br>
+📡 | Hosted on Render: https://twitter-clone-api-94zi.onrender.com
+
+<br>
+<br>
 
 
 
