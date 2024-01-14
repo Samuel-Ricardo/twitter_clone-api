@@ -66,6 +66,53 @@
   :building_construction: | Technologies and Concepts Studied:
 </h2>
 
+> <a href='https://nodejs.org/en'> <img width="128px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAZQK0-sE2OZjDGFQ1EnWWkAaiobiLd0H_hQ&usqp=CAU" /> </a>
+
+- NodeJS
+- Typescript
+- Express 
+- Prisma
+- MongoDB
+- Docker
+- SWC
+- Jest
+- Supertest
+- Inversify
+- Cors
+- JWT
+- Zod
+- Validations
+- File Upload & File Handle
+- Cryptography
+- Argon2
+- Bcrypt
+- Crypto - [ NodeJS ]
+- Socket.IO
+- Websockets
+- eslint
+- Prettier
+- husky
+- lint-staged
+- Events & Async
+- Event-Emitter 2
+- Swagger - [ DOCS ]
+- Design Patterns
+- Perfomance
+- Clean Architeture
+- Clean Code / SOLID
+- Scalability
+- Real Time
+
+> Among Others...
+
+#
+
+<br>
+
+<h2 id="app">
+  💻 | Application:
+</h2>
+
 
 
 <h2 id="run-project"> 
