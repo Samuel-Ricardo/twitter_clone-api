@@ -183,6 +183,22 @@
 
 <br>
 
+### 🕊️ | Detailed Post
+
+> <a href="./README_FILES/video_demo/"> <img width="auto" src="./README_FILES/demo_post.png"/> </a>
+
+<br>
+
+<p>
+  Here you can have a better experience by seeing the post and its comments, you can interact with the comments and create your own comment about it.
+</p>
+
+<p>
+ The content is responsive, you can better view images, for example, and comments are ordered by date. 
+</p>
+
+<br>
+
 
 
 <h2 id="run-project"> 
