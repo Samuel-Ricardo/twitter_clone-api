@@ -306,12 +306,14 @@ Navigate to project folder and run it using `docker-compose`
 
   #Apps Running on:
 
-  $ API: http://localhost:3000
+  $ API: http://localhost:3004 
+  $ SITE: http://localhost:3000
 
-  $ SWAGGER: http://localhost:300/docs [DOCUMENTATION] [DEV]
-  $ SWAGGER_SCHEMA: http://localhost:3000/docs-json [DOCUMENTATION] [DEV]
+  $ SWAGGER: http://localhost:3004/docs | [DOCUMENTATION]
+  $ SWAGGER_SCHEMA: http://localhost:3004/docs-json | [DOCUMENTATION]
 
-  $ [DEV] = dev environment only
+  $ MONGO: http://localhost:3004:27017 | [DATABASE]
+  $ MONGO_EXPRESS: http://localhost:3004:8081 | [DATABASE] | [VIEW]
 
   See more: ./docker-compose.yaml
 
