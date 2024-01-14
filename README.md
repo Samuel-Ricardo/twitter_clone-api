@@ -1,9 +1,7 @@
 # Twitter - X [API]
 
 <p align="center"> 
-  <a href="https://fullcycle.com.br/" target="_blank">
-    <img width="auto" src="https://medias.revistaoeste.com/qa-staging/wp-content/uploads/2021/09/twitter.jpg"/>
-  </a> 
+  <img width="auto" src="https://github.com/Samuel-Ricardo/twitter_clone/raw/main/README_FILES/_41122539-a504-4d4c-8d40-90b50423972e.jpg"/>
 </p>
 
 <h4 align="center" >🚀 🟦 Twitter - X 🟦 🚀</h4>
@@ -41,13 +39,34 @@
 
 </h1>
 
-- Site Repository: [[twitter_clone](https://github.com/Samuel-Ricardo/twitter_clone/tree/main)]
-
 <br>
 
 <p id="project"/>
 
 <br>
+
+<h2>  | :artificial_satellite: About:  </h2>
+
+<p align="justify">
+  This project is a functional twitter clone Full Stack application with a rethink metalic design, implements the main features of Twitter with the best pratice of Clean Architeture and with a Modular system, has the complete testing pyramid, security layer and more. The entire system is built on Docker.
+</p>
+
+<br>
+
+🔭 | Site Repository: [[twitter_clone](https://github.com/Samuel-Ricardo/twitter_clone/tree/main)] <br>
+📡 | Hosted on Render: https://twitter-clone-api-94zi.onrender.com
+
+<br>
+
+#
+
+<br>
+
+<h2 id="techs">
+  :building_construction: | Technologies and Concepts Studied:
+</h2>
+
+
 
 <h2 id="run-project"> 
    👨‍💻 | How to use
