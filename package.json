@@ -52,7 +52,7 @@
     "jest-mock-extended": "^3.0.4",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.7.0",
-    "prisma": "^5.0.0",
+    "prisma": "^5.1.0",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
